@@ -1,4 +1,4 @@
-```
+```C
 //----- (0048A5E0) --------------------------------------------------------
 int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
 {
@@ -92,8 +92,8 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
     v32 = v7;
   }
   qmemcpy(&v40, &v28, 0x7Cu);
-  if ( (*(int (__stdcall **)(int, int *, int *, _DWORD))(*(_DWORD *)dword_52E638 + 24))(dword_52E638, &v28, &v15, 0)
-    || (**(int (__stdcall ***)(int, void *, int *))v15)(v15, &unk_4AF328, &v17) )
+  if ( dword_52E638->CreateSurface(&v28, &v15, 0)
+    || v15->QueryInterface(&unk_4AF328, &v17) )
   {
     goto LABEL_43;
   }
@@ -148,8 +148,7 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
     goto LABEL_39;
   v42 = v19;
   v41 = v18;
-  if ( !(*(int (__stdcall **)(int, char *, int *, _DWORD))(*(_DWORD *)dword_52E638 + 24))(dword_52E638, &v40, &v16, 0)
-    && !(**(int (__stdcall ***)(int, void *, int *))v16)(v16, &unk_4AF328, &v24) )
+  if ( !dword_52E638->CreateSurface(&v40, &v16, 0) && !(v16->QueryInterface((&unk_4AF328, &v24) )
   {
     v14 = 0;
     if ( a3 )
@@ -183,13 +182,13 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
     }
 LABEL_36:
     if ( v16 )
-      (*(void (__stdcall **)(int))(*(_DWORD *)v16 + 8))(v16);
-    (*(void (__stdcall **)(int))(*(_DWORD *)v17 + 8))(v17);
+      v16->Release();
+      v17->Release();
     qmemcpy(&v28, &v40, 0x7Cu);
     v17 = v24;
 LABEL_39:
     if ( v15 )
-      (*(void (__stdcall **)(int))(*(_DWORD *)v15 + 8))(v15);
+      v15->Release();
     result = (int)a1;
     a1[31] = v17;
     qmemcpy(a1, &v28, 0x7Cu);
