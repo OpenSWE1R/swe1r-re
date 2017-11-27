@@ -1,0 +1,10 @@
+These are in "Software\LucasArts Entertainment Company LLC\Star Wars: Episode I Racer\v1.0"
+
+### "UseFett"
+### "Fix Flicker"
+### "FullScreen"
+### "Display Height"
+### "Display Width"
+### "3D Device"
+### "Display"
+### "DevMode"
