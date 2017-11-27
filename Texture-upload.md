@@ -38,9 +38,6 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
   int v37; // [esp+164h] [ebp-ECh]
   int v38; // [esp+168h] [ebp-E8h]
   int v39; // [esp+17Ch] [ebp-D4h]
-  char v40; // [esp+1D4h] [ebp-7Ch]
-  int v41; // [esp+1DCh] [ebp-74h]
-  int v42; // [esp+1E0h] [ebp-70h]
 
   memset(a1, 0, 0x94u);
   result = dword_52E61C;
@@ -91,7 +88,6 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
     v34 = sub_401808;
     v32 = v7;
   }
-  qmemcpy(&v40, &v28, 0x7Cu);
   if ( dword_52E638->CreateSurface(&v28, &v15, 0) || v15->QueryInterface(&unk_4AF328, &v17) )
   {
     goto LABEL_43;
@@ -140,10 +136,20 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
     }
     while ( v10 < v11 );
   }
+
+  // Do some size checking
   if ( v19 == v26[3] && v18 == v26[4] )
     goto LABEL_39;
-  v42 = v19;
-  v41 = v18;
+
+  DDSURFACEDESC2 v40;
+  //char v40; // [esp+1D4h] [ebp-7Ch] // + 0
+  //int v41; // [esp+1DCh] [ebp-74h] // + 8
+  //int v42; // [esp+1E0h] [ebp-70h] // + 12
+  qmemcpy(&v40, &v28, 0x7Cu);
+
+  v40.dwWidth = v19; // v42 = v19;
+  v40.dwHeight = v18; // v41 = v18;
+
   if ( !dword_52E638->CreateSurface(&v40, &v16, 0) && !(v16->QueryInterface((&unk_4AF328, &v24) )
   {
     v14 = 0;
