@@ -49,7 +49,7 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
   v6 = (unsigned int *)*a2;
   v26 = v6;
 
-  // Get Format and Dimensions (v18 and v19)
+  // Get Dimensions for 2 images: (v6[3] x v6[4]) and (v19 x v18)
   sub_48A9E0(v6[3], v6[4], (unsigned int *)&v19, (unsigned int *)&v18);
 
   //  width * height * bits_per_pixel / 8
