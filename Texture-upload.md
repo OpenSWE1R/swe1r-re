@@ -1,5 +1,9 @@
 ```C
 //----- (0048A5E0) --------------------------------------------------------
+// a1 = ?
+// a2 = texture object
+// a3 = number of mipmaps
+// a4 = number of bytes per pixel?
 int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
 {
   int result; // eax
