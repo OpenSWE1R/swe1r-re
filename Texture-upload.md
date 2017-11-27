@@ -92,8 +92,7 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
     v32 = v7;
   }
   qmemcpy(&v40, &v28, 0x7Cu);
-  if ( dword_52E638->CreateSurface(&v28, &v15, 0)
-    || v15->QueryInterface(&unk_4AF328, &v17) )
+  if ( dword_52E638->CreateSurface(&v28, &v15, 0) || v15->QueryInterface(&unk_4AF328, &v17) )
   {
     goto LABEL_43;
   }
@@ -104,26 +103,26 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
     {
       memset(&v35, 0, 0x7Cu);
       v35 = 124;
-      if ( (*(int (__stdcall **)(int, _DWORD, int *, signed int, _DWORD))(*(_DWORD *)v15 + 100))(v15, 0, &v35, 1, 0) )
+      if (v15->Lock(0, &v35, 1, 0))
         goto LABEL_43;
       v12 = (*v5)[8];
       if ( v12 && v12 > 0 && v12 <= 2 )
       {
         sub_488370(*v5);
         v13 = 0;
+        // Check if height is != 0
         if ( v36 )
         {
-          do
-          {
+          // Copy line `v13`
+          do {
             qmemcpy((void *)(v39 + v13 * v38), (const void *)((*v5)[22] + v13 * (*v5)[6]), 2 * v37);
             ++v13;
-          }
-          while ( v13 < v36 );
+          } while ( v13 < v36 );
           v11 = a3;
         }
         sub_4883C0(*v5);
       }
-      if ( (*(int (__stdcall **)(int, _DWORD))(*(_DWORD *)v15 + 128))(v15, 0) )
+      if (v15->Unlock(0))
         goto LABEL_43;
       if ( v10 < v11 - 1 )
       {
@@ -131,10 +130,7 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
         v22 = 0;
         v23 = 0;
         v20 = sub_401000;
-        if ( (*(int (__stdcall **)(int, signed int (__cdecl **)(_DWORD *, unsigned int, int), int *))(*(_DWORD *)v15 + 48))(
-               v15,
-               &v20,
-               &v15) )
+        if (v15->GetAttachedSurface(&v20, &v15))
         {
           goto LABEL_43;
         }
@@ -153,13 +149,7 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
     v14 = 0;
     if ( a3 )
     {
-      while ( !(*(int (__stdcall **)(int, _DWORD, int, _DWORD, signed int, _DWORD))(*(_DWORD *)v16 + 20))(
-                 v16,
-                 0,
-                 v15,
-                 0,
-                 0x1000000,
-                 0) )
+      while ( !v16->Blt(0, v15, 0, 0x1000000, 0) )
       {
         if ( v14 < a3 - 1 )
         {
@@ -167,10 +157,7 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
           v21 = 0;
           v22 = 0;
           v23 = 0;
-          if ( (*(int (__stdcall **)(int, signed int (__cdecl **)(_DWORD *, unsigned int, int), int *))(*(_DWORD *)v16 + 48))(
-                 v16,
-                 &v20,
-                 &v16) )
+          if (v16->GetAttachedSurface(&v20, &v16) )
           {
             break;
           }
@@ -198,7 +185,7 @@ LABEL_39:
 LABEL_43:
   result = v15;
   if ( v15 )
-    result = (*(int (__stdcall **)(int))(*(_DWORD *)v15 + 8))(v15);
+    result = v15->Release();
   return result;
 }
 ```
