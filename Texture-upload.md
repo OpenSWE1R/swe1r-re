@@ -1,3 +1,54 @@
+# Getting texture dimensions
+
+```C
+// a1 = in_width
+// a2 = in_height
+// a3 = out_width
+// a4 = out_height
+//----- (0048A9E0) --------------------------------------------------------
+void sub_48A9E0(unsigned int a1, unsigned int a2, unsigned int *a3, unsigned int *a4) {
+  unsigned int min_width = *(_DWORD *)(dword_52E618 + 32);
+  unsigned int max_width = *(_DWORD *)(dword_52E618 + 40);
+
+  unsigned int width;
+  if (a1 < min_width) {
+    width = min_width;
+  } else if (a1 > max_width) {
+    width = max_width;
+  } else {
+    width = a1;
+  }
+
+  min_height = *(_DWORD *)(dword_52E618 + 36);
+  max_height = *(_DWORD *)(dword_52E618 + 44);
+
+  unsigned int height;
+  if (a2 < min_height) {
+    height = min_height;
+  } else if (a2 > max_height) {
+    height = max_height
+  } else {
+    height = a2;
+  }
+
+  // Check for square textures
+  unsigned int must_be_square = *(_DWORD *)(dword_52E618 + 28);
+  if (must_be_square && width != height ) {
+    // Make sure that `height` is the maximum, either `width` or `height`
+    if (width > height ) {
+      height = width;
+    }
+    *a3 = height;
+    *a4 = height;
+  } else {
+    *a3 = width;
+    *a4 = height;
+  }
+}
+```
+
+# Loading texture
+
 ```C
 //----- (0048A5E0) --------------------------------------------------------
 // a1 = ?
