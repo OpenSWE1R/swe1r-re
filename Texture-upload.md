@@ -7,7 +7,6 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
   unsigned int *v6; // ebp
   unsigned int v7; // edx
   int v8; // eax
-  int v9; // eax
   unsigned int v10; // ebp
   unsigned int v11; // esi
   signed int v12; // eax
@@ -26,10 +25,6 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
   unsigned int v25; // [esp+B4h] [ebp-19Ch]
   unsigned int *v26; // [esp+B8h] [ebp-198h]
   char v27; // [esp+BCh] [ebp-194h]
-  int v28; // [esp+DCh] [ebp-174h]
-  int v29; // [esp+E0h] [ebp-170h]
-  int v30; // [esp+E4h] [ebp-16Ch]
-  unsigned int v31; // [esp+E8h] [ebp-168h]
   unsigned int v32; // [esp+F4h] [ebp-15Ch]
   char v33; // [esp+124h] [ebp-12Ch]
   int (*v34)(); // [esp+144h] [ebp-10Ch]
@@ -59,6 +54,8 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
     v7 = 1;
     a3 = 1;
   }
+
+  // Get proper format for number of bytes per pixel?!
   if ( a4 == 1 )
   {
     v8 = dword_52D568;
@@ -72,16 +69,23 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
     v8 = dword_52D564;
   }
   qmemcpy(&v27, (char *)&unk_52D5B0 + 96 * v8, 0x20u);
+
+  DDSURFACEDESC2 v28;
+  // int v28; // [esp+DCh] [ebp-174h] + 0
+  // int v29; // [esp+E0h] [ebp-170h] + 4
+  // int v30; // [esp+E4h] [ebp-16Ch] + 8
+  // unsigned int v31; // [esp+E8h] [ebp-168h] + 12
   memset(&v28, 0, 0x7Cu);
-  v28 = 124;
-  v29 = 4103;
-  v34 = (int (*)())6144;
-  v31 = v6[3];
-  v9 = v6[4];
+  v28.size = 124;
+  v28.dwFlags = 0x1007 // v29 = 4103;
+  v28.dwWidth = v6[3]; // v31 = v6[3];
+  v28.dwHeight = v6[4]; // v30 = v6[4];
   v10 = 0;
-  v30 = v9;
   v15 = 0;
+
+  v34 = 0x1800; // this will be ddsCaps.dwCaps
   qmemcpy(&v33, &v27, 0x20u);
+
   if ( v7 > 1 )
   {
     v29 = 135175;
