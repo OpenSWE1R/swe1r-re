@@ -1,3 +1,15 @@
+# Unknown helper
+
+```C
+//----- (004880C0) --------------------------------------------------------
+signed int __cdecl sub_4880C0(void *a1) {
+  if ( !dword_52D444 )
+    return 1;
+  qmemcpy(a1, (const void *)(676 * dword_529514 + 0x52A9F8), 0x2A4u);
+  return 0;
+}
+```
+
 # Callback to IDirect3D3::EnumDevices()
 
 ```
