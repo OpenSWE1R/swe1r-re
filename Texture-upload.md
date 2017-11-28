@@ -300,8 +300,8 @@ int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3)
 
     uint16_t* v4 = v12.lpSurface;
 
-    // Calculate pitch?
-    if ( v12.dwFlags & 8 )
+    // Calculate pitch if it doesn't exist
+    if ( v12.dwFlags & DDSD_PITCH )
       v6 = v12.lPitch / 2;
     else
       v6 = v11;
