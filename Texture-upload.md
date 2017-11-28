@@ -260,3 +260,73 @@ LABEL_43:
   return result;
 }
 ```
+
+# Color inversion?
+
+```C
+//----- (00431DF0) --------------------------------------------------------
+int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3)
+{
+  int result; // eax
+  __int16 *v4; // esi
+  int v5; // ebx
+  int v6; // eax
+  int v7; // ebp
+  int v8; // edi
+  __int16 v9; // cx
+  int v10; // [esp+20h] [ebp-80h]
+  int v11; // [esp+28h] [ebp-78h]
+  int v12; // [esp+2Ch] [ebp-74h]
+  char v13; // [esp+30h] [ebp-70h]
+  int v14; // [esp+34h] [ebp-6Ch]
+  int v15; // [esp+38h] [ebp-68h]
+  int v16; // [esp+3Ch] [ebp-64h]
+  __int16 *v17; // [esp+50h] [ebp-50h]
+
+  v10 = 0;
+  result = strncmp(a3, aInvcol, 5u);
+  if ( result )
+  {
+    sprintf(a3, aInvcol);
+    (***(void (__stdcall ****)(_DWORD, void *, int *, int, int))(*((_DWORD *)a3 + 36) + 124))(
+      *(_DWORD *)(*((_DWORD *)a3 + 36) + 124),
+      &unk_4AF208,
+      &v10,
+      a1,
+      a2);
+    memset(&v12, 0, 0x7Cu);
+    v12 = 124;
+    (*(void (__stdcall **)(int, _DWORD, int *, signed int, _DWORD))(*(_DWORD *)v11 + 100))(v11, 0, &v12, 1, 0);
+    v4 = v17;
+    v5 = v15;
+    if ( v13 & 8 )
+      v6 = v16 / 2;
+    else
+      v6 = v11;
+    if ( v14 > 0 )
+    {
+      v7 = v14;
+      do
+      {
+        if ( v5 > 0 )
+        {
+          v8 = v5;
+          do
+          {
+            v9 = *v4;
+            ++v4;
+            --v8;
+            *(v4 - 1) = ~(v9 & 0xFFF) | v9 & 0xF000;
+          }
+          while ( v8 );
+        }
+        --v7;
+        v4 += v6 - v5;
+      }
+      while ( v7 );
+    }
+    result = (*(int (__cdecl **)(int, _DWORD))(*(_DWORD *)v11 + 128))(v11, 0);
+  }
+  return result;
+}
+```
