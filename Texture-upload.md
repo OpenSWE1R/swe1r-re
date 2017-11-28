@@ -3,8 +3,8 @@
 ```C
 // a1 = in_width
 // a2 = in_height
-// a3 = out_width
-// a4 = out_height
+// a3 = &out_width
+// a4 = &out_height
 //----- (0048A9E0) --------------------------------------------------------
 void sub_48A9E0(unsigned int a1, unsigned int a2, unsigned int *a3, unsigned int *a4) {
   unsigned int min_width = *(_DWORD *)(dword_52E618 + 32);
@@ -19,8 +19,8 @@ void sub_48A9E0(unsigned int a1, unsigned int a2, unsigned int *a3, unsigned int
     width = a1;
   }
 
-  min_height = *(_DWORD *)(dword_52E618 + 36);
-  max_height = *(_DWORD *)(dword_52E618 + 44);
+  unsigned int min_height = *(_DWORD *)(dword_52E618 + 36);
+  unsigned int max_height = *(_DWORD *)(dword_52E618 + 44);
 
   unsigned int height;
   if (a2 < min_height) {
@@ -33,13 +33,13 @@ void sub_48A9E0(unsigned int a1, unsigned int a2, unsigned int *a3, unsigned int
 
   // Check for square textures
   unsigned int must_be_square = *(_DWORD *)(dword_52E618 + 28);
-  if (must_be_square && width != height ) {
-    // Make sure that `height` is the maximum, either `width` or `height`
-    if (width > height ) {
-      height = width;
+  if (must_be_square) {
+    // Make sure that `width` is the maximum, either `width` or `height`
+    if (height > width ) {
+      width = height;
     }
-    *a3 = height;
-    *a4 = height;
+    *a3 = width;
+    *a4 = width;
   } else {
     *a3 = width;
     *a4 = height;
@@ -100,7 +100,7 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
   v6 = (unsigned int *)*a2;
   v26 = v6;
 
-  // Get Dimensions for 2 images: (v6[3] x v6[4]) and (v19 x v18)
+  // Get texture dimensions
   sub_48A9E0(v6[3], v6[4], (unsigned int *)&v19, (unsigned int *)&v18);
 
   //  width * height * bits_per_pixel / 8
