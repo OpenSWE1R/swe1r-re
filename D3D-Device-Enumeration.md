@@ -96,8 +96,8 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
 
   v12 = v7->desc.dpcTriCaps.dwTextureCaps;
 
-  *(_DWORD *)(v7 + 20) = !(v12 & 0x1000) && (v12 & 0x2000);
-  v13 = (*(_BYTE *)(v7->desc.dpcTriCaps.dwTextureAddressCaps) & 8) && (v12 & 0x4000) || *(_DWORD *)(v7 + 20);
+  *(_DWORD *)(v7 + 20) = !(v12 & D3DPTEXTURECAPS_COLORKEYBLEND) && (v12 & 0x2000);
+  v13 = (v7->desc.dpcTriCaps.dwTextureAddressCaps & D3DPTADDRESSCAPS_BORDER) && (v12 & 0x4000) || *(_DWORD *)(v7 + 20); // Might also be 0x08000000 if I made an endian mistake :x
 
   *(_DWORD *)(v7 + 24) = v13;
 
