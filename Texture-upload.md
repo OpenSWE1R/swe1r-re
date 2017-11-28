@@ -265,67 +265,74 @@ LABEL_43:
 
 ```C
 //----- (00431DF0) --------------------------------------------------------
+// (not actually a function)
+// a3 = must be "invcol"
 int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3)
 {
   int result; // eax
   __int16 *v4; // esi
-  int v5; // ebx
   int v6; // eax
   int v7; // ebp
   int v8; // edi
   __int16 v9; // cx
   int v10; // [esp+20h] [ebp-80h]
   int v11; // [esp+28h] [ebp-78h]
-  int v12; // [esp+2Ch] [ebp-74h]
-  char v13; // [esp+30h] [ebp-70h]
-  int v14; // [esp+34h] [ebp-6Ch]
-  int v15; // [esp+38h] [ebp-68h]
-  int v16; // [esp+3Ch] [ebp-64h]
-  __int16 *v17; // [esp+50h] [ebp-50h]
 
   v10 = 0;
   result = strncmp(a3, aInvcol, 5u);
   if ( result )
   {
     sprintf(a3, aInvcol);
-    (***(void (__stdcall ****)(_DWORD, void *, int *, int, int))(*((_DWORD *)a3 + 36) + 124))(
-      *(_DWORD *)(*((_DWORD *)a3 + 36) + 124),
-      &unk_4AF208,
-      &v10,
-      a1,
-      a2);
+    something = *(_DWORD *)(*((_DWORD *)a3 + 36) + 124); // or something like this..
+    unk_4AF208->QueryInterface(&unk_4AF208, &v11); //FIXME: Used to say `.., &v10, a, b); ?!
+
+    DDSURFACEDESC2 v12;
+    //  int v12; // [esp+2Ch] [ebp-74h]    0 dwSize
+    //  char v13; // [esp+30h] [ebp-70h]   4 dwFlags
+    //  int v14; // [esp+34h] [ebp-6Ch]    8 dwHeight
+    //  int v15; // [esp+38h] [ebp-68h]   12 dwWidth
+    //  int v16; // [esp+3Ch] [ebp-64h]   16 lPitch or dwLinearSize
+    //  __int16 *v17; // [esp+50h] [ebp-50h] 36 lpSurface
+
     memset(&v12, 0, 0x7Cu);
-    v12 = 124;
-    (*(void (__stdcall **)(int, _DWORD, int *, signed int, _DWORD))(*(_DWORD *)v11 + 100))(v11, 0, &v12, 1, 0);
-    v4 = v17;
-    v5 = v15;
-    if ( v13 & 8 )
-      v6 = v16 / 2;
+    v12.dwSize = 124;
+    v11->Lock(0, &v12, 1, 0);
+
+    uint16_t* v4 = v12.lpSurface;
+
+    // Calculate pitch?
+    if ( v12.dwFlags & 8 )
+      v6 = v12.lPitch / 2;
     else
       v6 = v11;
-    if ( v14 > 0 )
+
+    // Loop over rows in image
+    if ( v12.dwHeight > 0 )
     {
-      v7 = v14;
+      v7 = v12.dwHeight;
       do
       {
-        if ( v5 > 0 )
+        // Loop over pixels in row
+        if (  v12.dwWidth > 0 )
         {
-          v8 = v5;
-          do
-          {
-            v9 = *v4;
-            ++v4;
+          v8 = v12.dwWidth;
+          do {
+            // Sample pixel
+            v9 = *v4++;
+            // Invert color but keep alpha
+            *(v4 - 1) = ~(v9 & 0xFFF) | (v9 & 0xF000);
+
             --v8;
-            *(v4 - 1) = ~(v9 & 0xFFF) | v9 & 0xF000;
           }
           while ( v8 );
         }
         --v7;
-        v4 += v6 - v5;
+        // Advance to next row (v6 = pitch?, v5 = rowlength)
+        v4 += v6 - v12.dwWidth;
       }
       while ( v7 );
     }
-    result = (*(int (__cdecl **)(int, _DWORD))(*(_DWORD *)v11 + 128))(v11, 0);
+    result = v11->Unlock(0);
   }
   return result;
 }
