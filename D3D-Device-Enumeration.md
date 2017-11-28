@@ -43,7 +43,8 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
 
   // Get pointer to memory for this device info
   struct {
-    uint8_t unk[52];
+    uint8_t unk[28];
+    uint32_t square_only_textures; // 28
     uint32_t min_texture_width; // 32
     uint32_t max_texture_height; // 36
     uint32_t min_texture_width; // 40
@@ -88,17 +89,16 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
   v11 = v7->desc.dwDeviceZBufferBitDepth;
   *(_DWORD *)(v7 + 8) = v11 != 0;
 
-  v10 = v7->desc.dpcTriCaps.dwTextureFilterCaps;
-  *(_DWORD *)(v7 + 4) = v10 & D3DPTFILTERCAPS_NEAREST;
-  *(_DWORD *)(v7 + 16) = v10 & D3DPTFILTERCAPS_MIPNEAREST;
-  *(_DWORD *)(v7 + 12) = v10 & D3DPTFILTERCAPS_MIPLINEAR;
-  *(_DWORD *)(v7 + 28) = v10 & D3DPTFILTERCAPS_LINEARMIPLINEAR;
+  v10 = v7->desc.dpcTriCaps.dwTextureCaps;
+  *(_DWORD *)(v7 + 4) = v10 & D3DPTEXTURECAPS_PERSPECTIVE;
+  *(_DWORD *)(v7 + 16) = v10 & D3DPTEXTURECAPS_ALPHA;
+  *(_DWORD *)(v7 + 12) = v10 & D3DPTEXTURECAPS_TRANSPARENCY;
+  *(_DWORD *)(v7 + 28) = v10 & D3DPTEXTURECAPS_SQUAREONLY; // Should be  ?!
 
-  v12 = v7->desc.dpcTriCaps.dwTextureCaps;
+  v12 = v7->desc.dpcTriCaps.dwShadeCaps;
+  *(_DWORD *)(v7 + 20) = !(v12 & D3DPSHADECAPS_ALPHAFLATBLEND) && (v12 & D3DPSHADECAPS_ALPHAFLATSTIPPLED );
 
-  *(_DWORD *)(v7 + 20) = !(v12 & D3DPTEXTURECAPS_COLORKEYBLEND) && (v12 & 0x2000);
-  v13 = (v7->desc.dpcTriCaps.dwTextureAddressCaps & D3DPTADDRESSCAPS_BORDER) && (v12 & 0x4000) || *(_DWORD *)(v7 + 20); // Might also be 0x08000000 if I made an endian mistake :x
-
+  v13 = (v7->desc.dpcTriCaps.dwTextureBlendCaps & D3DPTBLENDCAPS_MODULATEALPHA) && (v12 & D3DPSHADECAPS_ALPHAGOURAUDBLEND) || *(_DWORD *)(v7 + 20);
   *(_DWORD *)(v7 + 24) = v13;
 
 
