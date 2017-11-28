@@ -89,10 +89,10 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
   *(_DWORD *)(v7 + 8) = v11 != 0;
 
   v10 = v7->desc.dpcTriCaps.dwTextureFilterCaps;
-  *(_DWORD *)(v7 + 4) = v10 & 1;
-  *(_DWORD *)(v7 + 16) = v10 & 0x4;
-  *(_DWORD *)(v7 + 12) = v10 & 0x8;
-  *(_DWORD *)(v7 + 28) = v10 & 0x20;
+  *(_DWORD *)(v7 + 4) = v10 & D3DPTFILTERCAPS_NEAREST;
+  *(_DWORD *)(v7 + 16) = v10 & D3DPTFILTERCAPS_MIPNEAREST;
+  *(_DWORD *)(v7 + 12) = v10 & D3DPTFILTERCAPS_MIPLINEAR;
+  *(_DWORD *)(v7 + 28) = v10 & D3DPTFILTERCAPS_LINEARMIPLINEAR;
 
   v12 = v7->desc.dpcTriCaps.dwTextureCaps;
 
