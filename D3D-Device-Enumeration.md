@@ -30,6 +30,18 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
     return 0;
 
   // Get pointer to memory for this device info
+  struct {
+    uint8_t unk[52];
+    uint32_t min_texture_width; // 32
+    uint32_t max_texture_height; // 36
+    uint32_t min_texture_width; // 40
+    uint32_t max_texture_height; // 44
+    uint32_t max_vertex_count; // 48
+    char name[128]; // 52
+    char description[128]; // 180
+    D3DDEVICEDESC desc; // 316 [0xFC bytes] copied from A
+    GUID guid; // 568
+  }* v7;
   v7 = 872 * dword_52D56C + 0x52D870;
 
   // Copy GUID
@@ -47,12 +59,12 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
   strncpy((char *)(v7 + 52), lpDeviceName, 0x7Fu);
   *(_BYTE *)(v7 + 179) = 0;
 
-  v9 = *(_DWORD *)(a4 + 4);
+  v9 = *(_DWORD *)(a + 4);
   *(_DWORD *)v7 = v9 != 0;
   if ( !v9 )
     return 1;
 
-  qmemcpy((void *)(v7 + 316), (const void *)a4, 0xFCu);
+  qmemcpy((void *)(v7 + 316), (const void *)a, 0xFCu);
 
   if ( sub_4880C0(&v18) )
     return 0;
