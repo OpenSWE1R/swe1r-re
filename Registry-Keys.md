@@ -11,6 +11,7 @@ These are in "Software\LucasArts Entertainment Company LLC\Star Wars: Episode I 
 
 ---
 
+```C
 //----- (00423CC0) --------------------------------------------------------
 int __usercall sub_423CC0@<eax>(int a1@<esi>, char *a2)
 {
@@ -149,3 +150,4 @@ int __usercall sub_423CC0@<eax>(int a1@<esi>, char *a2)
   }
   return result;
 }
+```
