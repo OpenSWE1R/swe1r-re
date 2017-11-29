@@ -11,6 +11,30 @@ These are in "Software\LucasArts Entertainment Company LLC\Star Wars: Episode I 
 
 ---
 
+## Check for which dialog to display when `-v` option is used
+
+```C
+//----- (00424700) --------------------------------------------------------
+BOOL __stdcall DialogFunc(HWND hWnd, UINT a2, WPARAM a3, LPARAM dwNewLong)
+{
+
+  if ( a2 == 272 ) {
+    // Some cool debug dialog?
+    return sub_424760(hWnd, a3, dwNewLong);
+  }
+
+  if ( a2 == 273 ) {
+    // The Star Wars Racer graphics settings dialog (which lists all devices and resolutions)
+    sub_424A90(hWnd, (unsigned __int16)a3, dwNewLong, a3 >> 16);
+    return 1;
+  }
+
+  return 0;
+}
+```
+
+## Loading registry options
+
 ```C
 //----- (00423CC0) --------------------------------------------------------
 int __usercall sub_423CC0@<eax>(int a1@<esi>, char *a2)
