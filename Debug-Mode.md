@@ -7,6 +7,10 @@ dword_50C044 seems to contain wether debug mode is enabled.
 
 dword_E98EB0 seems to contain directional input of some sort. According to TCRF the digipad on N64 had to be rotated counter clockwise. The code to activate the menu at the start of sub_42AE00 seems to suggest this too.
 
+To enable the menu from GDB in OpenSWE1R, use `set *(uint32_t*)Memory(0x50C044) = 1`
+
+dword_50C048 is a bitmask that seems to control what menu options are shown. To show all menu options, use `set *(uint32_t*)Memory(0x50C048) = 0xFFFFFFFF`. This might have unintended sideeffects though.
+
 ## Pause menu
 
 ```C
