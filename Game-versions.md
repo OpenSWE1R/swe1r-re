@@ -16,6 +16,7 @@ There are different versions of this game.
 The demos can be downloaded from http://www.lucasarts.com/products/starwarsracer/racer_demo.htm:
 * [Mac demo in archive.org (lucasarts.com)](https://web.archive.org/web/20011205091707/http://www.lucasarts.com:80/products/starwarsracer/racerdemo.bin)
 * [Windows demo in archive.org (pcworld.com)](http://downloads.pcworld.com/pub/new/fun_and_games/action/racerdemo.exe)
+* [Windows demo in archive.org (gamesdomain.co.uk mirror)](https://web.archive.org/web/20020326005329/ftp://sunsite.doc.ic.ac.uk/Mirrors/ftp.gamesdomain.co.uk/pub/demos/racerdemo.exe)
 
 The N64 version can be detected by looking in the debug menu. See [tcrf for more information](https://tcrf.net/Star_Wars_Episode_I:_Racer_(Nintendo_64)#Build_Info).
 
