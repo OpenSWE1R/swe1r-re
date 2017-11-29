@@ -19,55 +19,64 @@ signed int __stdcall sub_488F50(_DWORD *a1, int a2)
   int v18; // eax
   int v19; // ecx
 
-  if ( dword_52D44C >= 0x40 )
+  // We can't handle more than 64 display modes
+  if ( dword_52D44C >= 64 ) {
     return 0;
+  }
+  
   v2 = a1[3];
 
-  // Check TV resolutions?!
-  if ( dword_52D45C == 1 )
-  {
-    if ( (v2 != 512 || a1[2] != 384) && (v2 != 640 || a1[2] != 480) )
-    {
-      if ((v2 == 800) && (a1[2] == 600)) {
-          goto LABEL_24;
-      } else {
+  if ( dword_52D45C == 1 ) {
+      // Check TV resolutions?!
+      bool isGood = false;
+      isGood |= (v2 == 512 && a1[2] == 384);
+      isGood |= (v2 == 640 && a1[2] == 480);
+      isGood |= (v2 == 800 && a1[2] == 600);
+      if (!isGood) {
         return 1;
       }
     }
+  } else {
+    // Check PC resolutions?!
+      bool isGood = false;
+      isGood |= (v2 == 512 && a1[2] == 384);
+      isGood |= (v2 == 640 && a1[2] == 480);
+      isGood |= (v2 == 800 && a1[2] == 600);
+      isGood |= (v2 == 1024 && a1[2] == 768);
+      isGood |= (v2 == 1152 && a1[2] == 864);
+      isGood |= (v2 == 1280 && a1[2] == 1024);
+      isGood |= (v2 == 1600 && a1[2] == 1200);
+    if (!isGood) {
+      return 1;
+    }
   }
-  else if ( (v2 != 512 || a1[2] != 384)
-         && (v2 != 640 || a1[2] != 480)
-         && (v2 != 800 || a1[2] != 600)
-         && (v2 != 1024 || a1[2] != 768)
-         && (v2 != 1152 || a1[2] != 864)
-         && (v2 != 1280 || a1[2] != 1024)
-         && (v2 != 1600 || a1[2] != 1200) )
-  {
-    return 1;
-  }
-LABEL_24:
+
+  // Get entry in our displaymode array we want to modify
   v4 = &dword_5295F8[20 * dword_52D44C];
+
+  // Copy resolution
   v4[1] = v2;
   v4[2] = a1[2];
-  v5 = v4[1];
+
+  // What is this shit? Some weird aspect ratio stuff?
+  // The actual aspect ratio would be different..
+  if ( (v4[1] == 320 && v4[2] == 200) || (v4[1] == 640 && v4[2] == 400) ) {
+    *v4 = 0x3F400000; // 0.75f [1 / (4:3)]
+  } else {
+    *v4 = 0x3F800000; // 1.0f [1 / (1:1)]
+  }
+
   v4[4] = a1[4];
-  if ( (v5 != 320 || v4[2] != 200) && (v5 != 640 || v4[2] != 400) )
-    *v4 = 0x3F800000; // 1.0f
-  else
-    *v4 = 0x3F400000; // 0.75f
 
   // Check ddpfPixelFormat.dwFlags
   v6 = a1[19];
-  if ( v6 & DDPF_PALETTEINDEXED8 )
-  {
+  if ( v6 & DDPF_PALETTEINDEXED8 ) {
     v4[6] = 0;
     v4[7] = 8;
     v4[8] = 0;
     v4[9] = 0;
     v4[10] = 0;
-  }
-  else if ( v6 & DDPF_RGB )
-  {
+  } else if ( v6 & DDPF_RGB ) {
     v4[6] = 1;
     v4[7] = a1[21];
     v7 = a1[22];
@@ -98,8 +107,7 @@ LABEL_24:
 
   // Get bytes per pixel
   v16 = v4[7];
-  switch ( v16 )
-  {
+  switch ( v16 ) {
     case 8:
       v4[5] = v4[4];
       break;
