@@ -108,7 +108,7 @@ LABEL_24:
       v4[5] = v4[4] / 3;
       break;
     case 32:
-      v17 = v4[4] / 4;
+      v4[5] = v4[4] / 4;
       break;
     default:
       break;
