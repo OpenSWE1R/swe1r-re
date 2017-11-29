@@ -38,14 +38,14 @@ signed int __stdcall sub_488F50(_DWORD *a1, int a2)
     }
   } else {
     // Check PC resolutions?!
-      bool isGood = false;
-      isGood |= (v2 == 512 && a1[2] == 384);
-      isGood |= (v2 == 640 && a1[2] == 480);
-      isGood |= (v2 == 800 && a1[2] == 600);
-      isGood |= (v2 == 1024 && a1[2] == 768);
-      isGood |= (v2 == 1152 && a1[2] == 864);
-      isGood |= (v2 == 1280 && a1[2] == 1024);
-      isGood |= (v2 == 1600 && a1[2] == 1200);
+    bool isGood = false;
+    isGood |= (v2 == 512 && a1[2] == 384);
+    isGood |= (v2 == 640 && a1[2] == 480);
+    isGood |= (v2 == 800 && a1[2] == 600);
+    isGood |= (v2 == 1024 && a1[2] == 768);
+    isGood |= (v2 == 1152 && a1[2] == 864);
+    isGood |= (v2 == 1280 && a1[2] == 1024);
+    isGood |= (v2 == 1600 && a1[2] == 1200);
     if (!isGood) {
       return 1;
     }
