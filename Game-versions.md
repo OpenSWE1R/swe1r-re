@@ -13,7 +13,8 @@ There are different versions of this game.
 |                                    | N64       | Europe         | Retail Cartridge Version (v15Apr99.1642) |
 |                                    | N64       | Japan          | Retail Cartridge Version (v18Jun99.1019) |
 
-The demos can be downloaded from http://www.lucasarts.com/products/starwarsracer/racer_demo.htm
+The demos can be downloaded from http://www.lucasarts.com/products/starwarsracer/racer_demo.htm:
+* [Mac demo in archive.org](https://web.archive.org/web/20011205091707/http://www.lucasarts.com:80/products/starwarsracer/racerdemo.bin)
 
 The N64 version can be detected by looking in the debug menu. See [tcrf for more information](https://tcrf.net/Star_Wars_Episode_I:_Racer_(Nintendo_64)#Build_Info).
 
