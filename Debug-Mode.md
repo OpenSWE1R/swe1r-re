@@ -11,7 +11,7 @@ To enable the menu from GDB in OpenSWE1R, use `set *(uint32_t*)Memory(0x50C044) 
 
 dword_50C048 is a bitmask that seems to control what menu options are shown. To show all menu options, use `set *(uint32_t*)Memory(0x50C048) = 0xFFFFFFFF`. This might have unintended sideeffects though.
 
-## Pause menu
+## Draw normal Pause menu
 
 ```C
 
@@ -88,7 +88,7 @@ LABEL_13:
 }
 ```
 
-## Draw cheats menu
+## Draw Pause or Cheats menu
 
 ```C
 //----- (0042AC70) --------------------------------------------------------
