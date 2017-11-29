@@ -55,8 +55,10 @@ LABEL_24:
     *v4 = 0x3F800000; // 1.0f
   else
     *v4 = 0x3F400000; // 0.75f
+
+  // Check ddpfPixelFormat.dwFlags
   v6 = a1[19];
-  if ( v6 & 0x20 )
+  if ( v6 & DDPF_PALETTEINDEXED8 )
   {
     v4[6] = 0;
     v4[7] = 8;
@@ -64,7 +66,7 @@ LABEL_24:
     v4[9] = 0;
     v4[10] = 0;
   }
-  else if ( v6 & 0x40 )
+  else if ( v6 & DDPF_RGB )
   {
     v4[6] = 1;
     v4[7] = a1[21];
@@ -94,7 +96,7 @@ LABEL_24:
     v4[10] = n;
   }
 
-  // Get bit per pixel
+  // Get bytes per pixel
   v16 = v4[7];
   switch ( v16 )
   {
