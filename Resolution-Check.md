@@ -16,24 +16,23 @@ signed int __stdcall sub_488F50(_DWORD *a1, int a2)
   int m; // ecx
   int n; // eax
   unsigned int v16; // ecx
-  int v17; // eax
   int v18; // eax
   int v19; // ecx
 
   if ( dword_52D44C >= 0x40 )
     return 0;
   v2 = a1[3];
+
+  // Check TV resolutions?!
   if ( dword_52D45C == 1 )
   {
     if ( (v2 != 512 || a1[2] != 384) && (v2 != 640 || a1[2] != 480) )
     {
-      if ( v2 == 800 )
-      {
-        if ( a1[2] != 600 )
-          return 1;
-        goto LABEL_24;
+      if ((v2 == 800) && (a1[2] == 600)) {
+          goto LABEL_24;
+      } else {
+        return 1;
       }
-      return 1;
     }
   }
   else if ( (v2 != 512 || a1[2] != 384)
@@ -53,9 +52,9 @@ LABEL_24:
   v5 = v4[1];
   v4[4] = a1[4];
   if ( (v5 != 320 || v4[2] != 200) && (v5 != 640 || v4[2] != 400) )
-    *v4 = 1065353216;
+    *v4 = 0x3F800000; // 1.0f
   else
-    *v4 = 1061158912;
+    *v4 = 0x3F400000; // 0.75f
   v6 = a1[19];
   if ( v6 & 0x20 )
   {
@@ -94,28 +93,28 @@ LABEL_24:
       v13 >>= 1;
     v4[10] = n;
   }
+
+  // Get bit per pixel
   v16 = v4[7];
   switch ( v16 )
   {
-    case 8u:
-      v17 = v4[4];
-      goto LABEL_51;
-    case 0x10u:
-      v4[5] = v4[4] >> 1;
+    case 8:
+      v4[5] = v4[4];
       break;
-    case 0x18u:
-      v4[5] = v4[4] / 3u;
+    case 16:
+      v4[5] = v4[4] / 2;
       break;
-    case 0x20u:
-      v17 = v4[4] >> 2;
-LABEL_51:
-      v4[5] = v17;
+    case 24:
+      v4[5] = v4[4] / 3;
+      break;
+    case 32:
+      v17 = v4[4] / 4;
       break;
     default:
       break;
   }
   v18 = v4[2] * v4[1];
-  v19 = v18 * (v16 >> 3);
+  v19 = v18 * (v16 / 8);
   v4[3] = v19;
   if ( dword_EC8D80 >= (unsigned int)(2 * (v19 + v18)) )
     ++dword_52D44C;
