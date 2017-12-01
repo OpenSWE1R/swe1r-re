@@ -1,1 +1,1 @@
-Welcome to the openswe1r wiki!
+Welcome to the OpenSWE1R wiki!
