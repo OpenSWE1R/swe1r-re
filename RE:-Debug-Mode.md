@@ -109,6 +109,8 @@ int __cdecl sub_42AC70(int a1, char *a2, int a3, int a4, int a5)
 
 # Draw position when debug level >= 2
 
+The position actually seems to come out of the translation of a 3x4 matrix at dword_DFB21C
+
 ```C
 //----- (00483BE0) --------------------------------------------------------
 // a1 = debug level
