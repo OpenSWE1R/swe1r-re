@@ -132,6 +132,8 @@ v6 = sub_421360(*(const char **)(*(_DWORD *)(*(_DWORD *)(v5 + 7792) + 24) + 24))
 v7 = sub_421360(*(const char **)(*(_DWORD *)(*(_DWORD *)(v5 + 7792) + 24) + 20)); // lastname?
 sprintf(a2, aNameSS, v7, v6);
 ```
+
+```C
 struct {
 uint8_t unk[108];
 float AntiSkid; // 108
@@ -151,5 +153,17 @@ float DmgImmunity // 160
 float unknown; // 164
 float IsectRadius; // 168
 float AiLookAhead // 264 (displayed as sqrt(AiLookAhead) in menu)
+
+... FIXME
+
+struct {
+  uint8_t unk[24];
+  struct { // 24
+    uint8_t unk[20];
+    const char* prename; // 20
+    const char* lastname; // 24
+  }* name_second_ptr;
+}* name_first_ptr; // 7792
+
 }
 ```
