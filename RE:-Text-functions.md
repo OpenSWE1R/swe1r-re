@@ -136,3 +136,35 @@ int sub_450100()
   return result;
 }
 ```
+
+```C
+//----- (004501F0) --------------------------------------------------------
+int sub_4501F0()
+{
+  int result; // eax
+  int v1; // esi
+  char *v2; // ebx
+  __int16 *v3; // edi
+
+  result = dword_50C758;
+  v1 = 0;
+  if ( dword_50C758 > 0 )
+  {
+    v2 = byte_E303A0;
+    v3 = word_E34660;
+    do
+    {
+      sub_42D950(byte_E343A0[4 * v1], byte_E343A1[4 * v1], byte_E343A2[4 * v1], byte_E343A3[4 * v1]);
+      sub_42D910(*v3, word_E34662[2 * v1]);
+      sub_42EC50(v2);
+      result = dword_50C758;
+      ++v1;
+      v3 += 2;
+      v2 += 128;
+    }
+    while ( v1 < dword_50C758 );
+  }
+  dword_50C758 = 0;
+  return result;
+}
+```
