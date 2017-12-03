@@ -106,3 +106,47 @@ int __cdecl sub_42AC70(int a1, char *a2, int a3, int a4, int a5)
   return a5;
 }
 ```
+
+# Draw position when debug level >= 2
+
+```C
+//----- (00483BE0) --------------------------------------------------------
+// a1 = debug level
+void __cdecl sub_483BE0(signed int a1)
+{
+  int v1; // ST10_4
+  int v2; // ST0C_4
+  int v3; // ST08_4
+  const char *v4; // eax
+  double v5; // st7
+  const char *v6; // eax
+  char v7; // [esp+8h] [ebp-40h]
+
+  // Check the debug level
+  if ( a1 >= 2 ) {
+
+    // Get X,Y,Z position
+    v1 = (signed __int64)*(float *)&dword_DFB254;
+    v2 = (signed __int64)*(float *)&dword_DFB250;
+    v3 = (signed __int64)*(float *)&dword_DFB24C;
+
+    // Create a string for it
+    v4 = sub_421360(aRSposDDD);
+    sprintf(&v7, v4, v3, v2, v1);
+
+    // Draw the string
+    sub_450590(4, 285, 214, (int)&v7);
+
+    // Unknown check
+    v5 = sub_45D390();
+    if ( v5 > 0.0 ) {
+      // Create a string for it
+      v6 = sub_421360(aRScomp5f);
+      sprintf(&v7, v6, LODWORD(v5), (_DWORD)(*(unsigned __int64 *)&v5 >> 32));
+
+      // Draw the string
+      sub_450590(4, 300, 194, (int)&v7);
+    }
+  }
+}
+```
