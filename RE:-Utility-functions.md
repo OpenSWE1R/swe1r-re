@@ -2,6 +2,8 @@
 
 This is used in the debug menu
 
+## Integer
+
 ```C
 //----- (00429D90) --------------------------------------------------------
 // a1 = pointer to value to be modified
@@ -13,6 +15,22 @@ This is used in the debug menu
 void __cdecl sub_429D90(int* a1, float a2, float a3, int a4, int a5){
   *a1 = (int)(a3 * a2 + (float)a1);
   if (*a1 < a4) { *a1 = a4; }
+  if (*a1 > a5) { *a1 = a5; }
+}
+```
+
+## Float
+
+```C
+//----- (00429D50) --------------------------------------------------------
+// a1 = pointer to value to be modified
+// a2 = factor a (from user input for example)
+// a3 = factor b (constant scaling factor for example)
+// a4 = min value
+// a5 = max value
+void __cdecl sub_429D50(float* a1, float a2, float a3, float a4, float a5) {
+  *a1 = a3 * a2 + *a1;
+  if (*a1 < a4) { *a1 = a4; } //FIXME: This is different in the decompilation, but I assume the decompiler messed up
   if (*a1 > a5) { *a1 = a5; }
 }
 ```
