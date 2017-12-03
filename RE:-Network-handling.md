@@ -284,3 +284,17 @@ int sub_487340() {
   return dword_510250;
 }
 ```
+
+## Get playername
+
+FIXME: Why is this 88 in size, when player structs are only 44?! This is odd..
+
+```C
+//----- (0041BCE0) --------------------------------------------------------
+// a1 = playerindex
+void *__cdecl sub_41BCE0(int a1)
+{
+  sub_48C380(&unk_4EAD88, &word_E9F3C4 + 88 * a1, 32);
+  return &unk_4EAD88;
+}
+```
