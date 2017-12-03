@@ -358,24 +358,21 @@ LABEL_43:
         }
 LABEL_57:
         v57 = *((_DWORD *)v3 + 2);
-        if ( v57 <= 3 )
-        {
+        if ( v57 <= 3 ) {
+          // Emit indices for triangle
           word_AF30E8[v14] = v16;
           word_AF30EA[v14] = v16 + 1;
           word_AF30EC[v14] = v16 + 2;
           v14 += 3;
           v83 = v14;
-        }
-        else
-        {
+        } else {
           v58 = v57 - 2;
           v59 = 0;
           v71 = v57 - 2;
           v74 = 1;
           v69 = v57 - 1;
           v76 = 0;
-          if ( (signed int)(v57 - 2) > 0 )
-          {
+          if ( (signed int)(v57 - 2) > 0 ) {
             v60 = (_WORD *)(2 * v83 + 11481322);
             v83 += v58 + 2 * v71;
             do
@@ -397,11 +394,12 @@ LABEL_57:
         v61 = *((_DWORD *)v3 + 18);
         v3 += 16;
         v62 = v80++ + 1;
-      }
-      while ( v61 + v14 + 2 * v61 - 6 < (unsigned int)dword_52E624
+      } while ( v61 + v14 + 2 * v61 - 6 < (unsigned int)dword_52E624
            && v62 < a1
            && v63 == *((_DWORD *)v3 + 7)
            && v66 == *(_DWORD *)v3 );
+
+      // Do the drawing
       sub_48A350(v65, v90, (int)&unk_B6B0E8, v15, (int)word_AF30E8, v14);
       result = a1;
     }
