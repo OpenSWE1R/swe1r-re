@@ -1,3 +1,22 @@
+# ChangeAndClamp
+
+This is used in the debug menu
+
+```C
+//----- (00429D90) --------------------------------------------------------
+// a1 = pointer to value to be modified
+// a2 = factor a (from user input for example)
+// a3 = factor b (constant scaling factor for example)
+// a4 = min value
+// a5 = max value
+// Probably void, but would return a5 otherwise
+void __cdecl sub_429D90(int* a1, float a2, float a3, int a4, int a5){
+  *a1 = (int)(a3 * a2 + (float)a1);
+  if (*a1 < a4) { *a1 = a4; }
+  if (*a1 > a5) { *a1 = a5; }
+}
+```
+
 # Some matrix copy function
 
 This has only one target matrix. It's used inline though, so probably not a matrix stack either.
