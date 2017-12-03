@@ -118,11 +118,13 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2)
   int v89; // [esp+64h] [ebp-4h]
   int v90; // [esp+74h] [ebp+Ch]
 
+  // Setup D3D projection matrix
   sub_48B260(
     *(float *)(dword_DF7F2C + 56),
     *(float *)(dword_DF7F2C + 64),
     *(float *)(*(_DWORD *)(dword_DF7F2C + 72) + 4),
     *(float *)(*(_DWORD *)(dword_DF7F2C + 72) + 8));
+
   sub_49EA00();
   result = a1;
   v80 = 0;
