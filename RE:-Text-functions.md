@@ -1,4 +1,6 @@
-There are more functions nearby which look like text rendering too
+# Wrappers around creating text entries
+
+There are more functions nearby which look like text related too
 
 ```
 //----- (00450530) --------------------------------------------------------
