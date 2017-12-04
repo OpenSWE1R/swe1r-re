@@ -1,4 +1,4 @@
-# Paket handler
+# Packet handler
 
 This handles the following packets:
 
