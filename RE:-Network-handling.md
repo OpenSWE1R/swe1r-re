@@ -1,4 +1,169 @@
-# Packet handler
+# Packet handlers
+
+This one probably sends a packet?
+
+```C
+//----- (0041DF10) --------------------------------------------------------
+int __cdecl sub_41DF10(int a1, int a2, signed int a3, int a4, double a5, double a6, int *a7, _DWORD *a8, int a9)
+{
+  int result; // eax
+  char *v10; // edx
+  int v11; // ecx
+  int v12; // edx
+  _DWORD *v13; // eax
+  int v14; // esi
+  _DWORD *v15; // eax
+  int v16; // eax
+  int v17; // eax
+  void *v18; // ST0C_4
+  const char *v19; // eax
+  char v20; // [esp+Ch] [ebp-400h]
+
+  result = dword_4D5E00;
+  if ( dword_4D5E00 )
+  {
+    result = dword_4EB3B4;
+    *(_DWORD *)&dword_EC7BC8 = dword_4EB3B4;
+    dword_EC7BCC = a3;
+    v10 = (char *)&dword_EC7BD0;
+    if ( a3 > 1668575852 )
+    {
+      if ( a3 > 1718378861 )
+      {
+        if ( a3 > 1819243380 )
+        {
+          if ( a3 > 1886550137 )
+          {
+            if ( a3 > 1919249006 )
+            {
+              if ( a3 == 1952544110 )
+              {
+                *(double *)qword_EC7BD4 = a5;
+                *(_DWORD *)&dword_EC7BD0 = a4;
+                v10 = (char *)&dword_EC7BDC;
+              }
+              else
+              {
+                if ( a3 != 1953655143 )
+                  return result;
+                *(_DWORD *)&dword_EC7BD0 = a4;
+                *(_DWORD *)qword_EC7BD4 = LODWORD(a5);
+                v10 = &qword_EC7BD4[4];
+              }
+            }
+            else if ( a3 != 1919249006 )
+            {
+              if ( a3 != 1903520116 )
+                return result;
+              dword_EA04E0[dword_4EB3B4] = 1;
+              v16 = 4 * result;
+              dword_EA05C0[v16] = 666;
+              dword_EA05C4[v16] = 0;
+              dword_EA05C8[v16] = 0;
+              dword_EA05CC[v16] = 0;
+            }
+          }
+          else if ( a3 == 1886550137 )
+          {
+            v12 = 0;
+            v13 = &unk_E29BC4;
+            do
+            {
+              if ( *v13 == 1094797641 || *v13 == 1282368364 )
+                ++v12;
+              v13 += 34;
+            }
+            while ( (signed int)v13 < (signed int)&unk_E2A664 );
+            *(_DWORD *)&dword_EC7BD0 = v12;
+            v10 = qword_EC7BD4;
+            v14 = 0;
+            v15 = &unk_E29BC4;
+            do
+            {
+              if ( *v15 == 1094797641 || *v15 == 1282368364 )
+              {
+                *(_DWORD *)v10 = v14;
+                v10 += 4;
+              }
+              v15 += 34;
+              ++v14;
+            }
+            while ( (signed int)v15 < (signed int)&unk_E2A664 );
+          }
+          else
+          {
+            if ( a3 != 1886151024 )
+              return result;
+            *(_DWORD *)&dword_EC7BD0 = a4;
+            v10 = &qword_EC7BD4[4];
+            *(float *)qword_EC7BD4 = a5;
+          }
+        }
+        else if ( a3 == 1819243380 )
+        {
+          *(_DWORD *)&dword_EC7BD0 = a4;
+          v10 = qword_EC7BD4;
+        }
+        else
+        {
+          if ( a3 != 1751477356 )
+            return result;
+          v10 = qword_EC7BD4;
+          *(_DWORD *)&dword_EC7BD0 = a4;
+        }
+      }
+      else if ( a3 == 1718378861 )
+      {
+        v10 = qword_EC7BD4;
+        *(_DWORD *)&dword_EC7BD0 = a4;
+      }
+      else
+      {
+        if ( a3 != 1718185577 )
+          return result;
+        dword_EA02C0[dword_4EB3B4] = 1;
+      }
+    }
+    else if ( a3 != 1668575852 )
+    {
+      if ( a3 != 1399878251 )
+        return result;
+      *(_DWORD *)&dword_EC7BD0 = a4;
+      *(float *)qword_EC7BD4 = a5;
+      *(float *)&qword_EC7BD4[4] = a6;
+      dword_EC7BDC = *a7;
+      dword_EC7BE0 = a7[1];
+      dword_EC7BE4 = a7[2];
+      *(_DWORD *)&dword_EC7BE8 = *a8;
+      dword_EC7BEC = a8[1];
+      v11 = a8[2];
+      dword_EC7BF4 = a9;
+      dword_EC7BF0 = v11;
+      v10 = (char *)&unk_EC7BF8;
+    }
+    dword_EC7BC0 = v10 - (char *)&dword_EC7BC8;
+    dword_EC7BA4 = 0;
+    word_EC7BC4 = 23;
+    result = sub_41B760((int)&unk_EC7BA0, a1, 1, a2);
+    if ( a3 == 1903520116 )
+    {
+      if ( dword_4EB1C8 || (v17 = dword_4EB3B4, dword_4B6714 == dword_4EB3B4) )
+      {
+        sub_41C8E0();
+        v17 = dword_4EB3B4;
+      }
+      dword_EA04E0[v17] = 1;
+      v18 = sub_41BCE0(v17);
+      v19 = sub_421360(aMondotextH0500);
+      sprintf(&v20, v19, v18);
+      result = (int)sub_41C190(&v20);
+    }
+  }
+  return result;
+}
+```
+
+---
 
 This handles the following packets:
 
