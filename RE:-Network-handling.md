@@ -254,3 +254,21 @@ void *__cdecl sub_41BCE0(int a1)
   return &unk_4EAD88;
 }
 ```
+
+# Add chat message
+
+```C
+//----- (0041C190) --------------------------------------------------------
+_DWORD *__cdecl sub_41C190(char *a1) {
+  _DWORD *result; // eax
+
+  if ( a1 ) {
+    result = 0;
+    if ( strlen(a1) != 0 ) {
+      sub_41D0C0(a1, -1, dword_4EB3B4);
+      result = sub_41C130(a1);
+    }
+  }
+  return result;
+}
+```
