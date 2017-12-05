@@ -66,9 +66,9 @@ Make sure you have [MSYS2 installed as explained on the official website](http:/
 **Install dependencies**
 
 * **x86:**
-  * `vcpkg install sdl2:x86-windows unicorn:x86-windows glew:x86-windows openal-soft:x86-windows enet:x86-windows`
+  * `pacman -S mingw-w64-i686-SDL2 mingw-w64-i686-glew mingw-w64-i686-openal mingw-w64-i686-enet`
 * **x64:**
-  * `vcpkg install sdl2:x64-windows unicorn:x64-windows glew:x64-windows openal-soft:x64-windows enet:x64-windows`
+  * `pacman -S mingw-w64-x86_64-SDL2 mingw-w64-x86_64-glew mingw-w64-x86_64-openal mingw-w64-x86_64-enet`
 
 **Generate build files**
 
