@@ -14,19 +14,26 @@ cd openswe1r
 
 # Supported platforms:
 
-## Windows (Visual Studio) <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/windows.png" alt="Windows">
+## Windows (Visual Studio 15) <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/windows.png" alt="Windows">
 
-*Only compilation for x86 or x64 are officially supported.*
+*Only compilation for x86 and x64 are officially supported.*
 
 **Platform requirements**
 
-You need a recent version of Visual Studio. These are available for free, but will require a registration at Microsoft after a short period of time.
-Additionally, you need Microsofts vcpkg, a package manager for Windows.
-Optionally, you can use an external installation of CMake instead of Visual Studio.
+Make sure you have installed [a full version of Visual Studio 2015](https://www.visualstudio.com/vs/). The Community Edition is available for free, but will require a free registration at Microsoft after a short period of time.
+Additionally, you need Microsofts vcpkg, a package manager for Windows. [Please follow the vcpkg quick-start guide on its repository](https://github.com/Microsoft/vcpkg#quick-start) if you don't have it installed already.
+Optionally, you can also install an external installation of CMake.
 
 **Install dependencies**
 
 You also need to install unicorn which currently isn't provided by vcpkg. As a result, you need to manually download the port files:
+
+FIXME!!
+```
+mkdir C:\tools\vcpkg\ports\unicorn\
+          Start-FileDownload 'https://raw.githubusercontent.com/JayFoxRox/vcpkg/unicorn-port/ports/unicorn/CONTROL' -FileName C:\tools\vcpkg\ports\unicorn\CONTROL
+          Start-FileDownload 'https://raw.githubusercontent.com/JayFoxRox/vcpkg/unicorn-port/ports/unicorn/portfile.cmake' -FileName C:\tools\vcpkg\ports\unicorn\portfile.cmake
+```
 
 * **x86:**
   * `vcpkg install sdl2:x86-windows unicorn:x86-windows glew:x86-windows openal-soft:x86-windows enet:x86-windows`
@@ -49,21 +56,27 @@ FIXME
 
 **Generate build files**
 
-cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..
+* **x86:**
+  * `cmake -G "Visual Studio 15 2017" -DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..`
+* **x64:**
+  * `cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..`
 
 **Building**
 
-FIXME
+`msbuild msvc_build/openswe1r.sln`
 
-## Windows (msys2) <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/windows.png" alt="Windows">
+## Windows (MSYS2 / MinGW) <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/windows.png" alt="Windows">
 
-*Only compilation for x86 or x64 are officially supported.*
+*Only compilation for x86 and x64 are officially supported.*
 
 **Platform requirements**
 
 Make sure you have [MSYS2 installed as explained on the official website](http://www.msys2.org/). Please make sure to also update your installation using pacman after going through the graphical setup. This is also explained on the website, but often ignored by users.
 
 **Install dependencies**
+
+`wget `https://raw.githubusercontent.com/Alexpux/MINGW-packages/master/mingw-w64-unicorn/PKGBUILD'` or something..
+`MINGW_INSTALLS=mingw64 makepkg-mingw -sLf -i`
 
 * **x86:**
   * `pacman -S mingw-w64-i686-SDL2 mingw-w64-i686-glew mingw-w64-i686-openal mingw-w64-i686-enet`
@@ -76,8 +89,7 @@ Make sure you have [MSYS2 installed as explained on the official website](http:/
 
 **Building**
 
-`make`
-
+`mingw32-make`
 
 ## macOS <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/80px-Apple_logo_black.svg.png" alt="MacOS">
 
