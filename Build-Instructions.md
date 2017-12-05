@@ -1,4 +1,4 @@
-# This article is WIP
+# This article is WIP: nothing of this works, images are poorly hotlinked
 
 It is assumed you have a working environment including C compiler which will work with CMake.
 It is also assumed that you have a working git installation and know how to use it.
@@ -12,7 +12,9 @@ cd openswe1r
 
 ---
 
-## Windows (Visual Studio)
+# Supported platforms:
+
+## Windows (Visual Studio) <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/windows.png" alt="Windows">
 
 **FIXME: Manually install vcpkg and cmake?!**
 
@@ -31,11 +33,11 @@ vcpkg <FIXME!!!>
 
 ### Using external CMake
 
-## Windows (msys2)
+## Windows (msys2) <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/windows.png" alt="Windows">
 
 **FIXME?!**
 
-## macOS
+## macOS <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/80px-Apple_logo_black.svg.png" alt="MacOS">
 
 * Unicorn-Engine: unicorn
 * SDL2: sdl2
@@ -52,7 +54,7 @@ brew install cmake
 brew install sdl2 unicorn glew devil openal-soft
 ```
 
-## Arch Linux
+## Arch Linux <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Archlinux-icon-crystal-64.svg" alt="Arch Linux">
 
 * Unicorn-Engine: community/unicorn
 * SDL2: extra/sdl2
@@ -69,14 +71,16 @@ pacman -S cmake
 pacman -S community/unicorn extra/sdl2 extra/glew community/devil extra/openal community/enet
 ```
 
-## Ubuntu
+# Not currently supported:
 
-**FIXME?!**
+## Ubuntu <img align="right" width="50px" height="50px" src="https://assets.ubuntu.com/v1/29985a98-ubuntu-logo32.png" alt="Ubuntu">
 
-## FreeBSD
+## FreeBSD <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/freebsd.png" alt="FreeBSD">
 
-**FIXME?!**
+## OpenBSD <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/openbsd.png" alt="OpenBSD">
 
-## OpenBSD
+## NetBSD <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/netbsd.png" alt="NetBSD">
 
-**FIXME?!**
+## Raspbian <img align="right" width="50px" height="50px" src="https://www.raspberrypi.org/app/uploads/2011/10/Raspi-PGB001.png" alt="Raspbian">
+
+## Android <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/1200px-Android_robot.svg.png" alt="Android">
