@@ -5,6 +5,7 @@ There are different versions of this game.
 | `22c2781b3cf606b7a093ec5a39ac2af5` | Windows   | United States? | Retail CD Version                        |
 | `d86d5d03638c24ab6279f24079825794` | Windows   | United States  | Patch from LucasArts FTP                 |
 | `44008c034cf696e1cdc569838a7f8b1b` | Windows   | International  | Patch from LucasArts FTP                 |
+| `E6EA6253F0091515B772FCABE0642058` | Windows   | German         | Retail CD Version                        |
 | `d6276f6b5f8a1f4055b6be58a4f58447` | Mac       | United States? | Retail CD Version                        |
 |                                    | Windows   | ?              | Demo from website                        |
 |                                    | Mac       | ?              | Demo from website                        |
