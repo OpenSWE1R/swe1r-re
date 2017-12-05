@@ -73,6 +73,10 @@ pacman -S community/unicorn extra/sdl2 extra/glew community/devil extra/openal c
 
 **FIXME?!**
 
----
+## FreeBSD
 
-FIXME: Create package guidelines which autoinstalls the demo?
+**FIXME?!**
+
+## OpenBSD
+
+**FIXME?!**
