@@ -14,13 +14,13 @@ cd openswe1r
 
 # Supported platforms:
 
-## Windows (Visual Studio 15) <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/windows.png" alt="Windows">
+## Windows (Visual Studio 2017) <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/windows.png" alt="Windows">
 
 *Only compilation for x86 and x64 are officially supported.*
 
 **Platform requirements**
 
-Make sure you have installed [a full version of Visual Studio 2015](https://www.visualstudio.com/vs/). The Community Edition is available for free, but will require a free registration at Microsoft after a short period of time.
+Make sure you have installed [a full version of Visual Studio 2017](https://www.visualstudio.com/vs/). The Community Edition is available for free, but will require a free registration at Microsoft after a short period of time.
 Additionally, you need Microsofts vcpkg, a package manager for Windows. [Please follow the vcpkg quick-start guide on its repository](https://github.com/Microsoft/vcpkg#quick-start) if you don't have it installed already.
 Optionally, you can also install an external installation of CMake.
 
