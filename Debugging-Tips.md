@@ -8,7 +8,7 @@ Here is an example to isolate an issue shortly after `IA3dSource__7`:
 (gdb) r
 ```
 
-Program runs until the breakpoint is reached:
+Program runs until the breakpoint is reached, so we enable tracing now:
 ```
 Thread 1 "openswe1r" hit Breakpoint 1, Hook_IA3dSource__7 (uc=0x5555557b97e0, _address=224853248, _size=0, _user_data=0x555556ab0470) at /home/fox/Data/Projects/OpenSWE1R/main.c:3246
 3246	HACKY_COM_BEGIN(IA3dSource, 7)
