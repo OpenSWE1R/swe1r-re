@@ -31,14 +31,18 @@ You also need to install unicorn which currently isn't provided by vcpkg. As a r
 FIXME!!
 ```
 mkdir C:\tools\vcpkg\ports\unicorn\
-          Start-FileDownload 'https://raw.githubusercontent.com/JayFoxRox/vcpkg/unicorn-port/ports/unicorn/CONTROL' -FileName C:\tools\vcpkg\ports\unicorn\CONTROL
-          Start-FileDownload 'https://raw.githubusercontent.com/JayFoxRox/vcpkg/unicorn-port/ports/unicorn/portfile.cmake' -FileName C:\tools\vcpkg\ports\unicorn\portfile.cmake
+Start-FileDownload 'https://raw.githubusercontent.com/JayFoxRox/vcpkg/unicorn-port/ports/unicorn/CONTROL' -FileName C:\tools\vcpkg\ports\unicorn\CONTROL
+Start-FileDownload 'https://raw.githubusercontent.com/JayFoxRox/vcpkg/unicorn-port/ports/unicorn/portfile.cmake' -FileName C:\tools\vcpkg\ports\unicorn\portfile.cmake
 ```
 
-* **x86:**
-  * `vcpkg install sdl2:x86-windows unicorn:x86-windows glew:x86-windows openal-soft:x86-windows enet:x86-windows`
-* **x64:**
-  * `vcpkg install sdl2:x64-windows unicorn:x64-windows glew:x64-windows openal-soft:x64-windows enet:x64-windows`
+**x86:**
+```
+vcpkg install sdl2:x86-windows unicorn:x86-windows glew:x86-windows openal-soft:x86-windows enet:x86-windows
+```
+**x64:**
+```
+vcpkg install sdl2:x64-windows unicorn:x64-windows glew:x64-windows openal-soft:x64-windows enet:x64-windows
+```
 
 ### Option 1: Using Visual Studio CMake support
 
@@ -56,14 +60,20 @@ FIXME
 
 **Generate build files**
 
-* **x86:**
-  * `cmake -G "Visual Studio 15 2017" -DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..`
-* **x64:**
-  * `cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..`
+**x86:**
+```
+cmake -G "Visual Studio 15 2017" -DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..
+```
+**x64:**
+```
+`cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_TOOLCHAIN_FILE=C:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake ..`
+```
 
 **Building**
 
-`msbuild msvc_build/openswe1r.sln`
+```
+msbuild msvc_build/openswe1r.sln
+```
 
 ## Windows (MSYS2 / MinGW) <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/windows.png" alt="Windows">
 
@@ -75,21 +85,30 @@ Make sure you have [MSYS2 installed as explained on the official website](http:/
 
 **Install dependencies**
 
-`wget `https://raw.githubusercontent.com/Alexpux/MINGW-packages/master/mingw-w64-unicorn/PKGBUILD'` or something..
-`MINGW_INSTALLS=mingw64 makepkg-mingw -sLf -i`
-
-* **x86:**
-  * `pacman -S mingw-w64-i686-SDL2 mingw-w64-i686-glew mingw-w64-i686-openal mingw-w64-i686-enet`
-* **x64:**
-  * `pacman -S mingw-w64-x86_64-SDL2 mingw-w64-x86_64-glew mingw-w64-x86_64-openal mingw-w64-x86_64-enet`
+**x86:**
+```
+wget https://raw.githubusercontent.com/Alexpux/MINGW-packages/master/mingw-w64-unicorn/PKGBUILD
+MINGW_INSTALLS=mingw32 makepkg-mingw -sLf -i
+pacman -S mingw-w64-i686-SDL2 mingw-w64-i686-glew mingw-w64-i686-openal mingw-w64-i686-enet
+```
+**x64:**
+```
+wget https://raw.githubusercontent.com/Alexpux/MINGW-packages/master/mingw-w64-unicorn/PKGBUILD
+MINGW_INSTALLS=mingw64 makepkg-mingw -sLf -i
+pacman -S mingw-w64-x86_64-SDL2 mingw-w64-x86_64-glew mingw-w64-x86_64-openal mingw-w64-x86_64-enet
+```
 
 **Generate build files**
 
-`cmake -G 'MSYS Makefiles' ..`
+```
+cmake -G 'MSYS Makefiles' ..
+```
 
 **Building**
 
-`mingw32-make`
+```
+mingw32-make
+```
 
 ## macOS <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/80px-Apple_logo_black.svg.png" alt="MacOS">
 
@@ -99,16 +118,47 @@ Make sure you have [MSYS2 installed as explained on the official website](http:/
 brew install cmake
 ```
 
-* **x64:**
-  * `brew install sdl2 unicorn glew devil openal-soft`
+**Native:**
+```
+brew install sdl2 unicorn glew devil openal-soft
+```
 
 **Generate build files**
 
-`cmake ..`
+```
+cmake ..
+```
 
 **Building**
 
-`make`
+```make```
+
+## Ubuntu <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo-ubuntu_cof-orange-hex.svg/200px-Logo-ubuntu_cof-orange-hex.svg.png" alt="Ubuntu">
+
+**Install dependencies**
+
+```
+pacman -S cmake
+```
+
+FIXME: Unicorn has to be installed from source?!
+
+**Native:**
+```
+apt-get install libopenal-dev libenet-dev libglew-dev libsdl2-dev
+```
+
+**Generate build files**
+
+```
+cmake ..
+```
+
+**Building**
+
+```
+make
+```
 
 ## Arch Linux <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Archlinux-icon-crystal-64.svg" alt="Arch Linux">
 
@@ -118,34 +168,37 @@ brew install cmake
 pacman -S cmake
 ```
 
-* **x64:**
-  * `pacman -S community/unicorn extra/sdl2 extra/glew community/devil extra/openal community/enet`
-
+**Native:**
+```
+pacman -S community/unicorn extra/sdl2 extra/glew community/devil extra/openal community/enet
+```
 
 **Generate build files**
 
-`cmake ..`
+```
+cmake ..
+```
 
 **Building**
 
-`make`
+```
+make
+```
 
-# Not currently supported:
-
-## Ubuntu <img align="right" width="50px" height="50px" src="https://assets.ubuntu.com/v1/29985a98-ubuntu-logo32.png" alt="Ubuntu">
+# Not officially supported:
 
 ## Fedora <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg" alt="Fedora">
 
-## Debian <img align="right" width="50px" height="50px" src="https://pbs.twimg.com/profile_images/919072984022822913/RUZ1R5Ik.jpg" alt="Debian">
+## Debian <img align="right" width="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Openlogo-debianV2.svg/194px-Openlogo-debianV2.svg.png" alt="Debian">
 
-## Gentoo <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/4/48/Gentoo_Linux_logo_matte.svg" alt="Gentoo">
+## Gentoo <img align="right" width="50px" src="https://upload.wikimedia.org/wikipedia/commons/4/48/Gentoo_Linux_logo_matte.svg" alt="Gentoo">
 
 ## FreeBSD <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/freebsd.png" alt="FreeBSD">
 
-## OpenBSD <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/openbsd.png" alt="OpenBSD">
+## OpenBSD <img align="right" width="50px" src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Puffy_mascot_openbsd.gif" alt="OpenBSD">
 
-## NetBSD <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/netbsd.png" alt="NetBSD">
+## NetBSD <img align="right" width="50px" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/NetBSD.svg/200px-NetBSD.svg.png" alt="NetBSD">
 
-## Raspbian <img align="right" height="50px" src="https://www.raspberrypi.org/app/uploads/2011/10/Raspi-PGB001.png" alt="Raspbian">
+## Raspbian <img align="right" width="50px" src="https://www.raspberrypi.org/app/uploads/2011/10/Raspi-PGB001.png" alt="Raspbian">
 
-## Android <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/1200px-Android_robot.svg.png" alt="Android">
+## Android <img align="right" width="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/1200px-Android_robot.svg.png" alt="Android">
