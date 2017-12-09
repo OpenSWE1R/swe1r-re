@@ -149,18 +149,18 @@ pacman -S cmake
 
 **Native:**
 ```
-mkdir unicorn
-cd unicorn
-wget https://codeload.github.com/unicorn-engine/unicorn/tar.gz/1.0.1
-tar xf unicorn-1.0.1.tar.gz
-make.sh
-cd ..
 apt-get install libopenal-dev libenet-dev libglew-dev libsdl2-dev
 ```
 
 **Generate build files**
 
 ```
+mkdir unicorn
+cd unicorn
+wget https://codeload.github.com/unicorn-engine/unicorn/tar.gz/1.0.1
+tar xf unicorn-1.0.1.tar.gz
+./make.sh
+cd ..
 UNICORNDIR="`pwd`/unicorn" cmake ..
 ```
 
