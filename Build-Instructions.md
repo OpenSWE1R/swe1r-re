@@ -126,7 +126,7 @@ brew install cmake
 
 **Native:**
 ```
-brew install sdl2 unicorn glew devil openal-soft
+brew install sdl2 unicorn glew openal-soft enet
 ```
 
 **Generate build files**
@@ -182,7 +182,7 @@ pacman -S cmake
 
 **Native:**
 ```
-pacman -S community/unicorn extra/sdl2 extra/glew community/devil extra/openal community/enet
+pacman -S community/unicorn extra/sdl2 extra/glew extra/openal community/enet
 ```
 
 **Generate build files**
