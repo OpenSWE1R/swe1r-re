@@ -159,9 +159,9 @@ apt-get install libopenal-dev libenet-dev libglew-dev libsdl2-dev
 ```
 mkdir unicorn
 cd unicorn
-wget https://codeload.github.com/unicorn-engine/unicorn/tar.gz/1.0.1
-tar xf unicorn-1.0.1.tar.gz --strip-components=1
-./make.sh
+wget https://github.com/unicorn-engine/unicorn/archive/1.0.1.tar.gz
+tar xf 1.0.1.tar.gz --strip-components=1
+UNICORN_ARCHS="x86" ./make.sh
 cd ..
 UNICORNDIR="`pwd`/unicorn" cmake ..
 ```
