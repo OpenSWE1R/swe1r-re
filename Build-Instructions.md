@@ -137,14 +137,16 @@ cmake ..
 
 **Building**
 
-```make```
+```
+make
+```
 
 ## Ubuntu <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo-ubuntu_cof-orange-hex.svg/200px-Logo-ubuntu_cof-orange-hex.svg.png" alt="Ubuntu">
 
 **Install dependencies**
 
 ```
-pacman -S cmake
+apt-get install cmake
 ```
 
 **Native:**
