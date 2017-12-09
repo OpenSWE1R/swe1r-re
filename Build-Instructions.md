@@ -87,14 +87,20 @@ Make sure you have [MSYS2 installed as explained on the official website](http:/
 
 **x86:**
 ```
+mkdir unicorn
+cd unicorn
 wget https://raw.githubusercontent.com/Alexpux/MINGW-packages/master/mingw-w64-unicorn/PKGBUILD
 MINGW_INSTALLS=mingw32 makepkg-mingw -sLf -i
+cd ..
 pacman -S mingw-w64-i686-SDL2 mingw-w64-i686-glew mingw-w64-i686-openal mingw-w64-i686-enet
 ```
 **x64:**
 ```
+mkdir unicorn
+cd unicorn
 wget https://raw.githubusercontent.com/Alexpux/MINGW-packages/master/mingw-w64-unicorn/PKGBUILD
 MINGW_INSTALLS=mingw64 makepkg-mingw -sLf -i
+cd ..
 pacman -S mingw-w64-x86_64-SDL2 mingw-w64-x86_64-glew mingw-w64-x86_64-openal mingw-w64-x86_64-enet
 ```
 
@@ -141,17 +147,21 @@ cmake ..
 pacman -S cmake
 ```
 
-FIXME: Unicorn has to be installed from source?!
-
 **Native:**
 ```
+mkdir unicorn
+cd unicorn
+wget https://codeload.github.com/unicorn-engine/unicorn/tar.gz/1.0.1
+tar xf unicorn-1.0.1.tar.gz
+make.sh
+cd ..
 apt-get install libopenal-dev libenet-dev libglew-dev libsdl2-dev
 ```
 
 **Generate build files**
 
 ```
-cmake ..
+UNICORNDIR="`pwd`/unicorn" cmake ..
 ```
 
 **Building**
