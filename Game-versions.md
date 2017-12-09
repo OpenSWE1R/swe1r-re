@@ -19,6 +19,8 @@ The demos can be downloaded from http://www.lucasarts.com/products/starwarsracer
 * [Windows demo in archive.org (pcworld.com)](http://downloads.pcworld.com/pub/new/fun_and_games/action/racerdemo.exe)
 * [Windows demo in archive.org (gamesdomain.co.uk mirror)](https://web.archive.org/web/20020326005329/ftp://sunsite.doc.ic.ac.uk/Mirrors/ftp.gamesdomain.co.uk/pub/demos/racerdemo.exe)
 
+The webdemo was also available on the ["PC Magazine (November 1999)" cover-disc (UK)](https://archive.org/details/pc-magazine-uk-cdrom-1999-11-B) and ["PC Zone Issue #80 (September 1999)" cover-disc (UK)](https://archive.org/details/cdrom-cdzone80-199909).
+
 The N64 version can be detected by looking in the debug menu. See [tcrf for more information](https://tcrf.net/Star_Wars_Episode_I:_Racer_(Nintendo_64)#Build_Info).
 
 ---
