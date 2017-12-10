@@ -199,6 +199,34 @@ make
 
 # Not officially supported (probably working):
 
+
+## OpenSUSE <img align="right" width="50px" src="https://upload.wikimedia.org/wikipedia/en/thumb/9/98/OpenSUSE_official-logo-color.svg/200px-OpenSUSE_official-logo-color.svg.png" alt="OpenSUSE">
+
+
+**Install dependencies**
+
+```
+FIXME cmake
+```
+
+**Native:**
+```
+FIXME unicorn sdl2 glew openal enet
+```
+
+**Generate build files**
+
+```
+cmake ..
+```
+
+**Building**
+
+```
+make
+```
+
+
 ## Fedora <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg" alt="Fedora">
 
 ## Debian <img align="right" width="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Openlogo-debianV2.svg/194px-Openlogo-debianV2.svg.png" alt="Debian">
