@@ -3,15 +3,7 @@
 ```C
 
 //----- (00401000) --------------------------------------------------------
-signed int __cdecl sub_401000(_DWORD *a1, unsigned int a2, int a3)
-{
-  _DWORD *v3; // eax
-  _DWORD *v4; // eax
-  _DWORD *v5; // eax
-  _DWORD *v6; // eax
-  _DWORD *v7; // eax
-  _DWORD *v8; // eax
-  signed int v9; // edi
+signed int __cdecl sub_401000(_DWORD *a1, unsigned int a2, int a3) {
   _DWORD *v10; // eax
   signed int result; // eax
   _DWORD *v12; // esi
@@ -27,26 +19,26 @@ signed int __cdecl sub_401000(_DWORD *a1, unsigned int a2, int a3)
   char *v22; // ST18_4
   char *v23; // ST14_4
   char *v24; // eax
+  uint8_t* byte = (_BYTE *)(dword_50C454 + 81);
+  DWORD* ptr;
+  ptr = sub_414D90(a1, 12);
+  sub_414E60((int)ptr, *byte == 0);
+  ptr = sub_414D90(a1, 14);
+  sub_414E60((int)ptr, *byte == 0);
+  ptr = sub_414D90(a1, 13);
+  sub_414E60((int)ptr, *byte == 0);
+  ptr = sub_414D90(a1, 15);
+  sub_414E60((int)ptr, *byte == 0);
+  ptr = sub_414D90(a1, 16);
+  sub_414E60((int)ptr, *byte == 0);
+  ptr = sub_414D90(a1, 1);
+  sub_414E60((int)ptr, *byte == 0);
 
-  v3 = sub_414D90(a1, 12);
-  sub_414E60((int)v3, *(_BYTE *)(dword_50C454 + 81) == 0);
-  v4 = sub_414D90(a1, 14);
-  sub_414E60((int)v4, *(_BYTE *)(dword_50C454 + 81) == 0);
-  v5 = sub_414D90(a1, 13);
-  sub_414E60((int)v5, *(_BYTE *)(dword_50C454 + 81) == 0);
-  v6 = sub_414D90(a1, 15);
-  sub_414E60((int)v6, *(_BYTE *)(dword_50C454 + 81) == 0);
-  v7 = sub_414D90(a1, 16);
-  sub_414E60((int)v7, *(_BYTE *)(dword_50C454 + 81) == 0);
-  v8 = sub_414D90(a1, 1);
-  sub_414E60((int)v8, *(_BYTE *)(dword_50C454 + 81) == 0);
-
-  v9 = 0;
-  do {
+  signed int v9; // edi
+  for(v9 = 0; v9 < 26; v9++) {
     v10 = sub_414D90(a1, v9 + 10000);
     sub_414E60((int)v10, *(char *)(dword_50C454 + 81));
-    ++v9;
-  } while ( v9 < 26 );
+  }
 
   // Not 100% sure about RE in what is following
 
