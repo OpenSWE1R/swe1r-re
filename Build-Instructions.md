@@ -163,7 +163,7 @@ wget https://github.com/unicorn-engine/unicorn/archive/1.0.1.tar.gz
 tar xf 1.0.1.tar.gz --strip-components=1
 UNICORN_ARCHS="x86" ./make.sh
 cd ..
-UNICORNDIR="`pwd`/unicorn" cmake ..
+UNICORNDIR="$PWD/unicorn" cmake ..
 ```
 
 **Building**
@@ -206,18 +206,24 @@ make
 **Install dependencies**
 
 ```
-FIXME cmake
+zypper in cmake
 ```
 
 **Native:**
 ```
-FIXME unicorn sdl2 glew openal enet
+zypper in libSDL2-devel glew-devel openal-soft-devel enet-devel
 ```
 
 **Generate build files**
 
 ```
-cmake ..
+mkdir unicorn
+cd unicorn
+wget https://github.com/unicorn-engine/unicorn/archive/1.0.1.tar.gz
+tar xf 1.0.1.tar.gz --strip-components=1
+UNICORN_ARCHS="x86" ./make.sh
+cd ..
+UNICORNDIR="$PWD/unicorn" cmake ..
 ```
 
 **Building**
