@@ -52,17 +52,21 @@ signed int __cdecl sub_401000(_DWORD *a1, unsigned int a2, int a3) {
     }
     return 0;
   } else if ( a2 == 100 ) {
-    if ( dword_4D5570 != 13 ) {
-      if ( dword_4D5570 != 16 ) {
-        return 0;
-      }
+
+    if ( dword_4D5570 == 13 ) {
+      dword_4D5570 = 0;
+      return 0;
+    } else if ( dword_4D5570 == 16 ) {
       if ( !a3 ) {
         sub_4240D0();
         exit_0(0);
       }
+      dword_4D5570 = 0;
+      return 0;
+    } else {
+      return 0;
     }
-    dword_4D5570 = 0;
-    return 0;
+
   } else if ( a2 == 1000 ) {
 
     switch ( a3 ) {
