@@ -1,4 +1,4 @@
-## Retail
+## Retail (FTP version)
 
 ```C
 
