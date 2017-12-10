@@ -1,4 +1,4 @@
-# This article is WIP: nothing of this works, images are poorly hotlinked
+**This article is still under construction. Use everything with caution. Some things might not work**
 
 It is assumed you have a working environment including C compiler which will work with CMake.
 It is also assumed that you have a working git installation and know how to use it.
@@ -197,7 +197,7 @@ cmake ..
 make
 ```
 
-# Not officially supported:
+# Not officially supported (probably working):
 
 ## Fedora <img align="right" width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Fedora_logo.svg" alt="Fedora">
 
@@ -206,6 +206,8 @@ make
 ## Gentoo <img align="right" width="50px" src="https://upload.wikimedia.org/wikipedia/commons/4/48/Gentoo_Linux_logo_matte.svg" alt="Gentoo">
 
 ## FreeBSD <img align="right" width="50px" height="50px" src="http://www.unicorn-engine.org/images/freebsd.png" alt="FreeBSD">
+
+# Not officially supported (probably not working):
 
 ## OpenBSD <img align="right" width="50px" src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Puffy_mascot_openbsd.gif" alt="OpenBSD">
 
