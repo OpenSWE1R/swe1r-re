@@ -33,11 +33,9 @@ signed int __cdecl sub_401000(_DWORD *a1, unsigned int a2, int a3) {
   sub_414E60((int)ptr, *byte == 0);
   ptr = sub_414D90(a1, 1);
   sub_414E60((int)ptr, *byte == 0);
-
-  signed int v9; // edi
-  for(v9 = 0; v9 < 26; v9++) {
-    v10 = sub_414D90(a1, v9 + 10000);
-    sub_414E60((int)v10, *(char *)(dword_50C454 + 81));
+  for(int v9 = 0; v9 < 26; v9++) {
+    ptr = sub_414D90(a1, v9 + 10000);
+    sub_414E60((int)ptr, *byte);
   }
 
   // Not 100% sure about RE in what is following
