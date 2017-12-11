@@ -52,9 +52,10 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
     uint32_t max_vertex_count; // 48
     char name[128]; // 52
     char description[128]; // 180
+    uint8_t unk1[8]; // 308
     D3DDEVICEDESC desc; // 316 [0xFC bytes] copied from A
     GUID guid; // 568
-  }* v7;
+  }* v7; // 872 bytes in total
   v7 = 872 * dword_52D56C + 0x52D870;
 
   // Copy GUID
