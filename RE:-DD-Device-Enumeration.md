@@ -36,41 +36,63 @@ BOOL __stdcall Callback(GUID *lpGUID, LPSTR a2, LPSTR a3, LPVOID a4)
   LPDIRECTDRAW lpDD; // [esp+24h] [ebp-4h]
 
   lpDD = 0;
-  if ( (unsigned int)dword_52D444 >= 0x10 )
+
+  // Don't allow more than 16 devices
+  if ( (unsigned int)dword_52D444 >= 0x10 ) {
     return 0;
-  v4 = 676 * dword_52D444 + 5417464;
-  if ( lpGUID )
-  {
-    v5 = (DWORD *)(676 * dword_52D444 + 5418124);
+  }
+
+  struct {
+    char name[128]; // 0
+    char description[128]; // 128
+    uint32_t hasGUID; // 256
+    uint32_t unk260; // 260
+    uint32_t hasNoGUID; // 264
+    uint32_t unk268; // 268
+    uint32_t unk272; // 272
+    uint32_t unk276; // 276
+    DDCAPS dd_caps; // 280
+    GUID guid; // 660
+  }* v4 = 676 * dword_52D444 + 5417464;
+
+  // Copy GUID
+  if ( lpGUID ) {
+    v5 = &v4->guid;
     *v5 = lpGUID->Data1;
     v5[1] = *(_DWORD *)&lpGUID->Data2;
     v5[2] = *(_DWORD *)lpGUID->Data4;
     v6 = *(_DWORD *)&lpGUID->Data4[4];
     *(_DWORD *)(v4 + 264) = 0;
     v5[3] = v6;
-  }
-  else
-  {
-    v7 = (_DWORD *)(676 * dword_52D444 + 5418124);
+  } else {
+    v7 = &v4->guid;
     *v7 = 0;
     v7[1] = 0;
     v7[2] = 0;
     v7[3] = 0;
     *(_DWORD *)(v4 + 264) = 1;
   }
+
+  // Copy name
   strncpy((char *)(v4 + 128), a2, 0x7Fu);
   *(_BYTE *)(v4 + 255) = 0;
+
+  // Copy description
   strncpy((char *)v4, a3, 0x7Fu);
   *(_BYTE *)(v4 + 127) = 0;
-  if ( lpGUID )
+
+  // Mark wether there was a GUID
+  if ( lpGUID ) {
     *(_DWORD *)(v4 + 256) = 1;
-  else
+  } else {
     *(_DWORD *)(v4 + 256) = 0;
-  if ( DirectDrawCreate(lpGUID, &lpDD, 0) )
-  {
+  }
+
+  if ( DirectDrawCreate(lpGUID, &lpDD, 0) ) {
     MessageBoxA(0, aDirectdrawFail, Caption, 0);
     return 1;
   }
+
   v9 = lpDD->lpVtbl;
   v10 = sub_48C780();
   if ( v9->SetCooperativeLevel(lpDD, (HWND)v10, 17) )
