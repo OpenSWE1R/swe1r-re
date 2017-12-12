@@ -247,6 +247,6 @@ make
 
 ## NetBSD <img align="right" width="50px" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/NetBSD.svg/200px-NetBSD.svg.png" alt="NetBSD">
 
-## Raspbian <img align="right" width="50px" src="https://www.raspberrypi.org/app/uploads/2011/10/Raspi-PGB001.png" alt="Raspbian">
+## Raspbian
 
 ## Android <img align="right" width="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/1200px-Android_robot.svg.png" alt="Android">
