@@ -6,6 +6,7 @@ There are some known bugs in the original game:
 * Hitting enter on selected menu item always goes forward, even if "Cancel" is selected
 * When one engine exploded, the other one is shown inside out (bad culling)
 * Sometimes re-spawns you directly infront of an obstacle you can't pass because you can't even accelerate enough
+* "Lens flares" and "Smoke and dust" will silently be disabled if they are not supported on the system, no warning/error is emitted
 * [Best times are not saved on fast PCs](https://www.speedrun.com/swe1r/thread/fsvab)
 * [Various issues at high framerates](https://www.speedrun.com/swe1r/thread/kel5z)
 
