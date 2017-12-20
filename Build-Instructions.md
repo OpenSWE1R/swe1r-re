@@ -28,13 +28,6 @@ Optionally, you can also install an external installation of CMake.
 
 You also need to install unicorn which currently isn't provided by vcpkg. As a result, you need to manually download the port files:
 
-FIXME!!
-```
-mkdir C:\tools\vcpkg\ports\unicorn\
-Start-FileDownload 'https://raw.githubusercontent.com/JayFoxRox/vcpkg/unicorn-port/ports/unicorn/CONTROL' -FileName C:\tools\vcpkg\ports\unicorn\CONTROL
-Start-FileDownload 'https://raw.githubusercontent.com/JayFoxRox/vcpkg/unicorn-port/ports/unicorn/portfile.cmake' -FileName C:\tools\vcpkg\ports\unicorn\portfile.cmake
-```
-
 **x86:**
 ```
 vcpkg install sdl2:x86-windows unicorn:x86-windows glew:x86-windows openal-soft:x86-windows enet:x86-windows
