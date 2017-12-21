@@ -83,10 +83,10 @@ int __cdecl sub_48CD30(float a1) {
 // a3 = cos (?) for angle
 // Very similar to sub_48CD50 (which does the same for sin (?) only)
 void __cdecl sub_48C950(float a1, float* a2, float* a3) {
+  float angle = sub_48C830(a1);
 
   // Figure out which quadrant this angle belongs to
   int quadrant;
-  float angle = sub_48C830(a1);
   if (angle >= 90.0) {
     if (angle >= 180.0) {
       if (angle >= 270.0) {
@@ -174,7 +174,7 @@ void __cdecl sub_48C950(float a1, float* a2, float* a3) {
       float b = dword_4BD8E8[index0];
       *a3 = (v29 - b) * delta + b;
  
-     break;
+      break;
 
     default:
       break;
