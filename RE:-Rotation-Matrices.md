@@ -12,63 +12,59 @@ These get their own article because github wikis are not too good to edit and [[
 
 ```C
 //----- (0048C830) --------------------------------------------------------
-double __cdecl sub_48C830(float a1)
-{
-  double v1; // st7
-  float v2; // ST00_4
-  float v4; // ST00_4
-  float v5; // [esp+10h] [ebp-8h]
-  float v6; // [esp+14h] [ebp-4h]
+// a1 = angle in degrees
+// Returns the wrapped angle [0.0; 360.0[ in degrees
+float __cdecl sub_48C830(float a1) {
+  float result;
 
-  if ( a1 >= 0.0 )
-  {
-    if ( a1 < 360.0 )
+  if (a1 >= 0.0) {
+    // If it's already a good angle, we can just return it
+    if (a1 < 360.0) {
       return a1;
-    v4 = a1 / 360.0;
-    v5 = a1 - sub_48C8F0(v4) * 360.0;
-  }
-  else
-  {
-    v1 = -a1;
-    v6 = v1;
-    if ( v1 >= 360.0 )
-    {
-      v2 = v6 / 360.0;
-      v5 = 360.0 - (v6 - sub_48C8F0(v2) * 360.0);
     }
-    else
-    {
-      v5 = 360.0 - v6;
+
+    // Wrap around
+    result = a1 - sub_48C8F0(a1 / 360.0) * 360.0;
+  } else {
+    float positive_angle = -a1;
+    if (positive_angle >= 360.0) {
+      // Wrap around
+      result = 360.0 - (positive_angle - sub_48C8F0(positive_angle / 360.0) * 360.0);
+    } else {
+      result = 360.0 - positive_angle;
     }
   }
-  if ( v5 == 360.0 )
-    v5 = 0.0;
-  return v5;
+
+  if (result == 360.0) {
+    result = 0.0;
+  }
+  return result;
 }
 ```
 
 ```C
 //----- (0048C8F0) --------------------------------------------------------
-double __cdecl sub_48C8F0(float a1)
-{
-  _ST7 = a1;
-  __asm { frndint }
-  return (float)_ST7;
+// Uses the x87 instruction "frndint" which rounds according to current rounding mode.
+float __cdecl sub_48C8F0(float a1) {
+  return _frndint(a1);
 }
 ```
 
 ```C
 //----- (0048C910) --------------------------------------------------------
-double __cdecl sub_48C910(float a1)
-{
-  double v1; // st7
-  float v3; // [esp+0h] [ebp-4h]
-
-  v1 = sub_48C830(a1);
-  v3 = v1;
-  if ( v1 > 180.0 )
-    v3 = -(360.0 - v3);
-  return v3;
+// a1 = angle in degrees
+// Returns angle in range ]-180.0;180.0] where input / output angles are:
+//    0.0 ~>    0.0
+//  180.0 ~>  180.0
+//  180.1 ~> -179.9
+//  359.9 ~>   -0.1
+//  360.0 ~>    0.0
+float __cdecl sub_48C910(float a1) {
+  float angle = sub_48C830(a1);
+  if (angle > 180.0) {
+    angle = -(360.0 - angle);
+  }
+  return angle;
 }
 ```
 
