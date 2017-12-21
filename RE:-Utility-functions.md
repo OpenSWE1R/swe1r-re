@@ -108,28 +108,32 @@ void __cdecl sub_480690(float *a1, float *a2, float *a3) {
 
 ```C
 //----- (00492B70) --------------------------------------------------------
-float *__cdecl sub_492B70(float *a1, float *a2, float *a3)
-{
-  float *v3; // ecx
-  float *result; // eax
+// a1 = output matrix [12 floats]
+// a2 = input matrix [12 floats]
+// a3 = input matrix [12 floats]
+float *__cdecl sub_492B70(float* a1, const float* a2, const float* a3) {
 
-  v3 = a3;
-  result = a2;
-  *a1 = *a3 * *a2 + a3[1] * a2[3] + a3[2] * a2[6];
-  a1[1] = result[1] * *v3 + result[7] * v3[2] + result[4] * v3[1];
-  a1[2] = result[2] * *v3 + result[8] * v3[2] + result[5] * v3[1];
-  a1[3] = v3[3] * *result + v3[5] * result[6] + v3[4] * result[3];
-  a1[4] = v3[4] * result[4] + v3[5] * result[7] + v3[3] * result[1];
-  a1[5] = v3[5] * result[8] + result[5] * v3[4] + v3[3] * result[2];
-  a1[6] = v3[6] * *result + v3[7] * result[3] + v3[8] * result[6];
-  a1[7] = v3[6] * result[1] + v3[7] * result[4] + v3[8] * result[7];
-  a1[8] = v3[8] * result[8] + v3[6] * result[2] + v3[7] * result[5];
-  a1[9] = v3[9] * *result + v3[10] * result[3] + v3[11] * result[6] + result[9];
-  a1[10] = v3[9] * result[1] + v3[11] * result[7] + v3[10] * result[4] + result[10];
-  a1[11] = a3[10] * a2[5] + a3[9] * a2[2] + a3[11] * a2[8] + a2[11];
-  return result;
+  a1[0] = a2[0] * a3[0] + a2[3] * a3[1] + a2[6] * a3[2];
+  a1[1] = a2[1] * a3[0] + a2[4] * a3[1] + a2[7] * a3[2];
+  a1[2] = a2[2] * a3[0] + a2[5] * a3[1] + a2[8] * a3[2];
+
+  a1[3] = a2[0] * a3[3] + a2[3] * a3[4] + a2[6] * a3[5];
+  a1[4] = a2[1] * a3[3] + a2[4] * a3[4] + a2[7] * a3[5];
+  a1[5] = a2[2] * a3[3] + a2[5] * a3[4] + a2[8] * a3[5];
+
+  a1[6] = a2[0] * a3[6] + a2[3] * a3[7] + a2[6] * a3[8];
+  a1[7] = a2[1] * a3[6] + a2[4] * a3[7] + a2[7] * a3[8];
+  a1[8] = a2[2] * a3[6] + a2[5] * a3[7] + a2[8] * a3[8];
+
+  a1[ 9] = a2[0] * a3[9] + a2[3] * a3[10] + a2[6] * a3[11] + a2[ 9];
+  a1[10] = a2[1] * a3[9] + a2[4] * a3[10] + a2[7] * a3[11] + a2[10];
+  a1[11] = a2[2] * a3[9] + a2[5] * a3[10] + a2[8] * a3[11] + a2[11];
+
+  return a2;
 }
+```
 
+```C
 //----- (00492D50) --------------------------------------------------------
 float *__cdecl sub_492D50(float *a1, float *a2)
 {
@@ -183,6 +187,7 @@ float *__cdecl sub_492D50(float *a1, float *a2)
 //----- (00492F40) --------------------------------------------------------
 // a1 = input & output matrix [12 floats]
 // a2 = input matrix [12 floats]
+// (Same as sub_492B70(a1, a1, a2) if it allowed overlapping matrices)
 float *__cdecl sub_492F40(float* a1, const float* a2) {
   float tmp[12];
   qmemcpy(tmp, a1, sizeof(tmp));
