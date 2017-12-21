@@ -282,39 +282,24 @@ float *__cdecl sub_493200(float *a1, float *a2, float *a3)
   a1[2] = result[5] * a2[1] + a3[8] * a2[2] + a3[2] * *a2 + result[11];
   return result;
 }
+```
 
+```C
 //----- (00493270) --------------------------------------------------------
-float *__cdecl sub_493270(float *a1, float *a2, float *a3, float *a4)
-{
-  float *result; // eax
-  float *v5; // edx
-  float *v6; // esi
-  float *v7; // ecx
-  double v8; // st7
-  double v9; // st5
-  double v10; // st6
+// a1 = some 12 component matrix
+// a2 = n x 3 component input vectors
+// a3 = n x 3 component output vectors
+// a4 = n [number of vectors to transform]
+// Return value is kind of complicated. a1 if a4 is set, otherwise a4.
+// Probably just returns void though.
+void __cdecl sub_493270(const float *a1, const float *a2, float *a3, int a4) {
+  for(int i = 0; i < a4; i++) {
+    a3[0] = a1[0] * a2[0] + a1[3] * a2[1] + a1[6] * a2[2] + a1[ 9];
+    a3[1] = a1[1] * a2[0] + a1[4] * a2[1] + a1[7] * a2[2] + a1[10];
+    a3[2] = a1[2] * a2[0] + a1[5] * a2[1] + a1[8] * a2[2] + a1[11];
 
-  result = a4;
-  if ( a4 )
-  {
-    result = a1;
-    v5 = a3;
-    v6 = a4;
-    v7 = a2;
-    do
-    {
-      v8 = a1[3] * v7[1];
-      v9 = a1[6] * v7[2];
-      v10 = *v7;
-      v7 += 3;
-      *v5 = v8 + v9 + v10 * *a1 + a1[9];
-      v5[1] = a1[1] * *(v7 - 3) + a1[4] * *(v7 - 2) + a1[7] * *(v7 - 1) + a1[10];
-      v5[2] = a1[2] * *(v7 - 3) + a1[5] * *(v7 - 2) + a1[8] * *(v7 - 1) + a1[11];
-      v5 += 3;
-      v6 = (float *)((char *)v6 - 1);
-    }
-    while ( v6 );
+    a2 += 3;
+    a3 += 3;
   }
-  return result;
 }
 ```
