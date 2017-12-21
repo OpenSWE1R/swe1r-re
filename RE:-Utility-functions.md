@@ -1,3 +1,28 @@
+# Vector normalize
+
+```C
+//----- (00492440) --------------------------------------------------------
+double __cdecl sub_492440(float *a1)
+{
+  float *v1; // ecx
+  float v2; // ST00_4
+  double result; // st7
+  float v4; // [esp+Ch] [ebp+8h]
+
+  v1 = a1;
+  v4 = a1[1] * a1[1] + a1[2] * a1[2] + *a1 * *a1;
+  v2 = sqrt(v4);
+  result = v2;
+  if ( v2 != 0.0 )
+  {
+    *v1 = 1.0 / result * *v1;
+    v1[1] = v1[1] * (1.0 / result);
+    v1[2] = v1[2] * (1.0 / result);
+  }
+  return result;
+}
+```
+
 # Collision checking
 
 I have the theory that this is related to collision checking, but I did not verify this yet.
