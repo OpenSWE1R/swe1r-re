@@ -36,17 +36,15 @@ const char *__cdecl sub_421360(const char *a1)
 
 ```C
 //----- (00421470) --------------------------------------------------------
-char *__cdecl sub_421470(const char *a1)
-{
-  if ( !a1 )
-    return 0;
-  if ( !*a1 )
-    return (char *)a1;
-  if ( *a1 != 47 )
-    return (char *)a1;
-  if ( strlen(a1) == 1 )
-    return (char *)a1;
-  return strchr(a1 + 1, 47) + 1;
+const char *__cdecl sub_421470(const char *a1) {
+  if (a1 == NULL) { return NULL; }
+  if (a1[0] == '\0') { return a1; } // This check is useless, but the original game checks this too
+
+  if (a1[0] == '/' && strlen(a1) != 1) {
+    return strchr(&a1[1], '/') + 1;
+  }
+
+  return a1;
 }
 ```
 
