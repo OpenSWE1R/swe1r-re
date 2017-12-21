@@ -103,3 +103,202 @@ void __cdecl sub_480690(float *a1, float *a2, float *a3) {
   a1[3] = a3[11] * a2[2] + a3[7] * a2[1] + a3[3] * a2[0] + a3[15];
 }
 ```
+
+# Various transformation functions
+
+```C
+//----- (00492B70) --------------------------------------------------------
+float *__cdecl sub_492B70(float *a1, float *a2, float *a3)
+{
+  float *v3; // ecx
+  float *result; // eax
+
+  v3 = a3;
+  result = a2;
+  *a1 = *a3 * *a2 + a3[1] * a2[3] + a3[2] * a2[6];
+  a1[1] = result[1] * *v3 + result[7] * v3[2] + result[4] * v3[1];
+  a1[2] = result[2] * *v3 + result[8] * v3[2] + result[5] * v3[1];
+  a1[3] = v3[3] * *result + v3[5] * result[6] + v3[4] * result[3];
+  a1[4] = v3[4] * result[4] + v3[5] * result[7] + v3[3] * result[1];
+  a1[5] = v3[5] * result[8] + result[5] * v3[4] + v3[3] * result[2];
+  a1[6] = v3[6] * *result + v3[7] * result[3] + v3[8] * result[6];
+  a1[7] = v3[6] * result[1] + v3[7] * result[4] + v3[8] * result[7];
+  a1[8] = v3[8] * result[8] + v3[6] * result[2] + v3[7] * result[5];
+  a1[9] = v3[9] * *result + v3[10] * result[3] + v3[11] * result[6] + result[9];
+  a1[10] = v3[9] * result[1] + v3[11] * result[7] + v3[10] * result[4] + result[10];
+  a1[11] = a3[10] * a2[5] + a3[9] * a2[2] + a3[11] * a2[8] + a2[11];
+  return result;
+}
+
+//----- (00492D50) --------------------------------------------------------
+float *__cdecl sub_492D50(float *a1, float *a2)
+{
+  float *result; // eax
+  double v3; // st7
+  double v4; // st6
+  double v5; // st3
+  double v6; // st7
+  double v7; // rt1
+  double v8; // st3
+  double v9; // st6
+  float v10; // [esp+8h] [ebp-30h]
+  float v11; // [esp+Ch] [ebp-2Ch]
+  float v12; // [esp+10h] [ebp-28h]
+  float v13; // [esp+14h] [ebp-24h]
+  float v14; // [esp+18h] [ebp-20h]
+  float v15; // [esp+1Ch] [ebp-1Ch]
+  float v16; // [esp+20h] [ebp-18h]
+  float v17; // [esp+24h] [ebp-14h]
+  float v18; // [esp+28h] [ebp-10h]
+  float v19; // [esp+2Ch] [ebp-Ch]
+  float v20; // [esp+30h] [ebp-8h]
+  float v21; // [esp+34h] [ebp-4h]
+
+  result = a2;
+  v3 = a2[1];
+  v4 = a2[2];
+  qmemcpy(&v10, a1, 0x30u);
+  v5 = v3;
+  v6 = v12;
+  v7 = v5 * v13;
+  v8 = v4 * v16;
+  v9 = v11;
+  *a1 = v7 + v8 + v10 * *a2;
+  a1[1] = result[1] * v14 + result[2] * v17 + v9 * *result;
+  a1[2] = result[1] * v15 + result[2] * v18 + v6 * *result;
+  a1[3] = result[4] * v13 + result[3] * v10 + result[5] * v16;
+  a1[4] = result[4] * v14 + result[3] * v11 + result[5] * v17;
+  a1[5] = result[4] * v15 + result[3] * v12 + result[5] * v18;
+  a1[6] = result[8] * v16 + result[7] * v13 + result[6] * v10;
+  a1[7] = result[8] * v17 + result[7] * v14 + result[6] * v11;
+  a1[8] = result[8] * v18 + result[7] * v15 + result[6] * v12;
+  a1[9] = result[11] * v16 + result[10] * v13 + result[9] * v10 + v19;
+  a1[10] = result[11] * v17 + result[10] * v14 + result[9] * v11 + v20;
+  a1[11] = result[11] * v18 + result[10] * v15 + result[9] * v12 + v21;
+  return result;
+}
+
+//----- (00492F40) --------------------------------------------------------
+float *__cdecl sub_492F40(float *a1, float *a2)
+{
+  float *result; // eax
+  double v3; // st7
+  double v4; // st6
+  double v5; // st4
+  double v6; // st7
+  double v7; // st7
+  float v8; // [esp+8h] [ebp-30h]
+  float v9; // [esp+Ch] [ebp-2Ch]
+  float v10; // [esp+10h] [ebp-28h]
+  float v11; // [esp+14h] [ebp-24h]
+  float v12; // [esp+18h] [ebp-20h]
+  float v13; // [esp+1Ch] [ebp-1Ch]
+  float v14; // [esp+20h] [ebp-18h]
+  float v15; // [esp+24h] [ebp-14h]
+  float v16; // [esp+28h] [ebp-10h]
+  float v17; // [esp+2Ch] [ebp-Ch]
+  float v18; // [esp+30h] [ebp-8h]
+  float v19; // [esp+34h] [ebp-4h]
+
+  result = a2;
+  v3 = a2[6];
+  v4 = a2[3];
+  qmemcpy(&v8, a1, 0x30u);
+  v5 = v3;
+  v6 = v11;
+  *a1 = v5 * v10 + v4 * v9 + v8 * *a2;
+  a1[1] = result[1] * v8 + result[7] * v10 + result[4] * v9;
+  a1[2] = result[5] * v9 + result[8] * v10 + result[2] * v8;
+  a1[3] = result[6] * v13 + result[3] * v12 + v6 * *result;
+  v7 = v14;
+  a1[4] = result[1] * v11 + result[7] * v13 + result[4] * v12;
+  a1[5] = result[5] * v12 + result[8] * v13 + result[2] * v11;
+  a1[6] = result[6] * v16 + result[3] * v15 + v7 * *result;
+  a1[7] = result[1] * v14 + result[7] * v16 + result[4] * v15;
+  a1[8] = result[5] * v15 + result[8] * v16 + result[2] * v14;
+  a1[9] = result[6] * v19 + result[3] * v18 + v17 * *result + result[9];
+  a1[10] = result[1] * v17 + result[7] * v19 + result[4] * v18 + result[10];
+  a1[11] = result[5] * v18 + result[8] * v19 + result[2] * v17 + result[11];
+  return result;
+}
+
+//----- (00493130) --------------------------------------------------------
+float *__cdecl sub_493130(float *a1, float *a2)
+{
+  char v3; // [esp+0h] [ebp-30h]
+
+  sub_492810((float *)&v3, a2);
+  return sub_492D50(a1, (float *)&v3);
+}
+
+//----- (00493160) --------------------------------------------------------
+int __cdecl sub_493160(int a1, float *a2)
+{
+  int result; // eax
+
+  result = a1;
+  *(float *)(a1 + 36) = *a2 + *(float *)(a1 + 36);
+  *(float *)(result + 40) = a2[1] + *(float *)(result + 40);
+  *(float *)(a1 + 44) = a2[2] + *(float *)(a1 + 44);
+  return result;
+}
+
+//----- (00493190) --------------------------------------------------------
+float *__cdecl sub_493190(float *a1, float *a2, float *a3)
+{
+  float *result; // eax
+
+  result = a3;
+  *a1 = a3[6] * a2[2] + a3[3] * a2[1] + *a2 * *a3;
+  a1[1] = result[4] * a2[1] + result[7] * a2[2] + result[1] * *a2;
+  a1[2] = a3[5] * a2[1] + a3[8] * a2[2] + a3[2] * *a2;
+  return result;
+}
+
+//----- (00493200) --------------------------------------------------------
+float *__cdecl sub_493200(float *a1, float *a2, float *a3)
+{
+  float *result; // eax
+
+  result = a3;
+  *a1 = a3[3] * a2[1] + a3[6] * a2[2] + *a2 * *a3 + a3[9];
+  a1[1] = result[4] * a2[1] + result[7] * a2[2] + result[1] * *a2 + result[10];
+  a1[2] = result[5] * a2[1] + a3[8] * a2[2] + a3[2] * *a2 + result[11];
+  return result;
+}
+
+//----- (00493270) --------------------------------------------------------
+float *__cdecl sub_493270(float *a1, float *a2, float *a3, float *a4)
+{
+  float *result; // eax
+  float *v5; // edx
+  float *v6; // esi
+  float *v7; // ecx
+  double v8; // st7
+  double v9; // st5
+  double v10; // st6
+
+  result = a4;
+  if ( a4 )
+  {
+    result = a1;
+    v5 = a3;
+    v6 = a4;
+    v7 = a2;
+    do
+    {
+      v8 = a1[3] * v7[1];
+      v9 = a1[6] * v7[2];
+      v10 = *v7;
+      v7 += 3;
+      *v5 = v8 + v9 + v10 * *a1 + a1[9];
+      v5[1] = a1[1] * *(v7 - 3) + a1[4] * *(v7 - 2) + a1[7] * *(v7 - 1) + a1[10];
+      v5[2] = a1[2] * *(v7 - 3) + a1[5] * *(v7 - 2) + a1[8] * *(v7 - 1) + a1[11];
+      v5 += 3;
+      v6 = (float *)((char *)v6 - 1);
+    }
+    while ( v6 );
+  }
+  return result;
+}
+```
