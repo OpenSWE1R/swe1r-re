@@ -2,8 +2,12 @@ These get their own article because github wikis are not too good to edit and [[
 
 ---
 
-```C
+dword_4C98E8 = 32 bit float sin() LUT with 4096 entries
+dword_4CD8E8 = 32 bit float tan() LUT with 4096 entries
 
+---
+
+```C
 //----- (0048C830) --------------------------------------------------------
 double __cdecl sub_48C830(float a1)
 {
@@ -126,40 +130,35 @@ int __cdecl sub_48C950(float a1, int a2, int a3)
   switch ( v19 )
   {
     case 0:
-      v15 = result >= 4096;
-      if ( result >= 4096 )
-        v24 = SLODWORD(dword_4C98E8[4095 - (result - 4096)]);
+      v15 = result >= 0x1000;
+      if ( result >= 0x1000 )
+        v24 = SLODWORD(dword_4C98E8[0xFFF - (result - 0x1000)]); // sin
       else
-        v24 = SLODWORD(dword_4C98E8[result]);
-      *(float *)a2 = (*(float *)&v24 - dword_4C98E8[v21]) * v18 + dword_4C98E8[v21];
-      result = LODWORD(dword_4C98E8[4095 - v21]);
-      if ( v15 )
-      {
+        v24 = SLODWORD(dword_4C98E8[result]); // sin
+      *(float *)a2 = (*(float *)&v24 - dword_4C98E8[v21]) * v18 + dword_4C98E8[v21]; // sin + sin
+      result = LODWORD(dword_4C98E8[0xFFF - v21]); // sin
+      if ( v15 ) {
         v25 = -flt_4C58E8[v22];
+      } else {
+        result = LODWORD(dword_4C98E8[0xFFF - v22]); // sin
+        v25 = dword_4C98E8[0xFFF - v22]; // sin
       }
-      else
-      {
-        result = LODWORD(dword_4C98E8[4095 - v22]);
-        v25 = dword_4C98E8[4095 - v22];
-      }
-      *(float *)a3 = (v25 - dword_4C98E8[4095 - v21]) * v18 + dword_4C98E8[4095 - v21];
+      *(float *)a3 = (v25 - dword_4C98E8[0xFFF - v21]) * v18 + dword_4C98E8[0xFFF - v21]; // sin + sin
       break;
     case 1:
       v16 = result >= 0x2000;
-      if ( result >= 0x2000 )
+      if ( result >= 0x2000 ) {
         v26 = -flt_4C18E8[result];
-      else
-        v26 = dword_4C98E8[4095 - (result - 4096)];
-      result = a2;
-      v7 = dword_4C98E8[4095 - (v21 - 4096)];
-      *(float *)a2 = (v26 - v7) * v18 + v7;
-      if ( v16 )
-      {
-        result = 4095 - (v22 - 0x2000);
-        v9 = -dword_4C98E8[result];
+      } else {
+        v26 = dword_4C98E8[0xFFF - (result - 0x1000)]; // sin
       }
-      else
-      {
+      result = a2;
+      v7 = dword_4C98E8[0xFFF - (v21 - 0x1000)]; // sin
+      *(float *)a2 = (v26 - v7) * v18 + v7;
+      if ( v16 ) {
+        result = 0xFFF - (v22 - 0x2000);
+        v9 = -dword_4C98E8[result]; // sin
+      } else {
         v9 = -flt_4C58E8[v22];
       }
       v10 = v9;
@@ -167,24 +166,21 @@ int __cdecl sub_48C950(float a1, int a2, int a3)
       *(float *)a3 = (v10 - v8) * v18 + v8;
       break;
     case 2:
-      v17 = result >= 12288;
-      if ( result >= 12288 )
-        v12 = -dword_4C98E8[4095 - (result - 12288)];
+      v17 = result >= 0x3000;
+      if ( result >= 0x3000 )
+        v12 = -dword_4C98E8[0xFFF - (result - 0x3000)]; // sin
       else
         v12 = -flt_4C18E8[result];
       v13 = v12;
       v11 = -flt_4C18E8[v21];
       *(float *)a2 = (v13 - v11) * v18 + v11;
-      result = 4095 - (v21 - 0x2000);
-      v20 = -dword_4C98E8[result];
-      if ( v17 )
-      {
+      result = 0xFFF - (v21 - 0x2000);
+      v20 = -dword_4C98E8[result]; // sin
+      if ( v17 ) {
         v27 = *(float *)&dword_4BD8E8[v22];
-      }
-      else
-      {
+      } else {
         result = v22 - 0x2000;
-        v27 = -dword_4C98E8[4095 - (v22 - 0x2000)];
+        v27 = -dword_4C98E8[0xFFF - (v22 - 0x2000)]; // sin
       }
       *(float *)a3 = (v27 - v20) * v18 + v20;
       break;
@@ -192,16 +188,13 @@ int __cdecl sub_48C950(float a1, int a2, int a3)
       if ( result >= 0x4000 )
         v28 = dword_4B98E8[result];
       else
-        v28 = -dword_4C98E8[4095 - (result - 12288)];
-      v14 = -dword_4C98E8[4095 - (v21 - 12288)];
+        v28 = -dword_4C98E8[0xFFF - (result - 0x3000)]; // sin
+      v14 = -dword_4C98E8[0xFFF - (v21 - 0x3000)]; // sin
       *(float *)a2 = (v28 - v14) * v18 + v14;
-      if ( result >= 0x4000 )
-      {
+      if ( result >= 0x4000 ) {
         result -= 0x4000;
-        v29 = SLODWORD(dword_4C98E8[4095 - (v22 - 0x4000)]);
-      }
-      else
-      {
+        v29 = SLODWORD(dword_4C98E8[0xFFF - (v22 - 0x4000)]); // sin
+      } else {
         v29 = dword_4BD8E8[result];
       }
       *(float *)a3 = (*(float *)&v29 - *(float *)&dword_4BD8E8[v21]) * v18 + *(float *)&dword_4BD8E8[v21];
