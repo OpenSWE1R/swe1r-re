@@ -2,8 +2,11 @@ These get their own article because github wikis are not too good to edit and [[
 
 ---
 
-dword_4C98E8 = 32 bit float sin() LUT with 4096 entries
-dword_4CD8E8 = 32 bit float tan() LUT with 4096 entries
+* dword_4C98E8 = 32 bit float sin() LUT with 4096 entries
+* dword_4CD8E8 = 32 bit float tan() LUT with 4096 entries
+* dword_4BD8E8 = 32 bit float ???  LUT with 4096 entries  [min. offset 0x3000 in array?!] => 0x4C98E8
+* flt_4C58E8 = 32 bit float ???  LUT with 4096 entries [min. offset 0x1000 in array?!] => 0x4C98E8
+* flt_4C18E8 = 32 bit float ???  LUT with 4096 entries [min. offset 0x2000 in array?!] => 0x4C98E8
 
 ---
 
