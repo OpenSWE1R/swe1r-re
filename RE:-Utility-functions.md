@@ -2,24 +2,16 @@
 
 ```C
 //----- (00492440) --------------------------------------------------------
-double __cdecl sub_492440(float *a1)
-{
-  float *v1; // ecx
-  float v2; // ST00_4
-  double result; // st7
-  float v4; // [esp+Ch] [ebp+8h]
-
-  v1 = a1;
-  v4 = a1[1] * a1[1] + a1[2] * a1[2] + *a1 * *a1;
-  v2 = sqrt(v4);
-  result = v2;
-  if ( v2 != 0.0 )
-  {
-    *v1 = 1.0 / result * *v1;
-    v1[1] = v1[1] * (1.0 / result);
-    v1[2] = v1[2] * (1.0 / result);
+// a1 = 3 component vector
+// Probably returns nothing, if it has to return something, it's the prior vector length [in 80 bit or maybe double precision]
+void __cdecl sub_492440(float *a1) {
+  float squared_length = a1[0] * a1[0] + a1[1] * a1[1] + a1[2] * a1[2];
+  float length = sqrt(squared_length);
+  if (length != 0.0) {
+    a1[0] = a1[0] * (1.0 / length);
+    a1[1] = a1[1] * (1.0 / length);
+    a1[2] = a1[2] * (1.0 / length);
   }
-  return result;
 }
 ```
 
