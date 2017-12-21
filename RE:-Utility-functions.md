@@ -241,46 +241,44 @@ float *__cdecl sub_492F40(float* a1, const float* a2) {
 //----- (00493130) --------------------------------------------------------
 float *__cdecl sub_493130(float *a1, float *a2)
 {
+  //FIXME: These are not enough bytes. I believe this is a 12 component matrix or something?
   char v3; // [esp+0h] [ebp-30h]
 
   sub_492810((float *)&v3, a2);
   return sub_492D50(a1, (float *)&v3);
 }
+```
 
+```C
 //----- (00493160) --------------------------------------------------------
-int __cdecl sub_493160(int a1, float *a2)
-{
-  int result; // eax
-
-  result = a1;
-  *(float *)(a1 + 36) = *a2 + *(float *)(a1 + 36);
-  *(float *)(result + 40) = a2[1] + *(float *)(result + 40);
-  *(float *)(a1 + 44) = a2[2] + *(float *)(a1 + 44);
-  return result;
+// a1 = 12 component matrix
+// a2 = 3 component vector
+// Translates a matrix?
+float* __cdecl sub_493160(float* a1, const float* a2) {
+  a1[ 9] = a2[0] + a1[ 9];
+  a1[10] = a2[1] + a1[10];
+  a1[11] = a2[2] + a1[11];
+  return a1;
 }
+```
 
+```C
 //----- (00493190) --------------------------------------------------------
-float *__cdecl sub_493190(float *a1, float *a2, float *a3)
-{
-  float *result; // eax
-
-  result = a3;
-  *a1 = a3[6] * a2[2] + a3[3] * a2[1] + *a2 * *a3;
-  a1[1] = result[4] * a2[1] + result[7] * a2[2] + result[1] * *a2;
-  a1[2] = a3[5] * a2[1] + a3[8] * a2[2] + a3[2] * *a2;
-  return result;
+const float* __cdecl sub_493190(float *a1, const float* a2, const float* a3) {
+  a1[0] = a3[0] * a2[0] + a3[3] * a2[1] + a3[6] * a2[2];
+  a1[1] = a3[1] * a2[0] + a3[4] * a2[1] + a3[7] * a2[2];
+  a1[2] = a3[2] * a2[0] + a3[5] * a2[1] + a3[8] * a2[2];
+  return a3;
 }
+```
 
+```C
 //----- (00493200) --------------------------------------------------------
-float *__cdecl sub_493200(float *a1, float *a2, float *a3)
-{
-  float *result; // eax
-
-  result = a3;
-  *a1 = a3[3] * a2[1] + a3[6] * a2[2] + *a2 * *a3 + a3[9];
-  a1[1] = result[4] * a2[1] + result[7] * a2[2] + result[1] * *a2 + result[10];
-  a1[2] = result[5] * a2[1] + a3[8] * a2[2] + a3[2] * *a2 + result[11];
-  return result;
+const float* __cdecl sub_493200(float* a1, const float* a2, const float* a3) {
+  a1[0] = a3[0] * a2[0] + a3[3] * a2[1] + a3[6] * a2[2] + a3[ 9];
+  a1[1] = a3[1] * a2[0] + a3[4] * a2[1] + a3[7] * a2[2] + a3[10];
+  a1[2] = a3[2] * a2[0] + a3[5] * a2[1] + a3[8] * a2[2] + a3[11];
+  return a3;
 }
 ```
 
