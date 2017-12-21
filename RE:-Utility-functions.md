@@ -177,51 +177,37 @@ float *__cdecl sub_492D50(float *a1, float *a2)
   a1[11] = result[11] * v18 + result[10] * v15 + result[9] * v12 + v21;
   return result;
 }
+```
 
+```C
 //----- (00492F40) --------------------------------------------------------
-float *__cdecl sub_492F40(float *a1, float *a2)
-{
-  float *result; // eax
-  double v3; // st7
-  double v4; // st6
-  double v5; // st4
-  double v6; // st7
-  double v7; // st7
-  float v8; // [esp+8h] [ebp-30h]
-  float v9; // [esp+Ch] [ebp-2Ch]
-  float v10; // [esp+10h] [ebp-28h]
-  float v11; // [esp+14h] [ebp-24h]
-  float v12; // [esp+18h] [ebp-20h]
-  float v13; // [esp+1Ch] [ebp-1Ch]
-  float v14; // [esp+20h] [ebp-18h]
-  float v15; // [esp+24h] [ebp-14h]
-  float v16; // [esp+28h] [ebp-10h]
-  float v17; // [esp+2Ch] [ebp-Ch]
-  float v18; // [esp+30h] [ebp-8h]
-  float v19; // [esp+34h] [ebp-4h]
+// a1 = input & output matrix [12 floats]
+// a2 = input matrix [12 floats]
+float *__cdecl sub_492F40(float* a1, const float* a2) {
+  float tmp[12];
+  qmemcpy(tmp, a1, sizeof(tmp));
 
-  result = a2;
-  v3 = a2[6];
-  v4 = a2[3];
-  qmemcpy(&v8, a1, 0x30u);
-  v5 = v3;
-  v6 = v11;
-  *a1 = v5 * v10 + v4 * v9 + v8 * *a2;
-  a1[1] = result[1] * v8 + result[7] * v10 + result[4] * v9;
-  a1[2] = result[5] * v9 + result[8] * v10 + result[2] * v8;
-  a1[3] = result[6] * v13 + result[3] * v12 + v6 * *result;
-  v7 = v14;
-  a1[4] = result[1] * v11 + result[7] * v13 + result[4] * v12;
-  a1[5] = result[5] * v12 + result[8] * v13 + result[2] * v11;
-  a1[6] = result[6] * v16 + result[3] * v15 + v7 * *result;
-  a1[7] = result[1] * v14 + result[7] * v16 + result[4] * v15;
-  a1[8] = result[5] * v15 + result[8] * v16 + result[2] * v14;
-  a1[9] = result[6] * v19 + result[3] * v18 + v17 * *result + result[9];
-  a1[10] = result[1] * v17 + result[7] * v19 + result[4] * v18 + result[10];
-  a1[11] = result[5] * v18 + result[8] * v19 + result[2] * v17 + result[11];
-  return result;
+  a1[0] = a2[0] * tmp[0] + a2[3] * tmp[1] + a2[6] * tmp[2];
+  a1[1] = a2[1] * tmp[0] + a2[4] * tmp[1] + a2[7] * tmp[2];
+  a1[2] = a2[2] * tmp[0] + a2[5] * tmp[1] + a2[8] * tmp[2];
+
+  a1[3] = a2[0] * tmp[3] + a2[3] * tmp[4] + a2[6] * tmp[5];
+  a1[4] = a2[1] * tmp[3] + a2[4] * tmp[4] + a2[7] * tmp[5];
+  a1[5] = a2[2] * tmp[3] + a2[5] * tmp[4] + a2[8] * tmp[5];
+
+  a1[6] = a2[0] * tmp[6] + a2[3] * tmp[7] + a2[6] * tmp[8];
+  a1[7] = a2[1] * tmp[6] + a2[4] * tmp[7] + a2[7] * tmp[8];
+  a1[8] = a2[2] * tmp[6] + a2[5] * tmp[7] + a2[8] * tmp[8];
+
+  a1[ 9] = a2[0] * tmp[9] + a2[3] * tmp[10] + a2[6] * tmp[11] + a2[ 9];
+  a1[10] = a2[1] * tmp[9] + a2[4] * tmp[10] + a2[7] * tmp[11] + a2[10];
+  a1[11] = a2[2] * tmp[9] + a2[5] * tmp[10] + a2[8] * tmp[11] + a2[11];
+
+  return a2;
 }
+```
 
+```C
 //----- (00493130) --------------------------------------------------------
 float *__cdecl sub_493130(float *a1, float *a2)
 {
