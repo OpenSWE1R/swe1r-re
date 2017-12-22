@@ -9,7 +9,7 @@ There are some known bugs in the original game:
 * "Lens flares" and "Smoke and dust" will silently be disabled if they are not supported on the system, no warning/error is emitted
 * [Best times are not saved on fast PCs](https://www.speedrun.com/swe1r/thread/fsvab)
 * [Various issues at high framerates](https://www.speedrun.com/swe1r/thread/kel5z)
-* Texture filter which (probably) should only invert color (and preserve alpha) always sets alpha to 0xF
+* Texture filter which (probably) should only invert color (and preserve alpha) always sets alpha to 0xF (100%)
 
 ## Courses
 
