@@ -106,12 +106,9 @@ int __cdecl sub_48A5E0(_DWORD *a1, _DWORD *a2, unsigned int a3, int a4)
   //  width * height * bits_per_pixel / 8
   v25 = v19 * v18 * v6[9] >> 3;
 
-  if ( dword_52E614 )
-  {
+  if ( dword_52E614 ) {
     v7 = a3;
-  }
-  else
-  {
+  } else {
     v7 = 1;
     a3 = 1;
   }
@@ -267,24 +264,22 @@ LABEL_43:
 //----- (00431DF0) --------------------------------------------------------
 // (not actually a function)
 // a3 = must be "invcol"
+// Probably returns void
 int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3)
 {
   int result; // eax
-  __int16 *v4; // esi
   int v6; // eax
   int v7; // ebp
   int v8; // edi
-  __int16 v9; // cx
   int v10; // [esp+20h] [ebp-80h]
   int v11; // [esp+28h] [ebp-78h]
 
   v10 = 0;
   result = strncmp(a3, aInvcol, 5u);
-  if ( result )
-  {
+  if (result) {
     sprintf(a3, aInvcol);
     something = *(_DWORD *)(*((_DWORD *)a3 + 36) + 124); // or something like this..
-    unk_4AF208->QueryInterface(&unk_4AF208, &v11); //FIXME: Used to say `.., &v10, a, b); ?!
+    unk_4AF208->QueryInterface(..., &v11); //FIXME: Used to say `.., &v10, a, b); ?!
 
     DDSURFACEDESC2 v12;
     //  int v12; // [esp+2Ch] [ebp-74h]    0 dwSize
@@ -301,36 +296,24 @@ int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3)
     uint16_t* v4 = v12.lpSurface;
 
     // Calculate pitch if it doesn't exist
-    if ( v12.dwFlags & DDSD_PITCH )
+    if ( v12.dwFlags & DDSD_PITCH ) {
       v6 = v12.lPitch / 2;
-    else
+    } else {
       v6 = v11;
+    }
 
     // Loop over rows in image
-    if ( v12.dwHeight > 0 )
-    {
-      v7 = v12.dwHeight;
-      do
-      {
-        // Loop over pixels in row
-        if (  v12.dwWidth > 0 )
-        {
-          v8 = v12.dwWidth;
-          do {
-            // Sample pixel
-            v9 = *v4++;
-            // Invert color but keep alpha
-            *(v4 - 1) = ~(v9 & 0xFFF) | (v9 & 0xF000);
-
-            --v8;
-          }
-          while ( v8 );
-        }
-        --v7;
-        // Advance to next row (v6 = pitch?, v5 = rowlength)
-        v4 += v6 - v12.dwWidth;
+    for(v7 = 0; v7 < v12.dwHeight; v7++) {
+      // Loop over pixels in row
+      for(v8 = 0; v8 < v12.dwWidth; v8++) {
+        // Sample pixel
+        uint16_t pixel = *v4;
+        // Invert color but keep alpha
+        //FIXME: this is a bug? inverting 0x0FFF will also overwrite alpha. Figure out if this is a bug in RE or the game.
+        *v4++ = (pixel & 0xF000) | ~(pixel & 0xFFF);
       }
-      while ( v7 );
+      // Advance to next row (v6 = pitch?, v5 = rowlength)
+      v4 += v6 - v12.dwWidth;
     }
     result = v11->Unlock(0);
   }
