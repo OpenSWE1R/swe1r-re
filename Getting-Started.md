@@ -8,7 +8,7 @@ Here is how to get started with OpenSWE1R development using the Star Wars Episod
 [[Webdemo download links can be found here|Game Versions]]. Its md5sum should be `f5c003fa7f7f6b0dc4b10f5e1d89c293`.
 
 3. Find "cabextract" for your platform.
-It is available on most platforms package manager, but [can also be downloaded from it's official website](https://www.cabextract.org.uk/).
+It is available on most platforms package manager, but [can also be downloaded from its official website](https://www.cabextract.org.uk/).
 
 4. Run `cabextract -L racerdemo.exe` to extract the games files. All files will automatically be converted to lowercase. You don't need "racerdemo.exe" anymore after this step, so it can be deleted.
 
