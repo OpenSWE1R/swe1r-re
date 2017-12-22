@@ -72,9 +72,7 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2)
   float v29; // ST4C_4
   signed int v32; // edx
   float v33; // ST4C_4
-  signed int v36; // edi
   float v37; // ST4C_4
-  signed int v40; // ebx
   float v41; // ST4C_4
   int v44; // edx
   unsigned int v45; // edx
@@ -245,10 +243,8 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2)
               if ( *(float *)(v18 + 8) > (double)*(float *)&flt_EC8578 ) {
                 if ( *(float *)(v18 + 8) < (double)*(float *)&flt_EC857C ) {
                   v22 = (1.0 - (*(float *)(v18 + 8) - *(float *)&flt_EC8578) * flt_EC8574) * 255.0;
-                  _ST7 = v22;
-                  __asm { frndint }
-                  v79 = (signed int)_ST7;
-                  *((_DWORD *)v20 + 5) = ((signed int)_ST7 << 24) | 0xFFFFFF;
+                  v79 = (signed int)_frndint(v22);
+                  *((_DWORD *)v20 + 5) = (v79 << 24) | 0xFFFFFF;
                 } else {
                   *((_DWORD *)v20 + 5) = 0x00FFFFFF;
                 }
@@ -275,43 +271,34 @@ LABEL_44:
             // Convert some colors from float to integer
             if ( v64 ) {
               v29 = v26 * 255.0;
-              _ST7 = v29;
-              __asm { frndint }
-              v89 = (signed int)_ST7;
-              v32 = (signed int)_ST7;
+              v89 = (signed int)_frndint(v29);
+
               v33 = v86 * 255.0;
-              _ST7 = v33;
-              __asm { frndint }
-              v88 = (signed int)_ST7;
-              v36 = (signed int)_ST7;
+              v88 = (signed int)_frndint(v33);
+
               v37 = v85 * 255.0;
-              _ST7 = v37;
-              __asm { frndint }
-              v82 = (signed int)_ST7;
-              v40 = (signed int)_ST7;
+              v82 = _frndint(v37);
+
               v41 = v84 * 255.0;
-              _ST7 = v41;
-              __asm { frndint }
-              v78 = (signed int)_ST7;
-              v17 = v70;
+              v78 = (signed int)_frndint(v41);
+
               // This was originally: v45 = ((v40 | ((v36 | (v32 << 8)) << 8)) << 8) | (signed int)_ST7;
-              v45 = (v36 << 24) (v36 << 16) | (v40 << 8) | (signed int)ST7;
+              v45 = (v89 << 24) | (v88 << 16) | (v82 << 8) | v78;
+
+              v17 = v70; // FIXME: Why does this happen?!
+
             }  else {
               v46 = v86 * 255.0;
-              _ST7 = v46;
-              __asm { frndint }
-              v87 = (signed int)_ST7;
-              v49 = (signed int)_ST7;
+              v87 = _frndint(v46);
+
               v50 = v85 * 255.0;
-              _ST7 = v50;
-              __asm { frndint }
-              v81 = (signed int)_ST7;
-              v53 = (signed int)_ST7;
+              v81 = (signed int)_frndint(v50);
+
               v54 = v84 * 255.0;
-              _ST7 = v54;
-              __asm { frndint }
-              v77 = (signed int)_ST7;
-              v45 = (signed int)_ST7 | ((v53 | ((*(_DWORD *)&v49 | 0xFFFFFF00) << 8)) << 8);
+              v77 = (signed int) _frndint(v54);
+
+              // Originally: v45 = (signed int)_ST7 | ((v53 | ((*(_DWORD *)&v49 | 0xFFFFFF00) << 8)) << 8);
+              v45 = (0xFF << 24) | (v87 << 16) | (v81 << 8) | v77;
             }
             *((_DWORD *)v20 + 4) = v45;
             v75 += 12;
