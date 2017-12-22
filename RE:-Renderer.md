@@ -42,11 +42,9 @@ int __cdecl sub_48B260(float a1, float a2, float a3, float a4) {
 
 ```C
 //----- (0048DF30) --------------------------------------------------------
-unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2)
-{
+unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
   unsigned int result; // eax
   float *v3; // esi
-  float v4; // eax
   int v5; // ecx
   int v6; // ecx
   int v7; // ecx
@@ -61,8 +59,6 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2)
   __int16 v16; // dx
   unsigned int v17; // ebx
   int v18; // edx
-  int v19; // edi
-  char *v20; // ecx
   double v21; // st7
   float v22; // ST2C_4
   bool v25; // zf
@@ -125,272 +121,254 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2)
 
   sub_49EA00();
   result = a1;
-  v80 = 0;
-  if ( a1 )
-  {
-    v3 = a2;
-    do
-    {
-      v4 = *v3;
-      v90 = 19;
-      v66 = *(_DWORD *)v3;
-      v64 = *(_DWORD *)v3 & 2;
-      if ( *(_DWORD *)v3 & 2 )
-        v90 = 531;
-      if ( LOBYTE(v4) & 4 )
-      {
-        v5 = v90;
-        BYTE1(v5) |= 8u;
-        v90 = v5;
+  v3 = a2;
+  for(int v80 = 0; v80 < a1; v80++) {
+    uint32_t v4 = *v3;
+    v90 = 19;
+    v66 = v4;
+    v64 = v4 & 2;
+
+    if (v4 & 2) {
+      v90 = 531;
+    }
+    if (v4 & 4) {
+      BYTE1(v90) |= 8u;
+    }
+    if (v4 & 8) {
+      BYTE1(v90) |= 0x10u;
+    }
+    if (!(v4 & 0x10)) {
+      v90 |= 0x80;
+    }
+    if (v4 & 0x20) {
+      BYTE1(v90) |= 0x20u;
+    }
+    if (BYTE1(v4) & 3) {
+      BYTE1(v90) |= 0x80u;
+    }
+
+    v10 = *((_DWORD *)v3 + 7);
+    v63 = *((_DWORD *)v3 + 7);
+    if ( v10 ) {
+      v11 = *(_DWORD *)(v10 + 124);
+      if ( v11 ) {
+        v12 = v90;
+        BYTE1(v12) |= 4u;
+        v90 = v12;
       }
-      if ( LOBYTE(v4) & 8 )
-      {
-        v6 = v90;
-        BYTE1(v6) |= 0x10u;
-        v90 = v6;
+      v13 = *(_DWORD *)(v10 + 144);
+      sub_48E5F0(*(_DWORD **)(v10 + 144), v11);
+      v65 = *(_DWORD *)(v13 + 128);
+    } else {
+      v65 = 0;
+    }
+
+    v14 = 0;
+    v15 = 0;
+    v83 = 0;
+    dword_A530D0 = 0;
+    dword_5430C0 = *(_DWORD *)(*(_DWORD *)(dword_DF7F2C + 72) + 4);
+    do {
+      v68 = *((_DWORD *)v3 + 2);
+      dword_5430C4 = *((_DWORD *)v3 + 4);
+      dword_AF30DC = *((_DWORD *)v3 + 6);
+      v16 = v15;
+      v67 = v15;
+      v72 = *((_DWORD *)v3 + 1);
+      if ( v72 >= dword_ECC424 ) {
+        v72 = dword_ECC424;
       }
-      if ( !(LOBYTE(v4) & 0x10) )
-      {
-        v7 = v90;
-        LOBYTE(v7) = v90 | 0x80;
-        v90 = v7;
-      }
-      if ( LOBYTE(v4) & 0x20 )
-      {
-        v8 = v90;
-        BYTE1(v8) |= 0x20u;
-        v90 = v8;
-      }
-      if ( BYTE1(v4) & 3 )
-      {
-        v9 = v90;
-        BYTE1(v9) |= 0x80u;
-        v90 = v9;
-      }
-      v10 = *((_DWORD *)v3 + 7);
-      v63 = *((_DWORD *)v3 + 7);
-      if ( v10 )
-      {
-        v11 = *(_DWORD *)(v10 + 124);
-        if ( v11 )
-        {
-          v12 = v90;
-          BYTE1(v12) |= 4u;
-          v90 = v12;
-        }
-        v13 = *(_DWORD *)(v10 + 144);
-        sub_48E5F0(*(_DWORD **)(v10 + 144), v11);
-        v65 = *(_DWORD *)(v13 + 128);
-      }
-      else
-      {
-        v65 = 0;
-      }
-      v14 = 0;
-      v15 = 0;
-      v83 = 0;
-      dword_A530D0 = 0;
-      dword_5430C0 = *(_DWORD *)(*(_DWORD *)(dword_DF7F2C + 72) + 4);
-      do
-      {
-        v68 = *((_DWORD *)v3 + 2);
-        dword_5430C4 = *((_DWORD *)v3 + 4);
-        dword_AF30DC = *((_DWORD *)v3 + 6);
-        v16 = v15;
-        v67 = v15;
-        v72 = *((_DWORD *)v3 + 1);
-        if ( v72 >= dword_ECC424 )
-          v72 = dword_ECC424;
-        v17 = 0;
-        v70 = 0;
-        if ( v68 ) {
-          v73 = 0;
-          v75 = 0;
+      v17 = 0;
+      v70 = 0;
+      if ( v68 ) {
+        v73 = 0;
+        v75 = 0;
 
 
 
-          while ( 1 ) {
-            v18 = v75 + dword_5430C4;
-            v19 = dword_AF30DC + v73;
+        while ( 1 ) {
+          v18 = v75 + dword_5430C4;
+          float* v19 = dword_AF30DC + v73;
 
-            // Generate output address (v15 = vertex index, 32 = stride)
-            v20 = (char *)&unk_B6B0E8 + 32 * v15;
+          // Generate output address (v15 = vertex index, 32 = stride)
+          struct {
+            float x; // 0
+            float y; // 4
+            float z; // 8
+            float rhw; // 12
+            uint32_t color1; // 16
+            uint32_t color2; // 20
+            float u; // 24
+            float v; // 28
+          }* v20 = &unk_B6B0E8[v15]; // unk_B6B0E8 is of the outputvertex type too
 
-            // Copy X?
-            *(_DWORD *)v20 = *(_DWORD *)(v75 + dword_5430C4);
+          // Copy X and Y
+          v20->x = *(_DWORD *)(v75 + dword_5430C4);
+          v20->y = *(_DWORD *)(v18 + 4);
 
-            // Copy Y?
-            *((_DWORD *)v20 + 1) = *(_DWORD *)(v18 + 4);
+          // Generate RHW
+          if ( *(float *)(v18 + 8) == 0.0 ) {
+            v21 = 0.0;
+          } else {
+            v21 = (2.0 - *(float *)(v18 + 8) * COERCE_FLOAT(2130706432 - *(_DWORD *)(v18 + 8)))
+                * COERCE_FLOAT(2130706432 - *(_DWORD *)(v18 + 8));
+          }
 
-            // Copy RHW?
-            if ( *(float *)(v18 + 8) == 0.0 ) {
-              v21 = 0.0;
-            } else {
-              v21 = (2.0 - *(float *)(v18 + 8) * COERCE_FLOAT(2130706432 - *(_DWORD *)(v18 + 8)))
-                  * COERCE_FLOAT(2130706432 - *(_DWORD *)(v18 + 8));
-            }
+          // Copy Z and RHW
+          if ( *(float *)(v18 + 8) == *(float *)&dword_5430C0 ) {
+            v20->z = 0.0;
+          } else {
+            v20->z = 1.0 - v21 * *(float *)&dword_5430C0;
+          }
+          v20->rhw = v21;
 
-            // Copy Z?
-            if ( *(float *)(v18 + 8) == *(float *)&dword_5430C0 ) {
-              *((_DWORD *)v20 + 2) = 0;
-            } else {
-              *((float *)v20 + 2) = 1.0 - v21 * *(float *)&dword_5430C0;
-            }
-            *((float *)v20 + 3) = v21;
-
-            // Probably something to do with colors or alpha blending
-            if ( v66 & 0x200 ) {
-              if ( *(float *)(v18 + 8) > (double)*(float *)&flt_EC8578 ) {
-                if ( *(float *)(v18 + 8) < (double)*(float *)&flt_EC857C ) {
-                  v22 = (1.0 - (*(float *)(v18 + 8) - *(float *)&flt_EC8578) * flt_EC8574) * 255.0;
-                  v79 = (signed int)_frndint(v22);
-                  *((_DWORD *)v20 + 5) = (v79 << 24) | 0xFFFFFF;
-                } else {
-                  *((_DWORD *)v20 + 5) = 0x00FFFFFF;
-                }
-              } else{
-                *((_DWORD *)v20 + 5) = 0xFFFFFFFF;
+          // Probably something to do with colors or alpha blending
+          if ( v66 & 0x200 ) {
+            if ( *(float *)(v18 + 8) > (double)*(float *)&flt_EC8578 ) {
+              if ( *(float *)(v18 + 8) < (double)*(float *)&flt_EC857C ) {
+                v22 = (1.0 - (*(float *)(v18 + 8) - *(float *)&flt_EC8578) * flt_EC8574) * 255.0;
+                v79 = (signed int)_frndint(v22);
+                v20->color2 = (v79 << 24) | 0xFFFFFF;
+              } else {
+                v20->color2 = 0x00FFFFFF;
               }
-            }
-            if ( v72 <= 0 )
-              goto LABEL_43;
-            if ( v72 > 2 )
-              break;
-            v27 = *(float *)(v19 + 4);
-            v26 = *(float *)(v19 + 12);
-            v86 = *(float *)v19;
-            v28 = *(float *)(v19 + 8);
-            v85 = v27;
-            v84 = v28;
-LABEL_44:
-            v86 = MIN(v86, 1.0);
-            v85 = MIN(v85, 1.0);
-            v84 = MIN(v84, 1.0);
-            v26 = MIN(v26, 1.0);
-
-            // Convert some colors from float to integer
-            if ( v64 ) {
-              v29 = v26 * 255.0;
-              v89 = (signed int)_frndint(v29);
-
-              v33 = v86 * 255.0;
-              v88 = (signed int)_frndint(v33);
-
-              v37 = v85 * 255.0;
-              v82 = _frndint(v37);
-
-              v41 = v84 * 255.0;
-              v78 = (signed int)_frndint(v41);
-
-              // This was originally: v45 = ((v40 | ((v36 | (v32 << 8)) << 8)) << 8) | (signed int)_ST7;
-              v45 = (v89 << 24) | (v88 << 16) | (v82 << 8) | v78;
-
-              v17 = v70; // FIXME: Why does this happen?!
-
-            }  else {
-              v46 = v86 * 255.0;
-              v87 = _frndint(v46);
-
-              v50 = v85 * 255.0;
-              v81 = (signed int)_frndint(v50);
-
-              v54 = v84 * 255.0;
-              v77 = (signed int) _frndint(v54);
-
-              // Originally: v45 = (signed int)_ST7 | ((v53 | ((*(_DWORD *)&v49 | 0xFFFFFF00) << 8)) << 8);
-              v45 = (0xFF << 24) | (v87 << 16) | (v81 << 8) | v77;
-            }
-            *((_DWORD *)v20 + 4) = v45;
-            v75 += 12;
-
-            // Copy U?
-            *((float *)v20 + 6) = *(float *)(*((_DWORD *)v3 + 5) + 8 * v17) + v3[14];
-            v73 += 16;
-
-            // Copy V?
-            *((float *)v20 + 7) = *(float *)(*((_DWORD *)v3 + 5) + 8 * v17 + 4) + v3[15];
-
-            // Generate next index
-            v15 = dword_A530D0 + 1;
-            ++v17;
-            ++dword_A530D0;
-            v70 = v17;
-            if ( v17 >= v68 ) {
-              v16 = v67;
-              v14 = v83;
-              goto LABEL_57;
+            } else{
+              v20->color2 = 0xFFFFFFFF;
             }
           }
+          if ( v72 <= 0 )
+            goto LABEL_43;
+          if ( v72 > 2 )
+            break;
+          v86 = v19[0];
+          v27 = v19[1];
+          v28 = v19[2];
+          v26 = v19[3];
+          v85 = v27;
+          v84 = v28;
+  LABEL_44:
+          v86 = MIN(v86, 1.0);
+          v85 = MIN(v85, 1.0);
+          v84 = MIN(v84, 1.0);
+          v26 = MIN(v26, 1.0);
 
+          // Convert some colors from float to integer
+          if ( v64 ) {
+            v29 = v26 * 255.0;
+            v89 = (signed int)_frndint(v29);
 
+            v33 = v86 * 255.0;
+            v88 = (signed int)_frndint(v33);
 
+            v37 = v85 * 255.0;
+            v82 = _frndint(v37);
 
-          if ( v72 == 3 )
-          {
-            v25 = *((float*)v3 + 12) == 1.0f;
-            v86 = v3[9] + *(float *)v19;
-            v85 = v3[10] + *(float *)(v19 + 4);
-            v84 = v3[11] + *(float *)(v19 + 8);
-            v26 = *(float *)(v19 + 12);
-            if ( !v25 )
-              v26 = v26 + v3[12];
-            goto LABEL_44;
+            v41 = v84 * 255.0;
+            v78 = (signed int)_frndint(v41);
+
+            // This was originally: v45 = ((v40 | ((v36 | (v32 << 8)) << 8)) << 8) | (signed int)_ST7;
+            v45 = (v89 << 24) | (v88 << 16) | (v82 << 8) | v78;
+
+            v17 = v70; // FIXME: Why does this happen?!
+
+          }  else {
+            v46 = v86 * 255.0;
+            v87 = _frndint(v46);
+
+            v50 = v85 * 255.0;
+            v81 = (signed int)_frndint(v50);
+
+            v54 = v84 * 255.0;
+            v77 = (signed int) _frndint(v54);
+
+            // Originally: v45 = (signed int)_ST7 | ((v53 | ((*(_DWORD *)&v49 | 0xFFFFFF00) << 8)) << 8);
+            v45 = (0xFF << 24) | (v87 << 16) | (v81 << 8) | v77;
           }
-LABEL_43:
-          v84 = 1.0;
-          v85 = 1.0;
-          v86 = 1.0;
-          v26 = *(float *)(dword_AF30DC + 12);
+          v20->color1 = v45;
+
+          // Copy UV
+          v20->u = *(float *)(*((_DWORD *)v3 + 5) + 8 * v17) + v3[14];
+          v20->v = *(float *)(*((_DWORD *)v3 + 5) + 8 * v17 + 4) + v3[15];
+
+          v75 += 12;
+          v73 += 16;
+
+          // Generate next index
+          v15 = dword_A530D0 + 1;
+          ++v17;
+          ++dword_A530D0;
+          v70 = v17;
+          if ( v17 >= v68 ) {
+            v16 = v67;
+            v14 = v83;
+            goto LABEL_57;
+          }
+        }
+
+
+
+
+        if ( v72 == 3 ) {
+          v25 = *((float*)v3 + 12) == 1.0f;
+          v86 = v19[0] + v3[9];
+          v85 = v19[1] + v3[10];
+          v84 = v19[2] + v3[11];
+          v26 = v19[3];
+          if ( !v25 ) {
+            v26 = v26 + v3[12];
+          }
           goto LABEL_44;
         }
-LABEL_57:
-        v57 = *((_DWORD *)v3 + 2);
-        if ( v57 <= 3 ) {
-          // Emit indices for triangle
-          word_AF30E8[v14] = v16;
-          word_AF30EA[v14] = v16 + 1;
-          word_AF30EC[v14] = v16 + 2;
-          v14 += 3;
-          v83 = v14;
-        } else {
-          v58 = v57 - 2;
-          v59 = 0;
-          v71 = v57 - 2;
-          v74 = 1;
-          v69 = v57 - 1;
-          v76 = 0;
-          if ( (signed int)(v57 - 2) > 0 ) {
-            v60 = (_WORD *)(2 * v83 + 11481322);
-            v83 += v58 + 2 * v71;
-            do
-            {
-              *(v60 - 1) = v67 + v59;
-              *v60 = v67 + v74;
-              v60[1] = v69 + v67;
-              v60 += 3;
-              if ( ~(_BYTE)v76 & 1 )
-                v59 = v74++;
-              else
-                v59 = v69--;
-              ++v76;
-            }
-            while ( v76 < v71 );
-          }
-          v14 = v83;
-        }
-        v61 = *((_DWORD *)v3 + 18);
-        v3 += 16;
-        v62 = v80++ + 1;
-      } while ( v61 + v14 + 2 * v61 - 6 < (unsigned int)dword_52E624
-           && v62 < a1
-           && v63 == *((_DWORD *)v3 + 7)
-           && v66 == *(_DWORD *)v3 );
+  LABEL_43:
+        v84 = 1.0;
+        v85 = 1.0;
+        v86 = 1.0;
+        v26 = *(float *)(dword_AF30DC + 12);
+        goto LABEL_44;
+      }
+  LABEL_57:
+      v57 = *((_DWORD *)v3 + 2);
+      if ( v57 <= 3 ) {
+        // Emit indices for triangle
+        word_AF30E8[v14] = v16;
+        word_AF30EA[v14] = v16 + 1;
+        word_AF30EC[v14] = v16 + 2;
+        v14 += 3;
+        v83 = v14;
+      } else {
+        int v58 = v57 - 2;
+        v59 = 0;
+        v74 = 1;
+        v69 = v57 - 1;
 
-      // Do the drawing
-      sub_48A350(v65, v90, (int)&unk_B6B0E8, v15, (int)word_AF30E8, v14);
-      result = a1;
-    }
-    while ( v80 < a1 );
+        v60 = (_WORD *)(2 * v83 + 0xAF30E8);
+        v83 += v58 + 2 * v71;
+
+        int v76 = 0;
+        for(v76 = 0; v76 < v71; v76++) {
+          v60[0] = v67 + v59;
+          v60[1] = v67 + v74;
+          v60[2] = v67 + v69;
+          v60 += 3;
+          if (!((_BYTE)v76 & 1) {
+            v59 = v74++;
+          } else {
+            v59 = v69--;
+          }
+        }
+        v14 = v83;
+      }
+      v61 = *((_DWORD *)v3 + 18);
+      v3 += 16;
+      v62 = v80 + 1;
+    } while ( v61 + v14 + 2 * v61 - 6 < (unsigned int)dword_52E624
+         && v62 < a1
+         && v63 == *((_DWORD *)v3 + 7)
+         && v66 == *(_DWORD *)v3 );
+
+    // Do the drawing
+    sub_48A350(v65, v90, (int)&unk_B6B0E8, v15, (int)word_AF30E8, v14);
+    result = a1;
   }
   return result;
 }
