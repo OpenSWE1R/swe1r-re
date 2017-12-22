@@ -9,7 +9,7 @@ dword_E98EB0 seems to contain directional input of some sort. According to TCRF 
 
 To enable the menu from GDB in OpenSWE1R, use `set *(uint32_t*)Memory(0x50C044) = 1`
 
-dword_50C048 is a bitmask that seems to control what menu options are shown. To show all menu options, use `set *(uint32_t*)Memory(0x50C048) = 0xFFFFFFFF`. This might have unintended sideeffects though.
+dword_50C048 is a bitmask that seems to control what menu options are shown. To show all menu options, use `set *(uint32_t*)Memory(0x50C048) = 0x3F`. This might have unintended sideeffects though.
 
 ## Draw normal Pause menu
 
