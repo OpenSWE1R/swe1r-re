@@ -299,7 +299,7 @@ int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3)
     if ( v12.dwFlags & DDSD_PITCH ) {
       v6 = v12.lPitch / 2;
     } else {
-      v6 = v11;
+      v6 = v11; //FIXME: This is probably bad?!
     }
 
     // Loop over rows in image
