@@ -3,11 +3,8 @@
 // Probably returns void, if not: needs work
 void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, float a9) {
   float *v13; // ecx
-  int v14; // esi
   signed int v15; // eax
   int v16; // esi
-  int v17; // eax
-  float *v19; // esi
   int v20; // eax
   double v21; // st7
   signed int v24; // edx
@@ -24,21 +21,15 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
   int v38; // [esp+1Ch] [ebp-8h]
   float v41; // [esp+38h] [ebp+14h]
   float v42; // [esp+38h] [ebp+14h]
-  int v43; // [esp+3Ch] [ebp+18h]
 
   int v10 = a8 - 1;
 
   float* v11 = a7 + 16 * v10;
   v13 = (float *)(a4 + 12 * v10 + 0);
-  v14 = a8;
 
   int offset = 0;
 
-  if ( v10 < 0 ) {
-    return;
-  }
-
-  for(int i = 0; i < v14; i++) {
+  for(int i = 0; i < a8; i++) {
     v16 = v11;
 
     v15 = 92;
@@ -49,54 +40,67 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
     } while ( v15 < 104 );
 
     v11[3] = 1.0f;
-    v17 = a3 - 1;
-    if ( a3 - 1 >= 0 ) {
-      v43 = a1 + 4 * v17;
-      float* v18 = (float *)(a2 + 12 * v17);
 
-      for(int j = 0; j < a3; j++) {
-        v19 = *(float **)v43;
-        v20 = *(_DWORD *)(*(_DWORD *)v43 + 4);
-        if ( v20 == 1 ) {
-          v32 = v18[0] - *(float *)(a5 + 12 * v10 + 0 + offset);
-          v33 = v18[1] - *(float *)(a5 + 12 * v10 + 4 + offset);
-          v34 = v18[2] - *(float *)(a5 + 12 * v10 + 8 + offset);
-          v41 = v32 * v32 + v33 * v33 + v34 * v34;
-          v35 = sqrt(v41);
-          v42 = v35;
-          if ( v35 < (double)v19[10] ) {
-            sub_492440(&v32);
-            v26 = v13[0] * v32 + v13[1] * v33 + v13[2] * v34;
-            if ( v26 > 0.0 ) {
-              v27 = v42 * a9;
-              v11[0] = (v19[6] - v27) * v26 + v11[0];
-              v11[1] = (v19[7] - v27) * v26 + v11[1];
-              v11[2] = (v19[8] - v27) * v26 + v11[2];
-            }
-          }
-        } else if (v20 != 0) {
-          v21 = v13[0] * v18[0] + v13[1] * v18[1] + v13[2] * v18[2];
-          if ( v21 > 0.0 ) {
-            float* v22 = v11;
-            float* v23 = v19 + 6;
-            for(int k = 0; k < 3; k++) {
-              *v22 = *v23 * v21 + *v22;
-              v22++;
-              v23++;
-            }
+    int v17 = a3 - 1;
 
+    typdef struct {
+      uint32_t unk0;
+      uint32_t unk1;
+      uint32_t unk2;
+      uint32_t unk3;
+      uint32_t unk4;
+      float x; // 6
+      float y; // 7
+      float z; // 8
+      uint32_t unk9;
+      float unkf10;
+    } Unknown;
+
+    Unknown** v43 = a1 + 4 * v17;
+    float* v18 = (float *)(a2 + 12 * v17);
+
+    for(int j = 0; j < a3; j++) {
+      Unknown* v19 = *v43;
+      v20 = v19->unk1;
+      if ( v20 == 1 ) {
+        v32 = v18[0] - *(float *)(a5 + 12 * v10 + 0 + offset);
+        v33 = v18[1] - *(float *)(a5 + 12 * v10 + 4 + offset);
+        v34 = v18[2] - *(float *)(a5 + 12 * v10 + 8 + offset);
+        v41 = v32 * v32 + v33 * v33 + v34 * v34;
+        v35 = sqrt(v41);
+        v42 = v35;
+        if ( v35 < v19->unkf10 ) {
+          sub_492440(&v32);
+          v26 = v13[0] * v32 + v13[1] * v33 + v13[2] * v34;
+          if ( v26 > 0.0 ) {
+            v27 = v42 * a9;
+            v11[0] = (v19->x - v27) * v26 + v11[0];
+            v11[1] = (v19->y - v27) * v26 + v11[1];
+            v11[2] = (v19->z - v27) * v26 + v11[2];
           }
         }
+      } else if (v20 != 0) {
+        v21 = v13[0] * v18[0] + v13[1] * v18[1] + v13[2] * v18[2];
+        if ( v21 > 0.0 ) {
+          float* v22 = v11;
+          float* v23 = &v19->x;
+          for(int k = 0; k < 3; k++) {
+            *v22 = *v23 * v21 + *v22;
+            v22++;
+            v23++;
+          }
 
-        v28 = v11;
-        for(int v29 = 0; v29 < 4; v29++) {
-          *v28 = *(float *)((char *)v28 + a6 - a7) * *v28;
-          ++v28;
         }
-
-        v18 -= 3;
-        v43 -= 4;
       }
+
+      v28 = v11;
+      for(int v29 = 0; v29 < 4; v29++) {
+        *v28 = *(float *)((char *)v28 + a6 - a7) * *v28;
+        ++v28;
+      }
+
+      v18 -= 3;
+      v43--;
     }
     v13 -= 3;
     v11 -= 4;
