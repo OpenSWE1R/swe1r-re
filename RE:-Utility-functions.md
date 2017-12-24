@@ -15,14 +15,6 @@ void __cdecl sub_492440(float *a1) {
 }
 ```
 
-# Collision checking
-
-I have the theory that this is related to collision checking, but I did not verify this yet.
-
-```C
-int __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, float a9);
-```
-
 # ChangeAndClamp
 
 This is used in the debug menu
