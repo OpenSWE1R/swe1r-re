@@ -171,23 +171,17 @@ signed int __cdecl sub_49C9F0(const A1* a1, const A2* a2, const A3* a3) {
 
   v28 = 0;
 
-  int v8 = a2->unk2[a2->unk0 - 1];
-  int v9 = a2->unk1[a2->unk0 - 1];
-
   //FIXME: load these from the globals instead
-  float* v25 = a2->unk4 +  8 * v8;
-  float* v11 = a2->unk3 + 12 * v9;
-  float* v13 = a2->unk5 + 16 * v9;
-
-  int vxx = a2->unk2[0];
-  int v10 = a2->unk1[0];
-
-  //FIXME: load these from the globals instead
-  float* v15 = a2->unk4 +  8 * vxx;
-  float* v12 = a2->unk3 + 12 * v10;
-  float* v14 = a2->unk5 + 16 * v10;
+  float* v25 = a2->unk4 +  8 * a2->unk2[a2->unk0 - 1];
+  float* v11 = a2->unk3 + 12 * a2->unk1[a2->unk0 - 1];
+  float* v13 = a2->unk5 + 16 * a2->unk1[a2->unk0 - 1];
 
   for(int i = 0; i < a2->unk0; i++) {
+
+    // Get source
+    float* v15 = dword_DFAA08 +  8 * a2->unk2[i];
+    float* v12 = dword_DFAA1C + 12 * a2->unk1[i];
+    float* v14 = dword_DFAA20 + 16 * a2->unk1[i];
 
     // Get destination address
     float* tmp = dword_DFAA0C +  8 * v28
@@ -232,10 +226,6 @@ signed int __cdecl sub_49C9F0(const A1* a1, const A2* a2, const A3* a3) {
     v25 = v15;
     v11 = v12;
     v13 = v14;
-
-    v15 = dword_DFAA08 +  8 * a2->unk2[i + 1];
-    v12 = dword_DFAA1C + 12 * a2->unk1[i + 1];
-    v14 = dword_DFAA20 + 16 * a2->unk1[i + 1];
   }
 
   if ( v28 < 3 ) {
