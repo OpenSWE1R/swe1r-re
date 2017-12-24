@@ -15,7 +15,6 @@ This function **probably** resolves collisions. But I did not confirm it yet
 // a9 = some vector scale factor
 // Probably returns void, if not: needs work
 void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, float a9) {
-  float *v13; // ecx
   signed int v15; // eax
   int v20; // eax
   double v21; // st7
@@ -34,9 +33,10 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
   int v10 = a8 - 1;
 
   float* v11 = a7 + 16 * v10;
-  v13 = (float *)(a4 + 12 * v10 + 0);
+  float* v13 = a4 + 12 * v10;
 
   int offset = 0;
+  int off2 = 0;
 
   for(int i = 0; i < a8; i++) {
 
@@ -59,7 +59,7 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
     } Unknown;
 
     Unknown** v43 = a1 + 4 * v17;
-    float* v18 = (float *)(a2 + 12 * v17);
+    float* v18 = a2 + 12 * v17;
 
     for(int j = 0; j < a3; j++) {
       Unknown* v19 = *v43;
@@ -98,7 +98,7 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
       }
 
       for(int v29 = 0; v29 < 4; v29++) {
-        v11[v29] = *(float *)((char *)v11 + a6 - a7) * v11[v29];
+        v11[v29] = *(float *)(a6 + 16 * v10 + off2) * v11[v29];
       }
 
       v18 -= 3;
@@ -106,7 +106,7 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
     }
     v13 -= 3;
     v11 -= 4;
-
+    off2 -= 16;
     offset -= 12;
 
   }
