@@ -1,4 +1,6 @@
-This function probably resolves collisions
+## Collision resolver???
+
+This function **probably** resolves collisions. But I did not confirm it yet
 
 ```C
 //----- (00490550) --------------------------------------------------------
@@ -116,6 +118,10 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
 
 }
 ```
+
+## Clipper???
+
+This **probably** does clipping. Not confirmed though.
 
 ```C
 //----- (0049C9F0) --------------------------------------------------------
