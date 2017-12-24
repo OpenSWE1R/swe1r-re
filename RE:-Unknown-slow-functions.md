@@ -119,130 +119,123 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
 
 ```C
 //----- (0049C9F0) --------------------------------------------------------
-signed int __cdecl sub_49C9F0(int a1, int *a2, _DWORD *a3)
-{
-  int v3; // ecx
+
+typedef struct {
+  uint32_t unk0;
+  float unkf1;
+} A1;
+
+typedef struct {
+  uint32_t unk0;
+  uint32_t* unk1;
+  uint32_t* unk2;
+  uint32_t unk3; // Pointer to 12 byte per element
+  uint32_t unk4; // Pointer to 8 byte per element
+  uint32_t unk5; // Pointer to 16 byte per element
+} A2;
+
+typedef struct {
+  uint32_t unk0;
+  uint32_t unk1;
+  uint32_t unk2;
+  uint32_t unk3; // Pointer to 12 byte per element
+  uint32_t unk4; // Pointer to 8 byte per element
+  uint32_t unk5; // Pointer to 16 byte per element
+} A3;
+
+signed int __cdecl sub_49C9F0(const A1* a1, const A2* a2, const A3* a3) {
   int v4; // ebx
   int v5; // ebp
   int *v6; // edx
   int v7; // eax
-  int v8; // eax
-  int v9; // ecx
-  int v10; // esi
-  float *v11; // edx
-  int v12; // ebx
-  float *v13; // ecx
-  float *v14; // esi
-  float *v15; // ebp
-  int v16; // edi
   double v17; // st7
   int v18; // eax
-  _DWORD *v19; // edx
-  _DWORD *v20; // edx
-  int v21; // eax
-  signed int result; // eax
-  signed int v23; // [esp+10h] [ebp-14h]
-  int v24; // [esp+14h] [ebp-10h]
-  float *v25; // [esp+18h] [ebp-Ch]
-  float *v26; // [esp+1Ch] [ebp-8h]
-  float *v27; // [esp+20h] [ebp-4h]
   signed int v28; // [esp+2Ch] [ebp+8h]
-  int v29; // [esp+30h] [ebp+Ch]
 
-  v3 = *a2;
+
   dword_DFAA04 = 0;
-  v4 = a2[3];
-  dword_DFAA1C = v4;
-  v5 = a2[4];
-  dword_DFAA08 = v5;
-  dword_DFAA20 = a2[5];
-  v6 = (int *)a2[1];
-  v24 = v3;
-  dword_DFAA18 = (int)v6;
-  v7 = a2[2];
-  dword_DFAA24 = v7;
-  dword_DFAA14 = a3[3];
-  dword_DFAA0C = a3[4];
-  dword_DFAA10 = a3[5];
+  dword_DFAA08 = a2->unk4;
+  dword_DFAA0C = a3->unk4;
+  dword_DFAA10 = a3->unk5;
+  dword_DFAA14 = a3->unk3;
+  dword_DFAA18 = a2->unk1;
+  dword_DFAA1C = a2->unk3;
+  dword_DFAA20 = a2->unk5;
+  dword_DFAA24 = a2->unk2;
+
   v28 = 0;
-  v8 = *(_DWORD *)(v7 + 4 * v3 - 4);
-  v9 = v6[v3 - 1];
-  v25 = (float *)(v5 + 8 * v8);
-  v10 = *v6;
-  v11 = (float *)(v4 + 12 * v9);
-  v12 = v4 + 12 * v10;
-  v13 = (float *)(dword_DFAA20 + 16 * v9);
-  v14 = (float *)(dword_DFAA20 + 16 * v10);
-  v26 = (float *)v12;
-  v15 = (float *)(v5 + 8 * *(_DWORD *)dword_DFAA24);
-  v27 = v15;
-  if ( v24 > 0 )
-  {
-    v16 = 0;
-    v23 = 4;
-    v29 = 0;
-    do
-    {
-      if ( v11[1] >= (double)*(float *)(a1 + 4) || *(float *)(v12 + 4) >= (double)*(float *)(a1 + 4) )
-      {
-        if ( v11[1] != *(float *)(a1 + 4)
-          && *(float *)(v12 + 4) != *(float *)(a1 + 4)
-          && (v11[1] < (double)*(float *)(a1 + 4) || *(float *)(v12 + 4) < (double)*(float *)(a1 + 4)) )
-        {
-          v17 = (*(float *)(a1 + 4) - v11[1]) / (*(float *)(v12 + 4) - v11[1]);
-          *(_DWORD *)(dword_DFAA14 + v29 + 4) = *(_DWORD *)(a1 + 4);
-          v12 = (int)v26;
-          *(float *)(dword_DFAA14 + v29 + 8) = (v26[2] - v11[2]) * v17 + v11[2];
-          v15 = v27;
-          *(float *)(dword_DFAA14 + v29) = (*v26 - *v11) * v17 + *v11;
-          *(float *)(dword_DFAA0C + 8 * v28) = (*v27 - *v25) * v17 + *v25;
-          *(float *)(dword_DFAA0C + 8 * v28 + 4) = (v27[1] - v25[1]) * v17 + v25[1];
-          *(float *)(dword_DFAA10 + v16) = (*v14 - *v13) * v17 + *v13;
-          *(float *)(dword_DFAA10 + v16 + 4) = (v14[1] - v13[1]) * v17 + v13[1];
-          ++v28;
-          v16 += 16;
-          *(float *)(dword_DFAA10 + v16 - 8) = (v14[2] - v13[2]) * v17 + v13[2];
-          v29 += 12;
-          *(float *)(dword_DFAA10 + v16 - 4) = (v14[3] - v13[3]) * v17 + v13[3];
-          v18 = dword_DFAA04;
-          LOBYTE(v18) = dword_DFAA04 | 1;
-          dword_DFAA04 = v18;
-        }
-        if ( *(float *)(v12 + 4) >= (double)*(float *)(a1 + 4) )
-        {
-          v19 = (_DWORD *)(v29 + dword_DFAA14);
-          *v19 = *(_DWORD *)v12;
-          v19[1] = *(_DWORD *)(v12 + 4);
-          v19[2] = *(_DWORD *)(v12 + 8);
-          *(float *)(dword_DFAA0C + 8 * v28) = *v15;
-          *(float *)(dword_DFAA0C + 8 * v28 + 4) = v15[1];
-          v20 = (_DWORD *)(v16 + dword_DFAA10);
-          *v20 = *(_DWORD *)v14;
-          v20[1] = *((_DWORD *)v14 + 1);
-          v20[2] = *((_DWORD *)v14 + 2);
-          v20[3] = *((_DWORD *)v14 + 3);
-          v29 += 12;
-          ++v28;
-          v16 += 16;
-        }
+
+  int v8 = a2->unk2[a2->unk0 - 1];
+  int v9 = a2->unk1[a2->unk0 - 1];
+
+  int vxx = a2->unk2[0];
+  int v10 = a2->unk1[0];
+
+  //FIXME: load these from the constants instead
+
+  float* v25 = a2->unk4 +  8 * v8;
+  float* v11 = a2->unk3 + 12 * v9;
+  float* v13 = a2->unk5 + 16 * v9;
+
+  float* v15 = a2->unk4 +  8 * vxx;
+  float* v12 = a2->unk3 + 12 * v10;
+  float* v14 = a2->unk5 + 16 * v10;
+
+  for(int i = 0; i < a2->unk0; i++) {
+
+    // Get destination address
+    float* tmp = dword_DFAA0C +  8 * v28
+    float* v20 = dword_DFAA10 + 16 * v28;
+    float* v19 = dword_DFAA14 + 12 * v28;
+
+    if ( v11[1] >= a1->unkf1 || v12[1] >= a1->unkf1 ) {
+      if (  v11[1] != a1->unkf1 && v12[1] != a1->unkf1
+        && (v11[1]  < a1->unkf1 || v12[1]  < a1->unkf1) ) {
+
+        v17 = (a1->unkf1 - v11[1]) / (v12[1] - v11[1]);
+
+        tmp[0] = (v15[0] - v25[0]) * v17 + v25[0];
+        tmp[1] = (v15[1] - v25[1]) * v17 + v25[1];
+        v19[0] = (v12[0] - v11[0]) * v17 + v11[0];
+        v19[1] = a1->unkf1;
+        v19[2] = (v12[2] - v11[2]) * v17 + v11[2];
+        v20[0] = (v14[0] - v13[0]) * v17 + v13[0];
+        v20[1] = (v14[1] - v13[1]) * v17 + v13[1];
+        v20[2] = (v14[2] - v13[2]) * v17 + v13[2];
+        v20[3] = (v14[3] - v13[3]) * v17 + v13[3];
+        ++v28;
+
+        dword_DFAA04 |= 1;
       }
-      v25 = v15;
-      v21 = *(_DWORD *)(dword_DFAA18 + v23);
-      v11 = (float *)v12;
-      v12 = dword_DFAA1C + 12 * v21;
-      v26 = (float *)(dword_DFAA1C + 12 * v21);
-      v15 = (float *)(dword_DFAA08 + 8 * *(_DWORD *)(dword_DFAA24 + v23));
-      v13 = v14;
-      v27 = (float *)(dword_DFAA08 + 8 * *(_DWORD *)(dword_DFAA24 + v23));
-      v14 = (float *)(dword_DFAA20 + 16 * v21);
-      v23 += 4;
-      --v24;
+      if ( v12[1] >= a1->unkf1 ) {
+
+        tmp[0] = v15[0];
+        tmp[1] = v15[1];
+        v19[0] = v12[0];
+        v19[1] = v12[1];
+        v19[2] = v12[2];
+        v20[0] = v14[0];
+        v20[1] = v14[1];
+        v20[2] = v14[2];
+        v20[3] = v14[3];
+        ++v28;
+
+      }
     }
-    while ( v24 );
+
+    v25 = v15;
+    v11 = v12;
+    v13 = v14;
+
+    v15 = dword_DFAA08 +  8 * a2->unk2[i + 1];
+    v12 = dword_DFAA1C + 12 * a2->unk1[i + 1];
+    v14 = dword_DFAA20 + 16 * a2->unk1[i + 1];
   }
-  result = v28;
-  if ( v28 < 3 )
+
+  if ( v28 < 3 ) {
     dword_DFAA04 |= 0x40u;
-  return result;
+  }
+
+  return v28;
 }
 ```
