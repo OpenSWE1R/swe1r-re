@@ -98,7 +98,7 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
       }
 
       for(int v29 = 0; v29 < 4; v29++) {
-        v11[v29] = *(float *)(a6 + 16 * v10 + off2) * v11[v29];
+        v11[v29] = *(float *)(a6 + 16 * v10 + off2 + v29 * 4) * v11[v29];
       }
 
       v18 -= 3;
