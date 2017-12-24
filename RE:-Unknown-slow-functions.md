@@ -15,7 +15,6 @@ This function probably resolves collisions
 void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, float a9) {
   float *v13; // ecx
   signed int v15; // eax
-  int v16; // esi
   int v20; // eax
   double v21; // st7
   signed int v24; // edx
@@ -41,15 +40,10 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
   int offset = 0;
 
   for(int i = 0; i < a8; i++) {
-    v16 = v11;
 
-    v15 = 92;
-    do {
-      v15 += 4;
-      v16 += 4;
-      *(_DWORD *)(v16 - 4) = *(_DWORD *)(dword_DF7F2C + v15 - 4);
-    } while ( v15 < 104 );
-
+    for(int v15 = 0; v15 < 3; v15++) {
+      v11[v15] = *(float*)(dword_DF7F2C + 92 + v15 * 4);
+    }
     v11[3] = 1.0f;
 
     int v17 = a3 - 1;
