@@ -2,14 +2,14 @@ This function probably resolves collisions
 
 ```C
 //----- (00490550) --------------------------------------------------------
-// a1 =
+// a1 = pointer to elements
 // a2 = n x 3 component vectors
 // a3 = n
 // a4 = m x 3 component vectors
 // a5 = # x 3 component vectors
 // a6 = ?
 // a7 = # x 4 component vectors
-// a8 = #
+// a8 = number of elements in a1
 // a9 = some vector scale factor
 // Probably returns void, if not: needs work
 void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, float a9) {
