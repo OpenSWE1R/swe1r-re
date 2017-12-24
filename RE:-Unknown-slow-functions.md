@@ -174,15 +174,15 @@ signed int __cdecl sub_49C9F0(const A1* a1, const A2* a2, const A3* a3) {
   int v8 = a2->unk2[a2->unk0 - 1];
   int v9 = a2->unk1[a2->unk0 - 1];
 
-  int vxx = a2->unk2[0];
-  int v10 = a2->unk1[0];
-
-  //FIXME: load these from the constants instead
-
+  //FIXME: load these from the globals instead
   float* v25 = a2->unk4 +  8 * v8;
   float* v11 = a2->unk3 + 12 * v9;
   float* v13 = a2->unk5 + 16 * v9;
 
+  int vxx = a2->unk2[0];
+  int v10 = a2->unk1[0];
+
+  //FIXME: load these from the globals instead
   float* v15 = a2->unk4 +  8 * vxx;
   float* v12 = a2->unk3 + 12 * v10;
   float* v14 = a2->unk5 + 16 * v10;
