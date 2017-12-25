@@ -16,8 +16,7 @@ dword_50C048 is a bitmask that seems to control what menu options are shown. To 
 ```C
 
 //----- (0042A840) --------------------------------------------------------
-int __cdecl sub_42A840(int a1, char *a2, int a3, int a4, int a5)
-{
+int __cdecl sub_42A840(int a1, char *a2, uint8_t* a3, int32_t* a4, float* a5) {
   const char *v5; // eax
   const char *v6; // eax
   int result; // eax
@@ -27,16 +26,17 @@ int __cdecl sub_42A840(int a1, char *a2, int a3, int a4, int a5)
   const char *v11; // eax
   const char *v12; // eax
 
-  *(_BYTE *)a3 = 0;
-  *(_DWORD *)a4 = -10000;
-  *(_DWORD *)a5 = -971227136;
-  switch ( a1 )
-  {
+  *a3 = 0;
+  *a4 = -10000;
+  *a5 = -10000.0f;
+  switch ( a1 ) {
     case 0:
       v5 = sub_421360(aScreentext535C);
       sprintf(a2, v5);
-      if ( !dword_50C064 )
-        goto LABEL_13;
+      if ( !dword_50C064 ) {
+        result = 1;
+        break;
+      }
       v6 = sub_421360(aScreentext366A);
       sprintf(a2, aCS, v6);
       result = 1;
@@ -44,8 +44,10 @@ int __cdecl sub_42A840(int a1, char *a2, int a3, int a4, int a5)
     case 1:
       v10 = sub_421360(aScreentext536C);
       sprintf(a2, v10);
-      if ( !dword_50C064 )
-        goto LABEL_13;
+      if ( !dword_50C064 ) {
+        result = 1;
+        break;
+      }
       v11 = sub_421360(aScreentext367Y);
       sprintf(a2, aCS, v11);
       result = 1;
@@ -53,8 +55,10 @@ int __cdecl sub_42A840(int a1, char *a2, int a3, int a4, int a5)
     case 2:
       v8 = sub_421360(aScreentext657C);
       sprintf(a2, v8);
-      if ( !dword_50C064 )
-        goto LABEL_13;
+      if ( !dword_50C064 ) {
+        result = 1;
+        break;
+      }
       v9 = sub_421360(aScreentext368N);
       sprintf(a2, aCS, v9);
       result = 1;
@@ -62,19 +66,16 @@ int __cdecl sub_42A840(int a1, char *a2, int a3, int a4, int a5)
     case 3:
       v12 = sub_421360(aScreentext658C);
       sprintf(a2, v12);
-      if ( dword_50C064 )
+      if ( dword_50C064 ) {
         sprintf(a2, &Class);
-LABEL_13:
+      }
       result = 1;
       break;
     case 4:
-      if ( dword_50C044 < 1 )
-      {
+      if ( dword_50C044 < 1 ) {
         sprintf(a2, aUnimplemented);
         result = 0;
-      }
-      else
-      {
+      } else {
         sprintf(a2, aCgameCheats);
         result = 1;
       }
@@ -92,10 +93,13 @@ LABEL_13:
 
 ```C
 //----- (0042AC70) --------------------------------------------------------
-int __cdecl sub_42AC70(int a1, char *a2, int a3, int a4, int a5)
-{
-  switch ( dword_50C07C )
-  {
+// a1 = submenu
+// a2 = ???
+// a3 = unknown
+// a4 = ???
+// a5 = same value as a4 but as float?!
+int __cdecl sub_42AC70(int a1, char *a2, uint8_t* a3, int32_t* a4, float* a5) {
+  switch ( dword_50C07C ) {
     case 0: // Draws the generic cheats
       return sub_42A580(a1, a2, a3, a4, a5);
     case 1: // Draws menu to edit pods
@@ -114,8 +118,7 @@ The position actually seems to come out of the translation of a 3x4 matrix at dw
 ```C
 //----- (00483BE0) --------------------------------------------------------
 // a1 = debug level
-void __cdecl sub_483BE0(signed int a1)
-{
+void __cdecl sub_483BE0(signed int a1) {
   int v1; // ST10_4
   int v2; // ST0C_4
   int v3; // ST08_4
