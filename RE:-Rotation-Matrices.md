@@ -87,91 +87,104 @@ void __cdecl sub_48C950(float a1, float* a2, float* a3) {
 
   // Figure out which quadrant this angle belongs to
   int quadrant;
-  if (angle >= 90.0) {
-    if (angle >= 180.0) {
-      if (angle >= 270.0) {
-        quadrant = 3;
-      } else {
-        quadrant = 2;
-      }
-    } else {
-      quadrant = 1;
-    }
-  } else {
+  if (angle < 90.0) {
     quadrant = 0;
+  } else if (angle < 180.0) {
+    quadrant = 1;
+  } else if (angle < 270.0) {
+    quadrant = 2;
+  } else {
+    quadrant = 3;
   }
 
   // Get angle for index and the delta to the closest integer
   float angle_index = angle * 45.511112; // (4096 * 4) / 360 = 45.511112
   float delta = angle_index - sub_48C8F0(angle_index);
   int index0 = sub_48CD30(angle_index);
-  int index1 = index_low + 1;
+  int index1 = index0 + 1;
 
   switch(quadrant) {
     case 0:
-      if ( index1 >= 0x1000 ) {
-        v24 = dword_4C98E8[0xFFF - (index1 - 0x1000)]); // sin
-        v25 = -flt_4C58E8[index1];
+
+      if (index1 >= 0x1000) {
+        index1 -= 0x1000;
+        v24 = dword_4C98E8[0xFFF - index1]);
+        v25 = -dword_4C98E8[index1];
       } else {
-        v24 = dword_4C98E8[index1]); // sin
-        v25 = dword_4C98E8[0xFFF - (index1 - 0x0000)]; // sin
+        v24 = dword_4C98E8[index1]);
+        v25 = dword_4C98E8[0xFFF - index1];
       }
 
       float a = dword_4C98E8[index0];
-      *a2 = (v24 - a) * delta + a; // sin + sin
+      *a2 = (v24 - a) * delta + a;
 
-      float b = dword_4C98E8[0xFFF - (index0 - 0x0000)];
-      *a3 = (v25 - b) * delta + b; // sin + sin
+      float b = dword_4C98E8[0xFFF - index0];
+      *a3 = (v25 - b) * delta + b;
 
       break;
 
     case 1:
-      if ( index1 >= 0x2000 ) {
-        v26 = -flt_4C18E8[index1];
-        v9 = -dword_4C98E8[0xFFF - (index1 - 0x2000)]; // sin
+
+      index0 -= 0x1000;
+      index1 -= 0x1000;
+
+      if ( index1 >= 0x1000 ) {
+        index1 -= 0x1000;
+        v26 = -dword_4C98E8[index1];
+        v9 = -dword_4C98E8[0xFFF - index1];
       } else {
-        v26 = dword_4C98E8[0xFFF - (index1 - 0x1000)]; // sin
-        v9 = -flt_4C58E8[index1];
+        v26 = dword_4C98E8[0xFFF - index1];
+        v9 = -dword_4C98E8[index1];
       }
 
-      float a = dword_4C98E8[0xFFF - (index0 - 0x1000)]; // sin
+      float a = dword_4C98E8[0xFFF - index0]; // sin
       *a2 = (v26 - a) * delta + a;
       
-      float b = -flt_4C58E8[index0];
+      float b = -dword_4C98E8[index0];
       *a3 = (v9 - b) * delta + b;
 
       break;
 
     case 2:
-      if (index1 >= 0x3000) {
-        v12 = -dword_4C98E8[0xFFF - (index1 - 0x3000)]; // sin
-        v27 = dword_4BD8E8[index1];
+
+      index0 -= 0x2000;
+      index1 -= 0x2000;
+
+      if (index1 >= 0x1000) {
+        index1 -= 0x1000;
+        v12 = -dword_4C98E8[0xFFF - index1]; // sin
+        v27 = dword_4C98E8[index1];
       } else {
-        v12 = -flt_4C18E8[index1];
-        v27 = -dword_4C98E8[0xFFF - (index1 - 0x2000)]; // sin
+        v12 = -dword_4C98E8[index1];
+        v27 = -dword_4C98E8[0xFFF - index1]; // sin
       }
 
-      float a = -flt_4C18E8[index0];
+      float a = -dword_4C98E8[index0];
       *a2 = (v12 - a) * delta + a;
 
-      float b = -dword_4C98E8[0xFFF - (index0 - 0x2000)]; // sin
+      float b = -dword_4C98E8[0xFFF - index0]; // sin
       *a3 = (v27 - b) * delta + b;
 
       break;
 
     case 3:
-      if (index1 >= 0x4000) {
-        v28 = dword_4B98E8[index1];
-        v29 = dword_4C98E8[0xFFF - (index1 - 0x4000)]); // sin
+
+      index0 -= 0x3000;
+      index1 -= 0x3000;
+
+      if (index1 >= 0x1000) {
+        index1 -= 0x1000;
+        v28 = dword_4C98E8[index1];
+        v29 = dword_4C98E8[0xFFF - index1]; // sin
       } else {
-        v28 = -dword_4C98E8[0xFFF - (index1 - 0x3000)]; // sin
-        v29 = dword_4BD8E8[index1];
+        v28 = -dword_4C98E8[0xFFF - index1]; // sin
+        v29 = dword_4C98E8[index1];
       }
 
-      float a = -dword_4C98E8[0xFFF - (index0 - 0x3000)]; // sin
+      float a = -dword_4C98E8[0xFFF - index0)]; // sin
       *a2 = (v28 - a) * delta + a;
 
-      float b = dword_4BD8E8[index0];
+      float b = dword_4C98E8[index0];
       *a3 = (v29 - b) * delta + b;
  
       break;
