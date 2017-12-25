@@ -29,7 +29,7 @@ typedef struct {
   uint32_t unk24;
 } A1;
 
-signed int __stdcall sub_488F50(A1* a1, int a2) {
+signed int __stdcall sub_488F50(const A1* a1, int a2) {
   int v5; // eax
   int v6; // eax
   unsigned int v7; // ebx
@@ -107,6 +107,8 @@ signed int __stdcall sub_488F50(A1* a1, int a2) {
   } else if ( v6 & DDPF_RGB ) {
     v4->unk6 = 1;
     v4->unk7 = a1->unk21;
+
+    // Red bits?
     v7 = a1->unk22;
     for (int i = 0; !(v7 & 1); ++i )
       v7 >>= 1;
@@ -115,6 +117,8 @@ signed int __stdcall sub_488F50(A1* a1, int a2) {
     for (int j = 0; v7 & 1; ++j )
       v7 >>= 1;
     v4->unk8 = j;
+
+    // Green bits?
     v10 = a1->unk23;
     for (int k = 0; !(v10 & 1); ++k )
       v10 >>= 1;
@@ -123,6 +127,8 @@ signed int __stdcall sub_488F50(A1* a1, int a2) {
     for (int l = 0; v10 & 1; ++l )
       v10 >>= 1;
     v4->unk9 = l;
+
+    // Blue bits?
     v13 = a1->unk24;
     for (int m = 0; !(v13 & 1); ++m )
       v13 >>= 1;
@@ -131,6 +137,7 @@ signed int __stdcall sub_488F50(A1* a1, int a2) {
     for (int n = 0; v13 & 1; ++n )
       v13 >>= 1;
     v4->unk10 = n;
+
   }
 
   // Get bytes per pixel
