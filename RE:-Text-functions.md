@@ -142,46 +142,33 @@ This must be the actual text rendering. It also flushes all text which had been 
 
 ```C
 //----- (00450100) --------------------------------------------------------
-int sub_450100()
-{
-  int result; // eax
-  int v1; // esi
-  char *v2; // edi
-  _DWORD *v3; // ebp
-  __int16 *v4; // ebx
-  int *v5; // [esp+4h] [ebp-4h]
+int sub_450100() {
+  int result = dword_50C750;
 
-  result = dword_50C750;
-  v1 = 0;
-  if ( dword_50C750 > 0 )
-  {
-    v2 = byte_E2C380;
-    v5 = (int *)&unk_E2B680;
-    v3 = &unk_E2BE80;
-    v4 = word_E34860;
-    do
-    {
-      sub_42D950(byte_E2B480[4 * v1], byte_E2B481[4 * v1], byte_E2B482[4 * v1], byte_E2B483[4 * v1]);
-      sub_42D910(*v4, word_E34862[2 * v1]);
-      if ( *v3 )
-      {
-        dword_50C0B0 = 1;
-        dword_E99750 = *v5;
-        dword_E99754 = v5[1];
-        dword_E99758 = v5[2];
-        dword_E9975C = v5[3];
-      }
-      sub_42EC50(v2);
-      result = dword_50C750;
-      ++v1;
-      v4 += 2;
-      ++v3;
-      v2 += 128;
-      dword_50C0B0 = 0;
-      v5 += 4;
+  uint8_t* v2 = byte_E2C380;
+  uint32_t* v3 = &unk_E2BE80;
+  int16_t* v4 = word_E34860;
+  int* v5 = &unk_E2B680;
+
+  for(int i = 0; i < dword_50C750; i++) {
+    sub_42D950(byte_E2B480[4 * i], byte_E2B481[4 * i], byte_E2B482[4 * i], byte_E2B483[4 * i]);
+    sub_42D910(*v4, word_E34862[2 * i]);
+    if ( *v3 ) {
+      dword_50C0B0 = 1;
+      dword_E99750 = v5[0];
+      dword_E99754 = v5[1];
+      dword_E99758 = v5[2];
+      dword_E9975C = v5[3];
     }
-    while ( v1 < dword_50C750 );
+    sub_42EC50(v2);
+    dword_50C0B0 = 0;
+
+    v2 += 128;
+    v3 += 1;
+    v4 += 2;
+    v5 += 4;
   }
+
   dword_50C750 = 0;
   return result;
 }
@@ -189,31 +176,22 @@ int sub_450100()
 
 ```C
 //----- (004501F0) --------------------------------------------------------
-int sub_4501F0()
-{
-  int result; // eax
-  int v1; // esi
-  char *v2; // ebx
-  __int16 *v3; // edi
+int sub_4501F0() {
+  int result = dword_50C758;
 
-  result = dword_50C758;
-  v1 = 0;
-  if ( dword_50C758 > 0 )
-  {
-    v2 = byte_E303A0;
-    v3 = word_E34660;
-    do
-    {
-      sub_42D950(byte_E343A0[4 * v1], byte_E343A1[4 * v1], byte_E343A2[4 * v1], byte_E343A3[4 * v1]);
-      sub_42D910(*v3, word_E34662[2 * v1]);
-      sub_42EC50(v2);
-      result = dword_50C758;
-      ++v1;
-      v3 += 2;
-      v2 += 128;
-    }
-    while ( v1 < dword_50C758 );
+  uint8_t* v2 = byte_E303A0;
+  int16_t* v3 = word_E34660;
+
+  for(int i = 0; i < dword_50C758; i++) {
+    sub_42D950(byte_E343A0[4 * i], byte_E343A1[4 * i], byte_E343A2[4 * i], byte_E343A3[4 * i]);
+    sub_42D910(*v3, word_E34662[2 * i]);
+    sub_42EC50(v2);
+    result = dword_50C758;
+
+    v2 += 128;
+    v3 += 2;
   }
+
   dword_50C758 = 0;
   return result;
 }
