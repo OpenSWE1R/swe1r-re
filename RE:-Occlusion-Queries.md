@@ -58,13 +58,16 @@ int sub_42D440() {
   char v41; // [esp+38h] [ebp-8h]
   float v42; // [esp+3Ch] [ebp-4h]
 
+  // Lock the Z-Buffer
   sub_433CD0((unsigned int *)&v35, &v33, &v32, &v42, &v41);
+
   v0 = v33;
   v1 = v32;
   v2 = v35;
   v40 = v32 + dword_ED38C8 * v33;
   v3 = 0;
   v34 = 0;
+  
   do
   {
     if ( *(int *)((char *)dword_4BEE60 + (_DWORD)v3) >= 0 )
@@ -115,32 +118,37 @@ int sub_42D440() {
     v34 = v3;
   }
   while ( (signed int)v3 < 8 );
-  switch ( v2 )
-  {
+
+
+  switch ( v2 ) {
     case 1:
-      v9 = flt_4BEE48;
+      v9 = flt_4BEE48; // 0x3b808081 ~ 1.0 / 0xFF
       break;
     case 2:
-      v9 = flt_4BEE4C;
+      v9 = flt_4BEE4C; // 0x37800080 ~ 1.0 / 0xFFFF
       break;
     case 3:
-      v9 = flt_4BEE54;
+      v9 = flt_4BEE54; // 0x33800001 ~ 1.0 / 0xFFFFFE
       break;
     case 4:
-      v9 = flt_4BEE50;
+      v9 = flt_4BEE50; // 0x2f800000 ~ 1 / 0xFFFFFFFF
       break;
     default:
       v9 = v42;
       break;
   }
+
+
   v10 = 0;
   do
   {
     v11 = dword_EA5A00[v10];
-    dword_EA5AC0[v10] = -998637568;
+    dword_EA5AC0[v10] = -1000.0f;
     if ( v11 >= 0 )
     {
       v12 = 0.0;
+
+
       if ( v2 > 0 )
       {
         v13 = v2 + v0 * dword_EA5A60[v10] + v1 + v11 * v2;
@@ -158,11 +166,15 @@ int sub_42D440() {
         v0 = v33;
         v1 = v32;
       }
+
+
       *(float *)(v10 * 4 + 15358656) = v12 * v9;
     }
     ++v10;
   }
   while ( v10 < 20 );
+
+
   v16 = dword_EA5060;
   v17 = 0;
   v34 = dword_EA5060;
@@ -171,10 +183,13 @@ int sub_42D440() {
     if ( byte_EA59C0[v17] )
     {
       v18 = dword_EA4FC0[v17];
-      *v16 = -998637568;
+      *v16 = -1000.0;
       if ( v18 >= 0 )
       {
         v19 = 0.0;
+
+
+
         if ( v2 > 0 )
         {
           v20 = v2 + v0 * dword_EA4F20[v17] + v32 + v18 * v2;
@@ -192,6 +207,9 @@ int sub_42D440() {
           v0 = v33;
           v16 = v34;
         }
+
+
+
         *(float *)v16 = v19 * v9;
       }
     }
@@ -200,6 +218,8 @@ int sub_42D440() {
     v34 = v16;
   }
   while ( (signed int)v16 < (signed int)dword_EA5100 );
+
+
   v23 = 0;
   if ( dword_517348 > 0 )
   {
@@ -208,7 +228,7 @@ int sub_42D440() {
     do
     {
       v25 = dword_EA5B80[v23];
-      *v24 = -998637568;
+      *v24 = -1000.0;
       if ( v25 >= 0 )
       {
         v26 = 0.0;
@@ -237,6 +257,8 @@ int sub_42D440() {
     }
     while ( v23 < dword_517348 );
   }
+
+
   return sub_433D60();
 }
 ```
