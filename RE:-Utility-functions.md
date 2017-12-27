@@ -253,6 +253,10 @@ const float* __cdecl sub_493200(float* a1, const float* a2, const float* a3) {
 }
 ```
 
+---
+
+`sub_498330` in demo
+
 ```C
 //----- (00493270) --------------------------------------------------------
 // a1 = some 12 component matrix
