@@ -128,32 +128,22 @@ int sub_42D440() {
   v16 = dword_EA5060;
   v17 = 0;
   do {
-    if ( byte_EA59C0[v17] )
-    {
+    if ( byte_EA59C0[v17] ) {
       v18 = dword_EA4FC0[v17];
       *v16 = -1000.0;
       if ( v18 >= 0 ) {
-        if ( v35 > 0 )
-        {
-          uint8_t* v20 = v35 + v33 * dword_EA4F20[v17] + v32 + v18 * v35;
-          v21 = 8 * v35;
-          v22 = v35;
 
-          float v19 = 0.0;
+        uint8_t* v20 = v32 + v33 * dword_EA4F20[v17] + v18 * v35 + v35;
+        v21 = 8 * v35;
 
-          do
-          {
-            v21 -= 8;
-            v40 = *--v20;
-            --v22;
-            v40 <<= v21;
-            v19 += (int32_t)v40;
-          }
-          while ( v22 );
-          v16 = v34;
+        float v19 = 0.0;
+        for(int v22 = 0; v22 < v35; v22++) {
+          v21 -= 8;
+          v40 = *--v20;
+          v40 <<= v21;
+          v19 += (int32_t)v40;
         }
-
-
+        v16 = v34;
 
         *(float *)v16 = v19 * v9;
       }
@@ -169,27 +159,24 @@ int sub_42D440() {
   //   Y at dword_EA5C00[v23] (int)
   //   Z as output at EA5BC0 (float)
   for(int v23 = 0; v23 < dword_517348; v23++) {
-    do {
-      v25 = dword_EA5B80[v23];
-      dword_EA5BC0[v23] = -1000.0;
-      if ( v25 >= 0 ) {
+    v25 = dword_EA5B80[v23];
+    dword_EA5BC0[v23] = -1000.0;
+    if ( v25 >= 0 ) {
 
-        uint8_t* v27 = v32 + v33 * dword_EA5C00[v23] + v25 * v35 + v35;
-        v28 = 8 * v35;
+      uint8_t* v27 = v32 + v33 * dword_EA5C00[v23] + v25 * v35 + v35;
+      v28 = 8 * v35;
 
-        float v26 = 0.0;
-        for(int v29 = 0; v29 < v35; v29++) {
-          v28 -= 8;
-          v40 = *--v27;
-          v40 <<= v28;
-          v26 += (int32_t)v40;
-        }
-
-        dword_EA5BC0[v23] = v26 * v9;
+      float v26 = 0.0;
+      for(int v29 = 0; v29 < v35; v29++) {
+        v28 -= 8;
+        v40 = *--v27;
+        v40 <<= v28;
+        v26 += (int32_t)v40;
       }
+
+      dword_EA5BC0[v23] = v26 * v9;
     }
   }
-
 
   return sub_433D60();
 }
