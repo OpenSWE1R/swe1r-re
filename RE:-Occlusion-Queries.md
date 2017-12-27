@@ -127,11 +127,7 @@ int sub_42D440() {
         v12 += (int32_t)v40;
       }
 
-      if ( v2 > 0 ) {
-        v0 = v33;
-        v1 = v32;
-      }
-
+      // Normalize depth
       dword_EA5AC0[v10] = v12 * v9;
     }
   }
