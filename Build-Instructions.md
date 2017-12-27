@@ -12,7 +12,7 @@ mkdir build
 cd build
 ```
 
-All of the following instructions should be ran from that "build/" directory, unless noted otherwise.
+All of the following instructions should be ran from the newly created "build/" directory, unless noted otherwise.
 
 ---
 
