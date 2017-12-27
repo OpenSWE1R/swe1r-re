@@ -66,7 +66,7 @@ int sub_42D440() {
         // Get pixel (v4 - 4, v5 - 4)
         v6 = (_BYTE *)(v32 + v33 * (v5 - 4) + v35 * (v4 - 4));
 
-        // This seems to scan a 7x7 pixel block and counts pixels which were not in depth buffer [= farplane]
+        // This seems to scan a 8x8 pixel block and counts pixels which were not in depth buffer [= farplane]
         for(int v7 = 0; v7 < 8; v7++) {
           for(int v8 = 0; v8 < 8; v8++) {
             if ( v8 < v36 || v8 >= v37 ||
