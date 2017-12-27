@@ -40,6 +40,8 @@ int __cdecl sub_48B260(float a1, float a2, float a3, float a4) {
 
 # Prepare for draw
 
+`sub_492FF0` in demo
+
 ```C
 //----- (0048DF30) --------------------------------------------------------
 unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
