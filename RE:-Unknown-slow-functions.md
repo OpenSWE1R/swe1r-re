@@ -118,6 +118,8 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
 
 This **probably** does clipping. Not confirmed though.
 
+`sub_4A1AD0` in demo
+
 ```C
 //----- (0049C9F0) --------------------------------------------------------
 
