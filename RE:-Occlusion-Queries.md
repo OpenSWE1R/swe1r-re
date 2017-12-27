@@ -20,16 +20,13 @@ int sub_42D440() {
   _BYTE *v6; // eax
   signed int v10; // ebx
   int v11; // ecx
-  double v12; // st6
   int *v16; // esi
   int v17; // ebx
   int v18; // ecx
-  double v19; // st6
   int v20; // esi
   int v21; // eax
   int v22; // ebp
   int v25; // ecx
-  double v26; // st6
   int v27; // esi
   int v28; // eax
   int v29; // ebp
@@ -108,16 +105,16 @@ int sub_42D440() {
     v11 = dword_EA5A00[v10];
     dword_EA5AC0[v10] = -1000.0f;
     if ( v11 >= 0 ) {
-      v12 = 0.0;
 
       // Get depth pointer for pixel (v11, dword_EA5A60[v10])
-      int v13 = v32 + v33 * dword_EA5A60[v10] + v11 * v35 + v35;
+      uint8_t* v13 = v32 + v33 * dword_EA5A60[v10] + v11 * v35 + v35;
       int v14 = 8 * v35;
 
       // Read depth bytes
+      float v12 = 0.0;
       for(int v15 = 0; v15 < v35; v15++) {
         v14 -= 8;
-        v40 = *(uint8_t*)(--v13);
+        v40 = *--v13;
         v40 <<= v14;
         v12 += (int32_t)v40;
       }
@@ -130,31 +127,27 @@ int sub_42D440() {
 
   v16 = dword_EA5060;
   v17 = 0;
-  v34 = dword_EA5060;
-  do
-  {
+  do {
     if ( byte_EA59C0[v17] )
     {
       v18 = dword_EA4FC0[v17];
       *v16 = -1000.0;
-      if ( v18 >= 0 )
-      {
-        v19 = 0.0;
-
-
-
+      if ( v18 >= 0 ) {
         if ( v35 > 0 )
         {
-          v20 = v35 + v33 * dword_EA4F20[v17] + v32 + v18 * v35;
+          uint8_t* v20 = v35 + v33 * dword_EA4F20[v17] + v32 + v18 * v35;
           v21 = 8 * v35;
           v22 = v35;
+
+          float v19 = 0.0;
+
           do
           {
             v21 -= 8;
-            v40 = *(unsigned __int8 *)(v20-- - 1);
+            v40 = *--v20;
             --v22;
             v40 <<= v21;
-            v19 = v19 + (double)(signed int)v40;
+            v19 += (int32_t)v40;
           }
           while ( v22 );
           v16 = v34;
@@ -176,27 +169,24 @@ int sub_42D440() {
   //   Y at dword_EA5C00[v23] (int)
   //   Z as output at EA5BC0 (float)
   for(int v23 = 0; v23 < dword_517348; v23++) {
-    float* v24 = &unk_EA5BC0;
     do {
       v25 = dword_EA5B80[v23];
-      *v24 = -1000.0;
+      dword_EA5BC0[v23] = -1000.0;
       if ( v25 >= 0 ) {
-        v26 = 0.0;
-        if ( v35 > 0 ) {
-          v27 = v32 + v33 * dword_EA5C00[v23] + v25 * v35 + v35;
-          v28 = 8 * v35;
 
-          for(int v29 = 0; v29 < v35; v29++) {
-            v28 -= 8;
-            v40 = *(unsigned __int8 *)(v27-- - 1);
-            v40 <<= v28;
-            v26 += (int32_t)v40;
-          }
+        uint8_t* v27 = v32 + v33 * dword_EA5C00[v23] + v25 * v35 + v35;
+        v28 = 8 * v35;
+
+        float v26 = 0.0;
+        for(int v29 = 0; v29 < v35; v29++) {
+          v28 -= 8;
+          v40 = *--v27;
+          v40 <<= v28;
+          v26 += (int32_t)v40;
         }
 
-        *v24 = v26 * v9;
+        dword_EA5BC0[v23] = v26 * v9;
       }
-      ++v24;
     }
   }
 
