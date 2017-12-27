@@ -3,12 +3,16 @@
 It is assumed you have a working environment including C compiler which will work with CMake.
 It is also assumed that you have a working git installation and know how to use it.
 
-For all platforms, you must first clone the repository:
+For all platforms, you must first clone the repository and create a "build/" directory in the repository:
 
 ```
 git clone https://github.com/OpenSWE1R/openswe1r.git
 cd openswe1r
+mkdir build
+cd build
 ```
+
+All of the following instructions should be ran from that "build/" directory, unless noted otherwise.
 
 ---
 
@@ -26,7 +30,7 @@ Optionally, you can also install an external installation of CMake.
 
 **Install dependencies**
 
-You also need to install unicorn which currently isn't provided by vcpkg. As a result, you need to manually download the port files:
+You also need to install the following vcpkg packages. If `vcpkg` is not in your `PATH` variable, you should run the following command from your vcpkg directory:
 
 **x86:**
 ```
@@ -38,6 +42,8 @@ vcpkg install sdl2:x64-windows unicorn:x64-windows glew:x64-windows openal-soft:
 ```
 
 ### Option 1: Using Visual Studio CMake support
+
+*You don't need a "build/" folder for this platform*
 
 **Generate build files**
 
@@ -156,7 +162,7 @@ wget https://github.com/unicorn-engine/unicorn/archive/1.0.1.tar.gz
 tar xf 1.0.1.tar.gz --strip-components=1
 UNICORN_ARCHS="x86" ./make.sh
 cd ..
-UNICORNDIR="$PWD/unicorn" cmake .
+UNICORNDIR="$PWD/unicorn" cmake ..
 ```
 
 **Building**
@@ -216,7 +222,7 @@ wget https://github.com/unicorn-engine/unicorn/archive/1.0.1.tar.gz
 tar xf 1.0.1.tar.gz --strip-components=1
 UNICORN_ARCHS="x86" ./make.sh
 cd ..
-UNICORNDIR="$PWD/unicorn" cmake .
+UNICORNDIR="$PWD/unicorn" cmake ..
 ```
 
 **Building**
