@@ -156,7 +156,7 @@ wget https://github.com/unicorn-engine/unicorn/archive/1.0.1.tar.gz
 tar xf 1.0.1.tar.gz --strip-components=1
 UNICORN_ARCHS="x86" ./make.sh
 cd ..
-UNICORNDIR="$PWD/unicorn" cmake ..
+UNICORNDIR="$PWD/unicorn" cmake .
 ```
 
 **Building**
@@ -216,7 +216,7 @@ wget https://github.com/unicorn-engine/unicorn/archive/1.0.1.tar.gz
 tar xf 1.0.1.tar.gz --strip-components=1
 UNICORN_ARCHS="x86" ./make.sh
 cd ..
-UNICORNDIR="$PWD/unicorn" cmake ..
+UNICORNDIR="$PWD/unicorn" cmake .
 ```
 
 **Building**
