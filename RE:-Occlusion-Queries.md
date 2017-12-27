@@ -28,31 +28,26 @@ int sub_42D440() {
   int v20; // esi
   int v21; // eax
   int v22; // ebp
-  int v23; // ebx
-  int *v24; // esi
   int v25; // ecx
   double v26; // st6
   int v27; // esi
   int v28; // eax
   int v29; // ebp
   int v31; // [esp+10h] [ebp-30h]
-  unsigned int v32; // [esp+14h] [ebp-2Ch]
-  int v33; // [esp+18h] [ebp-28h]
-  int v35; // [esp+20h] [ebp-20h]
+  uint32_t v32; // [esp+14h] [ebp-2Ch] // buffer base?
+  int32_t v33; // [esp+18h] [ebp-28h] // pitch
+  int32_t v35; // [esp+20h] [ebp-20h] // pixel size in bytes
   int v36; // [esp+24h] [ebp-1Ch]
   int v37; // [esp+28h] [ebp-18h]
   int v38; // [esp+2Ch] [ebp-14h]
   int v39; // [esp+30h] [ebp-10h]
-  unsigned int v40; // [esp+34h] [ebp-Ch]
+  uint32_t v40; // [esp+34h] [ebp-Ch]
   char v41; // [esp+38h] [ebp-8h]
   float v42; // [esp+3Ch] [ebp-4h]
 
   // Lock the Z-Buffer
   sub_433CD0((unsigned int *)&v35, &v33, &v32, &v42, &v41);
 
-  int32_t v0 = v33; // pitch?
-  uint32_t v1 = v32; // buffer base?
-  int32_t v2 = v35; // pixel size in bytes
   v40 = v32 + dword_ED38C8 * v33; // buffer end?
   
   for(unsigned int v3 = 0; v3 < 8; v3++) {
@@ -69,21 +64,21 @@ int sub_42D440() {
         v39 = dword_ED38C8 - v5 - 8;
 
         // Get pixel (v4 - 4, v5 - 4)
-        v6 = (_BYTE *)(v1 + v0 * (v5 - 4) + v2 * (v4 - 4));
+        v6 = (_BYTE *)(v32 + v33 * (v5 - 4) + v35 * (v4 - 4));
 
         // This seems to scan a 7x7 pixel block and counts pixels which were not in depth buffer [= farplane]
         for(int v7 = 0; v7 < 8; v7++) {
           for(int v8 = 0; v8 < 8; v8++) {
             if ( v8 < v36 || v8 >= v37 ||
                  v7 < v38 || v7 >= v39 ||
-                 (unsigned int)v6 >= v1 && (unsigned int)v6 < v40
-              && (v2 == 1 && *(uint8_t*)v6 != 0xFF || v2 == 2 && *(uint16_t*)v6 != 0xFFFF) ) {
+                 (unsigned int)v6 >= v32 && (unsigned int)v6 < v40
+              && (v35 == 1 && *(uint8_t*)v6 != 0xFF || v35 == 2 && *(uint16_t*)v6 != 0xFFFF) ) {
               v31++;
             }
-            v6 += v2;
+            v6 += v35;
           }
 
-          v6 += v0 - 8 * v2;
+          v6 += v33 - 8 * v35;
         }
 
         *(int *)((char *)dword_EA56A0 + v3) = v31;
@@ -95,7 +90,7 @@ int sub_42D440() {
 
   // Get factor to bring depth values into [0.0, 1.0] range
   float v9;
-  switch ( v2 ) {
+  switch ( v35 ) {
     case 1: v9 = flt_4BEE48; break; // 0x3b808081 ~ 1.0 / 0xFF
     case 2: v9 = flt_4BEE4C; break; // 0x37800080 ~ 1.0 / 0xFFFF
     case 3: v9 = flt_4BEE54; break; // 0x33800001 ~ 1.0 / 0xFFFFFE
@@ -116,11 +111,11 @@ int sub_42D440() {
       v12 = 0.0;
 
       // Get depth pointer for pixel (v11, dword_EA5A60[v10])
-      int v13 = v1 + v0 * dword_EA5A60[v10] + v11 * v2 + v2;
-      int v14 = 8 * v2;
+      int v13 = v32 + v33 * dword_EA5A60[v10] + v11 * v35 + v35;
+      int v14 = 8 * v35;
 
       // Read depth bytes
-      for(int v15 = 0; v15 < v2; v15++) {
+      for(int v15 = 0; v15 < v35; v15++) {
         v14 -= 8;
         v40 = *(uint8_t*)(--v13);
         v40 <<= v14;
@@ -148,11 +143,11 @@ int sub_42D440() {
 
 
 
-        if ( v2 > 0 )
+        if ( v35 > 0 )
         {
-          v20 = v2 + v0 * dword_EA4F20[v17] + v32 + v18 * v2;
-          v21 = 8 * v2;
-          v22 = v2;
+          v20 = v35 + v33 * dword_EA4F20[v17] + v32 + v18 * v35;
+          v21 = 8 * v35;
+          v22 = v35;
           do
           {
             v21 -= 8;
@@ -162,7 +157,6 @@ int sub_42D440() {
             v19 = v19 + (double)(signed int)v40;
           }
           while ( v22 );
-          v0 = v33;
           v16 = v34;
         }
 
@@ -177,43 +171,33 @@ int sub_42D440() {
   }
   while ( (signed int)v16 < (signed int)dword_EA5100 );
 
-
-  v23 = 0;
-  if ( dword_517348 > 0 )
-  {
-    v24 = (int *)&unk_EA5BC0;
-    v34 = (int *)&unk_EA5BC0;
-    do
-    {
+  // dword_517348 coordinates
+  //   X at dword_EA5B80[v23] (int)
+  //   Y at dword_EA5C00[v23] (int)
+  //   Z as output at EA5BC0 (float)
+  for(int v23 = 0; v23 < dword_517348; v23++) {
+    float* v24 = &unk_EA5BC0;
+    do {
       v25 = dword_EA5B80[v23];
       *v24 = -1000.0;
-      if ( v25 >= 0 )
-      {
+      if ( v25 >= 0 ) {
         v26 = 0.0;
-        if ( v2 > 0 )
-        {
-          v27 = v2 + v0 * dword_EA5C00[v23] + v32 + v25 * v2;
-          v28 = 8 * v2;
-          v29 = v2;
-          do
-          {
+        if ( v35 > 0 ) {
+          v27 = v32 + v33 * dword_EA5C00[v23] + v25 * v35 + v35;
+          v28 = 8 * v35;
+
+          for(int v29 = 0; v29 < v35; v29++) {
             v28 -= 8;
             v40 = *(unsigned __int8 *)(v27-- - 1);
-            --v29;
             v40 <<= v28;
-            v26 = v26 + (double)(signed int)v40;
+            v26 += (int32_t)v40;
           }
-          while ( v29 );
-          v0 = v33;
-          v24 = v34;
         }
-        *(float *)v24 = v26 * v9;
+
+        *v24 = v26 * v9;
       }
-      ++v23;
       ++v24;
-      v34 = v24;
     }
-    while ( v23 < dword_517348 );
   }
 
 
