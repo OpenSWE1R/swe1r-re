@@ -1,3 +1,14 @@
+```
+(gdb) print/x *(uint32_t*)Memory(0x4BEE48)
+$5 = 0x3b808081
+(gdb) print/x *(uint32_t*)Memory(0x4BEE48+4)
+$6 = 0x37800080
+(gdb) print/x *(uint32_t*)Memory(0x4BEE48+8)
+$7 = 0x33800001
+(gdb) print/x *(uint32_t*)Memory(0x4BEE48+12)
+$8 = 0x2f800000
+```
+
 
 **THIS IS FROM THE DEMO VERSION!**
 
