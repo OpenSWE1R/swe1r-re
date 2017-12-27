@@ -2,6 +2,8 @@
 
 This function **probably** resolves collisions. But I did not confirm it yet
 
+`sub_495610` in demo
+
 ```C
 //----- (00490550) --------------------------------------------------------
 // a1 = pointer to elements
