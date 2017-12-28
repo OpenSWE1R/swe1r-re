@@ -1,18 +1,38 @@
-```
-(gdb) print/x *(uint32_t*)Memory(0x4BEE48)
-$5 = 0x3b808081
-(gdb) print/x *(uint32_t*)Memory(0x4BEE48+4)
-$6 = 0x37800080
-(gdb) print/x *(uint32_t*)Memory(0x4BEE48+8)
-$7 = 0x33800001
-(gdb) print/x *(uint32_t*)Memory(0x4BEE48+12)
-$8 = 0x2f800000
-```
-
-
 **THIS IS FROM THE DEMO VERSION!**
 
 ```C
+//----- (00433CD0) --------------------------------------------------------
+// a1 = &pixelsize_in_bytes
+// a2 = &pitch
+// a3 = &surface_data_ptr
+// a4 = probably some width?
+// a5 = probably some height?
+// Locks the Z-Buffer
+// Probably returns void
+uint32_t* __cdecl sub_433CD0(uint32_t* a1, _DWORD *a2, _DWORD *a3, uint32_t* a4, uint32_t* a5) {
+
+  // Get depth buffer surface
+  DirectDrawSurface4* v5 = sub_48DB40();
+
+  // Lock the surface
+  DDSURFACEDESC2 v8; //FIXME: static assert that this is sizeof() == 124 and use this below
+  memset(&v8, 0, 124);
+  v8.dwSize = 124;
+  v5->Lock(NULL, &v8, 1, 0);
+
+  *a2 = desc->lPitch; // + 0x10
+  *a1 = desc->ddpfPixelFormat.dwZBufferBitDepth / 8; // +0x54 ; FIXME: Confirm that this is the correct field
+  *a3 = desc->lpSurface; // +0x24
+
+  *a4 = *(_DWORD *)(*(_DWORD *)(dword_E03204 + 72) + 4);
+  *a5 = *(_DWORD *)(*(_DWORD *)(dword_E03204 + 72) + 8);
+
+  return a5;
+}
+```
+
+```C
+// Does various tests against the Z-Buffer
 //----- (0042D440) --------------------------------------------------------
 int sub_42D440() {
   int v31; // [esp+10h] [ebp-30h]
@@ -24,11 +44,11 @@ int sub_42D440() {
   int v38; // [esp+2Ch] [ebp-14h]
   int v39; // [esp+30h] [ebp-10h]
   uint8_t* v40; // [esp+34h] [ebp-Ch]
-  char v41; // [esp+38h] [ebp-8h]
-  float v42; // [esp+3Ch] [ebp-4h]
+  uint32_t v41; // [esp+38h] [ebp-8h]
+  uint32_t v42; // [esp+3Ch] [ebp-4h]
 
   // Lock the Z-Buffer
-  sub_433CD0((unsigned int *)&v35, &v33, &v32, &v42, &v41);
+  sub_433CD0(&v35, &v33, &v32, &v42, &v41);
 
   v40 = v32 + dword_ED38C8 * v33; // buffer end?
   
@@ -63,9 +83,9 @@ int sub_42D440() {
           v6 += v33 - 8 * v35;
         }
 
-        *(int *)((char *)dword_EA56A0 + v3) = v31;
+        dword_EA56A0[v3] = v31;
       } else {
-        *(int *)((char *)dword_EA56A0 + v3) = 50;
+        dword_EA56A0[v3] = 50;
       }
     }
   }
