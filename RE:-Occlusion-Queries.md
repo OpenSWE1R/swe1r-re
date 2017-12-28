@@ -1,5 +1,7 @@
 **THIS IS FROM THE DEMO VERSION!**
 
+This article is a bit of a misnomer. It's actually about Z-buffer readbacks in general
+
 ```C
 //----- (00433CD0) --------------------------------------------------------
 // a1 = &pixelsize_in_bytes
