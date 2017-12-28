@@ -7,12 +7,14 @@ There are different versions of this game.
 | `44008c034cf696e1cdc569838a7f8b1b` | Windows   | International  | Patch from LucasArts FTP                 |
 | `E6EA6253F0091515B772FCABE0642058` | Windows   | German         | Retail CD Version                        |
 | `d6276f6b5f8a1f4055b6be58a4f58447` | Mac       | United States? | Retail CD Version                        |
-|                                    | Windows   | ?              | Demo from website                        |
+| `fbcf93e8c9923e3539ae0cd1b56dbd6b` | Windows   | ?              | Demo from website                        |
 |                                    | Mac       | ?              | Demo from website                        |
 |                                    | Dreamcast | ?              | Retail GD Version                        |
 |                                    | N64       | United States  | Retail Cartridge Version (v07Apr99.1553) |
 |                                    | N64       | Europe         | Retail Cartridge Version (v15Apr99.1642) |
 |                                    | N64       | Japan          | Retail Cartridge Version (v18Jun99.1019) |
+
+The executable on Windows is typically called "swep1rcr.exe"
 
 The demos can be downloaded from http://www.lucasarts.com/products/starwarsracer/racer_demo.htm:
 * [Mac demo in archive.org (lucasarts.com)](https://web.archive.org/web/20011205091707/http://www.lucasarts.com:80/products/starwarsracer/racerdemo.bin)
@@ -25,4 +27,5 @@ The N64 version can be detected by looking in the debug menu. See [tcrf for more
 
 ---
 
-OpenSWE1R is currently developed with the Windows version `d86d5d03638c24ab6279f24079825794`.
+OpenSWE1R is currently developed with the Windows patch version `d86d5d03638c24ab6279f24079825794`.
+Development will soon shift to the Windows demo version `fbcf93e8c9923e3539ae0cd1b56dbd6b`
