@@ -226,7 +226,6 @@ char __cdecl sub_42E280(int a1) {
   int v43; // [esp+14h] [ebp-28h]
   float v44; // [esp+18h] [ebp-24h]
   float v45; // [esp+1Ch] [ebp-20h]
-  int v46; // [esp+20h] [ebp-1Ch]
   float *v47; // [esp+24h] [ebp-18h]
   int v48; // [esp+28h] [ebp-14h]
   int v49; // [esp+2Ch] [ebp-10h]
@@ -355,10 +354,8 @@ char __cdecl sub_42E280(int a1) {
         sub_42D0E0(*(_WORD *)v6, (signed __int64)v38, (signed __int64)v39);
         if ( v5[0] >= 0.0 ) {
           v31 = 1.0 - flt_4BEEC8;
-          v32 = v5[1] * flt_4BEEC8;
-          v46 = (signed __int64)(v38 * v31 + flt_4BEEC8 * *v5);
-
-          int v42 = (signed __int64)(v39 * v31 + v32);
+          int32_t v46 = (signed __int64)(v38 * v31 + flt_4BEEC8 * v5[0]);
+          int32_t v42 = (signed __int64)(v39 * v31 + flt_4BEEC8 * v5[1]);
 
           // Get delta X abs?
           v33 = (double)v46 - v38;
