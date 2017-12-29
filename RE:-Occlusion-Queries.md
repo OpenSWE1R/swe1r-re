@@ -219,8 +219,6 @@ char __cdecl sub_42E280(int a1) {
   double v32; // st5
   double v33; // st7
   double v34; // st7
-  signed __int64 v35; // rax
-  double v37; // st6
   float v38; // [esp+0h] [ebp-3Ch]
   float v39; // [esp+4h] [ebp-38h]
   int v40; // [esp+8h] [ebp-34h]
@@ -265,8 +263,7 @@ char __cdecl sub_42E280(int a1) {
     if ( *v6 != -1 ) {
 
       if ( byte_EA5C40[v40] ) {
-        v37 = flt_4BEEC0 * dbl_E2DD00;
-        v7[0] = v7[0] - v37;
+        v7[0] = v7[0] - flt_4BEEC0 * dbl_E2DD00;
         v7[2] = v7[2] - flt_4BEEC4 * dbl_E2DD00;
       } else {
         sub_429B60(*(_WORD *)v6, 0);
@@ -301,7 +298,7 @@ char __cdecl sub_42E280(int a1) {
         if ( v13 == 2 ) {
           byte_EA5C40[v40] = 0;
         }
-        sub_42CCF0((signed __int16 *)v4, v7 - 2, &v38, &v39, &v44, &v45, 0);
+        sub_42CCF0((signed __int16 *)v4, v7, &v38, &v39, &v44, &v45, 0);
         if ( v38 <= 0.0 || v39 <= 0.0 || (double)dword_ED39A4 <= v38 || (double)dword_ED38C8 <= v39 ) {
           if ( (double)-dword_ED39A4 > v38 || (double)(2 * dword_ED39A4) < v38 || (double)(2 * dword_ED38C8) < v39 ) {
             byte_EA5C40[v40] = 0;
@@ -385,10 +382,12 @@ char __cdecl sub_42E280(int a1) {
           sub_429B60(*(_WORD *)v6, 0);
         }
         sub_429C80(*(_WORD *)v6, SLODWORD(v54), SLODWORD(v54));
+
+        signed __int64 v35; // rax //FIXME: Go home IDA, you are drunk!
         if ( sub_449A80() ) {
           v35 = (signed __int64)((double)(signed __int16)v47 * 0.5);
         } else {
-          LOBYTE(v35) = (uint8_t)v47;
+          v35 = (uint8_t)v47; //FIXME: Signed or unsigned?
         }
         sub_429CD0(*(_WORD *)v6, byte_4BEEBC, byte_4BEEBD, byte_4BEEBE, v35);
 
