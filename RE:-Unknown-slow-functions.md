@@ -5,6 +5,18 @@ This function **probably** resolves collisions. But I did not confirm it yet
 `sub_495610` in demo
 
 ```C
+
+typdef struct {
+  uint32_t unk0;
+  uint32_t unk1;
+  uint32_t unk2;
+  uint32_t unk3;
+  uint32_t unk4;
+  float position[3];
+  uint32_t unk9;
+  float unkf10;
+} Unknown;
+
 //----- (00490550) --------------------------------------------------------
 // a1 = pointer to elements
 // a2 = n x 3 component vectors
@@ -16,7 +28,7 @@ This function **probably** resolves collisions. But I did not confirm it yet
 // a8 = number of elements in a1
 // a9 = some vector scale factor
 // Probably returns void, if not: needs work
-void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, float a9) {
+void __cdecl sub_490550(Unknown* a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, float a9) {
   signed int v15; // eax
   int v20; // eax
   double v21; // st7
@@ -49,22 +61,11 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
 
     int v17 = a3 - 1;
 
-    typdef struct {
-      uint32_t unk0;
-      uint32_t unk1;
-      uint32_t unk2;
-      uint32_t unk3;
-      uint32_t unk4;
-      float position[3];
-      uint32_t unk9;
-      float unkf10;
-    } Unknown;
-
-    Unknown** v43 = a1 + 4 * v17;
+    Unknown** v43 = &a1[v17];
     float* v18 = a2 + 12 * v17;
 
     for(int j = 0; j < a3; j++) {
-      Unknown* v19 = *v43;
+      Unknown* v19 = *v43--;
       v20 = v19->unk1;
       if ( v20 == 1 ) {
         // Calculate distance vector
@@ -104,7 +105,6 @@ void __cdecl sub_490550(int a1, int a2, int a3, int a4, int a5, int a6, int a7, 
       }
 
       v18 -= 3;
-      v43--;
     }
     v13 -= 3;
     v11 -= 4;
