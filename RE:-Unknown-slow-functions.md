@@ -6,7 +6,15 @@ This function **probably** resolves collisions. But I did not confirm it yet
 
 ```C
 
-typdef struct {
+typedef union {
+  struct {
+    float x;
+    float y;
+    float z;
+  };
+} Vec3;
+
+typedef struct {
   uint32_t unk0;
   uint32_t unk1;
   uint32_t unk2;
@@ -23,12 +31,12 @@ typdef struct {
 // a3 = n
 // a4 = m x 3 component vectors
 // a5 = # x 3 component vectors
-// a6 = ?
+// a6 = # x 4x4 matrices
 // a7 = # x 4 component vectors
 // a8 = number of elements in a1
 // a9 = some vector scale factor
 // Probably returns void, if not: needs work
-void __cdecl sub_490550(Unknown* a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, float a9) {
+void __cdecl sub_490550(Unknown** a1, Vec3* a2, int a3, int a4, Vec3* a5, int a6, int a7, int a8, float a9) {
   signed int v15; // eax
   int v20; // eax
   double v21; // st7
@@ -59,19 +67,17 @@ void __cdecl sub_490550(Unknown* a1, int a2, int a3, int a4, int a5, int a6, int
     }
     v11[3] = 1.0f;
 
-    int v17 = a3 - 1;
-
-    Unknown** v43 = &a1[v17];
-    float* v18 = a2 + 12 * v17;
+    Unknown** v43 = &a1[a3 - 1];
+    Vec3* v18 = &a2[a3 - 1];
 
     for(int j = 0; j < a3; j++) {
       Unknown* v19 = *v43--;
       v20 = v19->unk1;
       if ( v20 == 1 ) {
         // Calculate distance vector
-        v32[0] = v18[0] - *(float *)(a5 + 12 * v10 + 0 + offset);
-        v32[1] = v18[1] - *(float *)(a5 + 12 * v10 + 4 + offset);
-        v32[2] = v18[2] - *(float *)(a5 + 12 * v10 + 8 + offset);
+        v32[0] = v18->f[0] - a5[v10 + offset].f[0]);
+        v32[1] = v18->f[1] - a5[v10 + offset].f[1]);
+        v32[2] = v18->f[2] - a5[v10 + offset].f[2]);
 
         // Calculate distance
         v41 = v32[0] * v32[0] + v32[1] * v32[1] + v32[2] * v32[2];
@@ -91,7 +97,7 @@ void __cdecl sub_490550(Unknown* a1, int a2, int a3, int a4, int a5, int a6, int
           }
         }
       } else if (v20 != 0) {
-        v21 = v13[0] * v18[0] + v13[1] * v18[1] + v13[2] * v18[2];
+        v21 = v13[0] * v18->f[0] + v13[1] * v18->f[1] + v13[2] * v18->f[2];
         if ( v21 > 0.0 ) {
           for(int k = 0; k < 3; k++) {
             v11[k] = v19->position[k] * v21 + v11[k];
@@ -104,12 +110,12 @@ void __cdecl sub_490550(Unknown* a1, int a2, int a3, int a4, int a5, int a6, int
         v11[v29] = *(float *)(a6 + 16 * v10 + off2 + v29 * 4) * v11[v29];
       }
 
-      v18 -= 3;
+      v18 -= 1;
     }
     v13 -= 3;
     v11 -= 4;
     off2 -= 16;
-    offset -= 12;
+    offset -= 3;
 
   }
 
