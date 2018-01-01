@@ -23,10 +23,10 @@ signed int sub_4848A0() {
       return 0;
     }
   }
-  dword_50D520 = 36;
 
   // dword_50D548 is A3d4*
   // dword_50D520 is A3DCAPS_HARDWARE
+  dword_50D520.dwSize = 36; // sizeof(A3DCAPS_HARDWARE)
   dword_50D548->GetHardwareCaps(&dword_50D520);
   dword_50D55C = dword_50D520.dwFlags & (A3D_DIRECT_PATH_GENERIC | A3D_DIRECT_PATH_A3D); // Check & 0x28
   dword_50D554 = dword_50D520.dwFlags & A3D_1ST_REFLECTIONS; // Check & 0x2
