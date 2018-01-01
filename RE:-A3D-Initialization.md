@@ -51,10 +51,11 @@ signed int sub_4848A0() {
       dword_50D560 = 0;
       return 1;
     }
-    dword_50D548->SetUnitsPerMeter(3.28f); // 0x4051EB85
+    dword_50D548->SetUnitsPerMeter(3.28f); // Game uses feet as unit (encoded as 0x4051EB85)
     dword_50D548->SetDistanceModelScale(LODWORD(flt_4C7D78));
     dword_50D548->SetDopplerScale(LODWORD(flt_4C7D74));
   }
+
   return 1;
 }
 ```
