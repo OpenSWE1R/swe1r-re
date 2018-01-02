@@ -194,9 +194,10 @@ int sub_449EF0() {
         dword_E67E70[v1 / 4] = *(_DWORD *)(dword_E67E78[v1 / 4] + 4);
         dword_E67E74[v1 / 4] = *(_DWORD *)(dword_E67E78[v1 / 4] + 8);
 
+        // Note that this copies the freshly written values, so we just duplicated memory from 0xE67E78
         dword_E6808C[v1 / 4] = dword_E67E6C[v1 / 4];
         dword_E68090[v1 / 4] = dword_E67E70[v1 / 4];
-        dword_E68094[v1 / 4] = *(_DWORD *)(dword_E67E78[v1 / 4] + 8);
+        dword_E68094[v1 / 4] = dword_E67E74[v1 / 4];
       }
 
 
