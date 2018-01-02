@@ -131,9 +131,11 @@ int __cdecl sub_484D90(A3dSource* a1, float a2) {
     return dword_50D548;
   }
 
-  if ( sub_485040(a1) & 0x20 ) {
+  // Check if this is a native source and fixup the volume
+  if ( sub_485040(a1) & A3DSOURCE_RENDERMODE_NATIVE) {
     a2 *= flt_4C7D7C;
   }
+
   return a1->SetGain(a2);
 }
 ```
