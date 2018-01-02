@@ -114,18 +114,33 @@ signed int sub_4848A0() {
 # Volume control
 
 ```C
-//----- (00484D90) --------------------------------------------------------
-int __cdecl sub_484D90(int a1, float a2)
+//----- (00485040) --------------------------------------------------------
+int __cdecl sub_485040(int *a1)
 {
-  int result; // eax
+  int v1; // ecx
+  int v2; // ecx
+  int v4; // [esp+8h] [ebp-4h]
 
-  result = dword_50D548;
-  if ( dword_50D548 )
-  {
-    if ( sub_485040((int *)a1) & 0x20 )
-      a2 = a2 * flt_4C7D7C;
-    result = (*(int (__stdcall **)(int, _DWORD))(*(_DWORD *)a1 + 160))(a1, LODWORD(a2));
+  v4 = v1;
+  v2 = *a1;
+  v4 = -1;
+  (*(void (__stdcall **)(int *, int *))(v2 + 212))(a1, &v4);
+  return v4;
+}
+
+```
+
+```C
+//----- (00484D90) --------------------------------------------------------
+// Sets the volume of source a1 to a2
+int __cdecl sub_484D90(A3dSource* a1, float a2) {
+  if ( !dword_50D548 ) {
+    return dword_50D548;
   }
-  return result;
+
+  if ( sub_485040(a1) & 0x20 ) {
+    a2 *= flt_4C7D7C;
+  }
+  return a1->SetGain(a2);
 }
 ```
