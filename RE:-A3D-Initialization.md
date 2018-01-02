@@ -111,7 +111,7 @@ signed int sub_4848A0() {
 }
 ```
 
-# Volume control
+# Get render mode
 
 ```C
 //----- (00485040) --------------------------------------------------------
@@ -122,6 +122,8 @@ int __cdecl sub_485040(A3dSource* a1) {
 }
 
 ```
+
+# Volume control
 
 ```C
 //----- (00484D90) --------------------------------------------------------
@@ -137,5 +139,16 @@ int __cdecl sub_484D90(A3dSource* a1, float a2) {
   }
 
   return a1->SetGain(a2);
+}
+```
+
+# Set position
+
+```C
+//----- (00484E10) --------------------------------------------------------
+// a1 = audio source
+// a2 = 3 component vector (note that the OpenAL coordinate system is different, this function handles the conversion)
+int __cdecl sub_484E10(A3dSource* a1, const float* a2) {
+  return a1->SetPosition3f(a2[0], a2[2], -a2[1]);
 }
 ```
