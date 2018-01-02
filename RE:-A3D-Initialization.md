@@ -115,16 +115,9 @@ signed int sub_4848A0() {
 
 ```C
 //----- (00485040) --------------------------------------------------------
-int __cdecl sub_485040(int *a1)
-{
-  int v1; // ecx
-  int v2; // ecx
-  int v4; // [esp+8h] [ebp-4h]
-
-  v4 = v1;
-  v2 = *a1;
-  v4 = -1;
-  (*(void (__stdcall **)(int *, int *))(v2 + 212))(a1, &v4);
+int __cdecl sub_485040(A3dSource* a1) {
+  DWORD v4 = -1; // [esp+8h] [ebp-4h]
+  a1->GetRenderMode(&v4);
   return v4;
 }
 
