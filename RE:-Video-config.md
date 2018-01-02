@@ -94,4 +94,5 @@ signed int __cdecl sub_408880(int a1) {
 HandleError:
   sub_487960();
   return 0;
+}
 ```
