@@ -1,3 +1,54 @@
+# Parse audio config
+
+```C
+//----- (00422440) --------------------------------------------------------
+signed int __cdecl sub_422440(int a1) {
+  char v2; // [esp+Ch] [ebp-100h]
+
+  if ( !dword_4EB450 ) {
+    return 1;
+  }
+
+  sprintf(&v2, aSSS, aDataConfig, a1, aAudioCfg);
+  if ( !sub_4877B0(&v2) ) {
+    sub_487900();
+    return -1;
+  }
+
+  while ( sub_487AE0() ) {
+
+    // Wait for EOF marker
+    if ( !strcmp(dword_EC8E84, aEnd) ) {
+      break;
+    }
+
+    // Parse an audio argument
+    if ( !_strcmpi(dword_EC8E84, aAudio) ) {
+      if ( !_strcmpi(dword_EC8E8C, aHires) ) {
+        dword_4B6D14 = _strcmpi(dword_EC8E90, aOn) == 0;
+      } else if ( !_strcmpi(dword_EC8E8C, off_4B74D0) ) {
+        dword_4B6D20 = _strcmpi(dword_EC8E90, aOn) == 0;
+      } else if ( !_strcmpi(dword_EC8E8C, a3d) ) {
+        dword_50D550 = _strcmpi(dword_EC8E90, aOn) == 0;
+      } else if ( !_strcmpi(dword_EC8E8C, aDoppler) ) {
+        dword_4B6D18 = _strcmpi(dword_EC8E90, aOn) == 0;
+      } else if ( !_strcmpi(dword_EC8E8C, aGainmatch) ) {
+        dword_4B6D24 = atof(dword_EC8E90);
+        sub_484D40(dword_4B6D24);
+      } else if ( !_strcmpi(dword_EC8E8C, aVoice) ) {
+        dword_4B6D28 = _strcmpi(dword_EC8E90, aOn) == 0;
+      } else  if ( !_strcmpi(dword_EC8E8C, aMusic) ) {
+        dword_4EB45C = _strcmpi(dword_EC8E90, aOn) == 0;
+      }
+    }
+
+  }
+  sub_487900();
+
+  return 1;
+}
+```
+
 # Create and initialize A3D
 
 ```C
