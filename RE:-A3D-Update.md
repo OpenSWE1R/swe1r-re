@@ -156,17 +156,18 @@ int sub_449EF0() {
           }
 
           if ( dword_4B6D2C ) {
-            if ( *(_DWORD *)(v6 + 40) <= 0x493E0u ) {
-LABEL_40:
+            if ( *(_DWORD *)(v6 + 40) <= 300000) {
               sub_449E00((int)v2);
               goto LABEL_47;
             }
-          } else if ( *(_BYTE *)(v6 + 36) & 6 || *(_DWORD *)(v6 + 40) <= 0x30D40u ) {
-            goto LABEL_40;
+          } else if ( *(_BYTE *)(v6 + 36) & 6 || *(_DWORD *)(v6 + 40) <= 200000) {
+              sub_449E00((int)v2);
+              goto LABEL_47;
           }
         }
         sub_422D10((_DWORD *)v6);
-        goto LABEL_40;
+        sub_449E00((int)v2);
+        goto LABEL_47;
       }
 
       // Update velocity
@@ -200,6 +201,8 @@ LABEL_40:
 
 
     }
+
+
 LABEL_47:
     v12 = *v2;
     if ( dword_E68060[v1 / 4] == *v2 ) {
