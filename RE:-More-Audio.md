@@ -1,10 +1,26 @@
 # Something to do with streaming
 
 ```C
+struct {
+  char unk0[32]; // filename?
+  uint32_t unk8;
+  uint32_t unk9; // Flags: 1 = Streaming, 8 = ???
+  uint32_t unk10; // Number of bytes left to read?
+  uint32_t unk11; // << \
+  uint32_t unk12; // <<  } probably some stream parameters such as bitrate etc. unk13 might only contain 16 bits
+  uint32_t unk13; // << /
+  uint32_t unk14;
+  uint32_t unk15; // Offset in file
+  uint32_t unk16;
+  uint32_t unk17;
+  uint32_t unk18;
+} StreamInformation; // FIXME: ???
+```
+
+```C
 //----- (00422AC0) --------------------------------------------------------
 // a1 = some kind of audio stream object, also used by the Helper Thread
 signed int __cdecl sub_422AC0(_DWORD *a1) {
-  int v4; // eax
   char v9[128]; // [esp+10h] [ebp-280h]
   char v10[512]; // [esp+90h] [ebp-200h]
 
@@ -16,6 +32,7 @@ signed int __cdecl sub_422AC0(_DWORD *a1) {
     sub_422F60(a1[10] + 102400);
   }
 
+  int v4; // eax
   if ( a1[9] & 8 ) {
     v4 = dword_4EB414;
   } else {
@@ -27,7 +44,7 @@ signed int __cdecl sub_422AC0(_DWORD *a1) {
   }
   a1[18] = v4;
 
-  // Generate the path to search in
+  // Generate the path to search audio file in
   char* v6 = dword_4B6D14 ? aDataWavs22kDat : aDataWavs11kDat;
   sprintf(v10, aSSSSS, v6, &unk_E9F300, aDataWavsMusic, &Class, aDataWavsVoice);
   
@@ -78,7 +95,7 @@ signed int __cdecl sub_422AC0(_DWORD *a1) {
 
   // Set the new stream values
   dword_4EB404 = v1; // Set file handle for audio which is being streamed
-  dword_4EB418 = (int)a1; // Set pointer to some audio stream instance (?) being streamed
+  dword_4EB418 = a1; // Set pointer to some audio stream instance (?) being streamed
   dword_4EB40C = a1[10]; // Set number of available bytes
 
   // Seek somewhere
