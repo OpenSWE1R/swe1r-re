@@ -1,10 +1,24 @@
 ```C
 
+// 8 (?) elements at dword_E67E40
 struct {
   uint32_t unk0;
-  uint32_t unk0;
-  uint32_t unk0;
-  uint32_t unk0;
+  uint32_t unk1; // index to some other object, probably buffer
+  uint32_t unk2; // some flag?
+  uint32_t unk3;
+  uint32_t unk4;
+  float unk5;
+  float unk6; // volume?
+  uint32_t unk7;
+  A3dSource* unk8; // not 100% sure
+  uint32_t unk9;
+  uint32_t unk10; // some flag?
+  float unk11; // x
+  float unk12; // y
+  float unk13; // z
+  float unk14; // x
+  float unk15; // y
+  float unk16; // z
   // 68 bytes
 } AudioSource;
 
@@ -101,8 +115,7 @@ int sub_449EF0() {
       sub_449E00((int)v2);
     }
 
-    if ( dword_E67C40[v1 / 4] )
-    {
+    if ( dword_E67C40[v1 / 4] ) {
       HIDWORD(v52) = (signed __int64)((double)dword_E67C38[v1 / 4] - dbl_E22A40 * 42666.66666666666);
       dword_E67C38[v1 / 4] = HIDWORD(v52);
       if ( (double)SHIDWORD(v52) > 0.0 ) {
@@ -156,6 +169,7 @@ LABEL_40:
         goto LABEL_40;
       }
 
+      // Update velocity
       if ( dword_E67E78[v1 / 4] && !(sub_485040(v5) & 0x20) ) {
         sub_484E10((int)v5, dword_E67E78[v1 / 4]);
         if ( dword_4B6D18 ) {
@@ -183,6 +197,8 @@ LABEL_40:
         dword_E68090[v1 / 4] = dword_E67E70[v1 / 4];
         dword_E68094[v1 / 4] = *(_DWORD *)(dword_E67E78[v1 / 4] + 8);
       }
+
+
     }
 LABEL_47:
     v12 = *v2;
@@ -198,12 +214,10 @@ LABEL_47:
         if ( dword_4EB460 ) {
           v14 = sub_422A90(dword_E67E44[v1 / 4]);
           LODWORD(v55) = v14;
-          if ( !(*(_BYTE *)(v14 + 36) & 8) )
-          {
+          if ( !(*(_BYTE *)(v14 + 36) & 8) ) {
             HIDWORD(v52) = (unsigned __int8)byte_50C688 > 0u;
             v15 = sub_422E30(v14, 0, (_DWORD *)&v52 + 1);
-            if ( HIDWORD(v52) == (unsigned __int8)byte_50C688 > 0u )
-            {
+            if ( HIDWORD(v52) == (unsigned __int8)byte_50C688 > 0u ) {
               qmemcpy((char *)&unk_E67C20 + v1, v2, 0x44u);
               dword_E67C44[v1 / 4] = dword_E67C40[v1 / 4] != *(_DWORD *)(v14 + 72);
               dword_E68080[v1 / 4] = v15;
@@ -219,8 +233,7 @@ LABEL_95:
               }
               *(float *)&v40 = v39 + v39;
               sub_484DD0(v38, *(_DWORD *)(LODWORD(v55) + 44), v40);
-              if ( dword_E68068[v1 / 4] )
-              {
+              if ( dword_E68068[v1 / 4] ) {
                 v41 = dbl_E22A40 <= 0.5 ? dbl_E22A40 : dbl_50CB70;
                 v42 = (signed __int64)(v41 * 42666.66666666666);
                 v43 = dword_E68078[v1 / 4];
@@ -231,43 +244,38 @@ LABEL_95:
               v44 = (double)dword_E67E58[v1 / 4] * 0.000030518509;
               sub_484D90(v38, v44);
               v45 = word_E6807C[v1 / 2];
-              if ( v45 != -999 )
-              {
+              if ( v45 != -999 ) {
                 LODWORD(v55) = v45;
                 v46 = ((double)v45 - 64.0) * 0.015625;
                 sub_484C30(v38, v46);
               }
-              if ( word_E6807C[v1 / 2] == -999 )
-              {
+              if ( word_E6807C[v1 / 2] == -999 ) {
                 sub_485020(v38, 0);
-                (*(void (__stdcall **)(int, _DWORD))(*(_DWORD *)v38 + 244))(v38, 0);
-                *(float *)&v47 = *(float *)&dword_E6809C[17 * LODWORD(v52)] * 3.28;
+                v38->SetTransformMode(0);
+                *(float *)&v47 = dword_E6809C[17 * LODWORD(v52)] * 3.28;
                 *(float *)&v48 = dword_E680A0[17 * LODWORD(v52)] * 3.28;
                 sub_484DF0(v38, v48, v47);
                 sub_484E10(v38, (int)&dword_E6808C[v1 / 4]);
-                if ( dword_E68068[v1 / 4] )
+                if ( dword_E68068[v1 / 4] ) {
                   sub_484E40(v38, (float *)&unk_50C690);
+                }
+
                 if ( dword_E68064[v1 / 4] < dword_E9F360 )
                 {
                   if ( dword_E2899C
-                    && ((v49 = *(float **)(dword_E2899C + 132), *(float *)&dword_E6808C[v1 / 4] != v49[20])
+                    && ((v49 = *(float **)(dword_E2899C + 132),
+                        *(float *)&dword_E6808C[v1 / 4] != v49[20])
                      || *(float *)&dword_E68090[17 * LODWORD(v52)] != v49[21]
                      || *(float *)&dword_E68094[17 * LODWORD(v52)] != v49[22]) )
                   {
-                    (*(void (__stdcall **)(int, signed int))(*(_DWORD *)v38 + 176))(v38, 1065353216);
+                    v38->SetDopplerScale(1.0f)
+                  } else {
+                    v38->SetDopplerScale(0.0f);
                   }
-                  else
-                  {
-                    (*(void (__stdcall **)(int, _DWORD))(*(_DWORD *)v38 + 176))(v38, 0);
-                  }
+                } else {
+                  v38->SetDopplerScale(0.0f);
                 }
-                else
-                {
-                  (*(void (__stdcall **)(int, _DWORD))(*(_DWORD *)v38 + 176))(v38, 0);
-                }
-              }
-              else
-              {
+              } else {
                 sub_485020(v38, 32);
               }
               sub_484BE0(v38, dword_E68068[v1 / 4]);
@@ -295,8 +303,7 @@ LABEL_95:
         v19 = (double)dword_E67E58[v1 / 4] * 0.000030518509;
         sub_484D90((int)v13, v19);
       }
-      if ( *(float *)&dword_E67E54[17 * LODWORD(v52)] != *(float *)&dword_E68074[17 * LODWORD(v52)] )
-      {
+      if ( *(float *)&dword_E67E54[17 * LODWORD(v52)] != *(float *)&dword_E68074[17 * LODWORD(v52)] ) {
         v20 = sub_422A90(dword_E67E44[v1 / 4]);
         if ( *(float *)&dword_E68074[17 * LODWORD(v52)] >= 0.05 )
           v21 = *(float *)&dword_E68074[17 * LODWORD(v52)];
@@ -377,8 +384,9 @@ LABEL_95:
       }
     }
 LABEL_119:
-    v51 = __OFSUB__(LODWORD(v52) + 1, 8);
-    v50 = LODWORD(v52)++ - 7 < 0;
+    LODWORD(v52) += 1;
+    v51 = __OFSUB__(LODWORD(v52), 8);
+    v50 = LODWORD(v52) < 8;
   } while ( v50 ^ v51 );
 
   // This block proabbly handles the listener
