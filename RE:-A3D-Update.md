@@ -1,4 +1,13 @@
 ```C
+
+struct {
+  uint32_t unk0;
+  uint32_t unk0;
+  uint32_t unk0;
+  uint32_t unk0;
+  // 68 bytes
+} AudioSource;
+
 //----- (00449EF0) --------------------------------------------------------
 int sub_449EF0() {
   int result; // eax
