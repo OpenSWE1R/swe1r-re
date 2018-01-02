@@ -110,3 +110,22 @@ signed int sub_4848A0() {
   return 1;
 }
 ```
+
+# Volume control
+
+```C
+//----- (00484D90) --------------------------------------------------------
+int __cdecl sub_484D90(int a1, float a2)
+{
+  int result; // eax
+
+  result = dword_50D548;
+  if ( dword_50D548 )
+  {
+    if ( sub_485040((int *)a1) & 0x20 )
+      a2 = a2 * flt_4C7D7C;
+    result = (*(int (__stdcall **)(int, _DWORD))(*(_DWORD *)a1 + 160))(a1, LODWORD(a2));
+  }
+  return result;
+}
+```
