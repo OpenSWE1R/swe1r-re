@@ -409,7 +409,7 @@ char __cdecl sub_45FE70(int a1, int a2, __int16 a3, __int16 a4, int a5)
     v14 = (signed __int64)(*(float *)&dword_4C4A58 * 255.0);
     v15 = (double)sub_4816B0() * 4.6566129e-10 * 255.0;
     sub_450530(160, 220, (signed __int64)v15, -1, -1, v14, (int)&v29);
-    *(float *)&dword_4C4A58 = *(float *)&dword_4C4A58 - dbl_E22A40 * 0.333299994468689;
+    *(float *)&dword_4C4A58 -= dbl_E22A40 * 0.333299994468689;
   }
 
   v16 = (a5 != 0 ? 22 : 18);
