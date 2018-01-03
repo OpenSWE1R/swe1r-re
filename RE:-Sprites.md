@@ -34,7 +34,7 @@ typedef struct {
   uint8_t g; // 0x19 G
   uint8_t b; // 0x1A B
   uint8_t a; // 0x1B A
-  uint32_t unk0x1C; //0x1C, written in sub_4282F0
+  Texture* unk0x1C; //0x1C, written in sub_4282F0
   // 32 bytes
 } Sprite;
 ```
