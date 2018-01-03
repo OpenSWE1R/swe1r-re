@@ -1,4 +1,4 @@
-# Savegam format
+# Savedata format
 
 ```C
 // This data follows the 4 byte magic in the savegames (from player/data/*.sav)
