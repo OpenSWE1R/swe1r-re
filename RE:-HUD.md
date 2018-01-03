@@ -1,3 +1,17 @@
+# HUD Entry point
+
+This might not be the first function, but it seems to be close
+
+```
+//----- (00462CF0) --------------------------------------------------------
+void sub_462CF0() {
+  void* v0 = sub_450B30(0x4A646765, 0); // Looks for object 0 of type 'Jdge'
+  sub_426C80(143, 6, 0.25, 0.2, 1);
+  sub_45E1A0(v0);
+  sub_463580(v0);
+}
+```
+
 # HUD Renderer
 
 ```C
