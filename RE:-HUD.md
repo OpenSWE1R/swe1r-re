@@ -1,8 +1,38 @@
 # HUD Renderer
 
 ```C
+
+typedef struct {
+...
+  int16_t current_position; // 92, 0 if the first lap hasn't started
+  uint16_t unk23b; // 94
+  float unk[???]; // 96 Something to do with lap records
+...
+  float some_position; // 116
+  uint32_t current_lap; // 120
+...
+  Address unk_pointer; // 132
+} A1;
+
+
+    v53 = *(float *)(a1 + 4 * v11 + 92);
+    v56 = 1.0 - *(float *)(a1 + 4 * v11 + 96) * 0.25;
+
+typedef struct {
+ // 292, something which controls some text position?!
+...
+  uint32_t unk; // 428 Something to do with boost
+...
+  uint32_t racer_count; // 444
+  uint32_t unk; // 448 Something to do with boost
+...
+  uint32_t lap_count; // 456
+...
+  float unk116; // 464 Something to do with lap records
+} A2;
+
 //----- (00460950) --------------------------------------------------------
-// a1 = ?
+// a1 = Some struct which has race / position information
 // a2 = Some struct which has race / position information
 int __cdecl sub_460950(int a1, int a2) {
   int v2; // ebp
@@ -161,11 +191,13 @@ int __cdecl sub_460950(int a1, int a2) {
           v18 = sub_421360(aScreentext538S);
           sub_450530(v5, (signed __int64)(v49 - -25.0), -56, -1, 0, v12, (int)v18);
 
+          //FIXME: ???
           HIWORD(v12) = HIWORD(a1);
           if ( !sub_427670(*(char *)(a1 + 16), 0x100000) ) {
             sub_427410(6, 0, 39, 0);
             sub_427690(*(char *)(a1 + 16), 0x100000);
           }
+
         }
       }
       v55 = 1;
@@ -226,17 +258,17 @@ int __cdecl sub_460950(int a1, int a2) {
     dword_50CA5C = 0;
     LOWORD(v12) = (signed __int64)v51;
     v28 = sub_421360(aF3CS);
-    sub_450670(v12, (signed __int64)v49, *(float *)(v2 + 116), -1, -1, -1, -66, (int)v28);
+    sub_450670(v12, (signed __int64)v49, *(float *)(v2 + 116), 0xFF,0xFF,0xFF,0xBE, (int)v28);
 
     // Draw "TIME" text
     v29 = sub_421360(aScreentext422C);
-    sub_450530(v12, (signed __int64)(v49 - -17.0), -1, -1, -1, -66, (int)v29);
+    sub_450530(v12, (signed __int64)(v49 - -17.0), 0xFF,0xFF,0xFF,0xBE, (int)v29);
   }
 
   //FIXME: ???
   v30 = *(_DWORD *)(a2 + 292);
   if ( v30 == 6 || v30 == 7 ) {
-    sub_450670(289, (signed __int64)v49, *(float *)(v2 + 116), -1, -1, -1, -66, (int)aF3RS);
+    sub_450670(289, (signed __int64)v49, *(float *)(v2 + 116), 0xFF,0xFF,0xFF,0xBE, (int)aF3RS);
   }
 
   v52 = 62.0;
@@ -308,7 +340,7 @@ int __cdecl sub_460950(int a1, int a2) {
   if ( dword_50C040 ) {
     result = dword_50C610;
     if ( dword_50C610 ) {
-      result = sub_450530(160, 20, -1, 0, 0, -1, (int)aCOzot);
+      result = sub_450530(160, 20, 0xFF,0x00,0x00,0xFF, (int)aCOzot);
     }
   }
 
