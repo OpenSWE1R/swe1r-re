@@ -137,55 +137,46 @@ char __cdecl sub_4611F0(int a1, int a2) {
   v112 = 1048576000;
   v103 = 0.0;
   v92 = *(_DWORD *)(a1 + 132);
-  if ( a2 )
+  if ( a2 ) {
     v4 = 65.0;
-  else
+  } else {
     v4 = 175.0;
+  }
   v5 = *(_DWORD *)(v2 + 96);
   v105 = v4;
   v129 = v4;
-  if ( v5 & 0x1000 )
-  {
-    dword_50CA60[a2] = 1065353216;
+  if ( v5 & 0x1000 ) {
+    dword_50CA60[a2] = 1.0f;
     dword_50CA68[a2] = 0;
-  }
-  else if ( v5 & 0x4000 )
-  {
-    dword_50CA68[a2] = -1082130432;
-  }
-  else
-  {
-    if ( v5 & 0x2000 )
-      v3 = 1;
+  } else if ( v5 & 0x4000 ) {
+    dword_50CA68[a2] = -1.0f;
+  } else {
+    if ( v5 & 0x2000 ) { v3 = 1; }
     v6 = *(_DWORD *)(v2 + 100);
-    if ( v6 & 0x4000 )
-      v3 = 1;
-    if ( *(float *)(v2 + 696) > 0.0 )
-      v3 = 1;
-    if ( *(float *)(v2 + 536) < 50.0 )
-      v3 = 1;
+    if ( v6 & 0x4000 ) { v3 = 1; }
+    if ( *(float *)(v2 + 696) > 0.0 ) { v3 = 1; }
+    if ( *(float *)(v2 + 536) < 50.0 ) { v3 = 1; }
     v7 = (float *)(v2 + 672);
+
+    // Loop over 6 engine parts?
     v8 = 6;
-    do
-    {
-      if ( *(v7 - 6) > 0.6 )
-        v3 = 1;
-      if ( *(_BYTE *)v7 & 0x1C )
-        v3 = 1;
+    do {
+      if ( *(v7 - 6) > 0.6 ) { v3 = 1; }
+      if ( *(_BYTE *)v7 & 0x1C ) { v3 = 1; }
       ++v7;
       --v8;
-    }
-    while ( v8 );
-    if ( v5 & 0x400 )
-      v3 = 1;
-    if ( v3 )
-    {
+    } while ( v8 );
+
+    if ( v5 & 0x400 ) { v3 = 1; }
+    if ( v3 ) {
       dword_50CA68[a2] = 1082130432;
       dword_4C52A8[a2] = 5.0;
     }
+
   }
-  if ( !sub_445690() )
-  {
+
+
+  if ( !sub_445690() ) {
     v9 = flt_4C52A0[a2] - dbl_E22A40 * 1.5;
     flt_4C52A0[a2] = v9;
     if ( v11 | v12 )
@@ -194,55 +185,58 @@ char __cdecl sub_4611F0(int a1, int a2) {
     if ( v14 )
       *(_DWORD *)(v2 + 696) = 0;
     *(float *)&dword_50CA60[a2] = *(float *)&dword_50CA68[a2] * dbl_E22A40 + *(float *)&dword_50CA60[a2];
-    if ( !(v16 | v17) )
-    {
-      dword_50CA60[a2] = 1065353216;
+    if ( !(v16 | v17) ) {
+      dword_50CA60[a2] = 1.0f;
       dword_50CA68[a2] = 0;
     }
-    if ( *(float *)&dword_50CA60[a2] > 0.0 )
-    {
+    if ( *(float *)&dword_50CA60[a2] > 0.0 ) {
       dword_4C52A8[a2] = dword_4C52A8[a2] - dbl_E22A40;
-      if ( v19 | v20 )
-        dword_50CA68[a2] = -1065353216;
+      if ( v19 | v20 ) {
+        dword_50CA68[a2] = -4.0f;
+      }
     }
   }
-  if ( *(float *)&dword_50CA60[a2] <= 0.0 )
-  {
+  if ( *(float *)&dword_50CA60[a2] <= 0.0 ) {
     dword_50CA60[a2] = 0;
     dword_50CA68[a2] = 0;
-    if ( a2 )
-    {
+    if ( a2 ) {
+
+      // Loop over 6 engine parts?
       v23 = 0;
-      do
+      do {
         sub_4285D0(v23++ + 35, 0);
-      while ( v23 < 6 );
+      } while ( v23 < 6 );
+
       sub_4285D0(41, 0);
       result = sub_4285D0(42, 0);
-    }
-    else
-    {
+    } else {
+
+      // Loop over 6 engine parts?
       v21 = 0;
       do
         sub_4285D0(v21++ + 27, 0);
       while ( v21 < 6 );
+
       sub_4285D0(33, 0);
       result = sub_4285D0(34, 0);
     }
     return result;
   }
-  if ( !sub_445690() )
-  {
+
+  if ( !sub_445690() ) {
     v24 = (int *)(v2 + 672);
+
+    // Loop over 6 engine parts?
     v25 = 6;
-    do
-    {
+    do {
       v26 = *v24;
       ++v24;
       --v25;
       *(v24 - 1) = v26 ^ 2;
-    }
-    while ( v25 );
+    } while ( v25 );
+
   }
+
   v119 = 0;
   v120 = -1;
   v123 = -1;
@@ -254,25 +248,26 @@ char __cdecl sub_4611F0(int a1, int a2) {
   v126 = 0;
   v122 = -1;
   v124 = -1;
-  if ( dword_50C5F0 )
+  if ( dword_50C5F0 ) {
     v28 = 112.0;
-  else
+  } else {
     v28 = (double)sub_4816B0() * 4.6566129e-10 * 64.0 - -64.0;
+  }
   v127 = (signed __int64)v28;
   v29 = *(_DWORD *)(v2 + 96);
-  if ( !(v29 & 0x2000) )
-  {
-    if ( v29 & 0x5000 || (v33 = *(_DWORD *)(v2 + 100), BYTE1(v33) & 0x40) )
-    {
+  if ( !(v29 & 0x2000) ) {
+    if ( v29 & 0x5000 || (v33 = *(_DWORD *)(v2 + 100), BYTE1(v33) & 0x40) ) {
       memset32(v131, 255, 6u);
       memset32(v133, 255, 6u);
+
+      // Loop over 6 engine parts?
       v71 = 0;
-      do
-      {
-        if ( dword_50C5F0 )
+      do {
+        if ( dword_50C5F0 ) {
           v72 = 150.0;
-        else
+        } else {
           v72 = (double)sub_4816B0() * 4.6566129e-10 * 200.0;
+        }
         v73 = (signed __int64)v72;
         v74 = dword_50C5F0 == 0;
         v132[v71] = v73;
@@ -284,17 +279,18 @@ char __cdecl sub_4611F0(int a1, int a2) {
         if ( (signed int)(signed __int64)v75 > v73 )
           v130[v71] = v73;
         ++v71;
-      }
-      while ( v71 < 6 );
+      } while ( v71 < 6 );
+
       goto LABEL_197;
     }
+
+    // Loop over 6 engine parts?
     v34 = 0;
     v35 = (float *)(v2 + 672);
     v36 = 0;
     v37 = 0;
     v107 = v35;
-    do
-    {
+    do {
       v38 = *v35;
       if ( *(_DWORD *)v35 & 4 )
       {
@@ -311,8 +307,9 @@ char __cdecl sub_4611F0(int a1, int a2) {
         v121 = 1;
       ++v37;
       ++v35;
-    }
-    while ( v37 < 6 );
+    } while ( v37 < 6 );
+
+
     v116 = v34;
     v111 = v36;
     if ( v36 )
@@ -462,6 +459,8 @@ char __cdecl sub_4611F0(int a1, int a2) {
       v41 = (float *)v51;
     }
     while ( v108 < 24 );
+
+
     v52 = v105 - 45.0;
     v106 = v52;
     v109 = v52 - -15.0;
@@ -471,6 +470,8 @@ char __cdecl sub_4611F0(int a1, int a2) {
       v54 = sub_421360(aScreentext433C);
       sub_450530(54, (signed __int64)(v109 - -48.0), -1, -128, 0, v53, (int)v54);
     }
+
+
     if ( *(float *)(v92 + 536) >= 20.0 )
     {
       if ( *(float *)(v92 + 536) < 50.0 )
@@ -583,6 +584,7 @@ char __cdecl sub_4611F0(int a1, int a2) {
     {
       flt_50CA70[a2] = 0.0;
     }
+
 LABEL_169:
     if ( !sub_445690() )
     {
@@ -613,12 +615,12 @@ LABEL_169:
     }
     goto LABEL_197;
   }
+
+  // Loop over 6 engine parts?
   v30 = (_BYTE *)(v2 + 672);
   v31 = 0;
-  do
-  {
-    if ( *v30 & 2 )
-    {
+  do {
+    if ( *v30 & 2 ) {
       v32 = dword_50C5F0;
       v133[v31] = 100;
       v132[v31] = 100;
@@ -626,9 +628,7 @@ LABEL_169:
         v130[v31] = (signed __int64)223.25;
       else
         v130[v31] = (signed __int64)((double)sub_4816B0() * 4.6566129e-10 * 127.0 - -128.0);
-    }
-    else
-    {
+    } else {
       v133[v31] = 200;
       v132[v31] = 200;
       v130[v31] = 200;
@@ -636,8 +636,9 @@ LABEL_169:
     v131[v31] = 255;
     ++v31;
     v30 += 4;
-  }
-  while ( v31 < 6 );
+  } while ( v31 < 6 );
+
+
 LABEL_197:
   v104 = 0;
   v76 = 0;
@@ -688,25 +689,28 @@ LABEL_197:
     v76 = v104 + 1;
     v85 = __OFSUB__(v104 + 1, 2);
     v84 = v104++ - 1 < 0;
-  }
-  while ( v84 ^ v85 );
+  } while ( v84 ^ v85 );
+
+
   v102 = 12.0;
   if ( !(dword_E996DC & 0x4000) )
     v102 = -12.0;
+
   v86 = a2 != 0 ? 41 : 33;
-  sub_4285D0(a2 != 0 ? 41 : 33, 1);
+  sub_4285D0(v86, 1);
   sub_428660(v86, (signed __int64)(v102 - -30.0 - -12.0), (signed __int64)v129);
-  sub_4286F0(v86, 1061158912, 1061158912);
+  sub_4286F0(v86, 0.75f, 0.75f);
   sub_428740(
     v86,
     v119,
     v120,
     v123,
     (signed __int64)((double)v125 * *(float *)&dword_50CA60[a2] * *(float *)&dword_50CA60[a2]));
+
   v87 = a2 != 0 ? 42 : 34;
-  sub_4285D0(a2 != 0 ? 42 : 34, 1);
+  sub_4285D0(v87, 1);
   sub_428660(v87, (signed __int64)(42.0 - v102), (signed __int64)v129);
-  sub_4286F0(v87, 1061158912, 1061158912);
+  sub_4286F0(v87, 0.75f, 0.75f);
   return sub_428740(
            v87,
            v126,
