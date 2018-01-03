@@ -18,10 +18,15 @@ typedef struct {
   uint8_t race_unlocked[5]; // 0x25 1 bit per course starting at LSb: unlocks race
   uint16_t race_status[5]; // 0x2A 2 bit per course starting at LSb: 0=4th (or not finished), 1=3rd, 2=2nd, 3=1st.
 
+  uint16_t podracers_unlocked; 0x34 1 bit per podracer ???
+
+  uint16_t unk; 0x36
+
   uint32_t truguts; // 0x38
+
   uint8_t unk[4]; // 0x3C
 
-  uint8_t unk; // 0x40 seems to be one?!
+  uint8_t pit_droid_count; // 0x40
 
   uint8_t traction_part_index; // 0x41
   uint8_t unk_part_index; // 0x42
