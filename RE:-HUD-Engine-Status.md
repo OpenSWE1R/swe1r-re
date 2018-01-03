@@ -640,26 +640,32 @@ LABEL_169:
 
 
 LABEL_197:
+
+  // This likely draws the engine parts as it loops over 2 colums, with 3 rows each.
+  // It also calls what is probably the sprite renderer
+
   v104 = 0;
   v76 = 0;
-  do
-  {
+  do {
     v77 = 0;
     v99 = 3 * v76;
     v113 = (double)(24 * v76) - -30.0 - -4.0;
-    do
-    {
+    do {
       v78 = v77 + v99;
       v79 = (1.0 - *(float *)&dword_50CA60[a2]) * 15.0;
       v93 = (double)(14 * v77) + v129 - -2.0;
       v97 = v79;
-      if ( v77 == 1 )
+      if ( v77 == 1 ) {
         v79 = v79 * 1.5;
-      if ( v104 )
+      }
+
+      if ( v104 ) {
         v80 = v79 + v113;
-      else
+      } else {
         v80 = v113 - v79;
+      }
       v101 = v80;
+
       if ( v77 == 0) {
         v81 = v93 - v97;      
         v93 = v81;
@@ -667,15 +673,20 @@ LABEL_197:
         v81 = v97 + v93;
         v93 = v81;
       }
+
       v82 = v78 + 27;
-      if ( a2 )
+      if ( a2 ) {
         v82 = v78 + 35;
+      }
+
+      // All of the following is probably responsible for setting the sprite color and size, then finally drawing it
       sub_4285D0(v82, 1);
       v83 = v93;
-      if ( dword_E996DC & 0x4000 )
+      if ( dword_E996DC & 0x4000 ) {
         sub_428660(v82, (signed __int64)(92.0 - v101), (signed __int64)v83);
-      else
+      } else {
         sub_428660(v82, (signed __int64)v101, (signed __int64)v83);
+      }
       sub_4286F0(v82, 1061158912, 1061158912);
       sub_428740(
         v82,
@@ -683,6 +694,7 @@ LABEL_197:
         v132[v78],
         v130[v78],
         (signed __int64)((double)v131[v78] * *(float *)&dword_50CA60[a2]));
+
       ++v77;
     }
     while ( v77 < 3 );
@@ -693,8 +705,9 @@ LABEL_197:
 
 
   v102 = 12.0;
-  if ( !(dword_E996DC & 0x4000) )
+  if ( !(dword_E996DC & 0x4000) ) {
     v102 = -12.0;
+  }
 
   v86 = a2 != 0 ? 41 : 33;
   sub_4285D0(v86, 1);
