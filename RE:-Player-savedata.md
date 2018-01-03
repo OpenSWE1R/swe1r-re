@@ -8,7 +8,7 @@ So if you modify something, you should delete that file first
 // They come from 0xE364B4 in memory
 typedef struct {
   char profileName[32]; // 0x00, size correct?
-  uint8_t unk[4]; 0x20
+  uint8_t unk[4]; // 0x20
   uint8_t last_podracer; // 0x24 value:
                              // 0x01 = Anakin Skywalker
                              // 0x09 = Ebe Endocott
@@ -42,7 +42,7 @@ typedef struct {
   uint8_t unk_part_health; // 0x4D
   uint8_t repair_part_health; // 0x4E
 
-  uint8_t unk; 0x4F seems to be zero; padding only?
+  uint8_t unk; // 0x4F seems to be zero; padding only?
 
   // 80 bytes
 } Savedata;
