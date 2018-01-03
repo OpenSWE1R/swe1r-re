@@ -1,7 +1,7 @@
 Here is how to get started with OpenSWE1R development using the Star Wars: Episode 1 Racer demo or disc version.
-The demo can be downloaded freely. Please follow the instructions for the demo version.
+The demo can be downloaded for free. Please follow the instructions for the demo version.
 
-## Installing the demo version
+## Option 1: Installing the demo version
 
 1. Follow the [[Build Instructions]] to build OpenSWE1R for your platform.
 
@@ -15,7 +15,7 @@ It is available on most platforms package manager, but [can also be downloaded f
 
 5. Run your previously built "openswe1r" binary to start the game.
 
-## Installing from disc
+## Option 2: Installing from disc
 
 1. Follow the [[Build Instructions]] to build OpenSWE1R for your platform.
 
