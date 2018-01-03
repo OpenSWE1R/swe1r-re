@@ -2,8 +2,9 @@
 
 ```C
 //----- (00460950) --------------------------------------------------------
-int __cdecl sub_460950(int a1, int a2)
-{
+// a1 = ?
+// a2 = Some struct which has race / position information
+int __cdecl sub_460950(int a1, int a2) {
   int v2; // ebp
   int v3; // ebx
   int v4; // esi
@@ -71,125 +72,132 @@ int __cdecl sub_460950(int a1, int a2)
   v58 = v3;
   HIDWORD(v57) = a1 == dword_E27820;
   v59 = *(_DWORD *)(a1 + 132);
-  if ( !sub_445690() )
-  {
-    *(float *)(v4 + 696) = *(float *)(v4 + 696) - dbl_E22A40;
-    if ( v7 )
-      *(_DWORD *)(v4 + 696) = 0;
+
+  if ( !sub_445690() ) {
+    if ( v7 ) {
+      *(float*)(v4 + 696) = 0.0f;
+    } else {
+      *(float*)(v4 + 696) -= dbl_E22A40;
+    }
   }
+
   v8 = *(_DWORD *)(a2 + 292);
-  if ( v8 == 1 )
-  {
+  if ( v8 == 1 ) {
     sub_4603F0(COERCE_FLOAT(5));
-  }
-  else if ( v8 )
-  {
+  } else if ( v8 ) {
     sub_4603F0(0.0);
-  }
-  else
-  {
+  } else {
     sub_4603F0(COERCE_FLOAT(2));
   }
+
   v50 = 254.0;
   v48 = 190.0;
-  if ( v3 == 2 )
-  {
+  if ( v3 == 2 ) {
     v50 = 277.0;
     v48 = (double)(110 * v5 + 96);
   }
+
   *(double *)&v9 = *(float *)(*(_DWORD *)(a1 + 132) + 416);
-  if ( *(double *)&v9 <= 0.0 )
+  if ( *(double *)&v9 <= 0.0 ) {
     *(double *)&v9 = 0.0;
+  }
+
   v10 = sub_421360(aF2CS0f);
   sprintf(&v60, v10, (_DWORD)v9, (_DWORD)(v9 >> 32));
   sub_450530((signed __int64)v50, (signed __int64)v48, 0, -61, -2, -2, (int)&v60);
-  if ( *(_DWORD *)(a2 + 292) == 1 )
-  {
+  if ( *(_DWORD *)(a2 + 292) == 1 ) {
     v51 = 240.0;
     v49 = 30.0;
-  }
-  else
-  {
+  } else {
     v51 = 160.0;
     v49 = 23.0;
-    if ( v3 == 2 )
+    if ( v3 == 2 ) {
       v49 = (double)(110 * v5 + 20);
+    }
   }
+
   v11 = *(_DWORD *)(a1 + 120);
   HIWORD(v12) = 0;
   v55 = 0;
   v54 = 0;
-  if ( v11 > 0 )
-  {
+  if ( v11 > 0 ) {
     v53 = *(float *)(a1 + 4 * v11 + 92);
     v56 = 1.0 - *(float *)(a1 + 4 * v11 + 96) * 0.25;
-    if ( v56 <= 0.0 || v56 >= 1.0 )
-    {
-      if ( sub_427670(*(char *)(a1 + 16), 0x100000) && !sub_427360(6, 0) )
+    if ( v56 <= 0.0 || v56 >= 1.0 ) {
+      if ( sub_427670(*(char *)(a1 + 16), 0x100000) && !sub_427360(6, 0) ) {
         sub_4276A0(*(char *)(a1 + 16), 0x100000);
-    }
-    else
-    {
-      if ( dword_50C5F0 )
+      }
+    } else {
+      if ( dword_50C5F0 ) {
         v13 = 223.25;
-      else
+      } else {
         v13 = (double)sub_4816B0() * 4.6566129e-10 * 127.0 - -128.0;
+      }
       v14 = (signed __int64)v13;
       v15 = (signed __int64)((double)v14 * 0.5);
+
       v12 = 8 * (unsigned __int64)(signed __int64)(v56 * 255.0);
-      if ( v12 > 255 )
+      if ( v12 > 255 ) {
         v12 = 255;
+      }
+
       LOWORD(v5) = (signed __int64)v51;
       v16 = sub_421360(aF3CS);
       sub_450670(v5, (signed __int64)v49, v53, v14, v15, 64, v12, (int)v16);
       v17 = sub_421360(aScreentext420C);
       sub_450530(v5, (signed __int64)(v49 - -17.0), v14, v15, 64, v12, (int)v17);
-      if ( v53 <= (double)*(float *)(a2 + 464) )
-      {
-        if ( (signed __int64)(v56 * 16.0) & 1 )
-        {
+      if ( v53 <= (double)*(float *)(a2 + 464) ) {
+        if ( (signed __int64)(v56 * 16.0) & 1 ) {
           v18 = sub_421360(aScreentext538S);
           sub_450530(v5, (signed __int64)(v49 - -25.0), -56, -1, 0, v12, (int)v18);
           HIWORD(v12) = HIWORD(a1);
-          if ( !sub_427670(*(char *)(a1 + 16), 0x100000) )
-          {
+          if ( !sub_427670(*(char *)(a1 + 16), 0x100000) ) {
             sub_427410(6, 0, 39, 0);
             sub_427690(*(char *)(a1 + 16), 0x100000);
           }
         }
       }
       v55 = 1;
-      if ( *(_DWORD *)(a1 + 120) + 1 == *(_DWORD *)(a2 + 456) )
-      {
+
+      if ( *(_DWORD *)(a1 + 120) + 1 == *(_DWORD *)(a2 + 456) ) {
         v19 = v56;
-        if ( dword_50CA18 > 1 )
-        {
-          if ( (signed int)(signed __int64)(v19 * 36.0) % -2 )
+        if ( dword_50CA18 > 1 ) {
+          if ( (signed int)(signed __int64)(v19 * 36.0) % -2 ) {
             v54 = 1;
-        }
-        else
-        {
+          }
+        } else {
           v20 = v19 - 0.5 + v19 - 0.5;
-          if ( v20 > 0.0 )
-          {
+          if ( v20 > 0.0 ) {
             v21 = 4 * (unsigned __int64)(signed __int64)(v20 * 255.0);
-            if ( v21 > 255 )
+            if ( v21 > 255 ) {
               LOBYTE(v21) = -1;
-            if ( dword_50C5F0 )
+            }
+
+            // Generate random red?
+            if ( dword_50C5F0 ) {
               v22 = 191.25;
-            else
+            } else {
               v22 = (double)sub_4816B0() * 4.6566129e-10 * 255.0;
+            }
             v23 = (signed __int64)v22;
-            if ( dword_50C5F0 )
+
+            // Generate random green?
+            if ( dword_50C5F0 ) {
               v24 = 191.25;
-            else
+            } else {
               v24 = (double)sub_4816B0() * 4.6566129e-10 * 255.0;
+            }
             v25 = (signed __int64)v24;
-            if ( dword_50C5F0 )
+
+            // Generate random blue?
+            if ( dword_50C5F0 ) {
               v26 = 191.25;
-            else
+            } else {
               v26 = (double)sub_4816B0() * 4.6566129e-10 * 255.0;
+            }
             v12 = (signed __int64)v26;
+
+            // Draw "FINAL LAP" text
             v27 = sub_421360(aScreentext526F);
             sub_450530(160, 70, v23, v25, v12, v21, (int)v27);
           }
@@ -198,71 +206,99 @@ int __cdecl sub_460950(int a1, int a2)
       v2 = a1;
     }
   }
-  if ( !v55 && v58 < 2 )
-  {
+
+  // Draw the lap time
+  //FIXME: What are these conditions?
+  if ( !v55 && v58 < 2 ) {
     dword_50CA5C = 0;
     LOWORD(v12) = (signed __int64)v51;
     v28 = sub_421360(aF3CS);
     sub_450670(v12, (signed __int64)v49, *(float *)(v2 + 116), -1, -1, -1, -66, (int)v28);
+
+    // Draw "TIME" text
     v29 = sub_421360(aScreentext422C);
     sub_450530(v12, (signed __int64)(v49 - -17.0), -1, -1, -1, -66, (int)v29);
   }
+
+  //FIXME: ???
   v30 = *(_DWORD *)(a2 + 292);
-  if ( v30 == 6 || v30 == 7 )
+  if ( v30 == 6 || v30 == 7 ) {
     sub_450670(289, (signed __int64)v49, *(float *)(v2 + 116), -1, -1, -1, -66, (int)aF3RS);
+  }
+
   v52 = 62.0;
-  if ( *(_DWORD *)(a2 + 292) != 1 )
+  if ( *(_DWORD *)(a2 + 292) != 1 ) {
     v52 = 42.0;
+  }
+
   v31 = *(_DWORD *)(v2 + 120) + 1;
-  if ( v31 > *(_DWORD *)(a2 + 456) )
+  if ( v31 > *(_DWORD *)(a2 + 456) ) {
     v31 = *(_DWORD *)(a2 + 456);
+  }
+
+  // Format text for "<lap> / <total_laps>"
   v32 = *(_DWORD *)(a2 + 456);
   v33 = v31;
   v34 = sub_421360(aF3CSDD);
   sprintf(&v60, v34, v33, v32);
-  if ( dword_50CA18 > 1 && v54 )
-  {
+
+
+  if ( dword_50CA18 > 1 && v54 ) {
+    // Draw "<lap> / <total_laps>"
     v35 = (signed __int64)v49;
     v36 = (signed __int64)v52;
     sub_450530(v36, v35, -1, 63, 63, -1, (int)&v60);
+
+    // Draw "LAP" text
     v37 = (signed __int64)(v49 - -17.0);
     v38 = sub_421360(aScreentext424C);
     sub_450530(v36, v37, -1, 63, 63, -1, (int)v38);
-  }
-  else
-  {
+  } else {
+    // Draw "<lap> / <total_laps>"
     v35 = (signed __int64)v49;
     v39 = (signed __int64)v52;
     sub_450530(v39, v35, -1, -1, -1, -66, (int)&v60);
+
+    // Draw "LAP" text
     v37 = (signed __int64)(v49 - -17.0);
     v40 = sub_421360(aScreentext424C);
     sub_450530(v39, v37, -1, -1, -1, -66, (int)v40);
   }
+
   v41 = *(_DWORD *)(a2 + 292);
-  if ( v41 != 1 && v41 != 6 && v41 != 7 )
-  {
+  if ( v41 != 1 && v41 != 6 && v41 != 7 ) {
+
+    // Draw the position when we entered the first lap by crossing the starting line
     v42 = *(_WORD *)(v2 + 92);
-    if ( v42 > 0 )
-    {
+    if ( v42 > 0 ) {
       v43 = *(_DWORD *)(a2 + 444);
       v44 = v42;
       v45 = sub_421360(aF3CSDD);
       sprintf(&v60, v45, v44, v43);
       sub_450530(278, v35, -1, -1, -1, -66, (int)&v60);
     }
+
+    // Draw "POS" text
     v46 = sub_421360(aScreentext426C);
     sub_450530(278, v37, -1, -1, -1, -66, (int)v46);
   }
-  if ( dword_50CA18 > 1 && !HIDWORD(v57) )
+
+  if ( dword_50CA18 > 1 && !HIDWORD(v57) ) {
     LOWORD(v57) = 54;
-  sub_45FE70(a2, v59, 225, v57, SHIDWORD(v57));
-  result = dword_50C040;
-  if ( dword_50C040 )
-  {
-    result = dword_50C610;
-    if ( dword_50C610 )
-      result = sub_450530(160, 20, -1, 0, 0, -1, (int)aCOzot);
   }
+
+  // Draw the boost meter?
+  sub_45FE70(a2, v59, 225, v57, SHIDWORD(v57));
+
+  //FIXME: No idea?!
+  result = dword_50C040;
+  if ( dword_50C040 ) {
+    result = dword_50C610;
+    if ( dword_50C610 ) {
+      result = sub_450530(160, 20, -1, 0, 0, -1, (int)aCOzot);
+    }
+  }
+
   return result;
 }
 ```
