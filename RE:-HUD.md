@@ -82,12 +82,12 @@ int __cdecl sub_460950(int a1, int a2) {
   }
 
   v8 = *(_DWORD *)(a2 + 292);
-  if ( v8 == 1 ) {
-    sub_4603F0(COERCE_FLOAT(5));
-  } else if ( v8 ) {
-    sub_4603F0(0.0);
-  } else {
+  if ( v8 == 0 ) {
     sub_4603F0(COERCE_FLOAT(2));
+  } else if ( v8 == 1 ) {
+    sub_4603F0(COERCE_FLOAT(5));
+  } else {
+    sub_4603F0(0.0);
   }
 
   v50 = 254.0;
@@ -128,6 +128,8 @@ int __cdecl sub_460950(int a1, int a2) {
         sub_4276A0(*(char *)(a1 + 16), 0x100000);
       }
     } else {
+
+      // Generate some color (R=x, G=x, B=x*0.5)
       if ( dword_50C5F0 ) {
         v13 = 223.25;
       } else {
@@ -136,20 +138,29 @@ int __cdecl sub_460950(int a1, int a2) {
       v14 = (signed __int64)v13;
       v15 = (signed __int64)((double)v14 * 0.5);
 
+      // Generate alpha?
       v12 = 8 * (unsigned __int64)(signed __int64)(v56 * 255.0);
       if ( v12 > 255 ) {
         v12 = 255;
       }
 
+      // Unknown, but probably formats lap time?
       LOWORD(v5) = (signed __int64)v51;
       v16 = sub_421360(aF3CS);
       sub_450670(v5, (signed __int64)v49, v53, v14, v15, 64, v12, (int)v16);
+
+      // Draw text "LAP TIME"
       v17 = sub_421360(aScreentext420C);
       sub_450530(v5, (signed __int64)(v49 - -17.0), v14, v15, 64, v12, (int)v17);
+
+      // Check if this was a new lap record
       if ( v53 <= (double)*(float *)(a2 + 464) ) {
         if ( (signed __int64)(v56 * 16.0) & 1 ) {
+
+          // Draw "New Record" Text
           v18 = sub_421360(aScreentext538S);
           sub_450530(v5, (signed __int64)(v49 - -25.0), -56, -1, 0, v12, (int)v18);
+
           HIWORD(v12) = HIWORD(a1);
           if ( !sub_427670(*(char *)(a1 + 16), 0x100000) ) {
             sub_427410(6, 0, 39, 0);
@@ -168,9 +179,11 @@ int __cdecl sub_460950(int a1, int a2) {
         } else {
           v20 = v19 - 0.5 + v19 - 0.5;
           if ( v20 > 0.0 ) {
+
+            // Generate alpha
             v21 = 4 * (unsigned __int64)(signed __int64)(v20 * 255.0);
             if ( v21 > 255 ) {
-              LOBYTE(v21) = -1;
+              LOBYTE(v21) = 255;
             }
 
             // Generate random red?
@@ -335,60 +348,62 @@ char __cdecl sub_45FE70(int a1, int a2, __int16 a3, __int16 a4, int a5)
 
   v5 = a3;
   v6 = a5 != 0 ? 21 : 17;
-  if ( dword_50CA18 > 1 )
+  if ( dword_50CA18 > 1 ) {
     v5 = a3 + 31;
+  }
   sub_4285D0(a5 != 0 ? 21 : 17, 1);
   sub_428660(v6, v5, a4);
   sub_428740(v6, 89, -116, 54, -2);
-  if ( !sub_445690() )
-  {
-    if ( *(_DWORD *)(a2 + 96) & 0x200000 )
-    {
-      *(float *)(a1 + 4 * a5 + 472) = *(float *)(a1 + 4 * a5 + 472) - dbl_E22A40 * -4.0;
-      if ( !(v8 | v9) )
-        *(_DWORD *)(a1 + 4 * a5 + 472) = 1065353216;
-    }
-    else
-    {
-      *(float *)(a1 + 4 * a5 + 472) = *(float *)(a1 + 4 * a5 + 472) - dbl_E22A40 * 4.0;
-      if ( v11 )
+  if ( !sub_445690() ) {
+    if ( *(_DWORD *)(a2 + 96) & 0x200000 ) {
+      *(float *)(a1 + 4 * a5 + 472) -= dbl_E22A40 * -4.0;
+      if ( !(v8 | v9) ) {
+        *(_DWORD *)(a1 + 4 * a5 + 472) = 1.0f;
+      }
+    } else {
+      *(float *)(a1 + 4 * a5 + 472) -= dbl_E22A40 * 4.0;
+      if ( v11 ) {
         *(_DWORD *)(a1 + 4 * a5 + 472) = 0;
+      }
     }
   }
+
   v23 = *(float *)(a1 + 4 * a5 + 472);
-  if ( dword_50C5F0 )
+  if ( dword_50C5F0 ) {
     v12 = (v23 - v23 * 0.69999999 * -3.0) * 0.25;
-  else
+  } else {
     v12 = (double)sub_4816B0() * 4.6566129e-10 * (v23 * 0.69999999 - v23) + v23;
+  }
   v24 = v12 * 255.0;
+
   sub_4285D0(14, 0);
-  if ( (unsigned int)&unk_800000 & *(_DWORD *)(a2 + 96) )
-  {
+  if ( (unsigned int)&unk_800000 & *(_DWORD *)(a2 + 96) ) {
     v25 = (signed __int64)v24;
     LOWORD(v26) = 255;
     BYTE2(v26) = 0;
     LOBYTE(v27) = 0;
     *(_WORD *)((char *)&v27 + 1) = 255;
     HIBYTE(v27) = -26;
-    v28 = 1065353216;
-  }
-  else
-  {
-    if ( a5 )
+    v28 = 1.0f;
+  } else {
+    if ( a5 ) {
       sub_4285D0(20, 0);
-    else
+    } else {
       sub_4285D0(16, 0);
+    }
     v25 = (signed __int64)v24;
     sub_46BC50(a2, &v26, &v27, (float *)&v28);
   }
-  if ( dword_50CA18 > 1 )
-  {
+
+  if ( dword_50CA18 > 1 ) {
     v25 = (signed __int64)((double)(signed __int16)v25 * 2.5);
-    if ( (signed __int16)v25 > 255 )
-      LOBYTE(v25) = -1;
+    if ( (signed __int16)v25 > 255 ) {
+      LOBYTE(v25) = 255;
+    }
   }
-  if ( *(float *)&dword_4C4A58 > 0.0 )
-  {
+
+  // Draw netplay Ctrl+Q to quit message (after hitting Escape)
+  if ( *(float *)&dword_4C4A58 > 0.0 ) {
     v13 = sub_421360(aMondotextH0522);
     sprintf(&v29, aF4SCS, v13);
     v14 = (signed __int64)(*(float *)&dword_4C4A58 * 255.0);
@@ -396,34 +411,39 @@ char __cdecl sub_45FE70(int a1, int a2, __int16 a3, __int16 a4, int a5)
     sub_450530(160, 220, (signed __int64)v15, -1, -1, v14, (int)&v29);
     *(float *)&dword_4C4A58 = *(float *)&dword_4C4A58 - dbl_E22A40 * 0.333299994468689;
   }
-  v16 = a5 != 0 ? 22 : 18;
-  sub_4285D0(a5 != 0 ? 22 : 18, 1);
+
+  v16 = (a5 != 0 ? 22 : 18);
+  sub_4285D0(v16, 1);
   sub_428660(v16, a3 + 24, a4 - 7);
   sub_428740(v16, v26, SBYTE1(v26), SBYTE2(v26), v25);
+
+  // Check if boost is charged
   if ( dword_50CA18 <= 1
     && !*(_DWORD *)(a1 + 428)
     && !*(_DWORD *)(a1 + 448)
     && (unsigned __int8)v26 > 0x78u
-    && BYTE1(v26) > 0x78u
-    && BYTE2(v26) < 0x78u
-    && !sub_445690() )
-  {
-    if ( ++dword_50CA58 & 1 )
-    {
+    && BYTE1(v26) > 0x78u && BYTE2(v26) < 0x78u
+    && !sub_445690() ) {
+    // Blink the boost text
+    if ( ++dword_50CA58 & 1 ) {
+
+      // Draw "BOOST" text
       v17 = sub_421360(aScreentext380B);
       sprintf(&v29, aF4CS, v17);
       v18 = (double)sub_4816B0() * 4.6566129e-10 * 255.0;
       sub_450530(244, 162, -1, -1, (signed __int64)v18, v25, (int)&v29);
+
     }
   }
   v19 = a5 != 0 ? 19 : 15;
-  sub_4285D0(a5 != 0 ? 19 : 15, 1);
+  sub_4285D0(v19, 1);
   sub_428660(v19, a3 + 34, a4 + 6);
   sub_428740(v19, v27, SBYTE1(v27), SBYTE2(v27), SHIBYTE(v27));
   dword_50CA04 = v28;
   v20 = a5 != 0 ? 20 : 16;
-  if ( !((unsigned int)&unk_800000 & *(_DWORD *)(a2 + 96)) )
+  if ( !((unsigned int)&unk_800000 & *(_DWORD *)(a2 + 96)) ) {
     return sub_4285D0(v20, 0);
+  }
   *(float *)&v21 = 1.0 - *(float *)(a2 + 536) * 0.0099999998;
   sub_4285D0(v20, 1);
   sub_428660(v20, a3 + 34, a4 + 6);
