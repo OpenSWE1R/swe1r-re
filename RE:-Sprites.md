@@ -12,11 +12,28 @@ typedef struct {
   float width; //0x8 Size X
   float height; //0xC Size Y
   uint32_t unk0x10; // written in sub_428720
-  uint32_t flags; // Flags 0x20 = enabled?
+  uint32_t flags; // Flags:
+                 // 0x10000 = position is again different + size is different
+                 // 0x8000 = colors are weird? might be unrelated?!
+                 // 0x4000 = can't find the image on screen?!
+                 // 0x2000 = ???
+                 // 0x1000 = offsets the image
+                 // 0x800 = ???
+                 // 0x400 = ???
+                 // 0x200 = ???
+                 // 0x100 = tiles differently
+                 // 0x80 = tiles the image somewhat?
+                 // 0x40 = ???
+                 // 0x20 = stay in memory?
+                 // 0x10 = ???
+                 // 0x8 = mirror vertically
+                 // 0x4 = mirror horizontally
+                 // 0x2 = ???
+                 // 0x1 = used/displayed?
   uint8_t r; // 0x18 R
-  uint8_t g; // 0x19
-  uint8_t b; // 0x1A
-  uint8_t a; // 0x1B
+  uint8_t g; // 0x19 G
+  uint8_t b; // 0x1A B
+  uint8_t a; // 0x1B A
   uint32_t unk0x1C; //0x1C, written in sub_4282F0
   // 32 bytes
 } Sprite;
