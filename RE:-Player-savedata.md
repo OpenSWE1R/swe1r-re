@@ -1,12 +1,47 @@
 # Savedata format
 
+Note that this info is typically loaded from tgfd.dat
+So if you modify something, you should delete that file first
+
 ```C
 // This data follows the 4 byte magic in the savegames (from player/data/*.sav)
 // They come from 0xE364B4 in memory
 typedef struct {
-  char profileName[32]; // size?
-  uint8_t unk[18];
-  // 50 bytes
+  char profileName[32]; // 0x00, size correct?
+  uint8_t unk[4]; 0x20
+  uint8_t last_podracer; // 0x24 value:
+                             // 0x01 = Anakin Skywalker
+                             // 0x09 = Ebe Endocott
+                             // 0x0A = Dud Bolt
+                             // 0x0B = Gasgano
+
+  uint8_t race_unlocked[5]; // 0x25 1 bit per course starting at LSb: unlocks race
+  uint16_t race_status[5]; // 0x2A 2 bit per course starting at LSb: 0=4th (or not finished), 1=3rd, 2=2nd, 3=1st.
+
+  uint32_t truguts; // 0x38
+  uint8_t unk[4]; // 0x3C
+
+  uint8_t unk; // 0x40 seems to be one?!
+
+  uint8_t traction_part_index; // 0x41
+  uint8_t unk_part_index; // 0x42
+  uint8_t unk_part_index; // 0x43
+  uint8_t unk_part_index; // 0x44
+  uint8_t unk_part_index; // 0x45
+  uint8_t unk_part_index; // 0x46
+  uint8_t repair_part_index; // 0x47
+
+  uint8_t traction_part_health; // 0x48
+  uint8_t unk_part_health; // 0x49
+  uint8_t unk_part_health; // 0x4A
+  uint8_t unk_part_health; // 0x4B
+  uint8_t unk_part_health; // 0x4C
+  uint8_t unk_part_health; // 0x4D
+  uint8_t repair_part_health; // 0x4E
+
+  uint8_t unk; 0x4F seems to be zero; padding only?
+
+  // 80 bytes
 } Savedata;
 ```
 
