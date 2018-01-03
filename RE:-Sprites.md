@@ -7,16 +7,17 @@ There seems to be a sprite renderer which is used for the HUD (and probably othe
 typedef struct {
   int16_t x; // Position x?
   int16_t y; // Position y?
-  uint32_t unk0x4; //0x4
+  int16_t unk0x4; // 0x4, written in sub_4286C0
+  int16_t unk0x6; // 0x6, written in sub_4286C0
   float width; //0x8 Size X
   float height; //0xC Size Y
-  uint32_t unk0x10;
+  uint32_t unk0x10; // written in sub_428720
   uint32_t flags; // Flags 0x20 = enabled?
   uint8_t r; // 0x18 R
   uint8_t g; // 0x19
   uint8_t b; // 0x1A
   uint8_t a; // 0x1B
-  uint32_t unk0x1C; //0x1C
+  uint32_t unk0x1C; //0x1C, written in sub_4282F0
   // 32 bytes
 } Sprite;
 ```
@@ -128,6 +129,45 @@ char __cdecl sub_428740(__int16 a1, uint8_t a2, uint8_t a3, uint8_t a4, uint8_t 
     byte_E9BA7B[v5] = a5;
   }
   return;
+}
+```
+
+# Unknown 1
+
+```C
+//----- (00428720) --------------------------------------------------------
+// a1 = sprite slot
+// a2 = unknown
+// Probably returns nothing
+__int16 __cdecl sub_428720(__int16 a1, int32_t a2) {
+  unsigned int v2; // eax
+
+  LOWORD(v2) = a1;
+  if ( a1 >= 0 ) {
+    v2 = 32 * a1;
+    dword_E9BA70[v2 / 4] = a2;
+  }
+  return v2;
+}
+```
+
+# Unknown 2
+
+```
+//----- (004286C0) --------------------------------------------------------
+// a1 = sprite slot
+// a2 = unknown
+// a3 = unknown
+__int16 __cdecl sub_4286C0(__int16 a1, __int16 a2, __int16 a3) {
+  unsigned int v3; // eax
+
+  LOWORD(v3) = a1;
+  if ( a1 >= 0 ) {
+    v3 = 32 * a1;
+    word_E9BA64[v3 / 2] = a2;
+    word_E9BA66[v3 / 2] = a3;
+  }
+  return v3;
 }
 ```
 
