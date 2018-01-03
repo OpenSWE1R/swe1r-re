@@ -14,10 +14,6 @@ typedef struct {
   Address unk_pointer; // 132
 } A1;
 
-
-    v53 = *(float *)(a1 + 4 * v11 + 92);
-    v56 = 1.0 - *(float *)(a1 + 4 * v11 + 96) * 0.25;
-
 typedef struct {
  // 292, something which controls some text position?!
 ...
