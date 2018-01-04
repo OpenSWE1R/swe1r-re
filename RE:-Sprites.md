@@ -248,7 +248,7 @@ static inline uint32_t swap32(uint32_t v) {
 ```C
 //----- (00446CA0) --------------------------------------------------------
 // a1 = sprite texture index
-signed __int16 *__cdecl sub_446CA0(int a1) {
+SpriteTexture* __cdecl sub_446CA0(int a1) {
 
   // Open "out_spriteblock.bin"
   sub_42D680(1);
