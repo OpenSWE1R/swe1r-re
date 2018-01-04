@@ -208,13 +208,11 @@ ObjectHeader* __cdecl sub_450AA0(uint32_t a1, int a2) {
       continue;
     }
 
-    uintptr_t result = v3->first_element;
     for (int32_t v6 = 0; v6 < v3->element_count; v6++) {
-      ObjectHeader* r = result;
+      ObjectHeader* r = (uintptr_t)v3->first_element + v6 * v3->element_size;
       if ((!(r->flags & 0x100)) && (r->handle == a2)) {
-        return result;
+        return r;
       }
-      result += v3->element_size;
     }
 
   }
