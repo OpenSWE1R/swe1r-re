@@ -48,21 +48,24 @@ We can also ensure proper float behaviour if need be.
 // Returns the larger of 2 values
 // `if ( v44 < 0 ) { v44 = 0; }`
 // would become `v44 = max(v44, 0);`
-static inline T max(T a, T b) {
+template<typename _T>
+static inline _T max(_T a, _T b) {
   return (a < b) ? b : a;
 }
 
 // Returns the smaller of 2 values
 // `if ( v44 > 255 ) { v44 = 255; }`
 // would become `v44 = min(v44, 255);`
-static inline T min(T a, T b) {
+template<typename _T>
+static inline _T min(_T a, _T b) {
   return (a > b) ? b : a;
 }
 
 // Clamps a value in range [a, b]
 // `if ( v44 < 0 ) { v44 = 0; }   if ( v44 > 255 ) { v44 = 255; }`
 // would become `v44 = clamp(v44, 0, 255);`
-static inline T clamp(T x, T a, T b) {
+template<typename _T>
+static inline _T clamp(_T x, _T a, _T b) {
   return min(max(x, a), b);
 }
 ```
