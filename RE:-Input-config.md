@@ -178,17 +178,18 @@ LABEL_28:
 
 ```C
 //----- (00406470) --------------------------------------------------------
-signed int __cdecl sub_406470(int a1, const char *a2, int a3)
-{
+// a1 = device type?! should be value 0=Joystick, 1=Mouse, 2=Keyboard or something negative to signal "anything"
+// a2 = if a3 is zero, then config filename, example (optional, default "wheel.map"). Otherwise foldername and prefix for "_control.map" (mandatory)
+// a3 = Load "control.map"
+signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
   signed int result; // eax
-  int v4; // ebx
+  int a1; // ebx
   signed int v5; // edi
   char *v6; // ebp
   unsigned int v7; // ebx
   const char **v8; // esi
   const char *v9; // ST10_4
   BOOL v10; // eax
-  char *v11; // ecx
   int v12; // eax
   _DWORD *v13; // esi
   int v14; // [esp+10h] [ebp-130h]
@@ -209,213 +210,164 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3)
   v21 = 0;
   v22 = 0;
   v23 = 0;
-  if ( a3 )
-  {
-    if ( !strcmp(a2, aWheel) )
-    {
+
+  if ( a3 ) {
+    if ( !strcmp(a2, aWheel) ) {
       sprintf(v18, aWheelMap);
-    }
-    else if ( strlen(a2) != 0 )
-    {
+    } else if ( strlen(a2) != 0 ) {
       sprintf(v18, aS_0, a2);
     }
     sprintf(&v24, aSSS_0, &unk_E9F300, aDataConfigDefa, v18);
-  }
-  else
-  {
+  } else {
     sprintf(&v24, aSSSS, aDataConfig, a2, a2, aControlMap);
   }
-  if ( sub_4877B0(&v24) )
-  {
-    v4 = a1;
-    if ( a1 < 0 || !a1 )
-      memset(dword_EC8880, 0, 0x18u);
-    if ( a1 < 0 || a1 == 1 )
-    {
-      dword_EC8790[0] = 0;
-      dword_EC8794 = 0;
-      dword_EC8798 = 0;
+
+  if ( !sub_4877B0(&v24) ) {
+    sub_487900();
+    return -1;
+  }
+
+  if ( a1 < 0 || a1 == 0 ) {
+    memset(dword_EC8880, 0, 0x18u);
+  }
+  if ( a1 < 0 || a1 == 1 ) {
+    dword_EC8790[0] = 0;
+    dword_EC8794 = 0;
+    dword_EC8798 = 0;
+  }
+
+  sub_407800(a1);
+
+  v5 = (signed int)v17;
+  v6 = v17;
+
+  while ( strcmp(dword_EC8E84, aEnd) ) {
+
+    if ( !sub_487AE0() ) {
+      break;
     }
-    sub_407800(a1);
-    if ( sub_487AE0() )
-    {
-      v5 = (signed int)v17;
-      v6 = v17;
-      while ( strcmp(dword_EC8E84, aEnd) )
-      {
-        v7 = 0;
-        LOBYTE(v14) = 0;
-        v15 = 0;
-        v16 = -1;
-        if ( dword_EC8E80 )
-        {
-          v8 = (const char **)&dword_EC8E84;
-          while ( 1 )
-          {
-            if ( _strcmpi(*v8, aJoystick) )
-            {
-              if ( _strcmpi(*v8, aMouse) )
-              {
-                if ( _strcmpi(*v8, aKeyboard) )
-                {
-                  if ( _strcmpi(*v8, aAxis) )
-                  {
-                    if ( _strcmpi(*v8, aButton) )
-                    {
-                      if ( _strcmpi(*v8, off_4B3E68) )
-                      {
-                        if ( _strcmpi(*v8, aFunction) )
-                        {
-                          if ( _strcmpi(*v8, aAxisRange) )
-                          {
-                            if ( a1 >= 0 && a1 != v5 || _strcmpi(*v8, aFlipAxis) )
-                            {
-                              if ( _strcmpi(*v8, aSensitivity) )
-                              {
-                                if ( _strcmpi(*v8, aDeadzone) )
-                                {
-                                  if ( !_strcmpi(*v8, aEnabled) )
-                                  {
-                                    v10 = _strcmpi(v8[1], aTrue) == 0;
-                                    if ( v5 )
-                                    {
-                                      if ( v5 == 1 )
-                                      {
-                                        if ( !v10 || (dword_4D6B38 = 1, !dword_4B2950) )
-                                          dword_4D6B38 = 0;
-                                      }
-                                    }
-                                    else
-                                    {
-                                      dword_4B2944 = v10 && dword_4B294C;
-                                    }
-                                  }
-                                }
-                                else if ( !v5 )
-                                {
-                                  dword_EC876C = atof(v8[1]);
-                                }
-                              }
-                              else
-                              {
-                                *(float *)&dword_EC8780[v5] = atof(v8[1]);
-                              }
-                            }
-                            else if ( v5 )
-                            {
-                              if ( v5 != 1 )
-                                break;
-                              dword_EC8790[v15] = 1;
-                            }
-                            else
-                            {
-                              dword_EC8880[v15] = 1;
-                            }
-                          }
-                          else if ( _strcmpi(v8[1], aPositive) )
-                          {
-                            if ( _strcmpi(v8[1], aNegative) )
-                              break;
-                            LOBYTE(v14) = v14 | 0x20;
-                          }
-                          else
-                          {
-                            LOBYTE(v14) = v14 | 0x10;
-                          }
-                        }
-                        else if ( !sub_407CD0((int)&v14, v8[1], 0) )
-                        {
-                          break;
-                        }
-                      }
-                      else
-                      {
-                        LOBYTE(v14) = v14 | 8;
-                        v15 = sub_407A90(v8[1], &unk_4B2BD0);
-                      }
-                    }
-                    else
-                    {
-                      v9 = v8[1];
-                      LOBYTE(v14) = v14 | 8;
-                      v15 = sub_407A90(v9, &unk_4B2B28);
-                    }
-                  }
-                  else
-                  {
-                    LOBYTE(v14) = v14 | 4;
-                    v15 = sub_407A90(v8[1], &unk_4B2AF0);
-                  }
-                }
-                else
-                {
-                  v5 = 2;
-                  v6 = byte_4D6828;
-                }
-              }
-              else
-              {
-                v5 = 1;
-                v6 = byte_4D6518;
-              }
-            }
-            else
-            {
-              v5 = 0;
-              v6 = byte_4D5FC0;
-            }
-            if ( v15 < 0 )
-              break;
-            ++v7;
-            v8 += 2;
-            if ( v7 >= dword_EC8E80 )
-              goto LABEL_65;
+
+    v7 = 0;
+    LOBYTE(v14) = 0;
+    v15 = 0;
+    v16 = -1;
+    if ( dword_EC8E80 ) {
+
+      v8 = (const char **)&dword_EC8E84;
+      while ( 1 ) {
+        if (!_strcmpi(v8[0] aJoystick) ) {
+          v5 = 0;
+          v6 = byte_4D5FC0;
+        } elseif (!_strcmpi(v8[0] aMouse) ) {
+          v5 = 1;
+          v6 = byte_4D6518;
+        } else if ( !_strcmpi(v8[0] aKeyboard) ) {
+          v5 = 2;
+          v6 = byte_4D6828;
+        } else if ( !_strcmpi(v8[0] aAxis) ) {
+          LOBYTE(v14) = v14 | 4;
+          v15 = sub_407A90(v8[1], &unk_4B2AF0);
+        } else if ( !_strcmpi(v8[0] aButton) ) {
+          v9 = v8[1];
+          LOBYTE(v14) = v14 | 8;
+          v15 = sub_407A90(v9, &unk_4B2B28);
+        } else if ( !_strcmpi(v8[0] off_4B3E68) ) {
+          LOBYTE(v14) = v14 | 8;
+          v15 = sub_407A90(v8[1], &unk_4B2BD0);
+        } else if ( !_strcmpi(v8[0] aFunction) ) {
+          if ( !sub_407CD0((int)&v14, v8[1], 0) ) {
+            sub_407800(a1);
+            sub_487900();
+            return 0;
           }
+        } else if ( !_strcmpi(v8[0] aAxisRange) ) {
+          if ( !_strcmpi(v8[1], aPositive) ) {
+             LOBYTE(v14) = v14 | 0x10;
+          } else if ( !_strcmpi(v8[1], aNegative) ) {
+            LOBYTE(v14) = v14 | 0x20;
+          } else {
+            sub_407800(a1);
+            sub_487900();
+            return 0;
+          }
+        } else if ((a1 < 0 || a1 == v5) && !_strcmpi(v8[0] aFlipAxis)) { //FIXME: Review this condition
+          if ( v5 == 0) {
+            dword_EC8880[v15] = 1;
+          } else if ( v5 == 1 ) {
+            dword_EC8790[v15] = 1;
+          } else {
+            sub_407800(a1);
+            sub_487900();
+            return 0;
+          }
+        } else if ( !_strcmpi(v8[0] aSensitivity) ) {
+          *(float *)&dword_EC8780[v5] = atof(v8[1]); 
+        } else if ( !_strcmpi(v8[0] aDeadzone) ) {
+          if ( !v5 ) {
+            dword_EC876C = atof(v8[1]);
+          }
+        } else if ( !_strcmpi(v8[0] aEnabled) ) {
+          v10 = !_strcmpi(v8[1], aTrue);
+          if ( v5 == 0) {
+            dword_4B2944 = v10 && dword_4B294C;
+          } else if ( v5 == 1 ) {
+            //FIXME: Simplify the following condition
+            if ( !v10 || (dword_4D6B38 = 1, !dword_4B2950) ) {
+              dword_4D6B38 = 0;
+            }
+          }
+          //FIXME: You'd expect an error handler here?!
+        }
+
+        // Error if the button / axis is not known
+        if ( v15 < 0 ) {
           sub_407800(a1);
           sub_487900();
           return 0;
         }
-LABEL_65:
-        if ( (a1 < 0 || a1 == v5) && v16 > -1 )
-        {
-          v11 = &v6[12 * dword_4D5E20[v5]];
-          *(_DWORD *)v11 = v14;
-          *((_DWORD *)v11 + 1) = v15;
-          *((_DWORD *)v11 + 2) = v16;
-          ++dword_4D5E20[v5];
-        }
-        v4 = a1;
-        if ( !sub_487AE0() )
+
+        v7++;
+        v8 += 2;
+
+        if ( v7 >= dword_EC8E80 ) {
           break;
+        }
       }
+      // Loop ends here
+
     }
-    if ( v4 >= 0 && v4 != 2 )
-    {
-      v12 = dword_4D5E28;
+
+    //FIXME: This feels out of place?
+    if ( (a1 < 0 || a1 == v5) && v16 > -1 ) {
+      uint32_t* v11 = &v6[12 * dword_4D5E20[v5]];
+      v11[0] = v14;
+      v11[1] = v15;
+      v11[2] = v16;
+      ++dword_4D5E20[v5];
     }
-    else
-    {
-      LOBYTE(v14) = 10;
-      v12 = dword_4D5E28 + 1;
-      v13 = (_DWORD *)(12 * dword_4D5E28++ + 5072936);
-      *v13 = v14;
-      v13[1] = 1;
-      v13[2] = 10;
-    }
-    if ( v4 < 0 || !v4 )
-      byte_4D5FC0[12 * dword_4D5E20[0]] = -1;
-    if ( v4 < 0 || v4 == 1 )
-      byte_4D6518[12 * dword_4D5E24] = -1;
-    if ( v4 < 0 || v4 == 2 )
-      byte_4D6828[12 * v12] = -1;
-    sub_487900();
-    result = 1;
+
   }
-  else
-  {
-    sub_487900();
-    result = -1;
+
+
+  if ( a1 < 0 || a1 == 2 ) {
+    LOBYTE(v14) = 10;
+    dword_4D5E28++;
+    v13 = (_DWORD *)(12 * dword_4D5E28 + 0x4D6828);
+    v13[0] = v14;
+    v13[1] = 1;
+    v13[2] = 10;
   }
-  return result;
+  if ( a1 < 0 || a1 == 0) {
+    byte_4D5FC0[12 * dword_4D5E20[0]] = -1;
+  }
+  if ( a1 < 0 || a1 == 1 ) {
+    byte_4D6518[12 * dword_4D5E24] = -1;
+  }
+  if ( a1 < 0 || a1 == 2 ) {
+    byte_4D6828[12 * dword_4D5E28] = -1;
+  }
+
+  sub_487900();
+  return 1;
 }
 ```
