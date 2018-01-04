@@ -32,7 +32,7 @@ typedef struct {
   char profileName[32]; // 0x00, size correct?
   uint8_t unk[4]; // 0x20
   uint8_t last_podracer; // 0x24 value:
-                         //   0x01 = Anakin Skywalker
+                         //   0x01 = Anakin Skywalker ??? Probably 0x00. Teemto somethingsomething seems to be 0x01
                          //   0x09 = Ebe Endocott
                          //   0x0A = Dud Bolt
                          //   0x0B = Gasgano
