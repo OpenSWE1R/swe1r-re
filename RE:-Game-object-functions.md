@@ -182,20 +182,19 @@ typedef struct {
 
 typedef struct {
   uint32_t unk; // 0
-  uint16_t index; // 4
+  uint16_t handle; // 4
   uint16_t flags; // 6   0x100 = object is present / searchable?
 } ObjectHeader;
 
 //----- (00450AA0) --------------------------------------------------------
-int __cdecl sub_450AA0(int a1, int a2) {
-  char **v2; // edi
-  char *v3; // ecx
-  signed int v4; // esi
+// a1 = list type
+// a2 = handle of object
+ObjectHeader* __cdecl sub_450AA0(uint32_t a1, int a2) {
 
-  // Access object table (this might actually be a list of lists?)
-  v2 = off_4BFEC0;
+  // Get pointer to object lists
+  ObjectList** v2 = off_4BFEC0;
 
-  while ( 1 ) {
+  while(1) {
 
     // Lookup object list, if there is none, we can abort as we don't have a list to search
     ObjectList* v3 = *v2++;
@@ -211,7 +210,7 @@ int __cdecl sub_450AA0(int a1, int a2) {
     uintptr_t result = v3->first_element;
     for (int32_t v6 = 0; v6 < v3->element_count; v6++) {
       ObjectHeader* r = result;
-      if ((!(r->flags & 0x100)) && (r->index == a2)) {
+      if ((!(r->flags & 0x100)) && (r->handle == a2)) {
         return result; // break from outer loop (return element)
       }
       result += v3->element_size;
