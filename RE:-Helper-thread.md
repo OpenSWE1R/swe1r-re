@@ -13,13 +13,6 @@ void __stdcall __noreturn StartAddress(LPVOID lpThreadParameter) {
 # Thread loop function
 
 ```C
-#define ASSERT(condition, message, path, line) \
-  if ( !(condition) ) { \
-    dword_ECC420->unk6((message), (path), (line)); \
-  }
-```
-
-```C
 //----- (004233A0) --------------------------------------------------------
 // a1 = some kind of file/stream-object which is at least 64 bytes
 // a2 = Stream write offset in bytes
