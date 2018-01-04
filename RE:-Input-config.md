@@ -203,20 +203,11 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
     };
   };
   char *v17; // [esp+1Ch] [ebp-124h]
-  char v18[4]; // [esp+20h] [ebp-120h]
-  int v19; // [esp+2Ch] [ebp-114h]
-  int v20; // [esp+30h] [ebp-110h]
-  int v21; // [esp+34h] [ebp-10Ch]
-  int v22; // [esp+38h] [ebp-108h]
-  int v23; // [esp+3Ch] [ebp-104h]
+
+  char v18[32]; // [esp+20h] [ebp-120h]
   char v24[256]; // [esp+40h] [ebp-100h]
 
   strcpy(v18, "control.map");
-  v19 = 0;
-  v20 = 0;
-  v21 = 0;
-  v22 = 0;
-  v23 = 0;
 
   if ( a3 ) {
     if ( !strcmp(a2, aWheel) ) {
