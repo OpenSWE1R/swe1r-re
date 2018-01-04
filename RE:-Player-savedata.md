@@ -14,18 +14,16 @@ typedef struct {
   Savedata profiles[4]; // 0x14 4 profiles, but the first profile seems to be the one used for most things
 
   // This keeps track of the best times.
-  // Out of the 100 entries, there seem to be always group of 4.
+  // Out of the 100 entries, there seem to be always group of times.
   //
-  // I know that element 88 is the abyss best lap
-  // abyss is the 2nd race [index 1] in the invitational cup
+  // Starting at index 0: 3 laps
+  // Starting at index 50: 1 lap [best lap]
   //
-  // Let's assume:
-  //   tracks 0-6 = first cup
-  //   tracks 7-13 = second cup
-  //   tracks 14-20 = third cup
-  //   tracks 21-24 = invitational cup
-  //
-  // then abyss is track 22. If each track has 4 times then index 88 makes perfect sense.
+  // The mapping from track select screen to times is not yet known
+  // 
+  // Element 0 is the boonta training course [3 laps].
+  // Element 50 the boonta training course [best lap]
+  // Element 88 is abyss [best lap]
   //
   float time_seconds[100]; // 0x154 default value seems to be 3599.9899902344 (0x4560FFD7) which is about an hour
   char time_names[100][32]; // 0x2E4 default value seems to be 0x41 ('A')
