@@ -31,11 +31,11 @@ static inline float frand() {
   return (float)sub_4816B0() / (float)0x7FFFFFFF;
 }
 
-// Returns a random float in range [lowest, highest]
+// Returns a random float in range [a, b]
 // `(double)sub_4816B0() * 4.6566129e-10 * 64.0 - -64.0`
 // would become `frand(64.0, 128.0)`
-static inline float frand(float lowest, float highest) {
-  return frand() * (highest - lowest) + lowest;
+static inline float frand(float a, float b) {
+  return frand() * (b - a) + a;
 }
 ```
 
