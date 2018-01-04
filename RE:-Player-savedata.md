@@ -13,10 +13,23 @@ typedef struct {
   uint32_t podracer_unlocked; // 0x10 1 bit per podracer ??? for freeplay
   Savedata profiles[4]; // 0x14 4 profiles, but the first profile seems to be the one used for most things
 
-  // This keeps track of the best times
-  uint32_t times[100]; // 0x154 ??? (assumption only. untested)
-  char time_names[100][32]; // 0x2E4
-  uint8_t time_podracer[100]; // 0xF64
+  // This keeps track of the best times.
+  // Out of the 100 entries, there seem to be always group of 4.
+  //
+  // I know that element 88 is the abyss best lap
+  // abyss is the 2nd race [index 1] in the invitational cup
+  //
+  // Let's assume:
+  //   tracks 0-6 = first cup
+  //   tracks 7-13 = second cup
+  //   tracks 14-20 = third cup
+  //   tracks 21-24 = invitational cup
+  //
+  // then abyss is track 22. If each track has 4 times then index 88 makes perfect sense.
+  //
+  float time_seconds[100]; // 0x154 default value seems to be 3599.9899902344 (0x4560FFD7) which is about an hour
+  char time_names[100][32]; // 0x2E4 default value seems to be 0x41 ('A')
+  uint8_t time_podracer[100]; // 0xF64 default value seems to be the track favorite
 
   uint8_t unk[12]; // 0xFC8
 
