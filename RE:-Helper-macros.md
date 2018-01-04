@@ -41,7 +41,7 @@ static inline float frand(float lowest, float highest) {
 
 ## Number clamping
 
-These are equivalent to the `std::min` and `std::max` functions, but we declare our own because we can't know for certain that the target platform has a proper C++ lib.
+These are similar to the `std::min` and `std::max` functions, but we declare our own because we can't know for certain that the target platform has a proper C++ lib.
 We can also ensure proper float behaviour if need be.
 
 ```C
@@ -56,7 +56,7 @@ static inline T max(T a, T b) {
 // `if ( v44 > 255 ) { v44 = 255; }`
 // would become `v44 = min(v44, 255);`
 static inline T min(T a, T b) {
-  return (a < b) ? a : b;
+  return (a > b) ? b : a;
 }
 
 // Clamps a value in range [a, b]
