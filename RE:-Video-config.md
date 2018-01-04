@@ -3,11 +3,10 @@
 ```C
 //----- (00408880) --------------------------------------------------------
 signed int __cdecl sub_408880(int a1) {
-  const char* onOff;
   char v8[32]; // [esp+0h] [ebp-140h]
   char v9[32]; // [esp+20h] [ebp-120h]
-  char v10[256]; // [esp+40h] [ebp-100h]
 
+  char v10[256]; // [esp+40h] [ebp-100h]
   sprintf(&v10, aSSS, aDataConfig, a1, aVideoCfg);
   if ( !sub_4877D0(&v10) ) {
     sub_487960();
