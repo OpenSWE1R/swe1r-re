@@ -38,3 +38,31 @@ static inline float frand(float lowest, float highest) {
   return frand() * (highest - lowest) + lowest;
 }
 ```
+
+## Number clamping
+
+These are equivalent to the `std::min` and `std::max` functions, but we declare our own because we can't know for certain that the target platform has a proper C++ lib.
+We can also ensure proper float behaviour if need be.
+
+```C
+// Returns the larger of 2 values
+// `if ( v44 < 0 ) { v44 = 0; }`
+// would become `v44 = max(v44, 0);`
+static inline T max(T a, T b) {
+  return (a < b) ? b : a;
+}
+
+// Returns the smaller of 2 values
+// `if ( v44 > 255 ) { v44 = 255; }`
+// would become `v44 = min(v44, 255);`
+static inline T min(T a, T b) {
+  return (a < b) ? a : b;
+}
+
+// Clamps a value in range [a, b]
+// `if ( v44 < 0 ) { v44 = 0; }   if ( v44 > 255 ) { v44 = 255; }`
+// would become `v44 = clamp(v44, 0, 255);`
+static inline T clamp(T x, T a, T b) {
+  return min(max(x, a), b);
+}
+```
