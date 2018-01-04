@@ -429,22 +429,12 @@ char __cdecl sub_4611F0(int a1, int a2) {
             v43 = (signed __int64)((double)(200 - v43) * flt_4C52A0[a2] + (double)v128);
           }
         }
-        if ( v44 < 0 )
-          v44 = 0;
-        if ( v44 > 255 )
-          v44 = 255;
-        if ( v45 < 0 )
-          v45 = 0;
-        if ( v45 > 255 )
-          v45 = 255;
-        if ( v46 < 0 )
-          v46 = 0;
-        if ( v46 > 255 )
-          v46 = 255;
-        if ( v43 < 0 )
-          v43 = 0;
-        if ( v43 > 255 )
-          v43 = 255;
+
+        v44 = clamp(v44, 0x00, 0xFF);
+        v45 = clamp(v45, 0x00, 0xFF);
+        v46 = clamp(v46, 0x00, 0xFF);
+        v43 = clamp(v43, 0x00, 0xFF);
+
         v51 = (int)(v48 + 1);
         v115 = (unsigned int *)v51;
         *(int *)((char *)v133 + v108) = v44;
