@@ -44,7 +44,7 @@ static inline float frand(float a, float b) {
 These are similar to the `std::min` and `std::max` functions, but we declare our own because we can't know for certain that the target platform has a proper C++ lib.
 We can also ensure proper float behaviour if need be.
 
-```C
+```C++
 // Returns the larger of 2 values
 // `if ( v44 < 0 ) { v44 = 0; }`
 // would become `v44 = max(v44, 0);`
