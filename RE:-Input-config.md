@@ -187,9 +187,21 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
   const char **v8; // esi
   const char *v9; // ST10_4
   _DWORD *v13; // esi
-  int v14; // [esp+10h] [ebp-130h]
-  int v15; // [esp+14h] [ebp-12Ch]
-  int v16; // [esp+18h] [ebp-128h]
+
+  //FIXME: This union might actually be bigger, that would explain why v17 is left unused
+  union {
+    typedef struct {
+      uint32_t flags; //FIXME: There is strong indication that this is only 8 bit, then 3 byte padding
+      uint32_t input; // The button or axis which the user will use
+      uint32_t function; // The function the game will map this to
+    } InputSetting;
+
+    struct {
+      int v14; // [esp+10h] [ebp-130h]
+      int v15; // [esp+14h] [ebp-12Ch]
+      int v16; // [esp+18h] [ebp-128h]
+    };
+  };
   char *v17; // [esp+1Ch] [ebp-124h]
   char v18[4]; // [esp+20h] [ebp-120h]
   int v19; // [esp+2Ch] [ebp-114h]
@@ -197,7 +209,7 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
   int v21; // [esp+34h] [ebp-10Ch]
   int v22; // [esp+38h] [ebp-108h]
   int v23; // [esp+3Ch] [ebp-104h]
-  char v24; // [esp+40h] [ebp-100h]
+  char v24[256]; // [esp+40h] [ebp-100h]
 
   strcpy(v18, "control.map");
   v19 = 0;
@@ -212,16 +224,18 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
     } else if ( strlen(a2) != 0 ) {
       sprintf(v18, aS_0, a2);
     }
-    sprintf(&v24, aSSS_0, &unk_E9F300, aDataConfigDefa, v18);
+    sprintf(v24, aSSS_0, &unk_E9F300, aDataConfigDefa, v18);
   } else {
-    sprintf(&v24, aSSSS, aDataConfig, a2, a2, aControlMap);
+    sprintf(v24, aSSSS, aDataConfig, a2, a2, aControlMap);
   }
 
-  if ( !sub_4877B0(&v24) ) {
+  // Open the config file and tokenize it
+  if ( !sub_4877B0(v24) ) {
     sub_487900();
     return -1;
   }
 
+  // Clear input?!
   if ( a1 < 0 || a1 == 0 ) {
     memset(dword_EC8880, 0, 0x18u);
   }
@@ -231,6 +245,7 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
     dword_EC8798 = 0;
   }
 
+  // Clear the input.. again?!
   sub_407800(a1);
 
   v5 = (signed int)v17;
@@ -238,18 +253,25 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
 
   while ( strcmp(dword_EC8E84, aEnd) ) {
 
+    // Tokenize next row?
     if ( !sub_487AE0() ) {
       break;
     }
+   
+    // Pointer to tokens
+    typedef struct {
+      const char* key;
+      const char* value;
+    } KeyValue;
+    v8 = (const char **)&dword_EC8E84;
 
 
+    // Clear settings for this button config
     LOBYTE(v14) = 0;
     v15 = 0;
     v16 = -1;
 
-    v8 = (const char **)&dword_EC8E84;
-
-
+    // Loop over each key / column
     for(uint32_t v7 = 0; v7 < dword_EC8E80; v7++) {
 
       if (!_strcmpi(v8[0] aJoystick) ) {
@@ -323,7 +345,7 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
       v8 += 2;
     }
 
-    //FIXME: This feels out of place?
+    // Store this buttons config
     if ( (a1 < 0 || a1 == v5) && v16 > -1 ) {
       uint32_t* v11 = &v6[12 * dword_4D5E20[v5]];
       v11[0] = v14;
@@ -334,7 +356,7 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
 
   }
 
-
+  // Unknown, but seems to add a special entry for keyboards 
   if ( a1 < 0 || a1 == 2 ) {
     LOBYTE(v14) = 10;
     dword_4D5E28++;
@@ -343,6 +365,8 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
     v13[1] = 1;
     v13[2] = 10;
   }
+
+  // Mark last entry in each device type
   if ( a1 < 0 || a1 == 0) {
     byte_4D5FC0[12 * dword_4D5E20[0]] = -1;
   }
