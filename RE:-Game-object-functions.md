@@ -167,3 +167,50 @@ struct {
 
 }
 ```
+
+# Object lookup
+
+```C
+//----- (00450AA0) --------------------------------------------------------
+int __cdecl sub_450AA0(int a1, int a2) {
+  char **v2; // edi
+  char *v3; // ecx
+  signed int v4; // esi
+  int result; // eax
+  int v6; // edx
+
+  // Access object table (this might actually be a list of lists?)
+  v2 = off_4BFEC0;
+
+  while ( 1 ) {
+    v3 = *v2++;
+
+    // If there is no object, we have reached the end of the object list
+    if ( !v3 ) {
+      return 0;
+    }
+
+    // Check if this is the object type we are looking for
+    if ( *(_DWORD *)v3 != a1 ) {
+      continue;
+    }
+
+    v4 = *((_DWORD *)v3 + 2);
+    result = *((_DWORD *)v3 + 4);
+
+    //FIXME: Turn this into a for-loop
+    v6 = 0;
+    if ( v4 > 0 ) {
+      while( *(_WORD *)(result + 6) & 0x100 || *(signed __int16 *)(result + 4) != a2 ) {
+        result += *((_DWORD *)v3 + 3);
+        if ( (signed __int16)++v6 >= v4 ) {
+          break;
+        }
+      }
+    }
+
+  }
+
+  return result;
+}
+```
