@@ -12,10 +12,14 @@ typedef struct {
   uint8_t race_unlocked[4]; // 0xC 1 bit per course starting at LSb: unlocks race for freeplay
   uint32_t podracer_unlocked; // 0x10 1 bit per podracer ??? for freeplay
   Savedata profiles[4]; // 0x14 4 profiles, but the first profile seems to be the one used for most things
+
+  // This keeps track of the best times
   uint32_t times[100]; // 0x154 ??? (assumption only. untested)
-  char names[100][32]; // 0x2E4 ??? (assumption only. untested)
-  uint8_t unk[100]; // 0xF64
+  char time_names[100][32]; // 0x2E4
+  uint8_t time_podracer[100]; // 0xF64
+
   uint8_t unk[12]; // 0xFC8
+
   // 4052 bytes
 } TGFD;
 ```
