@@ -188,7 +188,8 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
   const char *v9; // ST10_4
   _DWORD *v13; // esi
 
-  //FIXME: This union might actually be bigger, that would explain why v17 is left unused
+  //FIXME: This union might actually be bigger, that would explain why v17 is left unused.
+  //       However, it seems to be stored in 12 byte per element array.. soooo.. idk
   union {
     typedef struct {
       uint32_t flags; //FIXME: There is strong indication that this is only 8 bit, then 3 byte padding
@@ -226,10 +227,12 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
     return -1;
   }
 
-  // Clear input?!
+  // Clear the first 2 jostick inputs?!
   if ( a1 < 0 || a1 == 0 ) {
     memset(dword_EC8880, 0, 0x18u);
   }
+
+  // Clear the first mouse input?!
   if ( a1 < 0 || a1 == 1 ) {
     dword_EC8790[0] = 0;
     dword_EC8794 = 0;
@@ -239,6 +242,7 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
   // Clear the input.. again?!
   sub_407800(a1);
 
+  // Simulate v5 and v6 containing garbage from stack?!
   v5 = (signed int)v17;
   v6 = v17;
 
@@ -281,7 +285,7 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
         v9 = v8[1];
         LOBYTE(v14) = v14 | 8;
         v15 = sub_407A90(v9, &unk_4B2B28);
-      } else if ( !_strcmpi(v8[0] off_4B3E68) ) {
+      } else if ( !_strcmpi(v8[0] "KEY") ) {
         LOBYTE(v14) = v14 | 8;
         v15 = sub_407A90(v8[1], &unk_4B2BD0);
       } else if ( !_strcmpi(v8[0] aFunction) ) {
