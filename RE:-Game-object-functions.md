@@ -171,46 +171,54 @@ struct {
 # Object lookup
 
 ```C
+
+typedef struct {
+  uint32_t type; // 4 letter string
+  uint32_t unk;
+  uint32_t element_count; // object count
+  uint32_t element_size; // size per object
+  void* first_element; // pointer to first object
+} ObjectList;
+
+typedef struct {
+  uint32_t unk; // 0
+  uint16_t index; // 4
+  uint16_t flags; // 6   0x100 = object is present / searchable?
+} ObjectHeader;
+
 //----- (00450AA0) --------------------------------------------------------
 int __cdecl sub_450AA0(int a1, int a2) {
   char **v2; // edi
   char *v3; // ecx
   signed int v4; // esi
-  int result; // eax
-  int v6; // edx
 
   // Access object table (this might actually be a list of lists?)
   v2 = off_4BFEC0;
 
   while ( 1 ) {
-    v3 = *v2++;
 
-    // If there is no object, we have reached the end of the object list
+    // Lookup object list, if there is none, we can abort as we don't have a list to search
+    ObjectList* v3 = *v2++;
     if ( !v3 ) {
-      return 0;
+      break;
     }
 
-    // Check if this is the object type we are looking for
-    if ( *(_DWORD *)v3 != a1 ) {
+    // Skip lists with wrong type
+    if (v3->type != a1) {
       continue;
     }
 
-    v4 = *((_DWORD *)v3 + 2);
-    result = *((_DWORD *)v3 + 4);
-
-    //FIXME: Turn this into a for-loop
-    v6 = 0;
-    if ( v4 > 0 ) {
-      while( *(_WORD *)(result + 6) & 0x100 || *(signed __int16 *)(result + 4) != a2 ) {
-        result += *((_DWORD *)v3 + 3);
-        if ( (signed __int16)++v6 >= v4 ) {
-          break;
-        }
+    uintptr_t result = v3->first_element;
+    for (int32_t v6 = 0; v6 < v3->element_count; v6++) {
+      ObjectHeader* r = result;
+      if ((!(r->flags & 0x100)) && (r->index == a2)) {
+        return result; // break from outer loop (return element)
       }
+      result += v3->element_size;
     }
 
   }
 
-  return result;
+  return 0;
 }
 ```
