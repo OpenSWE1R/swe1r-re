@@ -250,11 +250,6 @@ static inline uint32_t swap32(uint32_t v) {
 // a1 = sprite texture index
 signed __int16 *__cdecl sub_446CA0(int a1) {
 
-  struct {
-    uint32_t v42_begin;
-    uint32_t v42_end;
-  } v42u;
-
   // Open "out_spriteblock.bin"
   sub_42D680(1);
 
@@ -274,11 +269,15 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
   }
 
   // Get offset into address table and find the offset of our index and the one after it
+  struct {
+    uint32_t v42_begin;
+    uint32_t v42_end;
+  } v42u;
   sub_42D640(1, 4 + a1 * 4, &v42u, 8u);
-
   v42u.begin = swap32(v42u.begin);
   v42u.end = swap32(v42u.end);
 
+  // Create a pointer to i
   SpriteTexture* d = i;
 
   // Read 0x14 bytes from offset v42u.begin to buffer d / i
@@ -292,9 +291,6 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
   d->unk5 = swap16(d->unk5);
   d->unk6 = swap16(d->unk6);
   d->unk7 = swap32(d->unk7);
-
-  // Keep pointer to the buffer
-  uint8_t* v38 = i;
 
   //FIXME: Verify this check in the future. Might have messed up
   if (d->format != 0x02 || d->unk4 ) {
@@ -360,7 +356,7 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
       // I believe this might create a texture for the page
       //FIXME: Sprite 99 must be special?!
       if ( a1 != 99 ) {
-        sub_446B60(v38, &p[v32]);
+        sub_446B60(d, &p[v32]);
       }
 
       // Get next free bytes in buffer
@@ -370,7 +366,7 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
     // Update buffer pointer for special sprite
     //FIXME: Sprite 99 must be special?!
     if ( a1 == 99 ) {
-      sub_446A20(v38);
+      sub_446A20(d);
     }
 
   }
@@ -382,6 +378,6 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
   sub_445B20(i);
 
   // Return buffer pointer
-  return v38;
+  return d;
 }
 ```
