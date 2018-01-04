@@ -183,7 +183,7 @@ typedef struct {
 typedef struct {
   uint32_t unk; // 0
   uint16_t handle; // 4
-  uint16_t flags; // 6   0x100 = object is present / searchable?
+  uint16_t flags; // 6   0x100 = object is not present / unsearchable?
 } ObjectHeader;
 
 //----- (00450AA0) --------------------------------------------------------
@@ -211,7 +211,7 @@ ObjectHeader* __cdecl sub_450AA0(uint32_t a1, int a2) {
     for (int32_t v6 = 0; v6 < v3->element_count; v6++) {
       ObjectHeader* r = result;
       if ((!(r->flags & 0x100)) && (r->handle == a2)) {
-        return result; // break from outer loop (return element)
+        return result;
       }
       result += v3->element_size;
     }
