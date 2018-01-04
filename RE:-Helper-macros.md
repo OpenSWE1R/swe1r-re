@@ -13,7 +13,7 @@ These code patterns appear regularily in the source code, so likely they were ma
 
 ```C
 static inline uint16_t swap16(uint16_t v) {
-  //FIXME
+  return (v >> 8) | (v << 8);
 }
 
 static inline uint32_t swap32(uint32_t v) {
