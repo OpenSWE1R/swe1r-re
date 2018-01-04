@@ -39,6 +39,12 @@ typedef struct {
 } Sprite;
 
 typedef struct {
+  uint16_t width;
+  uint16_t height;
+  uint32_t offset;
+} SpriteTexturePage;
+
+typedef struct {
   uint16_t width; // 0x0
   uint16_t height; // 0x2
   uint8_t format; // 0x4 actual format?
@@ -48,7 +54,8 @@ typedef struct {
   uint16_t unk5; // 0xC page count
   uint16_t unk6; // 0xE always 32 [bits per pixel?]
   uint32_t unk7; // 0x10 pagetable pointer
-  // 0x14 bytes total, but will be followed by its pixel data normally
+  // 0x14 bytes total, but will be followed by its page, palette and pixel data normally
+  SpriteTexturePage pages[];
 } SpriteTexture;
 ```
 
@@ -273,36 +280,31 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
   v42u.end = swap32(v42u.end);
 
   SpriteTexture* d = i;
-  //FIXME: Replace all uses of "d." with "d->"
 
   // Read 0x14 bytes from offset v42u.begin to buffer d / i
   sub_42D640(1, v42u.begin, d, 0x14u);
 
-  d.width = swap16(d.width);
-  d.height = swap16(d.height);
+  d->width = swap16(d->width);
+  d->height = swap16(d->height);
   //FIXME: Confirm that format doesn't need a byteswap
-  d.unk3 = swap16(d.unk3);
-  d.unk4 = swap32(d.unk4);
-  d.unk5 = swap16(d.unk5);
-  d.unk6 = swap16(d.unk6);
-  d.unk7 = swap32(d.unk7);
+  d->unk3 = swap16(d->unk3);
+  d->unk4 = swap32(d->unk4);
+  d->unk5 = swap16(d->unk5);
+  d->unk6 = swap16(d->unk6);
+  d->unk7 = swap32(d->unk7);
 
   // Keep pointer to the buffer
   uint8_t* v38 = i;
 
   //FIXME: Verify this check in the future. Might have messed up
-  if (d->format != 0x02 || d.unk4 ) {
+  if (d->format != 0x02 || d->unk4 ) {
 
     // Read page data (8 byte per page)
-    uint8_t* v22 = &d[1]; // Pointer to after d
-    int32_t v36 = 8 * d.unk5; //FIXME: Signed multiplication
+    int32_t v36 = 8 * d->unk5; //FIXME: Signed multiplication
     sub_42D640(1, v42u.begin + 20, v22, v36);
 
-    struct {
-      uint16_t width;
-      uint16_t height;
-      uint32_t offset;
-    }* p = v22;
+    //FIXME: Get rid of this access pointer and just use d->pages
+    SpriteTexturePage* p = d->pages;
 
     // Update the data pointer
     d->unk7 = p;
@@ -314,19 +316,21 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
       p[v24].offset = swap32(p[v24].offset);
     }
 
+    uint8_t* v22 = d->pages; // Pointer to after d
+
     // Get buffer pointer after pagetable and align it to next 16 bytes
     v22 = ((uintptr_t)v22 + v36 + 15) & 0xFFFFFFF0);
 
     // Read palette if there is one
-    if ( d.unk4 ) {
+    if ( d->unk4 ) {
       // Calculate palette size (it's from palette begin until the first page)
-      int32_t v23 = p[0].offset - d.unk4;
+      int32_t v23 = p[0].offset - d->unk4;
 
       // Read palette
-      sub_42D640(1, v42u.begin + d.unk4, v22, v23);
+      sub_42D640(1, v42u.begin + d->unk4, v22, v23);
 
       // Update palette pointer
-      d.unk4 = (int)v22;
+      d->unk4 = (int)v22;
 
       // Get pointer to next free bytes in buffer    
       v22 = ((uintptr_t)v22 + v23 + 15) & 0xFFFFFFF0;
