@@ -223,9 +223,16 @@ SpriteTexture* __cdecl sub_446FB0(int a1) {
 }
 ```
 
-# Query sprite texture
+# Sprite texture loader
+
+Some small helpers we'll need often during RE.
+FIXME: Move these elsewhere
 
 ```C
+static inline uint16_t swap16(uint16_t v) {
+  ...
+}
+
 static inline uint32_t swap32(uint32_t v) {
   return ((v & 0xFF0000 | (v >> 16)) >> 8) | (((v << 16) | v & 0xFF00) << 8);
 }
