@@ -12,7 +12,10 @@ typedef struct {
   uint8_t race_unlocked[4]; // 0xC 1 bit per course starting at LSb: unlocks race for freeplay
   uint32_t podracer_unlocked; // 0x10 1 bit per podracer ??? for freeplay
   Savedata profiles[4]; // 0x14 4 profiles, but the first profile seems to be the one used for most things
-  uint8_t unk[]; // 0x154
+  uint32_t times[100]; // 0x154 ??? (assumption only. untested)
+  char names[100][32]; // 0x2E4 ??? (assumption only. untested)
+  uint8_t unk[100]; // 0xF64
+  uint8_t unk[12]; // 0xFC8
   // 4052 bytes
 } TGFD;
 ```
@@ -29,10 +32,10 @@ typedef struct {
   char profileName[32]; // 0x00, size correct?
   uint8_t unk[4]; // 0x20
   uint8_t last_podracer; // 0x24 value:
-                             // 0x01 = Anakin Skywalker
-                             // 0x09 = Ebe Endocott
-                             // 0x0A = Dud Bolt
-                             // 0x0B = Gasgano
+                         //   0x01 = Anakin Skywalker
+                         //   0x09 = Ebe Endocott
+                         //   0x0A = Dud Bolt
+                         //   0x0B = Gasgano
 
   uint8_t race_unlocked[5]; // 0x25 1 bit per course starting at LSb: unlocks race
   uint16_t race_status[5]; // 0x2A 2 bit per course starting at LSb: 0=4th (or not finished), 1=3rd, 2=2nd, 3=1st.
@@ -45,21 +48,9 @@ typedef struct {
 
   uint8_t pit_droid_count; // 0x40
 
-  uint8_t traction_part_index; // 0x41
-  uint8_t unk_part_index; // 0x42
-  uint8_t unk_part_index; // 0x43
-  uint8_t unk_part_index; // 0x44
-  uint8_t unk_part_index; // 0x45
-  uint8_t unk_part_index; // 0x46
-  uint8_t repair_part_index; // 0x47
-
-  uint8_t traction_part_health; // 0x48
-  uint8_t unk_part_health; // 0x49
-  uint8_t unk_part_health; // 0x4A
-  uint8_t unk_part_health; // 0x4B
-  uint8_t unk_part_health; // 0x4C
-  uint8_t unk_part_health; // 0x4D
-  uint8_t repair_part_health; // 0x4E
+  // Parts, in same order as shown in menu (probably)
+  uint8_t part_index[7]; // 0x41
+  uint8_t part_health[7]; // 0x48
 
   uint8_t unk; // 0x4F seems to be zero; padding only?
 
