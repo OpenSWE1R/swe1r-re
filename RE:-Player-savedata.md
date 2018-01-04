@@ -1,5 +1,25 @@
 # Savedata format
 
+## tgfd.dat file
+
+What a mess.. this mirrors the current profile file, so they can desync too.
+Also since this keeps track of the freeplay stuff, that can also desync with the current profile.
+
+```C
+// This data follows the 4 byte magic in the savegames (from player/data/*.sav)
+// They come from 0xE364A0 in memory
+typedef struct {
+  uint8_t race_unlocked[4]; // 0xC 1 bit per course starting at LSb: unlocks race for freeplay
+  uint32_t podracer_unlocked; // 0x10 1 bit per podracer ??? for freeplay
+  Savedata current_profile; // 0x14
+  uint8_t unk[]; // 0x64
+
+  // 4052 bytes
+} TGFD;
+```
+
+## sav files
+
 Note that this info is typically loaded from tgfd.dat
 So if you modify something, you should delete that file first
 
