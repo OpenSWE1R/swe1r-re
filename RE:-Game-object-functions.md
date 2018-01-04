@@ -184,6 +184,7 @@ typedef struct {
   uint32_t unk; // 0
   uint16_t handle; // 4
   uint16_t flags; // 6   0x100 = object is not present / unsearchable?
+  uint8_t data[];
 } ObjectHeader;
 
 //----- (00450AA0) --------------------------------------------------------
