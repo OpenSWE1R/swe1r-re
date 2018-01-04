@@ -19,52 +19,32 @@ signed int __cdecl sub_408880(int a1) {
     goto HandleError;
   }
 
-  onOff = aOn;
-  if ( !dword_EC86A0 ) {
-    onOff = (char *)&off_4B4808;
-  }
-  sprintf(&v8, aReflectionsS, onOff);
+  sprintf(&v8, aReflectionsS, dword_EC86A0 ? "ON" : "OFF");
   if ( sub_4879F0(a28s28s, &v9, &v8) ) {
     goto HandleError;
   }
 
-  onOff = aOn;
-  if ( !dword_EC86A4 ) {
-    onOff = (char *)&off_4B4808;
-  }
-  sprintf(&v8, aZeffectsS, onOff);
+  sprintf(&v8, aZeffectsS, dword_EC86A4 ? "ON" : "OFF");
   if ( sub_4879F0(a28s28s, &v9, &v8) ) {
     goto HandleError;
   }
 
-  onOff = aOn;
-  if ( !dword_EC86A8 )
-    onOff = (char *)&off_4B4808;
-  sprintf(&v8, aDynamicLightin_0, onOff);
+  sprintf(&v8, aDynamicLightin_0, dword_EC86A8 ? "ON" : "OFF");
   if ( sub_4879F0(a28s28s, &v9, &v8) ) {
     goto HandleError;
   }
 
-  onOff = aOn;
-  if ( !dword_EC86AC )
-    onOff = (char *)&off_4B4808;
-  sprintf(&v8, aVsyncS, onOff);
+  sprintf(&v8, aVsyncS, dword_EC86AC  ? "ON" : "OFF");
   if ( sub_4879F0(a28s28s, &v9, &v8) ) {
     goto HandleError;
   }
 
-  onOff = aOn;
-  if ( !dword_EC86B0 )
-    onOff = (char *)&off_4B4808;
-  sprintf(&v8, aLensflareS, onOff);
+  sprintf(&v8, aLensflareS, dword_EC86B0 ? "ON" : "OFF");
   if ( sub_4879F0(a28s28s, &v9, &v8) ) {
     goto HandleError;
   }
 
-  onOff = aOn;
-  if ( !dword_EC86B4 )
-    onOff = (char *)&off_4B4808;
-  sprintf(&v8, aEngineexhaustS, onOff);
+  sprintf(&v8, aEngineexhaustS, dword_EC86B4 ? "ON" : "OFF");
   if ( sub_4879F0(a28s28s, &v9, &v8) {
     goto HandleError;
   }
