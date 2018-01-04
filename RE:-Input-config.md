@@ -182,15 +182,10 @@ LABEL_28:
 // a2 = if a3 is zero, then config filename, example (optional, default "wheel.map"). Otherwise foldername and prefix for "_control.map" (mandatory)
 // a3 = Load "control.map"
 signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
-  signed int result; // eax
-  int a1; // ebx
   signed int v5; // edi
   char *v6; // ebp
-  unsigned int v7; // ebx
   const char **v8; // esi
   const char *v9; // ST10_4
-  BOOL v10; // eax
-  int v12; // eax
   _DWORD *v13; // esi
   int v14; // [esp+10h] [ebp-130h]
   int v15; // [esp+14h] [ebp-12Ch]
@@ -247,94 +242,85 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
       break;
     }
 
-    v7 = 0;
+
     LOBYTE(v14) = 0;
     v15 = 0;
     v16 = -1;
-    if ( dword_EC8E80 ) {
 
-      v8 = (const char **)&dword_EC8E84;
-      while ( 1 ) {
-        if (!_strcmpi(v8[0] aJoystick) ) {
-          v5 = 0;
-          v6 = byte_4D5FC0;
-        } elseif (!_strcmpi(v8[0] aMouse) ) {
-          v5 = 1;
-          v6 = byte_4D6518;
-        } else if ( !_strcmpi(v8[0] aKeyboard) ) {
-          v5 = 2;
-          v6 = byte_4D6828;
-        } else if ( !_strcmpi(v8[0] aAxis) ) {
-          LOBYTE(v14) = v14 | 4;
-          v15 = sub_407A90(v8[1], &unk_4B2AF0);
-        } else if ( !_strcmpi(v8[0] aButton) ) {
-          v9 = v8[1];
-          LOBYTE(v14) = v14 | 8;
-          v15 = sub_407A90(v9, &unk_4B2B28);
-        } else if ( !_strcmpi(v8[0] off_4B3E68) ) {
-          LOBYTE(v14) = v14 | 8;
-          v15 = sub_407A90(v8[1], &unk_4B2BD0);
-        } else if ( !_strcmpi(v8[0] aFunction) ) {
-          if ( !sub_407CD0((int)&v14, v8[1], 0) ) {
-            sub_407800(a1);
-            sub_487900();
-            return 0;
-          }
-        } else if ( !_strcmpi(v8[0] aAxisRange) ) {
-          if ( !_strcmpi(v8[1], aPositive) ) {
-             LOBYTE(v14) = v14 | 0x10;
-          } else if ( !_strcmpi(v8[1], aNegative) ) {
-            LOBYTE(v14) = v14 | 0x20;
-          } else {
-            sub_407800(a1);
-            sub_487900();
-            return 0;
-          }
-        } else if ((a1 < 0 || a1 == v5) && !_strcmpi(v8[0] aFlipAxis)) { //FIXME: Review this condition
-          if ( v5 == 0) {
-            dword_EC8880[v15] = 1;
-          } else if ( v5 == 1 ) {
-            dword_EC8790[v15] = 1;
-          } else {
-            sub_407800(a1);
-            sub_487900();
-            return 0;
-          }
-        } else if ( !_strcmpi(v8[0] aSensitivity) ) {
-          *(float *)&dword_EC8780[v5] = atof(v8[1]); 
-        } else if ( !_strcmpi(v8[0] aDeadzone) ) {
-          if ( !v5 ) {
-            dword_EC876C = atof(v8[1]);
-          }
-        } else if ( !_strcmpi(v8[0] aEnabled) ) {
-          v10 = !_strcmpi(v8[1], aTrue);
-          if ( v5 == 0) {
-            dword_4B2944 = v10 && dword_4B294C;
-          } else if ( v5 == 1 ) {
-            //FIXME: Simplify the following condition
-            if ( !v10 || (dword_4D6B38 = 1, !dword_4B2950) ) {
-              dword_4D6B38 = 0;
-            }
-          }
-          //FIXME: You'd expect an error handler here?!
-        }
+    v8 = (const char **)&dword_EC8E84;
 
-        // Error if the button / axis is not known
-        if ( v15 < 0 ) {
+
+    for(uint32_t v7 = 0; v7 < dword_EC8E80; v7++) {
+
+      if (!_strcmpi(v8[0] aJoystick) ) {
+        v5 = 0;
+        v6 = byte_4D5FC0;
+      } elseif (!_strcmpi(v8[0] aMouse) ) {
+        v5 = 1;
+        v6 = byte_4D6518;
+      } else if ( !_strcmpi(v8[0] aKeyboard) ) {
+        v5 = 2;
+        v6 = byte_4D6828;
+      } else if ( !_strcmpi(v8[0] aAxis) ) {
+        LOBYTE(v14) = v14 | 4;
+        v15 = sub_407A90(v8[1], &unk_4B2AF0);
+      } else if ( !_strcmpi(v8[0] aButton) ) {
+        v9 = v8[1];
+        LOBYTE(v14) = v14 | 8;
+        v15 = sub_407A90(v9, &unk_4B2B28);
+      } else if ( !_strcmpi(v8[0] off_4B3E68) ) {
+        LOBYTE(v14) = v14 | 8;
+        v15 = sub_407A90(v8[1], &unk_4B2BD0);
+      } else if ( !_strcmpi(v8[0] aFunction) ) {
+        if ( !sub_407CD0((int)&v14, v8[1], 0) ) {
           sub_407800(a1);
           sub_487900();
           return 0;
         }
-
-        v7++;
-        v8 += 2;
-
-        if ( v7 >= dword_EC8E80 ) {
-          break;
+      } else if ( !_strcmpi(v8[0] aAxisRange) ) {
+        if ( !_strcmpi(v8[1], aPositive) ) {
+           LOBYTE(v14) = v14 | 0x10;
+        } else if ( !_strcmpi(v8[1], aNegative) ) {
+          LOBYTE(v14) = v14 | 0x20;
+        } else {
+          sub_407800(a1);
+          sub_487900();
+          return 0;
         }
+      } else if ((a1 < 0 || a1 == v5) && !_strcmpi(v8[0] aFlipAxis)) { //FIXME: Review this condition
+        if ( v5 == 0) {
+          dword_EC8880[v15] = 1;
+        } else if ( v5 == 1 ) {
+          dword_EC8790[v15] = 1;
+        } else {
+          sub_407800(a1);
+          sub_487900();
+          return 0;
+        }
+      } else if ( !_strcmpi(v8[0] aSensitivity) ) {
+        *(float *)&dword_EC8780[v5] = atof(v8[1]); 
+      } else if ( !_strcmpi(v8[0] aDeadzone) ) {
+        if ( !v5 ) {
+          dword_EC876C = atof(v8[1]);
+        }
+      } else if ( !_strcmpi(v8[0] aEnabled) ) {
+        BOOL v10 = !_strcmpi(v8[1], aTrue);
+        if ( v5 == 0) {
+          dword_4B2944 = v10 && dword_4B294C;
+        } else if ( v5 == 1 ) {
+          dword_4D6B38 = v10 && dword_4B2950
+        }
+        //FIXME: You'd expect an error handler here?!
       }
-      // Loop ends here
 
+      // Error if the button / axis is not known
+      if ( v15 < 0 ) {
+        sub_407800(a1);
+        sub_487900();
+        return 0;
+      }
+
+      v8 += 2;
     }
 
     //FIXME: This feels out of place?
