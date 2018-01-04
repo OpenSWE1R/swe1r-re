@@ -5,8 +5,8 @@ There seems to be a sprite renderer which is used for the HUD (and probably othe
 ```C
 // Array starting at 0xE9BA60
 typedef struct {
-  int16_t x; // Position x?
-  int16_t y; // Position y?
+  int16_t x; // Position x
+  int16_t y; // Position y
   int16_t unk0x4; // 0x4, written in sub_4286C0
   int16_t unk0x6; // 0x6, written in sub_4286C0
   float width; //0x8 Size X
