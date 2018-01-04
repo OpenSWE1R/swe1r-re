@@ -39,7 +39,16 @@ typedef struct {
 } Sprite;
 
 typedef struct {
-  // At most 0x2460/2 bytes
+  uint16_t width; // 0x0
+  uint16_t height; // 0x2
+  uint8_t format; // 0x4 actual format?
+  uint8_t page_width_align; // 0x5 page width alignment: 0=0x10, 1=0x8, 2=0x4, 3=0x2, 7=0x2. all other values are undefined
+  uint16_t unk3; // 0x6 always zero?
+  uint32_t unk4; // 0x8 palette pointer
+  uint16_t unk5; // 0xC page count
+  uint16_t unk6; // 0xE always 32 [bits per pixel?]
+  uint32_t unk7; // 0x10 pagetable pointer
+  // 0x14 bytes total, but will be followed by its pixel data normally
 } SpriteTexture;
 ```
 
@@ -53,7 +62,6 @@ typedef struct {
 __int16 __cdecl sub_4285D0(__int16 a1, int a2) {
   int *v2; // eax
   int v3; // eax
-  int v4; // ecx
 
   LOWORD(v2) = a1;
   if ( a1 == -201) {
@@ -227,33 +235,6 @@ static inline uint32_t swap32(uint32_t v) {
 //----- (00446CA0) --------------------------------------------------------
 // a1 = sprite texture index
 signed __int16 *__cdecl sub_446CA0(int a1) {
-  int *v4; // ecx
-  signed int v5; // edx
-  unsigned int v6; // eax
-  unsigned int v12; // ecx
-  int v13; // edi
-  int v14; // eax
-  int v15; // eax
-  unsigned int v16; // edi
-  int v17; // eax
-  int v18; // edi
-  unsigned int v19; // ecx
-  int v20; // edx
-  unsigned int v21; // ebp
-  int v23; // ebp
-  signed int v24; // ecx
-  bool v25; // zf
-  bool v26; // sf
-  __int16 v27; // dx
-  unsigned int *v28; // edx
-  int v33; // eax
-  int v34; // ecx
-
-
-  size_t v36; // [esp+10h] [ebp-1Ch]
-  int v37; // [esp+10h] [ebp-1Ch]
-  signed __int16 *v38; // [esp+14h] [ebp-18h]
-  uint32_t v39; // [esp+18h] [ebp-14h]
 
   struct {
     uint32_t v42_begin;
@@ -267,8 +248,9 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
   //FIXME: Change to uint8_t* and use another index to navigate through this buffer
   uint16_t* i = sub_445B40();
 
-  // Read 32 bit BE from out_spriteblock.bin and convert the to LE
+  // Read 32 bit BE from out_spriteblock.bin and convert to LE
   // This is the number of sprites in the file
+  uint32_t v39;
   sub_42D640(1, 0, &v39, 4u);
   v39 = swap32(v39);
 
@@ -278,22 +260,12 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
   }
 
   // Get offset into address table and find the offset of our index and the one after it
-  sub_42D640(1, 4 * a1 + 4, &v42u, 8u);
+  sub_42D640(1, 4 + a1 * 4, &v42u, 8u);
 
   v42u.begin = swap32(v42u.begin);
   v42u.end = swap32(v42u.end);
 
-  struct {
-    uint16_t width; // 0x0
-    uint16_t height; // 0x2 
-    uint16_t format; // 0x4
-    uint16_t unk3; // 0x6 always zero?
-    uint32_t unk4; // 0x8 palette offset
-    uint16_t unk5; // 0xC page count?
-    uint16_t unk6; // 0xE always 32 [bits per pixel?]
-    uint32_t unk7; // 0x10 data offset / header size? [unused?]
-    // 0x14 bytes total
-  }* d = i;
+  SpriteTexture* d = i;
   //FIXME: Replace all uses of "d." with "d->"
 
   // Read 0x14 bytes from offset v42u.begin to buffer d / i
@@ -301,6 +273,7 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
 
   d.width = swap16(d.width);
   d.height = swap16(d.height);
+  //FIXME: Confirm that format doesn't need a byteswap
   d.unk3 = swap16(d.unk3);
   d.unk4 = swap32(d.unk4);
   d.unk5 = swap16(d.unk5);
@@ -308,16 +281,14 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
   d.unk7 = swap32(d.unk7);
 
   // Keep pointer to the buffer
-  v38 = i;
-
-  v18 = &d.unk7; // data pointer [points at pagetable]
+  uint8_t* v38 = i;
 
   //FIXME: Verify this check in the future. Might have messed up
-  if ((d->format & 0xFF) != 2 || d.unk4 ) {
+  if (d->format != 0x02 || d.unk4 ) {
 
     // Read page data (8 byte per page)
     uint8_t* v22 = &d[1]; // Pointer to after d
-    v36 = 8 * d.unk5; //FIXME: Signed multiplication
+    int32_t v36 = 8 * d.unk5; //FIXME: Signed multiplication
     sub_42D640(1, v42u.begin + 20, v22, v36);
 
     struct {
@@ -342,7 +313,7 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
     // Read palette if there is one
     if ( d.unk4 ) {
       // Calculate palette size (it's from palette begin until the first page)
-      v23 = p[0].offset - d.unk4;
+      int32_t v23 = p[0].offset - d.unk4;
 
       // Read palette
       sub_42D640(1, v42u.begin + d.unk4, v22, v23);
@@ -361,6 +332,7 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
 
       // Get pointer to offset which is used for other things (end offset for us)
       // The last one must be handled slightly differently
+      int32_t v33;
       if ( v32 == d->unk5 - 1 ) {
         v33 = v42u.end - v42u.begin;
       } else {
@@ -368,19 +340,19 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
       }
 
       // Calculate size from offset to end offset and read data
-      v37 = v33 - p[v32].offset;
+      int32_t v37 = v33 - p[v32].offset;
       sub_42D640(1, v42u.begin + p[v32].offset, i, v37);
 
       // Update pointer to data
       p[v32].offset = i;
 
-      // Update buffer and page table pointer for this sprite
+      // I believe this might create a texture for the page
       //FIXME: Sprite 99 must be special?!
       if ( a1 != 99 ) {
         sub_446B60(v38, &p[v32]);
       }
 
-      // Get next free bytes in buffer again
+      // Get next free bytes in buffer
       i = ((uintptr_t)i + v37 + 15) & 0xFFFFFFF0;
     }
 
@@ -396,7 +368,7 @@ signed __int16 *__cdecl sub_446CA0(int a1) {
   sub_42D6F0(1);
 
   //FIXME: Mark the end of the buffer?
-  sub_445B20((int)i);
+  sub_445B20(i);
 
   // Return buffer pointer
   return v38;
