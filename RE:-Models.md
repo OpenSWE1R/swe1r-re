@@ -8,12 +8,9 @@ int *__cdecl sub_448780(int32_t a1) {
   unsigned int v2; // edx
   int v3; // eax
   int *v4; // ecx
-  signed int v5; // edx
   unsigned int v6; // eax
   int v7; // esi
   signed int v8; // ebp
-  int *v9; // ecx
-  int v10; // edx
   unsigned int v11; // eax
   int v12; // eax
   int *v13; // edi
@@ -35,7 +32,6 @@ int *__cdecl sub_448780(int32_t a1) {
   sub_42D680(3);
 
   // Load modelblock
-  v1 = 0;
   sub_42D680(0);
 
   dword_50C600 = 1;
@@ -48,9 +44,7 @@ int *__cdecl sub_448780(int32_t a1) {
 
   // Read model count
   sub_42D640(0, 0, &v21, 4u);
-  v2 = ((v21 >> 16) | v21 & 0xFF0000) >> 8;
-  v3 = v2 | (((v21 << 16) | v21 & 0xFF00) << 8);
-  v21 = v2 | (((v21 << 16) | v21 & 0xFF00) << 8);
+  v21 = = swap32(v21);
 
   // Check if model index is in valid range
   if ((a1 < 0) || (a1 >= v3)) {
@@ -60,121 +54,127 @@ int *__cdecl sub_448780(int32_t a1) {
   }
 
   // Read model entry from offset table
-  sub_42D640(0, 8 * a1 + 4, &v23, 0xCu);
   v4 = &v23;
-  v5 = 3;
-  do {
-    v6 = *v4;
-    ++v4;
-    --v5;
-    *(v4 - 1) = ((v6 & 0xFF0000 | (v6 >> 16)) >> 8) | (((v6 << 16) | v6 & 0xFF00) << 8);
-  } while ( v5 );
+  sub_42D640(0, 8 * a1 + 4, v4, 3 * 4);
+  for(int32_t v5 = 0; v5 < 3; v5++) {
+    v4[v5] = swap32(v4[v5]);
+  }
 
   v7 = v24 - v23;
   v8 = v25 - v24;
-  if ( v24 - v23 > 153600 ) {
+  if ( v7 > 153600 ) {
     sub_42D6F0(3);
     sub_42D6F0(0);
     return 0;
   }
 
-  sub_42D640(0, v23, dword_E6B180, v24 - v23);
-  if ( v7 / 4 > 0 )
-  {
-    v9 = dword_E6B180;
-    v10 = v7 / 4;
-    do {
-      v11 = *v9;
-      ++v9;
-      --v10;
-      *(v9 - 1) = (((v11 >> 16) | v11 & 0xFF0000) >> 8) | (((v11 << 16) | v11 & 0xFF00) << 8);
-    } while ( v10 );
+  int32_t* v9 = dword_E6B180;
+  sub_42D640(0, v23, v9, v7);
+  for(int32_t v10 = 0; v10 < v7 / 4; v10++) {
+    v9[v10] = swap32(v9[v10]);
   }
+
+
+  // Get buffer and align to 8 byte
+  typdef struct {
+    uint32_t magic;
+    uint32_t unk1;
+    uint32_t unk2;
+  } V13;
   v12 = sub_445B40();
   v13 = (int *)((v12 + 7) & 0xFFFFFFF8);
+
+  //FIXME: Read 12 byte.. what for?
   v22 = v12;
   sub_42D640(0, v24, v13, 0xCu);
-  if ( (((*v13 & 0xFF0000 | ((unsigned int)*v13 >> 16)) >> 8) | (((*v13 << 16) | *v13 & 0xFF00) << 8)) == 1131375984 ) {
-    v14 = v8 - 12;
+
+  if (swap32(v13[0]) == MAGIC('C','o','m','p')) {
+
+    // If this chunk is compressed, decompress it
+
+    // Get and validate length of compressed chunk
     v26 = v8 - 12;
-    v8 = ((((unsigned int)v13[2] >> 16) | v13[2] & 0xFF0000) >> 8) | (((v13[2] << 16) | v13[2] & 0xFF00) << 8);
+    v8 = swap32(v13[2]);
     if ( v8 + 8 > sub_445BF0() ) {
       dword_50C610 = 1;
       sub_42D6F0(3);
       sub_42D6F0(0);
       return 0;
     }
-    v16 = (char *)((dword_E981E4 - v14) & 0xFFFFFFF8);
+
+    v16 = (char *)((dword_E981E4 - (v8 - 12)) & 0xFFFFFFF8);
     if ( v16 < (char *)v13 + v8 ) {
       sub_42D6F0(3);
       sub_42D6F0(0);
       dword_50C610 = 1;
       return 0;
     }
+
+    // Load compressed data
     sub_42D640(0, v24 + 12, v16, v26);
+
+    // Uncompress
     sub_42D520(v16, v13);
+
+    // Parse model??
     sub_445B20((int)v13 + v8);
-    v1 = 0;
-  }
-  else
-  {
+  } else {
+    
+    // Chunk is not compressed, just load it
+
+    // Validate length of chunk
     if ( v8 + 8 > sub_445BF0() ) {
       sub_42D6F0(3);
       sub_42D6F0(0);
       dword_50C610 = 1;
       return 0;
     }
+
+    // Load data
     sub_42D640(0, v24, v13, v8);
+
+    // Parse model??
     sub_445B20((int)v13 + v8);
   }
+
   dword_E9822C = v22;
   dword_E6B164 = sub_445B40();
   v22 = sub_445B40();
-  if ( dword_50C604 )
-  {
+
+  if ( dword_50C604 ) {
     sub_445B40();
     sub_445B40();
     sub_445B40();
     sub_445B40();
   }
-  v17 = v8 >> 2;
+
+  v17 = v8 / 4;
   v18 = (unsigned int *)v13;
-  if ( v17 > 0 )
-  {
-    do
-    {
-      if ( (1 << (31 - (v1 & 0x1F))) & dword_E6B180[v1 >> 5] )
-      {
-        v19 = (((*v18 >> 16) | *v18 & 0xFF0000) >> 8) | (((*v18 << 16) | *v18 & 0xFF00) << 8);
-        *v18 = v19;
-        if ( (v19 & 0xFF000000) == 167772160 )
-        {
-          sub_447490(v17, v19 & 0xFFFFFF, (char **)v18, (int *)v18 + 1);
-        }
-        else if ( v19 )
-        {
-          *v18 = (unsigned int)v13 + v19;
-        }
+
+  for (int32_t v1 = 0; v1 < v17; v1++) {
+    if ( (1 << (31 - (v1 & 0x1F))) & dword_E6B180[v1 >> 5] ) {
+      v18[v1] = swap32(v18[v1]);
+      if ( (v18[v1] & 0xFF000000) == 0x0A000000 ) {
+        sub_447490(v17, v18[v1] & 0x00FFFFFF, &v18[v1], &v18[v1 + 1]);
+      } else if ( v18[v1] != 0x00000000) {
+        v18[v1] = (unsigned int)v13 + v18[v1];
       }
-      ++v18;
-      ++v1;
     }
-    while ( v1 < v17 );
   }
-  sub_4485D0((unsigned int *)v13);
-  v20 = *v13;
-  if ( *v13 == 1299145836
-    || v20 == 1416782187
-    || v20 == 1349477476
-    || v20 == 1348563572
-    || v20 == 1399022958
-    || v20 == 1296133236
-    || v20 == 1349873776 )
-  {
-    ++v13;
-  }
-  else
-  {
+
+  sub_4485D0(v13);
+
+  // For certain types, the header seems to be skipped?!
+  v20 = v13[0];
+  if ((v20 == MAGIC('M','o','d','l')) || // 0x4D6F646C 
+      (v20 == MAGIC('T','r','a','k')) || // 0x5472616B
+      (v20 == MAGIC('P','o','d','d')) || // 0x506F6464
+      (v20 == MAGIC('P','a','r','t')) || // 0x50617274
+      (v20 == MAGIC('S','c','e','n')) || // 0x5363656E
+      (v20 == MAGIC('M','A','l','t')) || // 0x4D416C74
+      (v20 == MAGIC('P','u','p','p'))) { // 0x50757070 ) {
+    v13++;
+  } else {
     nullsub_3();
   }
 
