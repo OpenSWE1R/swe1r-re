@@ -1,6 +1,4 @@
-**This article is still under construction. Use everything with caution. Some things might not work**
-
-It is assumed you have a working environment including C compiler which will work with CMake.
+It is assumed you have a working development environment including C compiler which will work with CMake.
 It is also assumed that you have a working git installation and know how to use it.
 
 For all platforms, you must first clone the repository and create a "build/" directory in the repository:
@@ -13,6 +11,8 @@ cd build
 ```
 
 All of the following instructions should be ran from the newly created "build/" directory, unless noted otherwise.
+
+After following the instructions for your platform below, you can try some of the more advanced [[Build Options]].
 
 ---
 
