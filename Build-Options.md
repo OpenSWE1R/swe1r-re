@@ -1,14 +1,15 @@
-**Make sure you understand how to build OpenSWE1R first, by reading the [[Build Instructions]].**
+**Make sure you understand how to build OpenSWE1R first, by reading the .**
 
 ## CMake options
 
 OpenSWE1R exposes options through CMake which you can set during setup.
 
-Using the command line interface, they can be added like this: `cmake -D<option1>=<value1> -D<option2>=<value2> ..`.
-For example: `cmake -DUSE_VM=ON ..`.
+Using the command line interface, you can configure your build using `cmake -D<option1>=<value1> -D<option2>=<value2> ..` (Example: `cmake -DUSE_VM=ON ..`).
 
-You'll have to compile again after this re-configuration.
-Below, you'll find a list of currently exposed:
+You'll have to build again after this re-configuration. See [[Build Instructions]]
+
+
+**List of currently exposed CMake options**:
 
 * **`USE_VM`** *- Accepted values: `OFF` (default), `ON`*
   
