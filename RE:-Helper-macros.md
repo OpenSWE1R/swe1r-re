@@ -84,15 +84,15 @@ static inline _T clamp(_T x, _T a, _T b) {
 ## Fast inverse
 
 ```C
-// Thanks to MerryMage for explaining this function
-// See http://bits.stephan-brumme.com/inverse.html
+// Thanks to MerryMage for identifiying this function.
+// Also see http://bits.stephan-brumme.com/inverse.html
 static inline float fast_inverse(float a) {
   uint32_t x = 0x7F000000 - *(uint32_t*)&a;
   return *(float*)&x;
 }
 
-// Thanks to wwylele for explaining this function
-// See https://en.wikipedia.org/wiki/Newton%27s_method#Multiplicative_inverses_of_numbers_and_power_series
+// Thanks to wwylele for identifiying this function.
+// Also see https://en.wikipedia.org/wiki/Newton%27s_method#Multiplicative_inverses_of_numbers_and_power_series
 static inline float inverse(float a) {
   float x_0 = fast_inverse(a);
   return x_0 * (2.0f - a * x_0);
