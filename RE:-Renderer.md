@@ -93,9 +93,7 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
   signed __int16 v69; // [esp+1Ch] [ebp-4Ch]
   int v71; // [esp+20h] [ebp-48h]
   signed int v72; // [esp+24h] [ebp-44h]
-  int v73; // [esp+2Ch] [ebp-3Ch]
   signed __int16 v74; // [esp+2Ch] [ebp-3Ch]
-  int v75; // [esp+30h] [ebp-38h]
   int v76; // [esp+30h] [ebp-38h]
   int v77; // [esp+34h] [ebp-34h]
   int v78; // [esp+38h] [ebp-30h]
@@ -121,7 +119,46 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
 
   sub_49EA00();
   result = a1;
+
+  struct {
+    uint32_t rendering_flags; // [0]
+    uint32_t color_blending_mode; // [1] ???
+    uint32_t vertex_count; // [2]
+    uint32_t unk3;
+    struct {
+      float x;
+      float y;
+      float z;
+    }* positions; // [4]
+    struct {
+      float u;
+      float v;
+    }* uvs; // [5]
+    struct {
+      float r;
+      float g;
+      float b;
+      float a;
+    }* colors; // [6]
+    struct {
+      ...
+      uint32_t unk; // +124 ; some rendering flag
+      struct {
+        ...
+        uint32_t unk; // +128
+      }* unk; // +144 ; v13
+    }* unk7; // v10 and v63
+    uint32_t unk8;
+    float r; // [9]
+    float g; // [10]
+    float b; // [11]
+    float a; // [12] ???
+    uint32_t unk13;
+    float u_offset; // [14]
+    float v_offset; // [15]
+  }; // v3
   v3 = a2;
+
   for(int v80 = 0; v80 < a1; v80++) {
     uint32_t v4 = *v3;
     v66 = v4;
@@ -173,19 +210,27 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
       dword_AF30DC = *((_DWORD *)v3 + 6);
       v16 = v15;
       v67 = v15;
+
+      // Check if the wanted color blending mode works?
       v72 = *((_DWORD *)v3 + 1);
       if ( v72 >= dword_ECC424 ) {
         v72 = dword_ECC424;
       }
       
-      v73 = 0;
-      v75 = 0;
-
-
-
       for(v17 = 0; v17 < v68; v17++) {
-        v18 = v75 + dword_5430C4;
-        float* v19 = dword_AF30DC + v73;
+
+        struct {
+          float x;
+          float y;
+          float z;
+        }* v18 = &dword_5430C4[v17];
+
+        struct {
+          float r;
+          float g;
+          float b;
+          float a;
+        }* v19 = &dword_AF30DC[v17];
 
         // Generate output address (v15 = vertex index, 32 = stride)
         struct {
@@ -200,19 +245,19 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
         }* v20 = &unk_B6B0E8[v15]; // unk_B6B0E8 is of the outputvertex type too
 
         // Copy X and Y
-        v20->x = *(_DWORD *)(v75 + dword_5430C4);
-        v20->y = *(_DWORD *)(v18 + 4);
+        v20->x = v18->x;
+        v20->y = v18->y;
 
         // Generate RHW
-        if ( *(float *)(v18 + 8) == 0.0 ) {
+        if (v18->z == 0.0 ) {
           v21 = 0.0;
         } else {
-          v21 = (2.0 - *(float *)(v18 + 8) * COERCE_FLOAT(2130706432 - *(_DWORD *)(v18 + 8)))
-              * COERCE_FLOAT(2130706432 - *(_DWORD *)(v18 + 8));
+          v21 = (2.0 - v18->z * COERCE_FLOAT(0x7F000000 - *(_DWORD *)&v18->z)
+              * COERCE_FLOAT(0x7F000000 - *(_DWORD *)&v18->z);
         }
 
         // Copy Z and RHW
-        if ( *(float *)(v18 + 8) == *(float *)&dword_5430C0 ) {
+        if ( v18->z == *(float *)&dword_5430C0 ) {
           v20->z = 0.0;
         } else {
           v20->z = 1.0 - v21 * *(float *)&dword_5430C0;
@@ -221,9 +266,9 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
 
         // Probably something to do with colors or alpha blending
         if ( v66 & 0x200 ) {
-          if ( *(float *)(v18 + 8) > (double)*(float *)&flt_EC8578 ) {
-            if ( *(float *)(v18 + 8) < (double)*(float *)&flt_EC857C ) {
-              v22 = (1.0 - (*(float *)(v18 + 8) - *(float *)&flt_EC8578) * flt_EC8574) * 255.0;
+          if (v18->z > *(float *)&flt_EC8578 ) {
+            if (v18->z < *(float *)&flt_EC857C ) {
+              v22 = (1.0 - (v18->z - *(float *)&flt_EC8578) * flt_EC8574) * 255.0;
               v79 = (signed int)_frndint(v22);
               v20->color2 = (v79 << 24) | 0xFFFFFF;
             } else {
@@ -242,18 +287,18 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
           goto LABEL_44;
         } else if ( v72 == 3 ) {
           v25 = *((float*)v3 + 12) == 1.0f;
-          v86 = v19[0] + v3[9];
-          v85 = v19[1] + v3[10];
-          v84 = v19[2] + v3[11];
-          v26 = v19[3];
+          v86 = v19->r + v3[9];
+          v85 = v19->g + v3[10];
+          v84 = v19->b + v3[11];
+          v26 = v19->a;
           if ( !v25 ) {
             v26 = v26 + v3[12];
           }
         } else {
-          v86 = v19[0];
-          v27 = v19[1];
-          v28 = v19[2];
-          v26 = v19[3];
+          v86 = v19->r;
+          v27 = v19->g;
+          v28 = v19->b;
+          v26 = v19->a;
           v85 = v27;
           v84 = v28;
         }
@@ -295,11 +340,8 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
         v20->color1 = v45;
 
         // Copy UV
-        v20->u = *(float *)(*((_DWORD *)v3 + 5) + 8 * v17) + v3[14];
+        v20->u = *(float *)(*((_DWORD *)v3 + 5) + 8 * v17 + 0) + v3[14];
         v20->v = *(float *)(*((_DWORD *)v3 + 5) + 8 * v17 + 4) + v3[15];
-
-        v75 += 12;
-        v73 += 16;
 
         // Generate next index
         v15 = ++dword_A530D0;
