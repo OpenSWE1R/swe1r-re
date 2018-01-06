@@ -395,83 +395,69 @@ void __cdecl sub_48A350(int a1, int a2, int a3, unsigned int a4, int a5, int a6)
 ```C
 //----- (0048A450) --------------------------------------------------------
 // a1 = the renderstates to set
-int __cdecl sub_48A450(int a1) {
-  int result; // eax
-  int v2; // edx
+void __cdecl sub_48A450(int a1) {
 
-  result = dword_52E610;
-  if ( dword_52E610 != a1 )
-  {
-    if ( (BYTE1(dword_52E610) ^ BYTE1(a1)) & 6 )
-    {
-      if ( a1 & 0x400 )
-      {
-        (*(void (__stdcall **)(int, signed int, signed int))(*(_DWORD *)dword_52E644 + 88))(dword_52E644, 27, 1);
-        (*(void (__stdcall **)(int, signed int, signed int))(*(_DWORD *)dword_52E644 + 88))(dword_52E644, 21, 4);
+  // Don't worry if all states are already set correctly
+  if ( dword_52E610 == a1 ) {
+    return;
+  }
+
+  if ((dword_52E610 ^ a1) & 0x600 ) {
+    if ( a1 & 0x400 ) {
+      dword_52E644->SetRenderState(D3DRENDERSTATE_ALPHABLENDENABLE, 1);
+      dword_52E644->SetRenderState(D3DRENDERSTATE_TEXTUREMAPBLEND, D3DTBLEND_MODULATEALPHA);
+    } else {
+      if ( a1 & 0x200 ) {
+        dword_52E644->SetRenderState(D3DRENDERSTATE_ALPHABLENDENABLE, 1);
+        dword_52E644->SetRenderState(D3DRENDERSTATE_TEXTUREMAPBLEND, D3DTBLEND_MODULATE);
+      } else {
+        dword_52E644->SetRenderState(D3DRENDERSTATE_ALPHABLENDENABLE, 0);
       }
-      else
-      {
-        v2 = *(_DWORD *)dword_52E644;
-        if ( a1 & 0x200 )
-        {
-          (*(void (__stdcall **)(int, signed int, signed int))(v2 + 88))(dword_52E644, 27, 1);
-          (*(void (__stdcall **)(int, signed int, signed int))(*(_DWORD *)dword_52E644 + 88))(dword_52E644, 21, 2);
-        }
-        else
-        {
-          (*(void (__stdcall **)(int, signed int, _DWORD))(v2 + 88))(dword_52E644, 27, 0);
-        }
-      }
-    }
-    if ( (BYTE1(dword_52E610) ^ BYTE1(a1)) & 0x20 )
-    {
-      if ( a1 & 0x2000 )
-        (*(void (__stdcall **)(int, signed int, _DWORD))(*(_DWORD *)dword_52E644 + 88))(dword_52E644, 14, 0);
-      else
-        (*(void (__stdcall **)(int, signed int, signed int))(*(_DWORD *)dword_52E644 + 88))(dword_52E644, 14, 1);
-    }
-    if ( (BYTE1(dword_52E610) ^ BYTE1(a1)) & 8 )
-    {
-      if ( a1 & 0x800 )
-        (*(void (__stdcall **)(int, _DWORD, signed int, signed int))(*(_DWORD *)dword_52E644 + 160))(
-          dword_52E644,
-          0,
-          13,
-          3);
-      else
-        (*(void (__stdcall **)(int, _DWORD, signed int, signed int))(*(_DWORD *)dword_52E644 + 160))(
-          dword_52E644,
-          0,
-          13,
-          1);
-    }
-    if ( (BYTE1(dword_52E610) ^ BYTE1(a1)) & 0x10 )
-    {
-      if ( a1 & 0x1000 )
-        (*(void (__stdcall **)(int, _DWORD, signed int, signed int))(*(_DWORD *)dword_52E644 + 160))(
-          dword_52E644,
-          0,
-          14,
-          3);
-      else
-        (*(void (__stdcall **)(int, _DWORD, signed int, signed int))(*(_DWORD *)dword_52E644 + 160))(
-          dword_52E644,
-          0,
-          14,
-          1);
-    }
-    if ( ((BYTE1(dword_52E610) ^ BYTE1(a1)) & 0x80u) != 0 )
-    {
-      if ( a1 & 0x8000 && dword_4C98B0 )
-        (*(void (__stdcall **)(int, signed int, signed int))(*(_DWORD *)dword_52E644 + 88))(dword_52E644, 28, 1);
-      else
-        (*(void (__stdcall **)(int, signed int, _DWORD))(*(_DWORD *)dword_52E644 + 88))(dword_52E644, 28, 0);
-    }
-    result = dword_52E610 ^ a1;
-    if ( ((dword_52E610 ^ a1) & 0x80u) == 0 || (dword_52E610 = a1, (result = sub_48B1B0(dword_52E614)) == 0) ) {
-      dword_52E610 = a1;
     }
   }
-  return result;
+
+  if ((dword_52E610 ^ a1) & 0x2000) {
+    if ( a1 & 0x2000 ) {
+      dword_52E644->SetRenderState(D3DRENDERSTATE_ZWRITEENABLE, 0);
+    } else {
+      dword_52E644->SetRenderState(D3DRENDERSTATE_ZWRITEENABLE, 1);
+    }
+  }
+
+  if ((dword_52E610 ^ a1) & 0x800) {
+    if ( a1 & 0x800 ) {
+      dword_52E644->SetTextureStageState(0, D3DTSS_ADDRESSU, D3DTADDRESS_CLAMP);
+    } else {
+      dword_52E644->SetTextureStageState(0, D3DTSS_ADDRESSU, D3DTADDRESS_WRAP);
+    }
+  }
+
+  if ((dword_52E610 ^ a1) & 0x1000) {
+    if ( a1 & 0x1000 ) {
+      dword_52E644->SetTextureStageState(0, D3DTSS_ADDRESSV, D3DTADDRESS_CLAMP);
+    } else {
+      dword_52E644->SetTextureStageState(0, D3DTSS_ADDRESSV, D3DTADDRESS_WRAP);
+    }
+  }
+
+  if ((dword_52E610 ^ a1) & 0x8000) != 0 ) {
+    if ( a1 & 0x8000 && dword_4C98B0 ) {
+      dword_52E644->SetRenderState(D3DRENDERSTATE_FOGENABLE, 1);
+    } else {
+      dword_52E644->SetRenderState(D3DRENDERSTATE_FOGENABLE, 0);
+    }
+  }
+
+  if ((dword_52E610 ^ a1) & 0x80) != 0) {
+    dword_52E610 = a1;
+    if ((sub_48B1B0(dword_52E614) != 0)) {
+      return;
+    }
+  }
+
+  // Update the internal state tracker
+  dword_52E610 = a1
+
+  return;
 }
 ```
