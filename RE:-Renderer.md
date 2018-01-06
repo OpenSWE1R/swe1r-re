@@ -34,7 +34,7 @@ int __cdecl sub_48B260(float a1, float a2, float a3, float a4) {
   m[14] = -(m[10] * a3); // -zn*zf/(zf-zn) 
 
   // Set D3D projection matrix
-  return (*(int (__stdcall **)(int, signed int, float *))(*(_DWORD *)dword_52E644 + 100))(dword_52E644, 3, m);
+  return dword_52E644->SetTransform(D3DTS_PROJECTION, m);
 }
 ```
 
@@ -43,19 +43,62 @@ int __cdecl sub_48B260(float a1, float a2, float a3, float a4) {
 `sub_492FF0` in demo
 
 ```C
+
+typedef struct {
+  ...
+  uint32_t unk; // +124 alphamodulate rendering flag
+  ...
+  struct {
+    ...
+    DIRECT3DTEXTURE2* d3d_texture; // +128
+  }* unk; // +144 ; v13
+} Texture
+
+typedef struct {
+  uint32_t rendering_flags; // [0]
+  uint32_t color_blending_mode; // [1] ???
+  uint32_t vertex_count; // [2]
+  uint32_t unk3; [3]
+  struct {
+    float x;
+    float y;
+    float z;
+  }* positions; // [4]
+  struct {
+    float u;
+    float v;
+  }* uvs; // [5]
+  struct {
+    float r;
+    float g;
+    float b;
+    float a;
+  }* colors; // [6]
+  Texture* texture; // v10
+  uint32_t unk8;
+  float r; // [9]
+  float g; // [10]
+  float b; // [11]
+  float a; // [12] ???
+  uint32_t unk13;
+  float u_offset; // [14]
+  float v_offset; // [15]
+} Model;
+```
+
+```C
 //----- (0048DF30) --------------------------------------------------------
-unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
+// a1 number of models
+// a2 array of input models
+unsigned int __cdecl sub_48DF30(uint32_t a1, Model* a2) {
   unsigned int result; // eax
-  float *v3; // esi
   int v5; // ecx
   int v6; // ecx
   int v7; // ecx
   int v8; // ecx
   int v9; // eax
-  int v10; // eax
   int v11; // ecx
   int v13; // edi
-  int v14; // edi
   unsigned int v15; // ecx
   __int16 v16; // dx
   unsigned int v17; // ebx
@@ -81,7 +124,6 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
   _WORD *v60; // eax
   int v61; // eax
   unsigned int v62; // ebx
-  int v64; // [esp+4h] [ebp-64h]
   int v65; // [esp+10h] [ebp-58h]
   __int16 v67; // [esp+18h] [ebp-50h]
   unsigned int v68; // [esp+1Ch] [ebp-4Ch]
@@ -105,6 +147,19 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
   int v89; // [esp+64h] [ebp-4h]
   int v90; // [esp+74h] [ebp+Ch]
 
+  typedef struct {
+    uint8_t unk[56];
+    float fov_y; // 56
+    uint32_t unk; // 60
+    float aspect_ratio; // 64
+    uint32_t unkb; // 68
+    struct {
+      uint32_t unk; // 0
+      float near; // 4
+      float far; // 8
+    }* zrange; // 72
+  }; //dword_DF7F2C
+
   // Setup D3D projection matrix
   sub_48B260(
     *(float *)(dword_DF7F2C + 56),
@@ -115,51 +170,12 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
   sub_49EA00();
   result = a1;
 
-  struct {
-    uint32_t rendering_flags; // [0]
-    uint32_t color_blending_mode; // [1] ???
-    uint32_t vertex_count; // [2]
-    uint32_t unk3;
-    struct {
-      float x;
-      float y;
-      float z;
-    }* positions; // [4]
-    struct {
-      float u;
-      float v;
-    }* uvs; // [5]
-    struct {
-      float r;
-      float g;
-      float b;
-      float a;
-    }* colors; // [6]
-    struct {
-      ...
-      uint32_t unk; // +124 ; some rendering flag
-      struct {
-        ...
-        uint32_t unk; // +128
-      }* unk; // +144 ; v13
-    }* unk7; // v10
-    uint32_t unk8;
-    float r; // [9]
-    float g; // [10]
-    float b; // [11]
-    float a; // [12] ???
-    uint32_t unk13;
-    float u_offset; // [14]
-    float v_offset; // [15]
-  }; // v3
-  v3 = a2;
+  Model* v3 = a2;
 
   for(int v80 = 0; v80 < a1; v80++) {
-    uint32_t v4 = *v3;
-    v64 = v4 & 2;
+    uint32_t v4 = v3[0];
 
     v90 = 0x13;
-
     if (v4 & 0x2) {
       v90 |= 0x200;
     }
@@ -179,21 +195,20 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
       v90 |= 0x8000;
     }
 
-    // 
-    v10 = *((_DWORD *)v3 + 7);
+    // Setup texture if there is one
+    Textur* v10 = v3[7];
     if ( v10 ) {
       v11 = *(_DWORD *)(v10 + 124);
       if ( v11 ) {
         v90 |= 0x400;
       }
       v13 = *(_DWORD *)(v10 + 144);
-      sub_48E5F0(*(_DWORD **)(v10 + 144), v11);
+      sub_48E5F0(v13, v11);
       v65 = *(_DWORD *)(v13 + 128);
     } else {
       v65 = 0;
     }
 
-    v14 = 0;
     v15 = 0;
     v83 = 0;
     dword_A530D0 = 0;
@@ -302,7 +317,7 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
         v88 = frndint(v86 * 255.0f);
         v82 = frndint(v85 * 255.0f);
         v78 = frndint(v84 * 255.0f);
-        if (v64) {
+        if (v4 & 2) {
           v89 = frndint(v26 * 255.0f);
         }  else {
           v89 = 0xFF;
@@ -320,47 +335,37 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
       }
 
       v16 = v67;
-      v14 = v83;
 
-      v57 = *((_DWORD *)v3 + 2);
+      v57 = v3[2];
       if ( v57 <= 3 ) {
         // Emit indices for triangle
-        word_AF30E8[v14] = v16 + 0;
-        word_AF30EA[v14] = v16 + 1;
-        word_AF30EC[v14] = v16 + 2;
-        v14 += 3;
-        v83 = v14;
+        word_AF30E8[v83++] = v16 + 0;
+        word_AF30E8[v83++] = v16 + 1;
+        word_AF30E8[v83++] = v16 + 2;
       } else {
-        int v58 = v57 - 2;
         v59 = 0;
         v74 = 1;
         v69 = v57 - 1;
 
-        v60 = (_WORD *)(2 * v83 + 0xAF30E8);
-        v83 += v58 + 2 * v71;
-
-        int v76 = 0;
-        for(v76 = 0; v76 < v71; v76++) {
-          v60[0] = v67 + v59;
-          v60[1] = v67 + v74;
-          v60[2] = v67 + v69;
-          v60 += 3;
-          if (!((_BYTE)v76 & 1) {
-            v59 = v74++;
-          } else {
+        for(int32_t v76 = 0; v76 < (v57 - 2); v76++) {
+          word_AF30E8[v83++] = v67 + v59;
+          word_AF30E8[v83++] = v67 + v74;
+          word_AF30E8[v83++] = v67 + v69;
+          if (v76 & 1) {
             v59 = v69--;
+          } else {
+            v59 = v74++;
           }
         }
-        v14 = v83;
       }
 
       // Get vertexcount of next object.
       //FIXME: I have a gut feeling these checks are in wrong, wtf IDA or MSVC compiler
       v61 = v3[16+2];
 
-      // Check if there is enough space in the index or vertexbuffer?!
-      //FIXME: <something with current indices> + 3 * (next_vertex_count - 2)
-      if((v61 + v14 + 2 * v61 - 6) >= (unsigned int)dword_52E624) {
+      // Check if there is enough space in the index or vertexbuffer
+      //FIXME: index_count + 3 * (next_vertex_count - 2)
+      if((v83 + 3 * (v61 - 2)) >= (unsigned int)dword_52E624) {
         break;
       }
 
@@ -380,7 +385,7 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
     }
 
     // Do the drawing
-    sub_48A350(v65, v90, (int)&unk_B6B0E8, v15, (int)word_AF30E8, v14);
+    sub_48A350(v65, v90, (int)&unk_B6B0E8, v15, (int)word_AF30E8, v83);
     result = a1;
   }
   return result;
