@@ -90,8 +90,7 @@ typedef struct {
 //----- (0048DF30) --------------------------------------------------------
 // a1 number of models
 // a2 array of input models
-unsigned int __cdecl sub_48DF30(uint32_t a1, Model* a2) {
-  unsigned int result; // eax
+void __cdecl sub_48DF30(uint32_t a1, Model* a2) {
   int v5; // ecx
   int v6; // ecx
   int v7; // ecx
@@ -168,7 +167,6 @@ unsigned int __cdecl sub_48DF30(uint32_t a1, Model* a2) {
     *(float *)(*(_DWORD *)(dword_DF7F2C + 72) + 8));
 
   sub_49EA00();
-  result = a1;
 
   Model* v3 = a2;
 
@@ -386,9 +384,9 @@ unsigned int __cdecl sub_48DF30(uint32_t a1, Model* a2) {
 
     // Do the drawing
     sub_48A350(v65, v90, (int)&unk_B6B0E8, v15, (int)word_AF30E8, v83);
-    result = a1;
   }
-  return result;
+
+  return;
 }
 ```
 
