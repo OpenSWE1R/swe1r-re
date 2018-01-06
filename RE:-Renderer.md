@@ -13,16 +13,16 @@ This works very similar to https://msdn.microsoft.com/en-us/library/windows/desk
 int __cdecl sub_48B260(float a1, float a2, float a3, float a4) {
   // zrange
   float v11 = a4 - a3;
-  if ( fabs(v11) < 0.009999999776482582 )
+  if ( fabs(v11) < 0.01f)
     return 0x80070057;
 
   // First part of cotangent
-  float v7 = sin(a1 * 0.5);
-  if ( fabs(v7) < 0.009999999776482582 )
+  float v7 = sin(a1 * 0.5f);
+  if ( fabs(v7) < 0.01f)
     return 0x80070057;
 
   // Get cot(fovY/2)
-  float v8 = cos(a1 * 0.5) / v7;
+  float v8 = cos(a1 * 0.5f) / v7;
 
   // Prepare the matrix
   float m[4*4]; // v12
@@ -30,7 +30,7 @@ int __cdecl sub_48B260(float a1, float a2, float a3, float a4) {
   m[0] = a2 * v8; // xScale = aspectRatio * cot(fovY/2)
   m[5] = v8; // yScale = cot(fovY/2)
   m[10] = a4 / v11; // zf/(zf-zn)
-  m[11] = 1.0;
+  m[11] = 1.0f;
   m[14] = -(m[10] * a3); // -zn*zf/(zf-zn) 
 
   // Set D3D projection matrix
