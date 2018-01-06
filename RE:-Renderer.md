@@ -193,8 +193,8 @@ void __cdecl sub_48DF30(uint32_t a1, Model* a2) {
     }
 
     // Setup texture if there is one
-    Textur* v10 = v3[7];
-    if ( v10 ) {
+    Texture* v10 = v3[7];
+    if (v10) {
       v11 = *(_DWORD *)(v10 + 124);
       if ( v11 ) {
         v90 |= 0x400;
