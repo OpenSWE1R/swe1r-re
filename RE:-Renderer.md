@@ -410,13 +410,11 @@ void __cdecl sub_48A450(int a1) {
     if ( a1 & 0x400 ) {
       dword_52E644->SetRenderState(D3DRENDERSTATE_ALPHABLENDENABLE, 1);
       dword_52E644->SetRenderState(D3DRENDERSTATE_TEXTUREMAPBLEND, D3DTBLEND_MODULATEALPHA);
+    } else if ( a1 & 0x200 ) {
+      dword_52E644->SetRenderState(D3DRENDERSTATE_ALPHABLENDENABLE, 1);
+      dword_52E644->SetRenderState(D3DRENDERSTATE_TEXTUREMAPBLEND, D3DTBLEND_MODULATE);
     } else {
-      if ( a1 & 0x200 ) {
-        dword_52E644->SetRenderState(D3DRENDERSTATE_ALPHABLENDENABLE, 1);
-        dword_52E644->SetRenderState(D3DRENDERSTATE_TEXTUREMAPBLEND, D3DTBLEND_MODULATE);
-      } else {
-        dword_52E644->SetRenderState(D3DRENDERSTATE_ALPHABLENDENABLE, 0);
-      }
+      dword_52E644->SetRenderState(D3DRENDERSTATE_ALPHABLENDENABLE, 0);
     }
   }
 
