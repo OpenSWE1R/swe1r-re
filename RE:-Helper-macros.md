@@ -1,6 +1,17 @@
 These code patterns appear regularily in the source code, so likely they were macros or inline functions at some point.
 
+## Magic values
+
+The game uses 4 byte magic values / tags for various things.
+This can be used to generate them.
+
+```C
+#define MAGIC(a1, a2, a3, a4) (((a1) << 24) | ((a2) << 16) | ((a3) << 8) | (a4))
+```
+
 ## Assertions
+
+Assertions in the original code already have a path and line hardcoded, they also have a condition which is checked and a message (which should reflect the condition directly by having it as a string)
 
 ```C
 #define ASSERT(condition, message, path, line) \
