@@ -64,9 +64,6 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
   float v22; // ST2C_4
   bool v25; // zf
   double v26; // st7
-  float v27; // eax
-  float v28; // edx
-  float v29; // ST4C_4
   signed int v32; // edx
   float v33; // ST4C_4
   float v37; // ST4C_4
@@ -263,12 +260,12 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
         }
         v20->rhw = v21;
 
-        // Probably something to do with colors or alpha blending
+        // Distance fading of objects or fog emulation?
         if ( v66 & 0x200 ) {
           if (v18->z > *(float *)&flt_EC8578 ) {
             if (v18->z < *(float *)&flt_EC857C ) {
-              v22 = (1.0 - (v18->z - *(float *)&flt_EC8578) * flt_EC8574) * 255.0;
-              v79 = (signed int)_frndint(v22);
+              v22 = (1.0 - (v18->z - *(float *)&flt_EC8578) * flt_EC8574);
+              v79 = frndint(v22 * 255.0f);
               v20->color2 = (v79 << 24) | 0xFFFFFF;
             } else {
               v20->color2 = 0x00FFFFFF;
@@ -279,64 +276,43 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
         }
 
         if ( v72 <= 0 ) {
-          v84 = 1.0;
-          v85 = 1.0;
-          v86 = 1.0;
-          v26 = *(float *)(dword_AF30DC + 12);
-          goto LABEL_44;
-        } else if ( v72 == 3 ) {
-          v25 = *((float*)v3 + 12) == 1.0f;
-          v86 = v19->r + v3[9];
-          v85 = v19->g + v3[10];
-          v84 = v19->b + v3[11];
-          v26 = v19->a;
-          if ( !v25 ) {
-            v26 = v26 + v3[12];
-          }
+          v84 = 1.0f;
+          v85 = 1.0f;
+          v86 = 1.0f;
         } else {
           v86 = v19->r;
-          v27 = v19->g;
-          v28 = v19->b;
-          v26 = v19->a;
-          v85 = v27;
-          v84 = v28;
+          v85 = v19->g;
+          v84 = v19->b;
+        }
+        v26 = v19->a;
+
+        if ( v72 == 3 ) {
+          v86 += v3[9];
+          v85 += v3[10];
+          v84 += v3[11];
+          if (v3[12] != 1.0f) {
+            v26 += v3[12];
+          }
         }
 
-        v86 = MIN(v86, 1.0);
-        v85 = MIN(v85, 1.0);
-        v84 = MIN(v84, 1.0);
-        v26 = MIN(v26, 1.0);
+        // Clamp colors
+        v86 = min(v86, 1.0f);
+        v85 = min(v85, 1.0f);
+        v84 = min(v84, 1.0f);
+        v26 = min(v26, 1.0f);
 
-        // Convert some colors from float to integer
-        if ( v64 ) {
-          v29 = v26 * 255.0;
-          v89 = (signed int)_frndint(v29);
-
-          v33 = v86 * 255.0;
-          v88 = (signed int)_frndint(v33);
-
-          v37 = v85 * 255.0;
-          v82 = _frndint(v37);
-
-          v41 = v84 * 255.0;
-          v78 = (signed int)_frndint(v41);
-
-          // This was originally: v45 = ((v40 | ((v36 | (v32 << 8)) << 8)) << 8) | (signed int)_ST7;
-          v45 = (v89 << 24) | (v88 << 16) | (v82 << 8) | v78;
+        // Convert colors from float to integer
+        v88 = frndint(v86 * 255.0f);
+        v82 = frndint(v85 * 255.0f);
+        v78 = frndint(v84 * 255.0f);
+        if (v64) {
+          v89 = frndint(v26 * 255.0f);
         }  else {
-          v46 = v86 * 255.0;
-          v87 = _frndint(v46);
-
-          v50 = v85 * 255.0;
-          v81 = (signed int)_frndint(v50);
-
-          v54 = v84 * 255.0;
-          v77 = (signed int) _frndint(v54);
-
-          // Originally: v45 = (signed int)_ST7 | ((v53 | ((*(_DWORD *)&v49 | 0xFFFFFF00) << 8)) << 8);
-          v45 = (0xFF << 24) | (v87 << 16) | (v81 << 8) | v77;
+          v89 = 0xFF;
         }
-        v20->color1 = v45;
+
+        // Create actual color
+        v20->color1 = (v89 << 24) | (v88 << 16) | (v82 << 8) | v78;
 
         // Copy UV
         v20->u = *(float *)(*((_DWORD *)v3 + 5) + 8 * v17 + 0) + v3[14];
@@ -352,7 +328,7 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
       v57 = *((_DWORD *)v3 + 2);
       if ( v57 <= 3 ) {
         // Emit indices for triangle
-        word_AF30E8[v14] = v16;
+        word_AF30E8[v14] = v16 + 0;
         word_AF30EA[v14] = v16 + 1;
         word_AF30EC[v14] = v16 + 2;
         v14 += 3;
@@ -380,13 +356,13 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
         }
         v14 = v83;
       }
-      v61 = *((_DWORD *)v3 + 18);
+      v61 = v3[18];
       v3 += 16;
       v62 = v80 + 1;
     } while ( v61 + v14 + 2 * v61 - 6 < (unsigned int)dword_52E624
          && v62 < a1
-         && v63 == *((_DWORD *)v3 + 7)
-         && v66 == *(_DWORD *)v3 );
+         && v63 == v3[7])
+         && v66 == v3[0]);
 
     // Do the drawing
     sub_48A350(v65, v90, (int)&unk_B6B0E8, v15, (int)word_AF30E8, v14);
