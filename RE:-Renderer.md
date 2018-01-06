@@ -452,6 +452,7 @@ void __cdecl sub_48A450(int a1) {
     }
   }
 
+  // Setup texture interpolation (keeps mipmap filter unchanged as dword_52E614 is the current state)
   if ((dword_52E610 ^ a1) & 0x80) != 0) {
     dword_52E610 = a1;
     if ((sub_48B1B0(dword_52E614) != 0)) {
@@ -466,55 +467,47 @@ void __cdecl sub_48A450(int a1) {
 }
 ```
 
-### More renderstates
+### Texture interpolation renderstates
 
 ```C
 //----- (0048B1B0) --------------------------------------------------------
+// a1 = mipmap filter
+// Depends on the current renderstate in dword_52E610 being set!
+// returns D3D error code / success
 int __cdecl sub_48B1B0(int a1) {
-  int v1; // ecx
   int result; // eax
 
-  v1 = *(_DWORD *)dword_52E644;
-
-  if ( (dword_52E610 & 0x80u) != 0 ) {
-    result = dword_52E644->SetTextureStageState(0, 16, 2);
+  if ((dword_52E610 & 0x80) != 0) {
+    result = dword_52E644->SetTextureStageState(0, D3DTSS_MAGFILTER, D3DTFG_LINEAR);
     if ( result ) {
       return result;
     }
 
-    result = dword_52E644->SetTextureStageState(0, 17, 2);
+    result = dword_52E644->SetTextureStageState(0, D3DTSS_MINFILTER, D3DTFN_LINEAR);
+    if ( result ) {
+      return result;
+    }
+  } else {
+    result = dword_52E644->SetTextureStageState(0, D3DTSS_MAGFILTER, D3DTFG_POINT);
     if ( result ) {
       return result;
     }
 
+    result = dword_52E644->SetTextureStageState(0, D3DTSS_MINFILTER, D3DTFN_POINT);
+    if ( result ) {
+      return result;
+    }
+  }
 
-LABEL_7:
-    dword_52E614 = a1;
-    if ( a1 == 1 )
-      return (*(int (__stdcall **)(int, _DWORD, signed int, signed int))(*(_DWORD *)dword_52E644 + 160))(
-               dword_52E644,
-               0,
-               18,
-               2);
-    if ( a1 == 2 )
-      return (*(int (__stdcall **)(int, signed int, signed int))(*(_DWORD *)dword_52E644 + 88))(dword_52E644, 18, 3);
-    return (*(int (__stdcall **)(int, _DWORD, signed int, signed int))(*(_DWORD *)dword_52E644 + 160))(
-             dword_52E644,
-             0,
-             18,
-             1);
+  // Update internal mipmap filter state tracker
+  dword_52E614 = a1;
+
+  if ( a1 == 1 ) {
+    return dword_52E644->SetTextureStageState(0, D3DTSS_MIPFILTER, D3DTFP_POINT);
   }
-  result = (*(int (__stdcall **)(int, _DWORD, signed int, signed int))(v1 + 160))(dword_52E644, 0, 16, 1);
-  if ( !result )
-  {
-    result = (*(int (__stdcall **)(int, _DWORD, signed int, signed int))(*(_DWORD *)dword_52E644 + 160))(
-               dword_52E644,
-               0,
-               17,
-               1);
-    if ( !result )
-      goto LABEL_7;
+  if ( a1 == 2 ) {
+    return dword_52E644->SetRenderState(D3DRENDERSTATE_TEXTUREMIN, D3DFILTER_MIPNEAREST);
   }
-  return result;
+  return dword_52E644->SetTextureStageState(0, D3DTSS_MIPFILTER, D3DTFP_NONE);
 }
 ```
