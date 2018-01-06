@@ -99,7 +99,6 @@ void __cdecl sub_48DF30(uint32_t a1, Model* a2) {
   int v11; // ecx
   int v13; // edi
   unsigned int v15; // ecx
-  __int16 v16; // dx
   unsigned int v17; // ebx
   int v18; // edx
   double v21; // st7
@@ -215,7 +214,6 @@ void __cdecl sub_48DF30(uint32_t a1, Model* a2) {
       v68 = *((_DWORD *)v3 + 2);
       dword_5430C4 = *((_DWORD *)v3 + 4);
       dword_AF30DC = *((_DWORD *)v3 + 6);
-      v16 = v15;
       v67 = v15;
 
       // Check if the wanted color blending mode works?
@@ -332,14 +330,12 @@ void __cdecl sub_48DF30(uint32_t a1, Model* a2) {
         v15 = ++dword_A530D0;
       }
 
-      v16 = v67;
-
       v57 = v3[2];
       if ( v57 <= 3 ) {
         // Emit indices for triangle
-        word_AF30E8[v83++] = v16 + 0;
-        word_AF30E8[v83++] = v16 + 1;
-        word_AF30E8[v83++] = v16 + 2;
+        word_AF30E8[v83++] = v67 + 0;
+        word_AF30E8[v83++] = v67 + 1;
+        word_AF30E8[v83++] = v67 + 2;
       } else {
         v59 = 0;
         v74 = 1;
