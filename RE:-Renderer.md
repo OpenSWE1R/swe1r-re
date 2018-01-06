@@ -81,10 +81,8 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
   _WORD *v60; // eax
   int v61; // eax
   unsigned int v62; // ebx
-  int v63; // [esp+0h] [ebp-68h]
   int v64; // [esp+4h] [ebp-64h]
   int v65; // [esp+10h] [ebp-58h]
-  int v66; // [esp+14h] [ebp-54h]
   __int16 v67; // [esp+18h] [ebp-50h]
   unsigned int v68; // [esp+1Ch] [ebp-4Ch]
   signed __int16 v69; // [esp+1Ch] [ebp-4Ch]
@@ -144,7 +142,7 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
         ...
         uint32_t unk; // +128
       }* unk; // +144 ; v13
-    }* unk7; // v10 and v63
+    }* unk7; // v10
     uint32_t unk8;
     float r; // [9]
     float g; // [10]
@@ -158,7 +156,6 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
 
   for(int v80 = 0; v80 < a1; v80++) {
     uint32_t v4 = *v3;
-    v66 = v4;
     v64 = v4 & 2;
 
     v90 = 0x13;
@@ -182,8 +179,8 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
       v90 |= 0x8000;
     }
 
+    // 
     v10 = *((_DWORD *)v3 + 7);
-    v63 = *((_DWORD *)v3 + 7);
     if ( v10 ) {
       v11 = *(_DWORD *)(v10 + 124);
       if ( v11 ) {
@@ -201,7 +198,7 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
     v83 = 0;
     dword_A530D0 = 0;
     dword_5430C0 = *(_DWORD *)(*(_DWORD *)(dword_DF7F2C + 72) + 4);
-    do {
+    while(1) {
       v68 = *((_DWORD *)v3 + 2);
       dword_5430C4 = *((_DWORD *)v3 + 4);
       dword_AF30DC = *((_DWORD *)v3 + 6);
@@ -261,7 +258,7 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
         v20->rhw = v21;
 
         // Distance fading of objects or fog emulation?
-        if ( v66 & 0x200 ) {
+        if ( v4 & 0x200 ) {
           if (v18->z > *(float *)&flt_EC8578 ) {
             if (v18->z < *(float *)&flt_EC857C ) {
               v22 = (1.0 - (v18->z - *(float *)&flt_EC8578) * flt_EC8574);
@@ -356,13 +353,31 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
         }
         v14 = v83;
       }
-      v61 = v3[18];
+
+      // Get vertexcount of next object.
+      //FIXME: I have a gut feeling these checks are in wrong, wtf IDA or MSVC compiler
+      v61 = v3[16+2];
+
+      // Check if there is enough space in the index or vertexbuffer?!
+      //FIXME: <something with current indices> + 3 * (next_vertex_count - 2)
+      if((v61 + v14 + 2 * v61 - 6) >= (unsigned int)dword_52E624) {
+        break;
+      }
+
+      // Check if the next object exists, if not, just draw queued objects
+      //FIXME: Related to gut feeling above.. shouldn't this be checked first?
+      if(v62 >= (v80 + 1)) {
+        break;
+      }
+
+      // Go to next object
       v3 += 16;
-      v62 = v80 + 1;
-    } while ( v61 + v14 + 2 * v61 - 6 < (unsigned int)dword_52E624
-         && v62 < a1
-         && v63 == v3[7])
-         && v66 == v3[0]);
+
+      // If the next object has a different texture or renderstates, draw the queued objects
+      if((v10 != v3[7]) || (v4 != v3[0])) {
+        break;
+      }
+    }
 
     // Do the drawing
     sub_48A350(v65, v90, (int)&unk_B6B0E8, v15, (int)word_AF30E8, v14);
