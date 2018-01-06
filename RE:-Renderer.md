@@ -357,6 +357,10 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
 }
 ```
 
+# More
+
+```C
+
 # Draw function
 
 ```C
@@ -459,5 +463,58 @@ void __cdecl sub_48A450(int a1) {
   dword_52E610 = a1
 
   return;
+}
+```
+
+### More renderstates
+
+```C
+//----- (0048B1B0) --------------------------------------------------------
+int __cdecl sub_48B1B0(int a1) {
+  int v1; // ecx
+  int result; // eax
+
+  v1 = *(_DWORD *)dword_52E644;
+
+  if ( (dword_52E610 & 0x80u) != 0 ) {
+    result = dword_52E644->SetTextureStageState(0, 16, 2);
+    if ( result ) {
+      return result;
+    }
+
+    result = dword_52E644->SetTextureStageState(0, 17, 2);
+    if ( result ) {
+      return result;
+    }
+
+
+LABEL_7:
+    dword_52E614 = a1;
+    if ( a1 == 1 )
+      return (*(int (__stdcall **)(int, _DWORD, signed int, signed int))(*(_DWORD *)dword_52E644 + 160))(
+               dword_52E644,
+               0,
+               18,
+               2);
+    if ( a1 == 2 )
+      return (*(int (__stdcall **)(int, signed int, signed int))(*(_DWORD *)dword_52E644 + 88))(dword_52E644, 18, 3);
+    return (*(int (__stdcall **)(int, _DWORD, signed int, signed int))(*(_DWORD *)dword_52E644 + 160))(
+             dword_52E644,
+             0,
+             18,
+             1);
+  }
+  result = (*(int (__stdcall **)(int, _DWORD, signed int, signed int))(v1 + 160))(dword_52E644, 0, 16, 1);
+  if ( !result )
+  {
+    result = (*(int (__stdcall **)(int, _DWORD, signed int, signed int))(*(_DWORD *)dword_52E644 + 160))(
+               dword_52E644,
+               0,
+               17,
+               1);
+    if ( !result )
+      goto LABEL_7;
+  }
+  return result;
 }
 ```
