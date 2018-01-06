@@ -81,27 +81,20 @@ static inline _T clamp(_T x, _T a, _T b) {
 }
 ```
 
-## Fast inverse (?)
+## Fast inverse
 
-> [4:28 PM] @JayFoxRox: still struggling with this line :(
-> 
-> ```C
-> v21 = (2.0 - *(float *)(v18 + 8) * COERCE_FLOAT(2130706432 - *(_DWORD *)(v18 + 8))) * COERCE_FLOAT(2130706432 - *(_DWORD *)(v18 + 8));
->  ```
-> 
-> what does `COERCE_FLOAT(2130706432 - *(_DWORD *)(v18 + 8))` do? clearly it must be a rather simple float op as I find it hard to believe the devs reinterpreted a float as int to work with it.
-> I assume this is the RHW or Z calculation for a vertex btw(edited)
-> 
-> [4:41 PM] merry: @@JayFoxRox **They probably did actually intepret it as a float to int to work with it.**
-> 
-> [4:42 PM] merry: **That's a fast approximate inverse**.
-> 
-> [4:42 PM] wwylele / 白疾風: yeah I am trying inserting different values and see the result
-> 
-> [4:42 PM] wwylele / 白疾風: **looks like inverse**
-> 
-> [4:43 PM] merry: it **works purely by adjusting the exponent and ignoring the mantissa**
-> 
-> [4:51 PM] wwylele / 白疾風: So the whole formula is actually a approximate inverse wrapped by one iteration of Newton's method
-> 
-> [4:52 PM] wwylele / 白疾風: i.e. it is just a little more approximated inverse
+```C
+// Thanks to MerryMage for explaining this function
+// See http://bits.stephan-brumme.com/inverse.html
+static inline float fast_inverse(float a) {
+  uint32_t x = 0x7F000000 - *(uint32_t*)&a;
+  return *(float*)&x;
+}
+
+// Thanks to wwylele for explaining this function
+// See https://en.wikipedia.org/wiki/Newton%27s_method#Multiplicative_inverses_of_numbers_and_power_series
+static inline inverse(float a) {
+  float x_0 = fast_inverse(a);
+  return x_0 * (2.0f - a * x_0);
+}
+```
