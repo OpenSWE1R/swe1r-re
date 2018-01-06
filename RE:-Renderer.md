@@ -54,7 +54,6 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
   int v9; // eax
   int v10; // eax
   int v11; // ecx
-  int v12; // edx
   int v13; // edi
   int v14; // edi
   unsigned int v15; // ecx
@@ -125,27 +124,28 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
   v3 = a2;
   for(int v80 = 0; v80 < a1; v80++) {
     uint32_t v4 = *v3;
-    v90 = 19;
     v66 = v4;
     v64 = v4 & 2;
 
-    if (v4 & 2) {
-      v90 = 531;
+    v90 = 0x13;
+
+    if (v4 & 0x2) {
+      v90 |= 0x200;
     }
-    if (v4 & 4) {
-      BYTE1(v90) |= 8u;
+    if (v4 & 0x4) {
+      v90 |= 0x800;
     }
-    if (v4 & 8) {
-      BYTE1(v90) |= 0x10u;
+    if (v4 & 0x8) {
+      v90 |= 0x1000;
     }
     if (!(v4 & 0x10)) {
       v90 |= 0x80;
     }
     if (v4 & 0x20) {
-      BYTE1(v90) |= 0x20u;
+      v90 |= 0x2000;
     }
-    if (BYTE1(v4) & 3) {
-      BYTE1(v90) |= 0x80u;
+    if (v4 & 0x300) {
+      v90 |= 0x8000;
     }
 
     v10 = *((_DWORD *)v3 + 7);
@@ -153,9 +153,7 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
     if ( v10 ) {
       v11 = *(_DWORD *)(v10 + 124);
       if ( v11 ) {
-        v12 = v90;
-        BYTE1(v12) |= 4u;
-        v90 = v12;
+        v90 |= 0x400;
       }
       v13 = *(_DWORD *)(v10 + 144);
       sub_48E5F0(*(_DWORD **)(v10 + 144), v11);
@@ -370,23 +368,25 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
 void __cdecl sub_48A350(int a1, int a2, int a3, unsigned int a4, int a5, int a6) {
   // Check if we are below the maximum vertex count
   //FIXME: Not 100% sure
-  if ( a4 <= dword_52E624 ) {
-
-    // Prepare renderstates
-    sub_48A450(a2);
-
-    // Check if the planned texture is already set, if not, set it
-    if ( a1 != dword_52E628 ) {
-      //FIXME: This feels like a bug, either in the game or my RE..
-      if (!dword_52E644->SetTexture(0, a1)) {
-        // Update the current texture
-        dword_52E628 = a1;
-      }
-    }
-
-    // Draw the data
-    dword_52E644->DrawIndexedPrimitive(4, 452, a3, a4, a5, a6, 24);
+  if ( a4 > dword_52E624 ) {
+    return;
   }
+  
+  // Prepare renderstates
+  sub_48A450(a2);
+
+  // Check if the planned texture is already set, if not, set it
+  if ( dword_52E628 != a1) {
+    if (dword_52E644->SetTexture(0, a1) == 0) {
+      // Update the current texture
+      dword_52E628 = a1;
+    }
+  }
+
+  // Draw the data
+  dword_52E644->DrawIndexedPrimitive(4, 452, a3, a4, a5, a6, 24);
+
+  return;
 }
 ```
 
@@ -403,10 +403,10 @@ void __cdecl sub_48A450(int a1) {
   }
 
   if ((dword_52E610 ^ a1) & 0x600 ) {
-    if ( a1 & 0x400 ) {
+    if (a1 & 0x400) {
       dword_52E644->SetRenderState(D3DRENDERSTATE_ALPHABLENDENABLE, 1);
       dword_52E644->SetRenderState(D3DRENDERSTATE_TEXTUREMAPBLEND, D3DTBLEND_MODULATEALPHA);
-    } else if ( a1 & 0x200 ) {
+    } else if (a1 & 0x200) {
       dword_52E644->SetRenderState(D3DRENDERSTATE_ALPHABLENDENABLE, 1);
       dword_52E644->SetRenderState(D3DRENDERSTATE_TEXTUREMAPBLEND, D3DTBLEND_MODULATE);
     } else {
@@ -415,7 +415,7 @@ void __cdecl sub_48A450(int a1) {
   }
 
   if ((dword_52E610 ^ a1) & 0x2000) {
-    if ( a1 & 0x2000 ) {
+    if (a1 & 0x2000) {
       dword_52E644->SetRenderState(D3DRENDERSTATE_ZWRITEENABLE, 0);
     } else {
       dword_52E644->SetRenderState(D3DRENDERSTATE_ZWRITEENABLE, 1);
@@ -423,7 +423,7 @@ void __cdecl sub_48A450(int a1) {
   }
 
   if ((dword_52E610 ^ a1) & 0x800) {
-    if ( a1 & 0x800 ) {
+    if (a1 & 0x800) {
       dword_52E644->SetTextureStageState(0, D3DTSS_ADDRESSU, D3DTADDRESS_CLAMP);
     } else {
       dword_52E644->SetTextureStageState(0, D3DTSS_ADDRESSU, D3DTADDRESS_WRAP);
@@ -431,7 +431,7 @@ void __cdecl sub_48A450(int a1) {
   }
 
   if ((dword_52E610 ^ a1) & 0x1000) {
-    if ( a1 & 0x1000 ) {
+    if (a1 & 0x1000) {
       dword_52E644->SetTextureStageState(0, D3DTSS_ADDRESSV, D3DTADDRESS_CLAMP);
     } else {
       dword_52E644->SetTextureStageState(0, D3DTSS_ADDRESSV, D3DTADDRESS_WRAP);
@@ -439,7 +439,7 @@ void __cdecl sub_48A450(int a1) {
   }
 
   if ((dword_52E610 ^ a1) & 0x8000) != 0 ) {
-    if ( a1 & 0x8000 && dword_4C98B0 ) {
+    if (a1 & 0x8000 && dword_4C98B0) {
       dword_52E644->SetRenderState(D3DRENDERSTATE_FOGENABLE, 1);
     } else {
       dword_52E644->SetRenderState(D3DRENDERSTATE_FOGENABLE, 0);
@@ -496,10 +496,10 @@ int __cdecl sub_48B1B0(int a1) {
   // Update internal mipmap filter state tracker
   dword_52E614 = a1;
 
-  if ( a1 == 1 ) {
+  if (a1 == 1) {
     return dword_52E644->SetTextureStageState(0, D3DTSS_MIPFILTER, D3DTFP_POINT);
   }
-  if ( a1 == 2 ) {
+  if (a1 == 2) {
     return dword_52E644->SetRenderState(D3DRENDERSTATE_TEXTUREMIN, D3DFILTER_MIPNEAREST);
   }
   return dword_52E644->SetTextureStageState(0, D3DTSS_MIPFILTER, D3DTFP_NONE);
