@@ -357,10 +357,6 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
 }
 ```
 
-# More
-
-```C
-
 # Draw function
 
 ```C
