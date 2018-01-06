@@ -252,8 +252,7 @@ unsigned int __cdecl sub_48DF30(unsigned int a1, float *a2) {
         if (v18->z == 0.0 ) {
           v21 = 0.0;
         } else {
-          v21 = (2.0 - v18->z * COERCE_FLOAT(0x7F000000 - *(_DWORD *)&v18->z)
-              * COERCE_FLOAT(0x7F000000 - *(_DWORD *)&v18->z);
+          v21 = inverse(v18->z);
         }
 
         // Copy Z and RHW
