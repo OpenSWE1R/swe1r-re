@@ -98,3 +98,14 @@ static inline float inverse(float a) {
   return x_0 * (2.0f - a * x_0);
 }
 ```
+
+## Native float rounding
+
+```C
+float frndint(float x) {
+  //FIXME: This should instead use the x86 FPU `frndint` instruction.
+  //       The current implementation is *wrong*.
+  //       Consider this a stub
+  return roundf(x);
+}
+```
