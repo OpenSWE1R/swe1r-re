@@ -93,7 +93,7 @@ static inline float fast_inverse(float a) {
 
 // Thanks to wwylele for explaining this function
 // See https://en.wikipedia.org/wiki/Newton%27s_method#Multiplicative_inverses_of_numbers_and_power_series
-static inline inverse(float a) {
+static inline float inverse(float a) {
   float x_0 = fast_inverse(a);
   return x_0 * (2.0f - a * x_0);
 }
