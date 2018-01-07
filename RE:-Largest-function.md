@@ -2,8 +2,7 @@ This appears to be the longest function (space wise) in the game. No idea what i
 
 ```C
 //----- (004337E0) --------------------------------------------------------
-void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, int a7, int a8, float a9, float a10)
-{
+void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, int a7, int a8, float a9, float a10) {
   unsigned int v10; // edi
   float v11; // ST14_4
   double v12; // st7
@@ -102,36 +101,39 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
   int v105; // [esp+1B8h] [ebp-60h]
   int v106[8]; // [esp+1F8h] [ebp-20h]
 
-  if ( a1 )
-  {
+  if ( a1 ) {
     v67 = *(_DWORD *)(a1 + 240);
-    if ( a8 )
-    {
-      v10 = 0;
+    if ( a8 ) {
+
+      //FIXME: Pretty sure that v76 is just a int32_t..
       v75 = 0.0;
-      do
-      {
-        v11 = ((double)SLODWORD(v75) * 0.01 - -0.1) * dbl_E22A38 * 360.0;
+      for(v10 = 0; v10 < 8; v10++) {
+        v11 = ((double)SLODWORD(v75) * 0.01 + 0.1) * dbl_E22A38 * 360.0;
         sub_42F380(v11, (int)(&v95 + v10), (int)&v106[v10]);
-        ++v10;
+       
+        v10++;
         v75 = *(float *)&v10;
+        v10--;
       }
-      while ( v10 < 8 );
+
     }
-    if ( a3 )
-    {
+
+    if ( a3 ) {
       v12 = flt_4C271C[13 * v67];
-      if ( v12 < 0.3 || v12 > 5.0 )
+      if ( v12 < 0.3 || v12 > 5.0 ) {
         v12 = 1.0;
+      }
       a4 = v12 * a4;
       a5 = v12 * a5;
       a6 = v12 * a6;
     }
+
     sub_481B30(*(_DWORD *)(a1 + 20), (float *)&unk_4C0088);
     sub_481B30(*(_DWORD *)(a1 + 4), (float *)&unk_4C0098);
     sub_481B30(*(_DWORD *)(a1 + 8), (float *)&unk_4C0098);
     sub_481B30(*(_DWORD *)(a1 + 12), (float *)&unk_4C0098);
     sub_481B30(*(_DWORD *)(a1 + 16), (float *)&unk_4C0098);
+
     v13 = *(_DWORD *)(a1 + 248);
     if ( v13 )
       *(_DWORD *)(v13 + 16) |= 1u;
@@ -141,34 +143,32 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
     v15 = *(_DWORD *)(a1 + 16);
     if ( v15 )
       *(_DWORD *)(v15 + 16) |= 1u;
+
     sub_44BB10(&v105, a2);
     sub_431450((int)&v105, a4, a5, a6, (int)&v105);
+
     v16 = *(_DWORD *)a1;
-    if ( *(_DWORD *)a1 )
-    {
+    if ( *(_DWORD *)a1 ) {
       sub_431740(v16, 0);
       sub_431A50(v16, 2, 3, 16, 2);
     }
-    if ( (dword_50C048 & 0x80u) != 0 && dword_E98E94 & 0x400 )
-    {
+
+    if ( (dword_50C048 & 0x80u) != 0 && dword_E98E94 & 0x400 ) {
       v17 = *(_DWORD *)a1;
-      if ( *(_DWORD *)a1 )
-      {
+      if ( *(_DWORD *)a1 ) {
         sub_431740(v17, 1);
         sub_431A50(v17, 2, 3, 16, 2);
       }
+
       v18 = *(_DWORD **)(a1 + 296);
-      if ( v18 )
-      {
+      if ( v18 ) {
         sub_44BB10(&v83, (int)&v105);
-        sub_431450((int)&v83, 0.0040000002, 0.0040000002, 0.0040000002, (int)&v83);
-        if ( a8 )
-        {
-          v19 = v98 * 0.2;
+        sub_431450((int)&v83, 0.004f, 0.004f, 0.004f, (int)&v83);
+        if ( a8 ) {
+          v19 = v98 * 0.2f;
           sub_42FA80((int)&v86, (int)&v86, v19, (int)&v85);
         }
         sub_431640(v18, &v83);
-LABEL_109:
         sub_431A50((int)v18, 2, 3, 16, 2);
         return;
       }
@@ -487,39 +487,39 @@ LABEL_109:
         sub_42F9B0(v82);
         sub_431100(&v90, v76, v77, v78);
         sub_42F7D0(v91, v82);
-        sub_42F7B0((int)&v92, 0.0, 0, 1065353216);
+        sub_42F7B0((int)&v92, 0.0, 0, 1.0f);
         sub_42F9F0((float *)&v90, v91, (float *)&v92);
         sub_42F9F0((float *)&v92, (float *)&v90, v91);
-        v62 = a6 * 0.0040000002;
-        v63 = v75 * 0.0099999998;
-        v64 = a4 * 0.0040000002;
+        v62 = a6 * 0.004f;
+        v63 = v75 * 0.01f;
+        v64 = a4 * 0.004f;
         sub_431450((int)&v90, v64, v63, v62, (int)&v90);
         sub_431640(*(_DWORD **)(a1 + 52), &v90);
-        if ( dword_50C478 > 0 )
-        {
+        if ( dword_50C478 > 0 ) {
           sub_42F7B0((int)&v94, 0.0, 0, 0);
           sub_42F7B0((int)&v93, 0.0, 0, 0);
-          v71 = 1067869798;
-          if ( !v52 )
-            v71 = 1056964608;
-          sub_481C30(*(_DWORD *)(a1 + 52), (int)&v94, (int)&v93, *(float *)&v71, 1065353216, 0.0, 50.0, 0);
+          v71 = v52 ? 1.3f : 0.5f;
+          sub_481C30(*(_DWORD *)(a1 + 52), (int)&v94, (int)&v93, *(float *)&v71, 1.0f, 0.0f, 50.0f, 0);
         }
+
         v65 = *(_DWORD *)(a1 + 52);
         if ( v65 )
           sub_431A50(v65, 2, 3, 16, 2);
       }
       if ( dword_50C478 == 4 )
         sub_43E6F0();
+
       v66 = *(_DWORD *)(a1 + 236);
       if ( v66 )
         sub_431A50(v66, 2, -4, 16, 3);
-      if ( (dword_50C048 & 0x80u) != 0 )
-      {
-        if ( dword_E98E94 & 0x1000 )
-        {
+
+      if ( (dword_50C048 & 0x80u) != 0 ) {
+        if ( dword_E98E94 & 0x1000 ) {
           v18 = *(_DWORD **)(a1 + 236);
-          if ( v18 )
-            goto LABEL_109;
+          if ( v18 ) {
+            sub_431A50((int)v18, 2, 3, 16, 2);
+            return;
+          }
         }
       }
     }
