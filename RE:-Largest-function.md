@@ -19,7 +19,7 @@ typedef struct {
   A1unkX* unk12; // +12
   A1unkB* unk16; // +16
   A1unkX* unk20; // +20
-  unk unk24a[8] // +24 to +52
+  unk* unk24a[8] // +24 to +52
   uint32_t unk56; // +56
   A1unkC* unk248; // +248
   ...
