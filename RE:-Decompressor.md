@@ -1,4 +1,4 @@
-# Decompressor?
+# Decompressor
 
 This is used from the model loader for "Comp" chunks
 
