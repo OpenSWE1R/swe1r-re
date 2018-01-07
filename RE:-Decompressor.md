@@ -4,7 +4,11 @@ This is used from the model loader for "Comp" chunks
 
 ```C
 //----- (0042D520) --------------------------------------------------------
-_BYTE *__cdecl sub_42D520(const uint8_t* a1, uint8_t* a2) {
+// a1 = Input stream, note that this expects space for a window at a1-0x1000 which will be written to!
+// a2 = Output stream
+// LZ77 with a seperate 0x1000 window. No idea why this was done + the parameter choice for a1 is "odd", to say the least.
+// Returns the pointer to the byte behind the last used output byte.
+uint8_t* __cdecl sub_42D520(uint8_t* a1, uint8_t* a2) {
   uint8_t* v2 = a1;
   uint8_t* result = a2;
   uint8_t* v4 = &a1[-0x1000];
