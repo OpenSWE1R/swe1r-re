@@ -30,11 +30,11 @@ _BYTE *__cdecl sub_42D520(const uint8_t* a1, uint8_t* a2) {
       }
 
       // If this is block copy, get more parameters
-      v9 = *v2++; // 4 msb = number of bytes to copy; 4 lsb = source page (0x100 bytes) in window
-      v10 = *v2++; // byte offset within input page
+      uint8_t v9 = *v2++; // 4 msb = number of bytes to copy; 4 lsb = source page (0x100 bytes) in window
+      uint8_t v10 = *v2++; // byte offset within input page
 
-      v11 = ((v9 & 0xF) * 0x100) + v10; // Get offset to source byte in window
-      v12 = (v9 >> 4) & 0xF; // Get number of bytes to copy
+      int32_t v11 = ((v9 & 0xF) * 0x100) + v10; // Get offset to source byte in window
+      int32_t v12 = (v9 >> 4) & 0xF; // Get number of bytes to copy
 
       // If source offset is 0, it marks the end of the stream
       if (v11 == 0) {
