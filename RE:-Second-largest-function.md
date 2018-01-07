@@ -1,5 +1,7 @@
 Maybe also 3rd largest function - IDA and retdec can't really decide.
 
+Should be *very* similar to `sub_49B7D0`
+
 ```C
 //----- (0049A390) --------------------------------------------------------
 signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
