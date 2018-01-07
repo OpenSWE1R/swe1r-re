@@ -1,7 +1,7 @@
 Maybe also 3rd largest function - IDA and retdec can't really decide.
 
 Should be *very* similar to `sub_49B7D0`
-Clearly does something with models.
+Clearly does something with meshes.
 
 ```C
 //----- (0049A390) --------------------------------------------------------
