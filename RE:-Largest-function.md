@@ -1,4 +1,5 @@
-This appears to be the longest function (space wise) in the game. No idea what it does
+This appears to be the longest function (space wise) in the game. No idea what it does.
+It seems to be full of unrolled loops though.
 
 ```C
 typdef struct {
@@ -18,7 +19,8 @@ typedef struct {
   A1unkX* unk12; // +12
   A1unkB* unk16; // +16
   A1unkX* unk20; // +20
-  ...
+  unk unk24a[8] // +24 to +52
+  uint32_t unk56; // +56
   A1unkC* unk248; // +248
   ...
   uint32_t unk296; // +296
@@ -354,6 +356,8 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
         }
       }
       sub_46F2C0(0, a1, a9, a10);
+
+      //FIXME: Most likely a loop over 8 elements
       v40 = *(_DWORD *)(a1 + 24);
       if ( v40 )
         sub_431A50(v40, 2, -4, 16, 3);
@@ -378,6 +382,7 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
       v47 = *(_DWORD *)(a1 + 52);
       if ( v47 )
         sub_431A50(v47, 2, -4, 16, 3);
+
       if ( dword_50C478 > 0 )
         --dword_50C478;
       if ( *(_DWORD *)(a1 + 40) )
