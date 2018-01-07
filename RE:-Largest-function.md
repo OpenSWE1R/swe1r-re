@@ -1,13 +1,41 @@
 This appears to be the longest function (space wise) in the game. No idea what it does
 
 ```C
+typdef struct {
+  uint8_t unk[16];
+  uint32_t unk16; // +16 some flags register?
+} A1unkA;
+
+typedef A1unkA A1unkB;
+typedef A1unkA A1unkC;
+
+typedef A1unkA A1unkX;
+
 typedef struct {
+  uint32_t unk0; // +0
+  A1unkX* unk4; // +4
+  A1unkA* unk8; // +8
+  A1unkX* unk12; // +12
+  A1unkB* unk16; // +16
+  A1unkX* unk20; // +20
+  ...
+  A1unkC* unk248; // +248
+  ...
   uint32_t unk296; // +296
 } A1;
 ```
 
 ```C
 //----- (004337E0) --------------------------------------------------------
+// a1 = an object of some sorts
+// a2 = unk, only passed to sub_44BB10
+// a3 = some boolean flag
+// a4 = x?
+// a6 = y?
+// a7 = z?
+// a8 = some boolean flag
+// a9 = unk, only passed to sub_46F2C0
+// a10 = unk, only passed to sub_46F2C0
 void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, int a7, int a8, float a9, float a10) {
   unsigned int v10; // edi
   float v11; // ST14_4
@@ -94,12 +122,17 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
   int v92; // [esp+E0h] [ebp-138h]
   int v93; // [esp+100h] [ebp-118h]
   int v94; // [esp+10Ch] [ebp-10Ch]
-  int v95; // [esp+118h] [ebp-100h]
-  float v96; // [esp+11Ch] [ebp-FCh]
-  float v97; // [esp+120h] [ebp-F8h]
-  float v98; // [esp+124h] [ebp-F4h]
-  float v99; // [esp+128h] [ebp-F0h]
-  float v100; // [esp+12Ch] [ebp-ECh]
+
+  // A 8 element array:
+  int v95; // [esp+118h] [ebp-100h] //0
+  float v96; // [esp+11Ch] [ebp-FCh] //1
+  float v97; // [esp+120h] [ebp-F8h] //2
+  float v98; // [esp+124h] [ebp-F4h] //3
+  float v99; // [esp+128h] [ebp-F0h] //4
+  float v100; // [esp+12Ch] [ebp-ECh] //5
+  //E8 = 6
+  //E4 = 7
+
   float v101[12]; // [esp+138h] [ebp-E0h]
   char v102; // [esp+168h] [ebp-B0h]
   float v103[12]; // [esp+178h] [ebp-A0h]
