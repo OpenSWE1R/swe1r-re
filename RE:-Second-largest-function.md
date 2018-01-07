@@ -5,8 +5,7 @@ Clearly does something with meshes.
 
 ```C
 //----- (0049A390) --------------------------------------------------------
-signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
-{
+signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5) {
   float *v5; // edi
   float *v6; // ebx
   int v7; // edx
@@ -37,7 +36,6 @@ signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
   int v36; // ebp
   int v37; // ebx
   int v38; // ecx
-  bool v39; // zf
   bool v40; // sf
   float *v41; // ecx
   int v42; // edx
@@ -215,12 +213,13 @@ signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
   v161 = 0;
   v9 = &a4[4 * a5 - 4];
   v167 = a2;
-  if ( a5 > 0 )
-  {
+
+
+  // For loop from 0 to a5 exclusive
+  if ( a5 > 0 ) {
     v10 = 0;
     v191 = a5;
-    do
-    {
+    do {
       v11 = *v157;
       v195 = *(float *)(a1 + 48) * v157[1];
       v13 = *(float *)(a1 + 48) * v167[1];
@@ -294,9 +293,11 @@ signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
     }
     while ( v191 );
   }
+
+
+  // This looks like an unrolled loop?
   result = v161;
-  if ( v161 >= 3 )
-  {
+  if ( v161 >= 3 ) {
     v31 = v8 ^ dword_DFA138;
     v197 = v161;
     v32 = v8 ^ dword_DFA138 ^ v8;
@@ -309,7 +310,6 @@ signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
     v37 = v36 ^ dword_DF9EB0 ^ dword_DFA13C;
     v174 = (float *)(v35 + 8 * v161 - 8);
     v38 = 16 * v161;
-    v39 = v161 == 0;
     v40 = v161 < 0;
     dword_DFA138 = v33;
     dword_DF9EAC ^= dword_DF9EA8 ^ dword_DF9EAC;
@@ -319,71 +319,78 @@ signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
     v162 = 0;
     v41 = (float *)(v38 + v37 - 16);
     v168 = (float *)v33;
-    if ( !v40 && !v39 )
-    {
+    if ( !v40 && (v161 != 0) ) {
       v42 = 0;
       v43 = 0;
       v192 = v197;
-      do
-      {
-        v44 = *v158;
+      do {
+        v44 = v158[0];
         v198 = *(float *)(a1 + 40) * v158[1];
         v46 = *(float *)(a1 + 40) * v168[1];
         if ( v47 | v48 || v46 >= *v168 )
         {
-          if ( *v158 != v198 && v46 != *v168 && (*v158 > (double)v198 || v46 < *v168) )
+          if ( v158[0] != v198 && v46 != v168[0] && (v158[0] > (double)v198 || v46 < v168[0]) )
           {
             v199 = v168[1] - v158[1];
-            v180 = *v168 - *v158;
-            v51 = v168[1] * *v158 - v158[1] * *v168;
-            if ( !v52 )
-            {
+            v180 = v168[0] - v158[0];
+            v51 = v168[1] * v158[0] - v158[1] * v168[0];
+            if ( !v52 ) {
               v49 = *(float *)(a1 + 40) * v199 - v180;
               v51 = v51 / v49;
             }
             v186 = *(float *)(a1 + 40) * v51;
-            v54 = v199;
-            if ( v55 )
-              v54 = -v54;
-            v57 = v180;
-            if ( v58 )
-              v57 = -v57;
-            if ( v54 <= v57 )
-              v59 = (v186 - *v158) / v180;
-            else
+
+            v54 = v55 ? -v54 : v199;
+            v57 = v58 ? -v75 : v180;
+            if ( v54 <= v57 ) {
+              v59 = (v186 - v158[0]) / v180;
+            else {
               v59 = (v51 - v158[1]) / v199;
+            }
             *(float *)(v32 + v43) = v186;
             *(float *)(dword_DF9EB4 + v43 + 4) = v51;
             v60 = 8 * v162;
-            v43 += 12;
             ++v162;
-            *(float *)(dword_DF9EB4 + v43 - 4) = (v168[2] - v158[2]) * v59 + v158[2];
-            *(float *)(dword_DF9EAC + v60) = (*(float *)v35 - *v174) * v59 + *v174;
+
+            // Copy Z, Y, X
+            *(float *)(dword_DF9EB4 + v43 + 8) = (v168[2] - v158[2]) * v59 + v158[2];
+            *(float *)(dword_DF9EAC + v60 + 0) = (*(float *)(v35 + 0) - v174[0]) * v59 + v174[0];
             *(float *)(dword_DF9EAC + v60 + 4) = (*(float *)(v35 + 4) - v174[1]) * v59 + v174[1];
-            *(float *)(dword_DF9EB0 + v42) = (*(float *)v37 - *v41) * v59 + *v41;
-            *(float *)(dword_DF9EB0 + v42 + 4) = (*(float *)(v37 + 4) - v41[1]) * v59 + v41[1];
-            *(float *)(dword_DF9EB0 + v42 + 8) = (*(float *)(v37 + 8) - v41[2]) * v59 + v41[2];
+            v43 += 12;
+
+            // Copy RGBA
+            *(float *)(dword_DF9EB0 + v42 +  0) = (*(float *)(v37 +  0) - v41[0]) * v59 + v41[0];
+            *(float *)(dword_DF9EB0 + v42 +  4) = (*(float *)(v37 +  4) - v41[1]) * v59 + v41[1];
+            *(float *)(dword_DF9EB0 + v42 +  8) = (*(float *)(v37 +  8) - v41[2]) * v59 + v41[2];
+            *(float *)(dword_DF9EB0 + v42 + 12) = (*(float *)(v37 + 12) - v41[3]) * v59 + v41[3];
             v42 += 16;
-            *(float *)(dword_DF9EB0 + v42 - 4) = (*(float *)(v37 + 12) - v41[3]) * v59 + v41[3];
+
             v61 = dword_DFAA04;
             v32 = dword_DF9EB4;
             LOBYTE(v61) = dword_DFAA04 | 0x20;
             dword_DFAA04 = v61;
           }
-          if ( v46 >= *v168 )
-          {
+
+          if ( v46 >= *v168 ) {
+
+            // Copy XYZ
             v62 = (_DWORD *)(v43 + v32);
-            v43 += 12;
-            *v62 = *(_DWORD *)v168;
+            v62[0] = *((_DWORD *)v168 + 0);
             v62[1] = *((_DWORD *)v168 + 1);
             v62[2] = *((_DWORD *)v168 + 2);
-            *(_DWORD *)(dword_DF9EAC + 8 * v162) = *(_DWORD *)v35;
+            v43 += 12;
+
+            // Copy UV
+            *(_DWORD *)(dword_DF9EAC + 8 * v162 + 0) = *(_DWORD *)(v35 + 0);
             *(_DWORD *)(dword_DF9EAC + 8 * v162 + 4) = *(_DWORD *)(v35 + 4);
+           
+            // Copy RGBA
             v63 = (_DWORD *)(v42 + dword_DF9EB0);
-            *v63 = *(_DWORD *)v37;
+            v63[0] = *(_DWORD *)(v37 + 0);
             v63[1] = *(_DWORD *)(v37 + 4);
             v63[2] = *(_DWORD *)(v37 + 8);
             v63[3] = *(_DWORD *)(v37 + 12);
+
             ++v162;
             v32 = dword_DF9EB4;
             v42 += 16;
@@ -421,7 +428,6 @@ signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
       v159 = v69 + 12 * v162 - 12;
       v175 = &v71[2 * v162 - 2];
       v73 = 4 * v162;
-      v39 = v162 == 0;
       v40 = v162 < 0;
       dword_DFA138 = v69;
       dword_DF9EA8 = (int)v71;
@@ -429,7 +435,7 @@ signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
       v200 = v162;
       v163 = 0;
       v74 = &v67[v73 - 4];
-      if ( !v40 && !v39 )
+      if ( !v40 && (v162 != 0) )
       {
         v75 = 0;
         v169 = (float *)(v69 + 8);
@@ -642,17 +648,14 @@ signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
           v189 = (float *)v125;
           v134 = (float *)(16 * v208 + v130 - 16);
           v171 = (float *)v130;
-          if ( v208 <= 0 )
-          {
-            v140 = dword_DFA138;
-          }
-          else
-          {
+
+
+          // For loop from 0 to v208 (exclusive) ???
+          if ( v208 > 0 ) {
             v135 = 0;
             v165 = 0;
             v183 = (float *)(dword_DFA138 + 4);
-            do
-            {
+            do {
               if ( v132[1] >= (double)*(float *)(a1 + 4) || *v183 >= (double)*(float *)(a1 + 4) )
               {
                 if ( v132[1] != *(float *)(a1 + 4)
@@ -703,19 +706,29 @@ signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
               v183 += 3;
               v177 = v189;
               v189 += 2;
-              v39 = v208 == 1;
               v171 = v133;
-              --v208;
-            }
-            while ( !v39 );
-            v140 = dword_DFA138;
+              v208--;
+            } while ( v208 != 0 );
+
+
+
+
             v125 = dword_DF9EA8;
             v130 = dword_DFA13C;
           }
-          if ( v131 >= 3 )
-          {
-            if ( !*(_DWORD *)a1 )
-              goto LABEL_130;
+
+          v140 = dword_DFA138;
+
+
+          if ( v131 >= 3 ) {
+            if ( !*(_DWORD *)a1 ) {
+              if ( (float *)v128 != a2 ) {
+                qmemcpy(a2, (const void *)v128, 4 * ((unsigned int)(12 * v131) >> 2));
+                qmemcpy(a3, (const void *)dword_DF9EAC, 4 * ((unsigned int)(8 * v131) >> 2));
+                qmemcpy(a4, (const void *)dword_DF9EB0, 4 * ((unsigned int)(16 * v131) >> 2));
+              }
+              return v131;
+            }
             v142 = v128 ^ v140;
             v143 = dword_DF9EAC ^ v125;
             v144 = v131;
@@ -738,13 +751,14 @@ signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
             v151 = &v149[4 * v144 - 4];
             v190 = (float *)v146;
             v172 = v149;
-            if ( v144 > 0 )
-            {
+
+
+            // Loop from 0 to ???
+            if ( v144 > 0 ) {
               v152 = 0;
               v166 = 0;
               v184 = (float *)(dword_DFA138 + 4);
-              do
-              {
+              do {
                 if ( v150[1] <= (double)*(float *)(a1 + 8) || *v184 <= (double)*(float *)(a1 + 8) )
                 {
                   if ( v150[1] != *(float *)(a1 + 8)
@@ -795,45 +809,36 @@ signed int __cdecl sub_49A390(int a1, float *a2, float *a3, float *a4, int a5)
                 v184 += 3;
                 v178 = v190;
                 v190 += 2;
-                v39 = v209 == 1;
                 v172 = v149;
-                --v209;
+                v209--;
               }
-              while ( !v39 );
+              while (v209 != 0);
             }
-            if ( v131 >= 3 )
-            {
-LABEL_130:
-              if ( (float *)v128 != a2 )
-              {
+
+
+            if ( v131 >= 3 ) {
+              if ( (float *)v128 != a2 ) {
                 qmemcpy(a2, (const void *)v128, 4 * ((unsigned int)(12 * v131) >> 2));
                 qmemcpy(a3, (const void *)dword_DF9EAC, 4 * ((unsigned int)(8 * v131) >> 2));
                 qmemcpy(a4, (const void *)dword_DF9EB0, 4 * ((unsigned int)(16 * v131) >> 2));
               }
             }
-            result = v131;
-          }
-          else
-          {
+            return v131;
+
+          } else {
             v141 = dword_DFAA04;
             LOBYTE(v141) = dword_DFAA04 | 0x40;
             dword_DFAA04 = v141;
-            result = v131;
+            return v131;
           }
+        } else {
+          return v164;
         }
-        else
-        {
-          result = v164;
-        }
+      } else {
+        return v163;
       }
-      else
-      {
-        result = v163;
-      }
-    }
-    else
-    {
-      result = v162;
+    } else {
+      return v162;
     }
   }
   return result;
