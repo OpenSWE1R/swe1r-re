@@ -1,6 +1,12 @@
 This appears to be the longest function (space wise) in the game. No idea what it does
 
 ```C
+typedef struct {
+  uint32_t unk296; // +296
+} A1;
+```
+
+```C
 //----- (004337E0) --------------------------------------------------------
 void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, int a7, int a8, float a9, float a10) {
   unsigned int v10; // edi
