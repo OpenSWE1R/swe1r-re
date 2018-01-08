@@ -49,7 +49,6 @@ void __cdecl sub_4476B0(signed int *a1) {
   unsigned int *v42; // ecx
   signed int v43; // edx
   unsigned int v44; // eax
-  unsigned int v45; // eax
   int v46; // eax
   int v47; // esi
   __int16 v48; // dx
@@ -148,121 +147,71 @@ void __cdecl sub_4476B0(signed int *a1) {
     return;
   }
 
-  v2 = *a1;
-  if (!(*a1 != 20581 && v2 != 20582 && v2 != 53348 && v2 != 53349 && v2 != 20580 && v2 != 12388 && v2 != 53350)) {
+  //FIXME: Did I invert this poorly?
+  //FIXME: WTF?! a1[0] is not swapped here yet?!
+  v2 = a1[0];
+  if ((v2 == 20581) || (v2 == 20582) || (v2 == 53348) || (v2 == 53349) || (v2 == 20580) || (v2 == 12388) || (v2 == 53350)) {
     return;
   }
 
-  v3 = ((*a1 & 0xFF0000 | ((unsigned int)*a1 >> 16)) >> 8) | (((*a1 << 16) | *a1 & 0xFF00) << 8);
   v4 = (a1[1] << 16) | a1[1] & 0xFF00;
   v5 = (unsigned int)a1[1] >> 16;
   v6 = a1[1] & 0xFF0000;
-  *a1 = v3;
   v7 = v6 | v5;
-  v8 = a1[2];
   a1[1] = (v7 >> 8) | (v4 << 8);
+
+  a1[0] = swap32(a1[0]);
+  v3 = a1[0];
+
+  v8 = a1[2];
   v9 = (v8 << 16) | (unsigned __int16)(v8 & 0xFF00);
   v10 = v8 & 0xFF0000 | (v8 >> 16);
-  LOWORD(v8) = *((_WORD *)a1 + 6);
   a1[2] = (v10 >> 8) | (v9 << 8);
-  LOBYTE(v9) = BYTE1(v8);
-  BYTE1(v9) = v8;
-  LOWORD(v8) = *((_WORD *)a1 + 7);
-  *((_WORD *)a1 + 6) = v9;
-  LOBYTE(v9) = BYTE1(v8);
-  BYTE1(v9) = v8;
-  v11 = a1[4];
-  *((_WORD *)a1 + 7) = v9;
-  a1[4] = ((v11 & 0xFF0000 | (v11 >> 16)) >> 8) | (((v11 << 16) | v11 & 0xFF00) << 8);
-  if ( v3 == 53349) {
 
+  LOWORD(v8) = *((_WORD *)a1 + 6);
+  LOBYTE(v9) = BYTE1(v8);
+  BYTE1(v9) = v8;
+  *((_WORD *)a1 + 6) = v9;
+
+  LOWORD(v8) = *((_WORD *)a1 + 7);
+  LOBYTE(v9) = BYTE1(v8);
+  BYTE1(v9) = v8;
+  *((_WORD *)a1 + 7) = v9;
+
+  a1[4] = swap32(a1[4]);
+  v11 = a1[4];
+
+  if ( v3 == 53349) {
     v127 = (unsigned int *)(a1 + 7);
-    v128 = 12;
-    do
-    {
-      v129 = *v127;
-      ++v127;
-      --v128;
-      *(v127 - 1) = ((v129 & 0xFF0000 | (v129 >> 16)) >> 8) | (((v129 << 16) | v129 & 0xFF00) << 8);
-    }
-    while ( v128 );
+    v127 = swap32(v127, 12);
     v130 = (unsigned int *)(a1 + 19);
-    v131 = 3;
-    do
-    {
-      v132 = *v130;
-      ++v130;
-      --v131;
-      *(v130 - 1) = (((v132 >> 16) | v132 & 0xFF0000) >> 8) | (((v132 << 16) | v132 & 0xFF00) << 8);
-    }
-    while ( v131 );
+    v130 = swap32(v130, 3);
   } else if ( v3 == 53350 ) {
+
     LOBYTE(v121) = *((_WORD *)a1 + 14) >> 8;
     HIBYTE(v121) = *((_WORD *)a1 + 14);
     v122 = *((_WORD *)a1 + 15);
     HIBYTE(v123) = *((_WORD *)a1 + 15);
     *((_WORD *)a1 + 14) = v121;
+
     LOBYTE(v123) = HIBYTE(v122);
     v124 = (unsigned int *)(a1 + 8);
     *((_WORD *)a1 + 15) = v123;
-
-    //FIXME: for loop
-    v125 = 3;
-    do {
-      v126 = *v124;
-      ++v124;
-      --v125;
-      *(v124 - 1) = (((v126 >> 16) | v126 & 0xFF0000) >> 8) | (((v126 << 16) | v126 & 0xFF00) << 8);
-    } while ( v125 );
-
+    v124 = swap32(v124, 3);
   } else if ( v3 == 53348 ) {
     v117 = (unsigned int *)(a1 + 7);
-    v118 = 12;
-    do
-    {
-      v119 = *v117;
-      ++v117;
-      --v118;
-      *(v117 - 1) = (((v119 >> 16) | v119 & 0xFF0000) >> 8) | (((v119 << 16) | v119 & 0xFF00) << 8);
-    }
-    while ( v118 );
+    v117 = swap32(v117, 12);
   } else if ( v3 == 20582 ) {
     v111 = (unsigned int *)(a1 + 7);
-
-    //FIXME: For loop
-    v112 = 8;
-    do {
-      v113 = *v111;
-      ++v111;
-      --v112;
-      *(v111 - 1) = (((v113 >> 16) | v113 & 0xFF0000) >> 8) | (((v113 << 16) | v113 & 0xFF00) << 8);
-    } while ( v112 );
-
+    v111 = swap32(v111, 8);
     v114 = (unsigned int *)(a1 + 15);
-
-    //FIXME: for loop
-    v115 = 3;
-    do {
-      v116 = *v114;
-      ++v114;
-      --v115;
-      *(v114 - 1) = ((v116 & 0xFF0000 | (v116 >> 16)) >> 8) | (((v116 << 16) | v116 & 0xFF00) << 8);
-    } while ( v115 );
-
+    v114 = swap32(v114, 3);
   } else if ( v3 == 20581 ) {
-    a1[7] = ((((unsigned int)a1[7] >> 16) | a1[7] & 0xFF0000) >> 8) | (((a1[7] << 16) | a1[7] & 0xFF00) << 8);
+    a1[7] = swap32(a1[7]);
   } else if ( v3 == 12388 ) {
-    a1[5] = ((((unsigned int)a1[5] >> 16) | a1[5] & 0xFF0000) >> 8) | (((a1[5] << 16) | a1[5] & 0xFF00) << 8);
+    a1[5] = swap32(a1[5]);
     v13 = (unsigned int *)(a1 + 7);
-
-    //FIXME: for loop
-    v12 = 6;
-    do {
-      v14 = *v13;
-      ++v13;
-      --v12;
-      *(v13 - 1) = ((v14 & 0xFF0000 | (v14 >> 16)) >> 8) | (((v14 << 16) | v14 & 0xFF00) << 8);
-    } while ( v12 );
+    v13 = swap32(v13, 6);
 
     v15 = 0;
     v138 = 0;
@@ -301,18 +250,7 @@ void __cdecl sub_4476B0(signed int *a1) {
               LOBYTE(v24) = BYTE1(v22);
               v25 = (__int16 *)(v19 + 8);
               *(_WORD *)(v19 + 6) = v24;
-
-              //FIXME: for loop
-              v26 = 2;
-              do {
-                v27 = *v25;
-                LOBYTE(v28) = (unsigned __int16)*v25 >> 8;
-                ++v25;
-                HIBYTE(v28) = v27;
-                --v26;
-                *(v25 - 1) = v28;
-              } while ( v26 );
-
+              v25 = swap16(v25, 2);
               LOBYTE(v29) = *(_WORD *)(v19 + 16) >> 8;
               HIBYTE(v29) = *(_WORD *)(v19 + 16);
               v30 = *(_WORD *)(v19 + 18);
@@ -339,42 +277,22 @@ void __cdecl sub_4476B0(signed int *a1) {
               *(_WORD *)(v19 + 26) = v31;
             }
             v36 = *(_DWORD *)(v17 + 12);
-            if ( v36 && !sub_447670(*(_DWORD *)(v17 + 12)) )
-            {
+            if ( v36 && !sub_447670(*(_DWORD *)(v17 + 12)) ) {
               v37 = dword_50C630;
               dword_E68280[dword_50C630] = v36;
               dword_50C630 = v37 + 1;
               LOWORD(v37) = *(_WORD *)(v36 + 4);
               v38 = (unsigned int *)(v36 + 6);
-              *(_DWORD *)v36 = (((*(_DWORD *)v36 >> 16) | *(_DWORD *)v36 & 0xFF0000u) >> 8) | (((*(_DWORD *)v36 << 16) | *(_DWORD *)v36 & 0xFF00) << 8);
+              *(_DWORD *)v36 = swap32(*(_DWORD *)v36);
               LOBYTE(v39) = BYTE1(v37);
               HIBYTE(v39) = v37;
               *(_WORD *)(v36 + 4) = v39;
-
-              //FIXME: for loop
-              v40 = 2;
-              do {
-                v41 = *v38;
-                ++v38;
-                --v40;
-                *(v38 - 1) = (((v41 >> 16) | v41 & 0xFF0000) >> 8) | (((v41 << 16) | v41 & 0xFF00) << 8);
-              } while ( v40 );
-
+              v38 = swap32(v38, 2);
               v42 = (unsigned int *)(v36 + 14);
-
-              //FIXME: for loop
-              v43 = 2;
-              do {
-                v44 = *v42;
-                ++v42;
-                --v43;
-                *(v42 - 1) = (((v44 >> 16) | v44 & 0xFF0000) >> 8) | (((v44 << 16) | v44 & 0xFF00) << 8);
-              } while ( v43 );
-
+              v42 = swap32(v42, 2);
               v1 = a1;
-              v45 = *(_DWORD *)(v36 + 28);
-              *(_DWORD *)(v36 + 24) = ((*(_DWORD *)(v36 + 24) & 0xFF0000u | (*(_DWORD *)(v36 + 24) >> 16)) >> 8) | (((*(_DWORD *)(v36 + 24) << 16) | *(_DWORD *)(v36 + 24) & 0xFF00) << 8);
-              *(_DWORD *)(v36 + 28) = ((v45 & 0xFF0000 | (v45 >> 16)) >> 8) | (((v45 << 16) | v45 & 0xFF00) << 8);
+              *(_DWORD *)(v36 + 24) = swap32(*(_DWORD *)(v36 + 24);
+              *(_DWORD *)(v36 + 28) = swap32(*(_DWORD *)(v36 + 28));
             }
           }
           v46 = *(_DWORD *)(v16 + 4);
@@ -439,36 +357,20 @@ void __cdecl sub_4476B0(signed int *a1) {
             {
               do {
                 v74 = (unsigned int *)v47;
-
-                //FIXME: For loop
-                v75 = 3;
-                do
-                {
-                  v76 = *v74;
-                  ++v74;
-                  --v75;
-                  *(v74 - 1) = ((v76 & 0xFF0000 | (v76 >> 16)) >> 8) | (((v76 << 16) | v76 & 0xFF00) << 8);
-                } while ( v75 );
-
+                v74 = swap32(v74, 3);
                 v77 = (unsigned int *)(v47 + 12);
+                v77 = swap32(v77, 3);
+                *(_DWORD *)(v47 + 24) = swap32(*(_DWORD *)(v47 + 24));
+                *(_DWORD *)(v47 + 28) = swap32(*(_DWORD *)(v47 + 28));
 
-                //FIXME: For loop
-                v78 = 3;
-                do {
-                  v79 = *v77;
-                  ++v77;
-                  --v78;
-                  *(v77 - 1) = (((v79 >> 16) | v79 & 0xFF0000) >> 8) | (((v79 << 16) | v79 & 0xFF00) << 8);
-                } while ( v78 );
-
-                *(_DWORD *)(v47 + 24) = (((*(_DWORD *)(v47 + 24) >> 16) | *(_DWORD *)(v47 + 24) & 0xFF0000u) >> 8) | (((*(_DWORD *)(v47 + 24) << 16) | *(_DWORD *)(v47 + 24) & 0xFF00) << 8);
-                *(_DWORD *)(v47 + 28) = (((*(_DWORD *)(v47 + 28) >> 16) | *(_DWORD *)(v47 + 28) & 0xFF0000u) >> 8) | (((*(_DWORD *)(v47 + 28) << 16) | *(_DWORD *)(v47 + 28) & 0xFF00) << 8);
                 LOBYTE(v80) = *(_WORD *)(v47 + 36) >> 8;
                 HIBYTE(v80) = *(_WORD *)(v47 + 36);
                 *(_WORD *)(v47 + 36) = v80;
+
                 LOBYTE(v81) = *(_WORD *)(v47 + 38) >> 8;
                 HIBYTE(v81) = *(_WORD *)(v47 + 38);
                 *(_WORD *)(v47 + 38) = v81;
+
                 v47 = *(_DWORD *)(v47 + 40);
               } while ( v47 );
               v1 = a1;
@@ -476,14 +378,7 @@ void __cdecl sub_4476B0(signed int *a1) {
           }
           v82 = (unsigned int *)(v16 + 8);
 
-          //FIXME: For loop
-          v83 = 6;
-          do {
-            v84 = *v82;
-            ++v82;
-            --v83;
-            *(v82 - 1) = (((v84 >> 16) | v84 & 0xFF0000) >> 8) | (((v84 << 16) | v84 & 0xFF00) << 8);
-          } while ( v83 );
+          v82 = swap32(v82, 6);
 
           LOBYTE(v85) = 0;
           HIBYTE(v85) = *(_WORD *)(v16 + 32);
@@ -548,14 +443,11 @@ void __cdecl sub_4476B0(signed int *a1) {
             }
 
             //FIXME: For loop
-            if ( v95 > 0 )
-            {
-              do
-              {
-                v99 = (_WORD *)(*(_DWORD *)(v16 + 40) + 2 * v93++);
-                LOBYTE(v100) = *v99 >> 8;
-                HIBYTE(v100) = *v99;
-                *v99 = v100;
+            if ( v95 > 0 ) {
+              do {
+                v99 = (_WORD *)(*(_DWORD *)(v16 + 40) + 2 * v93);
+                *v99 = swap16(v99);
+                v93++;
               }
               while ( v93 < v95 );
             }
