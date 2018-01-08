@@ -10,6 +10,10 @@ int __cdecl sub_4214C0(_BYTE *a1, char *a2);
 //----- (004AB5D0) --------------------------------------------------------
 // Probably '_strupr', however, might not use the C locale?! (maybe POSIX version, `strupr`?)
 LPCSTR __cdecl sub_4AB5D0(LPCSTR lpSrcStr);
+
+//----- (0049EDD0) --------------------------------------------------------
+// `_strlwr`, same caveats as with `_strupr` above.
+LPCSTR __cdecl sub_49EDD0(LPCSTR lpSrcStr)
 ```
 
 ## Guesses by IDA
