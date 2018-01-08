@@ -75,16 +75,14 @@ int *__cdecl sub_448780(int32_t a1) {
   }
 
 
-  // Get buffer and align to 8 byte
+  // Read chunk header to 8 byte aligned buffer
   typdef struct {
     uint32_t magic;
     uint32_t unk1;
     uint32_t unk2;
   } V13;
   v12 = sub_445B40();
-  v13 = (int *)((v12 + 7) & 0xFFFFFFF8);
-
-  //FIXME: Read 12 byte.. what for?
+  v13 = align_up(v12, 8);
   v22 = v12;
   sub_42D640(0, v24, v13, 0xCu);
 
@@ -116,7 +114,7 @@ int *__cdecl sub_448780(int32_t a1) {
     // Uncompress
     sub_42D520(v16, v13);
 
-    // Parse model??
+    // Keep track of buffer position?
     sub_445B20((int)v13 + v8);
   } else {
     
@@ -133,7 +131,7 @@ int *__cdecl sub_448780(int32_t a1) {
     // Load data
     sub_42D640(0, v24, v13, v8);
 
-    // Parse model??
+    // Keep track of buffer position?
     sub_445B20((int)v13 + v8);
   }
 
