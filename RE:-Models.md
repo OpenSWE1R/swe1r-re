@@ -149,17 +149,22 @@ int *__cdecl sub_448780(int32_t a1) {
   v17 = v8 / 4;
   v18 = (unsigned int *)v13;
 
+  // Loop over each mesh [material?] (?)
   for (int32_t v1 = 0; v1 < v17; v1++) {
+    // Check if this mesh is textured
     if ( (1 << (31 - (v1 & 0x1F))) & dword_E6B180[v1 >> 5] ) {
       v18[v1] = swap32(v18[v1]);
       if ( (v18[v1] & 0xFF000000) == 0x0A000000 ) {
+        // Load texture
         sub_447490(v17, v18[v1] & 0x00FFFFFF, &v18[v1], &v18[v1 + 1]);
       } else if ( v18[v1] != 0x00000000) {
+        // Texture is already in memory, so point into an existing buffer ???
         v18[v1] = (unsigned int)v13 + v18[v1];
       }
     }
   }
 
+  // Parse the model
   sub_4485D0(v13);
 
   // For certain types, the header seems to be skipped?!
@@ -259,7 +264,7 @@ void __usercall sub_447490(int a1@<ebp>, int a2, char **a3, int *a4) {
   //FIXME: ???
   sub_446C20(a3, a4);
 
-  // Add model to cache
+  // Add texture to cache
   dword_E93860[a2] = a3;
 
   // Keep track of some special textures?
@@ -284,7 +289,6 @@ void __usercall sub_447490(int a1@<ebp>, int a2, char **a3, int *a4) {
 ```C
 //----- (004485D0) --------------------------------------------------------
 void __cdecl sub_4485D0(unsigned int *a1) {
-  int v1; // esi
   signed int *v3; // eax
   unsigned int *v5; // esi
   unsigned int v6; // ecx
@@ -293,63 +297,62 @@ void __cdecl sub_4485D0(unsigned int *a1) {
   signed int v9; // ecx
   unsigned int v10; // eax
   _DWORD *v11; // eax
-  int v12; // esi
-  int i; // edi
   unsigned int result; // eax
-  int v15; // esi
 
-  v1 = &a1[1];
+  // Swap magic and keep a copy for later
   a1[0] = swap32(a1[0]);
-
-  uint32_t v2 = a1[0];
 
   dword_E6B168 = 0;
   dword_E981E8 = 0;
 
-  v3 = (signed int *)a1[1];
-  if ( a1[1] != -1 ) {
-    do {
-      if ( v3 ) {
-        sub_4476B0(v3);
-      }
-      v3 = *(signed int **)(v1 + 4);
-      v1 += 4;
+  //FIXME: What does this do?
+  uint32_t* v1 = &a1[1];
+  while(*v1 != -1) {
+    if (*v1) {
+      sub_4476B0(*v1);
     }
-    while ( v3 != (signed int *)-1 );
+    v1++;
   }
 
-  v5 = &a1[2];
+  // Advance pointer to behind the data
+  v5 = &v1[1];
 
   uint32_t tmp = swap32(*v5);
   if (tmp == MAGIC('D','a','t','a')) {
     v5[0] = tmp;
     v5[1] = swap32(v5[1]);
+
+    // Swap all data bytes
+    uint32_t* vx = &v5[2];
     for(int32_t v9 = 0; v9 < v5[1]; v9++) {
-      v5[2 + v9] = swap32(v5[2 + v9]);
+      vx[v9] = swap32(vx[v9]);
     }
+
+    // Advance pointer to behind the data
+    v5 = &vx[v9];
   }
 
   uint32_t tmp = swap32(*v5);
   if (tmp == MAGIC('A','n','i','m') ) {
     v5[0] = tmp;
-    v11 = (_DWORD *)v5[1]; //FIXME: No swap here?!
-    v12 = (int)(v5 + 1);
-    for ( i = v12; v11; v12 += 4 ) {
-      sub_448180(v11);
-      v11 = *(_DWORD **)(i + 4);
-      i += 4;
+
+    // Call anim parser until data pointer is null.
+    uint32_t* v12 = &v5[1];
+    while(*v12) {
+      sub_448180(*v12++);
     }
-    v5 = (unsigned int *)(v12 + 4);
+
+    // Set pointer to after the last entry
+    v5 = &v12[1];
   }
 
   uint32_t tmp = swap32(*v5);
   if (tmp == MAGIC('A','l','t','N')) {
     v5[0] = tmp;
-    v15 = &v5[1]
-    if (v2 == MAGIC('M','A','l','t')) {
-      while(*(int32_t*)v15) {
-        sub_4476B0(*(int32_t*)v15);
-        v15 += 4
+    if (a1[0] == MAGIC('M','A','l','t')) {
+      uint32_t* v15 = &v5[1];
+      while(*v15) {
+        sub_4476B0(*v15++);
       }
     }
   }
