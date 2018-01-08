@@ -1,3 +1,13 @@
+## Guesses by me
+
+```C
+//----- (004214C0) --------------------------------------------------------
+// a1 = input string
+// a2 = output string
+// Unescapes string, returns length of output string
+int __cdecl sub_4214C0(_BYTE *a1, char *a2)
+```
+
 ## Guesses by IDA
 
 Generated using the pretty bad `cat SWEP1RCR_newer_patch.c | grep "using guesse" | grep -v "dword_" | grep -v "flt_" | grep -v "word_" | grep -v "byte_" | grep -v "dbl_" | grep -v "off_" | grep -v "sub_" | grep -v "var_" | sort -h | uniq`
