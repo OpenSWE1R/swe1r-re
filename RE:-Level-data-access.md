@@ -37,7 +37,7 @@ void __cdecl sub_42D680(int32_t a1) {
 }
 ```
 
-## File handle
+## Retrieve file handle (internal)
 
 ```C
 //----- (0042D600) --------------------------------------------------------
@@ -53,7 +53,7 @@ FILE** __cdecl sub_42D600(int32_t a1) {
   }
   return 0;
 }
-
+```
 
 ## Read
 
