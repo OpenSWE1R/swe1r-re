@@ -136,7 +136,6 @@ void __cdecl sub_4476B0(signed int *a1) {
   signed int v131; // edx
   unsigned int v132; // eax
   int v133; // eax
-  int v134; // esi
   unsigned int v135; // edx
   bool v136; // zf
   bool v137; // sf
@@ -498,18 +497,14 @@ void __cdecl sub_4476B0(signed int *a1) {
       while ( v15 < v1[5] );
     }
   }
-  v133 = *v1;
-  if ( v133 & 0x4000 ) {
-    v134 = 0;
-    v135 = (((unsigned int)v1[5] >> 16) | v1[5] & 0xFF0000) >> 8;
-    v136 = (v135 | (((v1[5] << 16) | v1[5] & 0xFF00) << 8)) == 0;
-    v137 = ((v135 | (((v1[5] << 16) | v1[5] & 0xFF00) << 8)) & 0x80000000) != 0;
-    v1[5] = v135 | (((v1[5] << 16) | v1[5] & 0xFF00) << 8);
-    if ( !v137 && !v136 ) {
-      do {
-        sub_4476B0(*(_DWORD *)(v1[6] + 4 * v134++));
-      } while ( v134 < v1[5] );
+
+  // Recursively parse children if this has any ???
+  if ( v1[0] & 0x4000 ) {
+    v1[5] = swap32(v1[5]);
+    for(int32_t v134 = 0; v134 < v1[5]; v134++) {
+      sub_4476B0(*(_DWORD *)(v1[6] + 4 * v134));
     }
   }
+
 }
 ```
