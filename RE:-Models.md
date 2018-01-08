@@ -285,12 +285,9 @@ void __usercall sub_447490(int a1@<ebp>, int a2, char **a3, int *a4) {
 
 ```C
 //----- (004485D0) --------------------------------------------------------
-unsigned int __cdecl sub_4485D0(unsigned int *a1)
-{
+void __cdecl sub_4485D0(unsigned int *a1) {
   int v1; // esi
-  unsigned int v2; // ebx
   signed int *v3; // eax
-  unsigned int v4; // eax
   unsigned int *v5; // esi
   unsigned int v6; // ecx
   int v7; // eax
@@ -303,73 +300,62 @@ unsigned int __cdecl sub_4485D0(unsigned int *a1)
   unsigned int result; // eax
   int v15; // esi
 
-  v1 = (int)(a1 + 1);
-  v2 = ((*a1 & 0xFF0000 | (*a1 >> 16)) >> 8) | (((*a1 << 16) | *a1 & 0xFF00) << 8);
-  *a1 = v2;
+  v1 = &a1[1];
+  a1[0] = swap32(a1[0]);
+
+  uint32_t v2 = a1[0];
+
   dword_E6B168 = 0;
   dword_E981E8 = 0;
+
   v3 = (signed int *)a1[1];
-  if ( a1[1] != -1 )
-  {
-    do
-    {
-      if ( v3 )
+  if ( a1[1] != -1 ) {
+    do {
+      if ( v3 ) {
         sub_4476B0(v3);
+      }
       v3 = *(signed int **)(v1 + 4);
       v1 += 4;
     }
     while ( v3 != (signed int *)-1 );
   }
-  v4 = *(_DWORD *)(v1 + 4);
-  v5 = (unsigned int *)(v1 + 4);
-  if ( ((((v4 >> 16) | v4 & 0xFF0000) >> 8) | (((v4 << 16) | v4 & 0xFF00) << 8)) == 1147237473 )
-  {
-    *v5 = 1147237473;
-    v6 = v5[1];
-    v7 = (v5[1] << 16) | v5[1] & 0xFF00;
-    v5 += 2;
-    v8 = (((v6 >> 16) | v6 & 0xFF0000) >> 8) | (v7 << 8);
-    *(v5 - 1) = v8;
-    if ( v8 > 0 )
-    {
-      v9 = v8;
-      do
-      {
-        v10 = *v5;
-        ++v5;
-        --v9;
-        *(v5 - 1) = (((v10 >> 16) | v10 & 0xFF0000) >> 8) | (((v10 << 16) | v10 & 0xFF00) << 8);
-      }
-      while ( v9 );
+
+  v5 = &a1[2];
+
+  uint32_t tmp = swap32(*v5);
+  if (tmp == MAGIC('D','a','t','a')) {
+    v5[0] = tmp;
+    v5[1] = swap32(v5[1]);
+    for(int32_t v9 = 0; v9 < v5[1]; v9++) {
+      v5[2 + v9] = swap32(v5[2 + v9]);
     }
   }
-  if ( ((((*v5 >> 16) | *v5 & 0xFF0000) >> 8) | (((*v5 << 16) | *v5 & 0xFF00) << 8)) == 1097754989 )
-  {
-    *v5 = 1097754989;
-    v11 = (_DWORD *)v5[1];
+
+  uint32_t tmp = swap32(*v5);
+  if (tmp == MAGIC('A','n','i','m') ) {
+    v5[0] = tmp;
+    v11 = (_DWORD *)v5[1]; //FIXME: No swap here?!
     v12 = (int)(v5 + 1);
-    for ( i = v12; v11; v12 += 4 )
-    {
+    for ( i = v12; v11; v12 += 4 ) {
       sub_448180(v11);
       v11 = *(_DWORD **)(i + 4);
       i += 4;
     }
     v5 = (unsigned int *)(v12 + 4);
   }
-  result = *v5 >> 16;
-  if ( (((result | *v5 & 0xFF0000) >> 8) | (((*v5 << 16) | *v5 & 0xFF00) << 8)) == 1097626702 )
-  {
-    *v5 = 1097626702;
-    v15 = (int)(v5 + 1);
-    if ( v2 == 1296133236 )
-    {
-      for ( result = *(_DWORD *)v15; result; v15 += 4 )
-      {
-        sub_4476B0((signed int *)result);
-        result = *(_DWORD *)(v15 + 4);
+
+  uint32_t tmp = swap32(*v5);
+  if (tmp == MAGIC('A','l','t','N')) {
+    v5[0] = tmp;
+    v15 = &v5[1]
+    if (v2 == MAGIC('M','A','l','t')) {
+      while(*(int32_t*)v15) {
+        sub_4476B0(*(int32_t*)v15);
+        v15 += 4
       }
     }
   }
-  return result;
+
+  return;
 }
 ```
