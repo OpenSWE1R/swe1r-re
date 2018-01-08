@@ -81,7 +81,7 @@ signed int __cdecl sub_421120(const char* a1) {
       v12++;
     } 
 
-    //FIXME: ???
+    // Unescape string
     sub_4214C0(v10, v10);
 
     // Search first tab symbol and replace it with zero termination
