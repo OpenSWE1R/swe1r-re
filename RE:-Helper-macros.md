@@ -109,3 +109,13 @@ static inline float frndint(float x) {
   return roundf(x);
 }
 ```
+
+## Alignment
+
+```C
+static inline uintptr_t align_up(uintptr_t address, uintptr_t alignment) {
+  // Slightly modified to allow non-POT alignments
+  // Originally implemented as `return (address + (alignment - 1)) & ~(alignment - 1);`
+  return address + (alignment - address) % alignment;
+}
+```
