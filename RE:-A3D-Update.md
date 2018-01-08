@@ -430,3 +430,62 @@ uint32_t* __cdecl sub_449E00(uint32_t* a1) {
   return a1;
 }
 ```
+
+## More unknown stuff
+
+```C
+//----- (004292B0) --------------------------------------------------------
+// a1 = 4x4 matrix?!
+_DWORD *__cdecl sub_4292B0(float *a1) {
+  int32_t v1 = _RTC_NumErrors(); //FIXME: I'm guessing this was misdetected?!
+  if ( v1 <= 0 ) {
+    return sub_4313D0(a1);
+  }
+
+  int32_t v3;
+  int32_t v2 = 0;
+  while ( 1 ) {
+    v3 = sub_4318D0(v2);
+    if ( v3 ) {
+      if ( sub_431770(v3) & 1 ) {
+        break;
+      }
+    }
+
+    v2++;
+    if ( v2 >= v1 ) {
+      return sub_4313D0(a1);
+    }
+  }
+
+  int32_t v6 = sub_4318B0(v3);
+  return sub_44BB10(a1, (int)off_4B91C4 + 124 * v6 + 20);
+}
+```
+
+### Set identity matrix
+
+```C
+//----- (004313D0) --------------------------------------------------------
+float* __cdecl sub_4313D0(float* a1) {
+  a1[ 0] = 1.0f; a1[ 1] = 0.0f; a1[ 2] = 0.0f; a1[ 3] = 0.0f;
+  a1[ 4] = 0.0f; a1[ 5] = 1.0f; a1[ 6] = 0.0f; a1[ 7] = 0.0f;
+  a1[ 8] = 0.0f; a1[ 9] = 0.0f; a1[10] = 1.0f; a1[11] = 0.0f;
+  a1[12] = 0.0f; a1[13] = 0.0f; a1[14] = 0.0f; a1[15] = 1.0f;
+  return a1;
+}
+```
+
+### Get pointer to some object
+
+```C
+//----- (004318D0) --------------------------------------------------------
+int __cdecl sub_4318D0(int32_t a1) {
+  // Boundary check the argument
+  if ( a1 < 0 || a1 >= 4 )
+    return 0;
+  }
+
+  return 0xDFB040 + a1 * 364;
+}
+```
