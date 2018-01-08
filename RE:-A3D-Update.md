@@ -503,3 +503,48 @@ int __cdecl sub_422A90(int32_t a1) {
   return *((_DWORD *)off_4B6D34 + 10) + a1 * 76;
 }
 ```
+
+## Setter unk A
+
+```C
+//----- (004850A0) --------------------------------------------------------
+// Probably returns void
+void __cdecl sub_4850A0(int a1) {
+  if ( dword_50D548 == 0) {
+    return;
+  }
+  a1->Release();
+  return;
+}
+```
+
+
+
+## Setter unk B
+
+```C
+//----- (004850C0) --------------------------------------------------------
+signed int __cdecl sub_4850C0(int a1, int a2) {
+  if (a1 == 0) {
+    return -1;
+  }
+
+  int v2 = a1; // esi
+
+  // GetStatus???
+  //FIXME: This looks wrong? Why is it passing a pointer to itself?
+  if ( (*(int (__stdcall **)(int, int *))(*(_DWORD *)a1 + 224))(a1, &a1) < 0 ) {
+    return -1;
+  }
+
+  if ( !(a1 & 1) ) {
+    return 0;
+  }
+
+  if ( a2 ) {
+    //GetWavePosition???
+    (*(void (__stdcall **)(int, int))(*(_DWORD *)v2 + 76))(v2, a2);
+  }
+  return 1;
+}
+```
