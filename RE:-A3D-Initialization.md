@@ -245,18 +245,6 @@ void __cdecl sub_484A80(float a1) {
 }
 ```
 
-# Get render mode
-
-```C
-//----- (00485040) --------------------------------------------------------
-int __cdecl sub_485040(A3dSource* a1) {
-  DWORD v4 = -1; // [esp+8h] [ebp-4h]
-  a1->GetRenderMode(&v4);
-  return v4;
-}
-
-```
-
 # Volume control
 
 ```C
@@ -273,6 +261,17 @@ int __cdecl sub_484D90(A3dSource* a1, float a2) {
   }
 
   return a1->SetGain(a2);
+}
+```
+
+## Get render mode
+
+```C
+//----- (00485040) --------------------------------------------------------
+int __cdecl sub_485040(A3dSource* a1) {
+  DWORD v4 = -1; // [esp+8h] [ebp-4h]
+  a1->GetRenderMode(&v4);
+  return v4;
 }
 ```
 
