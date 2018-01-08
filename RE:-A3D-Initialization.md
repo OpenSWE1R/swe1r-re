@@ -49,6 +49,22 @@ signed int __cdecl sub_422440(int a1) {
 }
 ```
 
+## Gain clamping
+
+```C
+//----- (00484D40) --------------------------------------------------------
+void __cdecl sub_484D40(float a1) {
+  if ( a1 < 0.0f ) {
+    flt_4C7D7C = 0.0f;
+  } else if ( a1 > 10.0f ) {
+    flt_4C7D7C = 10.0f;
+  } else {
+    flt_4C7D7C = a1;
+  }
+  return;
+}
+```
+
 # Create and initialize A3D
 
 ```C
