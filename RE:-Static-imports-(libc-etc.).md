@@ -5,7 +5,11 @@
 // a1 = input string
 // a2 = output string
 // Unescapes string, returns length of output string
-int __cdecl sub_4214C0(_BYTE *a1, char *a2)
+int __cdecl sub_4214C0(_BYTE *a1, char *a2);
+
+//----- (004AB5D0) --------------------------------------------------------
+// Probably '_strlwr', however, might not use the C locale?!
+LPCSTR __cdecl sub_4AB5D0(LPCSTR lpSrcStr);
 ```
 
 ## Guesses by IDA
