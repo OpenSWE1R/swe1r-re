@@ -26,9 +26,21 @@ Assertions in the original code already have a path and line hardcoded, they als
 static inline uint16_t swap16(uint16_t v) {
   return (v >> 8) | (v << 8);
 }
+static inline uint16_t* swap16(uint16_t* v, uint32_t count) {
+  for(uint32_t i = 0; i < count; i++) {
+    v[i] = swap16(v[i]);
+  }
+  return &v[i]; //FIXME: Might be off by one
+}
 
 static inline uint32_t swap32(uint32_t v) {
   return ((v & 0xFF0000 | (v >> 16)) >> 8) | (((v << 16) | v & 0xFF00) << 8);
+}
+static inline uint32_t* swap32(uint32_t* v, uint32_t count) {
+  for(uint32_t i = 0; i < count; i++) {
+    v[i] = swap32(v[i]);
+  }
+  return &v[i]; //FIXME: Might be off by one
 }
 ```
 
