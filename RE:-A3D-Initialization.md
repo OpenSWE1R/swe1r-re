@@ -127,6 +127,59 @@ signed int sub_4848A0() {
 }
 ```
 
+## Load A3D COM class
+
+```C
+//----- (0049E940) --------------------------------------------------------
+HRESULT sub_49E940() {
+  HRESULT v0 = CoInitialize(0);
+  sub_49E750();
+  return v0;
+}
+```
+
+### Read A3D registry config
+
+```C
+//----- (0049E750) --------------------------------------------------------
+int sub_49E750() {
+  sub_49E8E0(off_4D1D5C, &Class, aA3dObject);
+  sub_49E8E0(aA3dClsid, &Class, aD8f1eee0F63411);
+  sub_49E8E0(aClsidD8f1eee0F, &Class, aA3dObject);
+  sub_49E8E0(aClsidD8f1eee0F_0, &Class, aA3dDll);
+  sub_49E8E0(aClsidD8f1eee0F_0, aThreadingmodel, aApartment);
+
+  sub_49E8E0(aA3dapi, &Class, aA3dapiObject);
+  sub_49E8E0(aA3dapiClsid, &Class, a92fa2c24253c11);
+  sub_49E8E0(aClsid92fa2c242, &Class, aA3dapiObject);
+  sub_49E8E0(aClsid92fa2c242, aAppid, a92fa2c24253c11_0);
+  sub_49E8E0(aClsid92fa2c242_0, &Class, aA3dapiDll);
+  sub_49E8E0(aClsid92fa2c242_0, aThreadingmodel, aApartment);
+
+  sub_49E8E0(aA3ddal, &Class, aA3ddalObject);
+  sub_49E8E0(aA3ddalClsid, &Class, a442d12a1264111);
+  sub_49E8E0(aClsid442d12a12, &Class, aA3ddalObject);
+  sub_49E8E0(aClsid442d12a12, aAppid, a442d12a1264111_0);
+  sub_49E8E0(aClsid442d12a12_0, &Class, aA3dDll);
+  sub_49E8E0(aClsid442d12a12_0, aThreadingmodel, aApartment);
+
+  return 0;
+}
+```
+
+#### Read registry key
+
+
+```C
+//----- (0049E8E0) --------------------------------------------------------
+LSTATUS __cdecl sub_49E8E0(LPCSTR lpSubKey, LPCSTR lpValueName, BYTE *lpData) {
+  DWORD dwDisposition; // [esp+4h] [ebp-4h]
+  RegCreateKeyExA(HKEY_CLASSES_ROOT, lpSubKey, 0, aRegSz, 0, 0xF003Fu, 0, (PHKEY)&lpSubKey, &dwDisposition);
+  RegSetValueExA((HKEY)lpSubKey, lpValueName, 0, 1u, lpData, strlen((const char *)lpData));
+  return RegCloseKey((HKEY)lpSubKey);
+}
+```
+
 # Get render mode
 
 ```C
