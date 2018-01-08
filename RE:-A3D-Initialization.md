@@ -224,6 +224,27 @@ HRESULT __cdecl sub_49E970(LPGUID a1, IA3d4** a2, LPUNKNOWN pUnkOuter, DWORD a4)
 }
 ```
 
+## Get HWND
+
+```C
+//----- (0048C780) --------------------------------------------------------
+int sub_48C780() {
+  return dword_52EE70;
+}
+```
+
+## Unk
+
+```C
+//----- (00484A80) --------------------------------------------------------
+void __cdecl sub_484A80(float a1) {
+  if ( dword_50D548 ) {
+    dword_50D548->SetOutputGain(a1);
+  }
+  return;
+}
+```
+
 # Get render mode
 
 ```C
