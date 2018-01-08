@@ -263,23 +263,24 @@ LABEL_43:
 ```C
 //----- (00431DF0) --------------------------------------------------------
 // (not actually a function)
-// a3 = must be "invcol"
+// a3 = must be anything but "invcol"
 // Probably returns void
-int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3)
-{
+int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3) {
   int result; // eax
   int v6; // eax
   int v7; // ebp
   int v8; // edi
-  int v10; // [esp+20h] [ebp-80h]
-  int v11; // [esp+28h] [ebp-78h]
+  uint32_t v10; // [esp+20h] [ebp-80h]
+  uint32_t v11; // [esp+28h] [ebp-78h]
 
-  v10 = 0;
   result = strncmp(a3, aInvcol, 5u);
   if (result) {
     sprintf(a3, aInvcol);
+
     something = *(_DWORD *)(*((_DWORD *)a3 + 36) + 124); // or something like this..
-    unk_4AF208->QueryInterface(..., &v11); //FIXME: Used to say `.., &v10, a, b); ?!
+
+    v10 = 0;  // v11?
+    something->QueryInterface(&unk_4AF208, &v11); //FIXME: Used to say `.., &v10, a, b); ?!
 
     DDSURFACEDESC2 v12;
     //  int v12; // [esp+2Ch] [ebp-74h]    0 dwSize
