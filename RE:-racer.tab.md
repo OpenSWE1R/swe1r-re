@@ -81,7 +81,7 @@ signed int __cdecl sub_421120(const char* a1) {
       v12++;
     } 
 
-    // Unescape string
+    // Unescape key + value
     sub_4214C0(v10, v10);
 
     // Search first tab symbol and replace it with zero termination
@@ -90,7 +90,7 @@ signed int __cdecl sub_421120(const char* a1) {
       *v13 = '\0';
     }
 
-    //FIXME: ???
+    // Convert key to lowercase
     sub_4AB5D0(v10);
 
     // Store entry in string table
