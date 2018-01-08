@@ -476,7 +476,7 @@ float* __cdecl sub_4313D0(float* a1) {
 }
 ```
 
-### Get pointer to some object
+## Get pointer to some object
 
 ```C
 //----- (004318D0) --------------------------------------------------------
@@ -487,5 +487,19 @@ int __cdecl sub_4318D0(int32_t a1) {
   }
 
   return 0xDFB040 + a1 * 364;
+}
+```
+
+## Get pointer to some other object
+
+```C
+//----- (00422A90) --------------------------------------------------------
+int __cdecl sub_422A90(int32_t a1) {
+  // Boundary check the argument
+  if ( a1 < 0 || a1 >= *((_DWORD *)off_4B6D34 + 8) ) {
+    result = 0;
+  }
+
+  return *((_DWORD *)off_4B6D34 + 10) + a1 * 76;
 }
 ```
