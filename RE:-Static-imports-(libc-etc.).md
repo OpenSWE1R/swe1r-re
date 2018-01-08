@@ -39,7 +39,7 @@ Generated using the pretty bad `cat SWEP1RCR_newer_patch.c | grep "using guesse"
 
 **Imports:**
 
-```
+```C
 //----- (004AC054) --------------------------------------------------------
 // 4AC054: using guessed type int __stdcall IFReleaseProject(_DWORD);
 //----- (004AC058) --------------------------------------------------------
