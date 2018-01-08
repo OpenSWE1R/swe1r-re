@@ -76,6 +76,7 @@ signed int sub_4848A0() {
     return 0;
   }
 
+  // Load A3D COM module
   sub_49E940();
 
   // Presumably creates A3D instance
@@ -177,6 +178,49 @@ LSTATUS __cdecl sub_49E8E0(LPCSTR lpSubKey, LPCSTR lpValueName, BYTE *lpData) {
   RegCreateKeyExA(HKEY_CLASSES_ROOT, lpSubKey, 0, aRegSz, 0, 0xF003Fu, 0, (PHKEY)&lpSubKey, &dwDisposition);
   RegSetValueExA((HKEY)lpSubKey, lpValueName, 0, 1u, lpData, strlen((const char *)lpData));
   return RegCloseKey((HKEY)lpSubKey);
+}
+```
+
+## Create A3D instance
+
+```C
+//----- (0049E970) --------------------------------------------------------
+// a1 = GUID for A3D Init()
+// a2 = output IA3d4
+// a3 = ...
+// a4 = something else for Init()
+HRESULT __cdecl sub_49E970(LPGUID a1, IA3d4** a2, LPUNKNOWN pUnkOuter, DWORD a4) {
+
+  // Check for required argument and clear it
+  if (a2 == 0) {
+    return 0x80070057;
+  }
+  *a2 = 0;
+
+  // Load A3D COM module
+  sub_49E940();
+
+  // Create the A3D instance
+  LPVOID ppv = 0; // [esp+10h] [ebp-4h]
+  HRESULT result = CoCreateInstance(&stru_4AE0E8, pUnkOuter, 1u, &stru_4AE128, &ppv);
+  if ( result < 0 ) {
+    return result;
+  }
+
+  // Make sure we got a pointer to the instance
+  if ( ppv == 0) {
+    return 0x80004005;
+  }
+
+  //FIXME: ???
+  if (ppv->Init(a1, a4, 0) < 0) {
+    ppv->Release();
+    return 0x80004005;
+  }
+
+  // Writeback pointer to the instance and return with success
+  *a2 = ppv;
+  return 0;
 }
 ```
 
