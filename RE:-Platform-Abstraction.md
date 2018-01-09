@@ -67,3 +67,184 @@ void __cdecl sub_48C3D0(A1* a1) {
   a1->unk27 = nullsub_1; //
 }
 ```
+
+### Implementations
+
+
+#### Assert Messagebox
+
+```C
+//----- (0048C4A0) --------------------------------------------------------
+// a1 = presumably condition / message
+// a2 = presumably path
+// a3 = presumably line number
+void __cdecl __noreturn sub_48C4A0(char* a1, char *a2, int32_t a3) {
+
+  //FIXME: Check if debugger is on?
+  if (dword_52EE58) {
+    DebugBreak();
+    exit_0(1);
+  }
+
+  dword_52EE58 = 1;
+
+  // Search for the last backslash so we can isolate the filename
+  int32_t v5 = 0;
+  int32_t v4 = 0;
+  int32_t v3 = 0;
+  char* i = a2;
+  while(a2[v5] != '\0') {
+    if (a2[v5] == '\\') {
+      v4 = 1;
+      v3 = v5;
+    }
+    v5++;
+  }
+
+  // If we found the last backslash, advance v3 to point behind it
+  if ( v4 ) {
+    v3++;
+  }
+
+  // Do a debug print and open a messagebox
+  CHAR Text[0x200]; // [esp+Ch] [ebp-200h]
+  _snprintf(&Text, 0x200u, aSDS, &a2[v3], a3, a1);
+  dword_ECC420->unk4(aAssertS, &Text);
+  MessageBoxA(0, &Text, aAssertHandler, MB_TASKMODAL);
+
+  DebugBreak();
+  exit_0(1);
+}
+```
+
+#### OutputDebugStringA with formatting (up to 0x800 bytes)
+
+```C
+//----- (0048C570) --------------------------------------------------------
+int sub_48C570(char *a1, ...) {
+  va_list va; // [esp+8h] [ebp+8h]
+  va_start(va, a1);
+  _vsnprintf(OutputString, 0x800u, a1, va);
+  OutputDebugStringA(OutputString);
+  return 1;
+}
+```
+
+#### f(x) = x
+
+```C
+//----- (0048C5E0) --------------------------------------------------------
+//FIXME: Figure out what this might have been used for
+int __cdecl sub_48C5E0(int a1) {
+  return a1;
+}
+```
+
+#### fopen
+
+```C
+//----- (0048C5F0) --------------------------------------------------------
+FILE *__cdecl sub_48C5F0(char *a1, char *a2) {
+  return fopen(a1, a2);
+}
+```
+
+#### fclose
+
+```C
+//----- (0048C610) --------------------------------------------------------
+int __cdecl sub_48C610(FILE *a1) {
+  fclose(a1);
+  return 0;
+}
+```
+
+#### fread
+
+```C
+//----- (0048C620) --------------------------------------------------------
+size_t __cdecl sub_48C620(FILE *a1, void *a2, size_t a3) {
+  return sub_49FFE0(a2, 1u, a3, a1);
+}
+```
+
+#### fwrite
+
+```C
+//----- (0048C640) --------------------------------------------------------
+size_t __cdecl sub_48C640(FILE *a1, void *a2, size_t a3) {
+  return sub_4A0160(a2, 1u, a3, a1);
+}
+```
+
+#### fgets
+
+```C
+//----- (0048C660) --------------------------------------------------------
+char *__cdecl sub_48C660(FILE *a1, char *a2, int a3) {
+  return fgets(a2, a3, a1);
+}
+```
+
+#### fgetws
+
+```C
+//----- (0048C680) --------------------------------------------------------
+// FIXME: Rarely seen wchar here.. is this correct?
+wchar_t *__cdecl sub_48C680(FILE *a1, wchar_t *a2, int a3) {
+  return fgetws(a2, a3, a1);
+}
+```
+
+#### ftell
+
+```C
+//----- (0048C6B0) --------------------------------------------------------
+int __cdecl sub_48C6B0(FILE *a1) {
+  return ftell(a1);
+}
+```
+
+#### fseek
+
+```
+//----- (0048C6C0) --------------------------------------------------------
+int __cdecl sub_48C6C0(FILE *a1, int a2, int a3) {
+  return fseek(a1, a2, a3);
+}
+```
+
+#### ???
+
+```C
+//----- (0048C6E0) --------------------------------------------------------
+FILE *__cdecl sub_48C6E0(char *a1)
+{
+  FILE *result; // eax
+  FILE *v2; // esi
+  FILE *v3; // edi
+
+  result = sub_48C5F0(a1, aRb);
+  v2 = result;
+  if ( result )
+  {
+    sub_48C6C0(result, 0, 2);
+    v3 = (FILE *)sub_48C6B0(v2);
+    sub_48C610(v2);
+    result = v3;
+  }
+  return result;
+}
+
+#### fprintf (up to 0x800 bytes)
+
+```C
+//----- (0048C730) --------------------------------------------------------
+int sub_48C730(FILE *a1, char *a2, ...) {
+  va_list va; // [esp+Ch] [ebp+Ch]
+  va_start(va, a2);
+  int32_t v2 = _vsnprintf(byte_52E658, 0x800u, a2, va);
+  sub_48C640(a1, byte_52E658, v2);
+  return 0;
+}
+```
