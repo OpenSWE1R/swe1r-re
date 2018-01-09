@@ -51,7 +51,7 @@ static inline uint32_t* swap32(uint32_t* v, uint32_t count) {
 // `(double)sub_4816B0() * 4.6566129e-10 * 64.0 - -64.0`
 // would become `frand() * 64.0 + 64.0`
 static inline float frand() {
-  return (float)sub_4816B0() / (float)0x7FFFFFFF;
+  return (float)sub_4816B0() * (1.0f / (float)0x7FFFFFFF);
 }
 
 // Returns a random float in range [a, b]
