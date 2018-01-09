@@ -18,13 +18,13 @@ WPARAM __cdecl sub_49CD40(HINSTANCE hInstance, int a2, char *a3, int a4, LPCSTR 
   // Create the window
   sub_49CEA0(hInstance, a4, lpWindowName);
 
-  // Set some variable?!
+  // Copy HWND
   sub_48C770((int)dword_DFAA28);
 
-  // Set another variable?!
+  // Copy HINSTANCE
   sub_48C790((int)hInstance);
 
-  // And set another variable..
+  // Copy ?????
   sub_48C7B0((int *)&unk_4AF9B0);
 
   // ?
@@ -32,12 +32,12 @@ WPARAM __cdecl sub_49CD40(HINSTANCE hInstance, int a2, char *a3, int a4, LPCSTR 
 
 
   dword_DFAA34 = 2 * GetSystemMetrics(32);
-  v5 = GetSystemMetrics(32);
-  dword_DFAA38 = GetSystemMetrics(15) + 2 * v5;
+  dword_DFAA38 = GetSystemMetrics(15) + 2 * GetSystemMetrics(32);
 
   // Initialize game (not an actual call probably?)
-  if ( !sub_423CC0((int)GetSystemMetrics, a3) )
+  if ( !sub_423CC0((int)GetSystemMetrics, a3) ) {
     return 0;
+  }
 
   //FIXME: I rewrote this in a weird way. It should still be correct tho
   while ( true ) {
@@ -117,5 +117,68 @@ int __cdecl sub_49CEA0(HINSTANCE hInstance, int a2, LPCSTR lpWindowName) {
   ShowWindow(dword_DFAA28, 1);
   UpdateWindow(dword_DFAA28);
   return 1;
+}
+```
+
+## Set HWND
+
+```C
+//----- (0048C770) --------------------------------------------------------
+// a1 = HWND
+HWND __cdecl sub_48C770(HWND a1) {
+  dword_52EE70 = a1;
+  return a1;
+}
+```
+
+## Set HINSTANCE
+
+```C
+//----- (0048C790) --------------------------------------------------------
+HINSTANCE __cdecl sub_48C790(HINSTANCE a1) {
+  dword_52EE74 = a1;
+  return a1;
+}
+```
+
+## Set ?????
+
+```C
+//----- (0048C7B0) --------------------------------------------------------
+int* __cdecl sub_48C7B0(int *a1) {
+  dword_52EE60 = a1[0];
+  dword_52EE64 = a1[1];
+  dword_52EE68 = a1[2];
+  dword_52EE6C = a1[3];
+  return a1;
+}
+```
+
+---
+
+## Get HWND
+
+```C
+//----- (0048C780) --------------------------------------------------------
+HWND sub_48C780() {
+  return dword_52EE70;
+}
+```
+
+## Get HINSTANCE
+
+```C
+//----- (0048C7A0) --------------------------------------------------------
+HINSTANCE sub_48C7A0() {
+  return dword_52EE74;
+}
+```
+
+### Get ?????
+
+```C
+//----- (0048C7E0) --------------------------------------------------------
+int* sub_48C7E0() {
+  return &dword_52EE60;
 }
 ```
