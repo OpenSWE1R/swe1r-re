@@ -224,15 +224,6 @@ HRESULT __cdecl sub_49E970(LPGUID a1, IA3d4** a2, LPUNKNOWN pUnkOuter, DWORD a4)
 }
 ```
 
-## Get HWND
-
-```C
-//----- (0048C780) --------------------------------------------------------
-HWND sub_48C780() {
-  return dword_52EE70;
-}
-```
-
 ## Unk
 
 ```C
