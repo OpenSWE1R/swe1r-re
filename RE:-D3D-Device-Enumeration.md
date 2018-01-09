@@ -3,40 +3,35 @@
 ```C
 //----- (00489DC0) --------------------------------------------------------
 int (__stdcall ***sub_489DC0())(_DWORD, void *, int *) {
-  int (__stdcall ***result)(_DWORD, void *, int *); // eax
+  int result; // eax
 
   memset(&unk_52D570, 0, 0x300u);
   memset(&unk_52D870, 0, 0xDA0u);
-  result = (int (__stdcall ***)(_DWORD, void *, int *))sub_489260();
-  dword_52E638 = (int)result;
-  if ( result )
-  {
-    if ( (**result)(result, &unk_4AF278, &dword_52E640) )
-    {
-      result = 0;
-    }
-    else
-    {
-      dword_52D56C = 0;
-      if ( (*(int (__stdcall **)(int, int (__stdcall *)(int, char *, char *, int, int, int), _DWORD))(*(_DWORD *)dword_52E640 + 12))(
-             dword_52E640,
-             sub_48B540,
-             0) )
-      {
-        result = 0;
-      }
-      else if ( dword_52D56C )
-      {
-        result = (int (__stdcall ***)(_DWORD, void *, int *))1;
-        dword_52E64C = 1;
-      }
-      else
-      {
-        result = 0;
-      }
-    }
+
+  dword_52E638 = sub_489260();
+  if ( dword_52E638 == 0) {
+    return 0;
   }
-  return result;
+
+  // Get IDirect3D3
+  if (dword_52E638->QueryInterface(&unk_4AF278, &dword_52E640) ) {
+    return 0;
+  }
+
+  // Set number of devices to 0 and then start counting them
+  dword_52D56C = 0;
+  if (dword_52E640->EnumDevices(sub_48B540, 0) ) {
+    return 0;
+  }
+ 
+  // If no devices are found, we can't return anything
+  if ( dword_52D56C == 0) {
+    return 0;
+  }
+  
+  // Otherwise mark that we have a device and return success
+  dword_52E64C = 1;
+  return 1;
 }
 ```
 
@@ -56,20 +51,25 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
   int v15; // edx
   int v16; // ecx
   int v17; // eax
-  char v18; // [esp+10h] [ebp-2A4h]
-  int v19; // [esp+118h] [ebp-19Ch]
+
+  //FIXME: These 2 should be a single object
+  uint8_t v18[676]; // [esp+10h] [ebp-2A4h]
+  //int v19; // [esp+118h] [ebp-19Ch]
+  uint32_t* v19 = &v18[264];
 
   // Must have device descs and GUID
-  if ( !lpGuid || !a || !b )
+  if ( !lpGuid || !a || !b ) {
     return 0;
+  }
 
   // Make sure this is GUID {84E63DE0-46AA-11CF-816F-0000C020156E} (IDirect3DHALDevice)
   if ( !memcmp((const void *)lpGuid, &unk_4AF2D8, 0x10u) )
     return 1;
 
   // Only allow up to 4 devices
-  if ( (unsigned int)dword_52D56C >= 4 )
+  if ( (unsigned int)dword_52D56C >= 4 ) {
     return 0;
+  }
 
   // Get pointer to memory for this device info
   struct {
@@ -104,17 +104,21 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
   *(_BYTE *)(v7 + 179) = 0;
 
   v9 = *(_DWORD *)(a + 4);
-  *(_DWORD *)v7 = v9 != 0;
-  if ( !v9 )
+  *(_DWORD *)v7 = (v9 != 0);
+  if ( v9 == 0) {
     return 1;
+  }
 
   qmemcpy((void *)(v7 + 316), (const void *)a, 0xFCu);
 
-  if ( sub_4880C0(&v18) )
+  // Retrieve some object of sorts
+  if ( sub_4880C0(&v18) ) {
     return 0;
+  }
 
-  if ( !v19 && !*(_DWORD *)v7 )
+  if ( !*v19 && !*(_DWORD *)v7 ) {
     return 1;
+  }
 
 
   v11 = v7->desc.dwDeviceZBufferBitDepth;
@@ -124,7 +128,7 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
   *(_DWORD *)(v7 + 4) = v10 & D3DPTEXTURECAPS_PERSPECTIVE;
   *(_DWORD *)(v7 + 16) = v10 & D3DPTEXTURECAPS_ALPHA;
   *(_DWORD *)(v7 + 12) = v10 & D3DPTEXTURECAPS_TRANSPARENCY;
-  *(_DWORD *)(v7 + 28) = v10 & D3DPTEXTURECAPS_SQUAREONLY; // Should be  ?!
+  *(_DWORD *)(v7 + 28) = v10 & D3DPTEXTURECAPS_SQUAREONLY;
 
   v12 = v7->desc.dpcTriCaps.dwShadeCaps;
   *(_DWORD *)(v7 + 20) = !(v12 & D3DPSHADECAPS_ALPHAFLATBLEND) && (v12 & D3DPSHADECAPS_ALPHAFLATSTIPPLED );
@@ -139,8 +143,7 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
   v15 = v7->desc.dwMinTextureHeight;
   v17 = v7->desc.dwMaxTextureWidth;
   v16 = v7->desc.dwMaxTextureHeight;
-  if ( v14 )
-  {
+  if ( v14 ) {
     // Set minimum width, height
     *(_DWORD *)(v7 + 32) = v14;
     *(_DWORD *)(v7 + 36) = v15;
@@ -148,9 +151,7 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
     // Set maximum width, height
     *(_DWORD *)(v7 + 40) = v17;
     *(_DWORD *)(v7 + 44) = v16;
-  }
-  else
-  {
+  } else {
     // Set minimum width, height
     *(_DWORD *)(v7 + 32) = 16;
     *(_DWORD *)(v7 + 36) = 16;
@@ -163,7 +164,7 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
   *(_DWORD *)(v7 + 48) = v7->desc.dwMaxVertexCount;
 
   // Increment device count / index
-  ++dword_52D56C;
+  dword_52D56C++;
 
   return 1;
 }
@@ -174,9 +175,10 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
 ```C
 //----- (004880C0) --------------------------------------------------------
 signed int __cdecl sub_4880C0(void *a1) {
-  if ( !dword_52D444 )
+  if (dword_52D444 == 0) {
     return 1;
-  qmemcpy(a1, (const void *)(676 * dword_529514 + 0x52A9F8), 0x2A4u);
+  }
+  qmemcpy(a1, (const void *)(0x52A9F8 + 676 * dword_529514), 676);
   return 0;
 }
 ```
