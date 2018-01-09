@@ -1,7 +1,96 @@
+## Allocator
+
+They probably didn't write this themselves, but yet I can't find it online.. mhhhh
+
+```C
+typedef struct {
+  union {
+    struct {
+      uint16_t size_short; // -8
+      uint16_t pad;
+    }
+    uint32_t size; // -8
+  };
+  uint32_t unk1; // -4
+  uint8_t data[]; // 0 Pointer which is actually returned
+} Allocation;
+
+//----- (0048D7E0) --------------------------------------------------------
+// Allocate()
+// allocator which grabs small allocations from malloc, and seems to use buckets or a heap for larger allocations
+unsigned __int16 *__cdecl sub_48D7E0(unsigned int a1);
+
+//----- (0048DB10) --------------------------------------------------------
+// allocator which will be used when the alloction is small enough
+void* __cdecl sub_48DB10(uint32_t a1) {
+  Allocation* result = malloc(8 + a1); // 8 = sizeof(Allocation)
+  if (result == 0) {
+    return 0;
+  }
+  result->size = a1 + 8;
+  result->unk1 = 0;
+  return result->data;
+}
+
+//----- (0048D9A0) --------------------------------------------------------
+// Free()
+// counterpart to 0048D7E0
+void __cdecl sub_48D9A0(int a1);
+
+//----- (0048DA80) --------------------------------------------------------
+// Realloc()
+// a1 = old pointer or 0
+// a2 = new size
+unsigned __int16 *__cdecl sub_48DA80(_DWORD *a1, unsigned int a2) {
+  unsigned __int16 *result; // eax
+  unsigned int v3; // esi
+  unsigned __int16 *v4; // ebp
+  int v5; // eax
+  unsigned int v6; // eax
+
+  // If no allocation existed, create a new one.. done!
+  if ( a1 == 0) {
+    return sub_48D7E0(a2);
+  }
+
+  // If the new size is zero, just free the block
+  if ( a2 == 0) {
+    sub_48D9A0((int)a1);
+    return 0;
+  }
+
+  // Create a new allocation where we can move to
+  v4 = sub_48D7E0(a2);
+  if ( v4 == 0) {
+    return 0;
+  }
+
+  // Lookup old allocation size
+  Allocation* a = (uintptr_t)a1 - 8; // 8 = sizeof(Allocation)
+  if (a->unk1) ) {
+    v5 = a->size_short & 0x7FFF; // FIXME: WTH?! *((unsigned __int16 *)a1 - 4);
+  } else {
+    v5 = a->size;
+  }
+  v6 = v5 - 8;
+  
+  // Copy old data (sized so it fits new buffer, but doesn't read beyond old buffer)
+  v3 = min(a2, v6);
+  qmemcpy(v4, a1, v3);
+
+  // Free the old allocation
+  sub_48D9A0(a1);
+
+  // Return the new allocation
+  return v4;
+}
+```
+
 ## Guesses by me
 
 ```C
 //----- (004214C0) --------------------------------------------------------
+//FIXME: This one they probably wrote themselves?!
 // a1 = input string
 // a2 = output string
 // Unescapes string, returns length of output string
