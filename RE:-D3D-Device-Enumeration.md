@@ -2,7 +2,8 @@
 
 ```C
 //----- (00489DC0) --------------------------------------------------------
-int (__stdcall ***sub_489DC0())(_DWORD, void *, int *) {
+//FIXME: I assume this is cdecl too? this returns a function pointer according to IDA, so the declaration is messed up..
+int32_t sub_489DC0() {
   int result; // eax
 
   memset(&unk_52D570, 0, 0x300u);
