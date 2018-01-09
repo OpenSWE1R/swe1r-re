@@ -1,19 +1,20 @@
 ```C
 //----- (00487D20) --------------------------------------------------------
-signed int sub_487D20()
-{
-  if ( !dword_52D438 )
-  {
-    memset(&dword_EC8CA0, 0, 0xE0u);
-    memset(&dword_EC8DA0, 0, 0xE0u);
-    memset(&dword_529578, 0, 0x80u);
-    dword_52D438 = 1;
-    dword_52D444 = 0;
-    if ( DirectDrawEnumerateA(Callback, 0) )
-      return 0;
-    dword_52951C = 640;
-    dword_529520 = 480;
+signed int sub_487D20() {
+  if ( dword_52D438 != 0) {
+    return 1;
   }
+
+  memset(&dword_EC8CA0, 0, 0xE0u);
+  memset(&dword_EC8DA0, 0, 0xE0u);
+  memset(&dword_529578, 0, 0x80u);
+  dword_52D438 = 1;
+  dword_52D444 = 0;
+  if ( DirectDrawEnumerateA(Callback, 0) ) {
+    return 0;
+  }
+  dword_52951C = 640;
+  dword_529520 = 480;
   return 1;
 }
 ```
