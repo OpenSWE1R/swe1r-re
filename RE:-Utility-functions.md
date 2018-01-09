@@ -1,3 +1,19 @@
+# Power function
+
+```C
+//----- (0048C7F0) --------------------------------------------------------
+// a1 = base
+// a2 = exponent
+// Simple power function
+float __cdecl sub_48C7F0(float a1, int32_t a2) {
+  float r = a1;
+  for (int32_t i = 0; i < (a2 - 1); i++ ) {
+    r *= a1;
+  }
+  return r;
+}
+```
+
 # Vector normalize
 
 ```C
