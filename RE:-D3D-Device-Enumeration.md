@@ -1,16 +1,46 @@
-# Unknown helper
+# ??
 
 ```C
-//----- (004880C0) --------------------------------------------------------
-signed int __cdecl sub_4880C0(void *a1) {
-  if ( !dword_52D444 )
-    return 1;
-  qmemcpy(a1, (const void *)(676 * dword_529514 + 0x52A9F8), 0x2A4u);
-  return 0;
+//----- (00489DC0) --------------------------------------------------------
+int (__stdcall ***sub_489DC0())(_DWORD, void *, int *) {
+  int (__stdcall ***result)(_DWORD, void *, int *); // eax
+
+  memset(&unk_52D570, 0, 0x300u);
+  memset(&unk_52D870, 0, 0xDA0u);
+  result = (int (__stdcall ***)(_DWORD, void *, int *))sub_489260();
+  dword_52E638 = (int)result;
+  if ( result )
+  {
+    if ( (**result)(result, &unk_4AF278, &dword_52E640) )
+    {
+      result = 0;
+    }
+    else
+    {
+      dword_52D56C = 0;
+      if ( (*(int (__stdcall **)(int, int (__stdcall *)(int, char *, char *, int, int, int), _DWORD))(*(_DWORD *)dword_52E640 + 12))(
+             dword_52E640,
+             sub_48B540,
+             0) )
+      {
+        result = 0;
+      }
+      else if ( dword_52D56C )
+      {
+        result = (int (__stdcall ***)(_DWORD, void *, int *))1;
+        dword_52E64C = 1;
+      }
+      else
+      {
+        result = 0;
+      }
+    }
+  }
+  return result;
 }
 ```
 
-# Callback to IDirect3D3::EnumDevices()
+## Callback to IDirect3D3::EnumDevices()
 
 ```
 //----- (0048B540) --------------------------------------------------------
@@ -136,5 +166,17 @@ HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR 
   ++dword_52D56C;
 
   return 1;
+}
+```
+
+### Unknown helper
+
+```C
+//----- (004880C0) --------------------------------------------------------
+signed int __cdecl sub_4880C0(void *a1) {
+  if ( !dword_52D444 )
+    return 1;
+  qmemcpy(a1, (const void *)(676 * dword_529514 + 0x52A9F8), 0x2A4u);
+  return 0;
 }
 ```
