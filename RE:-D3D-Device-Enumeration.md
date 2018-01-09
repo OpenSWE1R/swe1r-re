@@ -38,7 +38,7 @@ int32_t sub_489DC0() {
 
 ## Callback to IDirect3D3::EnumDevices()
 
-```
+```C
 //----- (0048B540) --------------------------------------------------------
 HRESULT __stdcall sub_48B540(GUID FAR *lpGuid, LPSTR lpDeviceDescription, LPSTR lpDeviceName, LPD3DDEVICEDESC a, LPD3DDEVICEDESC b, LPVOID* user) {
   int v7; // ebp
