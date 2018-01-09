@@ -266,7 +266,7 @@ char __cdecl sub_42E280(int a1) {
         v7[2] = v7[2] - flt_4BEEC4 * dbl_E2DD00;
       } else {
         sub_429B60(*(_WORD *)v6, 0);
-        if ( (double)sub_4866D0() * 4.6566129e-10 > 0.69999999 ) {
+        if (frand() > 0.7f) {
           v7[0] = flt_5179B8;
           v7[1] = flt_5179BC;
           v7[2] = flt_5179C0;
@@ -274,18 +274,18 @@ char __cdecl sub_42E280(int a1) {
           v10 = v40;
           byte_EA5C40[v10] = 1;
 
-          v7[0] += ((double)sub_4866D0() * 4.6566129e-10 * 800.0 - 400.0) * *(float *)(v4 + 112);
-          v7[1] += ((double)sub_4866D0() * 4.6566129e-10 * 800.0 - 400.0) * *(float *)(v4 + 116);
-          v7[2] += ((double)sub_4866D0() * 4.6566129e-10 * 800.0 - 400.0) * *(float *)(v4 + 120);
+          v7[0] += frand(-400.0f, 400.0f) * *(float *)(v4 + 112);
+          v7[1] += frand(-400.0f, 400.0f) * *(float *)(v4 + 116);
+          v7[2] += frand(-400.0f, 400.0f) * *(float *)(v4 + 120);
 
-          v11 = (double)sub_4866D0() * 4.6566129e-10 * 340.0 - -10.0;
+          v11 = frand(10.0f, 350.0f);
           v7[0] += *(float *)(v4 + 128) * v11;
           v7[1] += *(float *)(v4 + 132) * v11;
           v7[2] += *(float *)(v4 + 136) * v11;
 
-          v7[0] += ((double)sub_4866D0() * 4.6566129e-10 * 190.0 - -10.0) * *(float *)(v4 + 144);
-          v7[1] += ((double)sub_4866D0() * 4.6566129e-10 * 190.0 - -10.0) * *(float *)(v4 + 148);
-          v7[2] += ((double)sub_4866D0() * 4.6566129e-10 * 190.0 - -10.0) * *(float *)(v4 + 152);
+          v7[0] += frand(10.0f, 200.0f) * *(float *)(v4 + 144);
+          v7[1] += frand(10.0f, 200.0f) * *(float *)(v4 + 148);
+          v7[2] += frand(10.0f, 200.0f) * *(float *)(v4 + 152);
 
           v5[0] = -1.0;
           v5[1] = -1.0;
@@ -326,33 +326,35 @@ char __cdecl sub_42E280(int a1) {
           }
         }
 
-        v23 = 100.0;
+
         if ( !(v24 | v25) ) {
-          v23 = 100.0 / v45;
+          v23 = 100.0f / v45;
+          if ( v23 < 0.01f ) {
+            v23 = 0.01f;
+          }
+        } else {
+          v23 = 100.0f;
         }
-        if ( v23 < 0.0099999998 ) {
-          v23 = 0.0099999998;
-        }
-        v27 = v23 * 0.15000001;
+        v27 = v23 * 0.15f;
 
         v54 = v27;
         if ( v28 | v29 ) {
-          if ( flt_4BEEC4 <= 300.0 ) {
-            if ( v27 > 0.15000001 ) {
-              v54 = 0.15000001;
+          if ( flt_4BEEC4 <= 300.0f ) {
+            if ( v27 > 0.15f ) {
+              v54 = 0.15f;
             }
-          } else if ( v27 > 0.1 ) {
-            v54 = 0.1;
+          } else if ( v27 > 0.1f) {
+            v54 = 0.1f;
           }
-        } else if ( v27 > 0.039999999 ) {
-          v54 = 0.039999999;
+        } else if ( v27 > 0.04f ) {
+          v54 = 0.04f;
         }
 
         v30 = *(_WORD *)v6;
         int16_t v47 = byte_4BEEBF; //FIXME: int16_t or uint16_t?!
         sub_429B60(v30, 1);
         sub_42D0E0(*(_WORD *)v6, (signed __int64)v38, (signed __int64)v39);
-        if ( v5[0] >= 0.0 ) {
+        if (v5[0] >= 0.0f) {
           v31 = 1.0 - flt_4BEEC8;
           int32_t v46 = (signed __int64)(v38 * v31 + flt_4BEEC8 * v5[0]);
           int32_t v42 = (signed __int64)(v39 * v31 + flt_4BEEC8 * v5[1]);
@@ -382,7 +384,7 @@ char __cdecl sub_42E280(int a1) {
 
         signed __int64 v35; // rax //FIXME: Go home IDA, you are drunk!
         if ( sub_449A80() ) {
-          v35 = (signed __int64)((double)(signed __int16)v47 * 0.5);
+          v35 = (signed __int64)((double)(signed __int16)v47 * 0.5f);
         } else {
           v35 = (uint8_t)v47; //FIXME: Signed or unsigned?
         }
@@ -393,8 +395,8 @@ char __cdecl sub_42E280(int a1) {
       }
     }
     v7 += 3;
-    ++v6;
     v5 += 2;
+    v6++;
   }
 
   // Unlock z-Buffer
