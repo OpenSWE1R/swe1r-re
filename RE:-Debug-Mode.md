@@ -155,3 +155,45 @@ void __cdecl sub_483BE0(signed int a1) {
   }
 }
 ```
+
+## Helper
+
+```
+//----- (0045D390) --------------------------------------------------------
+double sub_45D390() {
+  if (sub_450B30(MAGIC('T','e','s','t'), 0) == 0) {
+    return -1.0;
+  }
+
+  if ( dword_E2899C ) {
+    return sub_47F810(*(_DWORD *)(dword_E2899C + 132) + 172);
+  }
+  return -1.0;
+}
+```
+
+### Helpers helper
+
+```C
+//----- (0047F810) --------------------------------------------------------
+// Returns value that's shown as "comp" in the debug menu
+// a1 = pointer to object?
+float __cdecl sub_47F810(int a1) {
+  int32_t v1 = sub_44E620(a1, 0);
+  float v3 = *(float *)(a1 + 8) * flt_E22A64[2 * v1] + flt_E22A60[2 * v1];
+
+  float result; // st7
+  if (dword_4C7BE4 < 0) {
+    if ( v3 < 1.0 ) {
+      result = v3;
+    } else {
+      result = 0.99989998;
+    }
+  } else if ( v3 <= 1.0 ) {
+    result = v3;
+  } else {
+    result = 1.0;
+  }
+  return result;
+}
+```
