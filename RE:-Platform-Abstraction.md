@@ -92,7 +92,6 @@ void __cdecl __noreturn sub_48C4A0(char* a1, char *a2, int32_t a3) {
   int32_t v5 = 0;
   int32_t v4 = 0;
   int32_t v3 = 0;
-  char* i = a2;
   while(a2[v5] != '\0') {
     if (a2[v5] == '\\') {
       v4 = 1;
