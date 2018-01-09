@@ -17,7 +17,3 @@ Audio volume rolloff factor (default: 0.1). If higher the objects will get silen
 ### -p
 ### -s
 Turn the audio engine off
-
----
-
-These are parsed at 0x424430
