@@ -456,21 +456,23 @@ float __cdecl sub_48D010(float a1) {
     v7 = -a1;
   }
 
+  // This looks like a Maclaurin expansion of arcin(x)
+  // Compare: https://en.wikipedia.org/wiki/Taylor_series#Trigonometric_functions
   float v10;
   float v9;
+  // This probably attempts to minimize errors
   if ( v7 <= 0.70710677 ) {
     v10 = v7;
-    v10 += sub_48C7F0(v7, 3) / 6.0f;
-    v10 += sub_48C7F0(v7, 5) * 0.075f;
-    v10 += sub_48C7F0(v7, 7) * 0.066797003;
-    v9 = v10 * 57.295784;
+    v10 += sub_48C7F0(v7, 3) / 6.0f; // (1*x^3)/6
+    v10 += sub_48C7F0(v7, 5) * 0.075f; // (3*x^5)/40
+    v10 += sub_48C7F0(v7, 7) * 0.066797003; // ???? should probably be (5*x^7)/112 .. except it's not
+    v9 = v10 * 57.295784; // convert from radian to degree
   } else {
-    v10 = 1.0f - v7 * v7;
-    v10 = sub_48CFF0(v10);
-    v10 += sub_48C7F0(v10, 3) / 6.0f;
-    v10 += sub_48C7F0(v10, 5) * 0.075f;
+    v10 = sub_48CFF0(1.0f - v7 * v7); // This is basically f(x) on the circle with radius 1 around point (0,1)
+    v10 += sub_48C7F0(v10, 3) / 6.0f; // (1*x^3)/6
+    v10 += sub_48C7F0(v10, 5) * 0.075f; // (3*x^5)/40
     v10 += sub_48C7F0(v10, 7) * 0.066797003;
-    v9 = 90.0f - v10 * 57.295784;
+    v9 = 90.0f - v10 * 57.295784; // convert from radian to degree and ...? 
   }
 
   // Restore sign
