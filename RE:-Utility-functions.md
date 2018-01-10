@@ -443,42 +443,43 @@ void __cdecl sub_492960(int a1, float a2)
 
 ```C
 //----- (0048D010) --------------------------------------------------------
-double __cdecl sub_48D010(float a1)
-{
-  float v1; // ST04_4
-  float v2; // ST14_4
-  float v3; // ST10_4
-  float v4; // ST0C_4
-  float v5; // ST08_4
-  double result; // st7
-  float v7; // [esp+14h] [ebp-14h]
-  BOOL v8; // [esp+20h] [ebp-8h]
-  float v9; // [esp+24h] [ebp-4h]
-  float v10; // [esp+30h] [ebp+8h]
+float __cdecl sub_48D010(float a1) {
+  // Keep track of sign
+  bool v8 = a1 < 0.0;
 
-  v8 = a1 < 0.0;
-  if ( a1 >= 0.0 )
+  // Switch to absolute values for calculations
+  //FIXME: Should there be some kind of "abs" macro?
+  float v7;
+  if ( a1 >= 0.0 ) {
     v7 = a1;
-  else
+  } else {
     v7 = -a1;
-  if ( v7 <= 0.70710677 )
-  {
-    v4 = sub_48C7F0(v7, 3) / 6.0 + v7;
-    v5 = sub_48C7F0(v7, 5) * 0.075000003 + v4;
-    v9 = (sub_48C7F0(v7, 7) * 0.066797003 + v5) * 57.295784;
   }
-  else
-  {
-    v1 = 1.0 - v7 * v7;
-    v10 = sub_48CFF0(v1);
-    v2 = sub_48C7F0(v10, 3) / 6.0 + v10;
-    v3 = sub_48C7F0(v10, 5) * 0.075000003 + v2;
-    v9 = 90.0 - (sub_48C7F0(v10, 7) * 0.066797003 + v3) * 57.295784;
+
+  float v10;
+  float v9;
+  if ( v7 <= 0.70710677 ) {
+    v10 = v7;
+    v10 += sub_48C7F0(v7, 3) / 6.0f;
+    v10 += sub_48C7F0(v7, 5) * 0.075f;
+    v10 += sub_48C7F0(v7, 7) * 0.066797003;
+    v9 = v10 * 57.295784;
+  } else {
+    v10 = 1.0f - v7 * v7;
+    v10 = sub_48CFF0(v10);
+    v10 += sub_48C7F0(v10, 3) / 6.0f;
+    v10 += sub_48C7F0(v10, 5) * 0.075f;
+    v10 += sub_48C7F0(v10, 7) * 0.066797003;
+    v9 = 90.0f - v10 * 57.295784;
   }
-  if ( v8 )
+
+  // Restore sign
+  float result;
+  if ( v8 ) {
     result = -v9;
-  else
+  } else {
     result = v9;
+  }
   return result;
 }
 ```
