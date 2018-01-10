@@ -292,3 +292,149 @@ void __cdecl sub_493270(const float *a1, const float *a2, float *a3, int a4) {
   }
 }
 ```
+
+### Called from mainloop
+
+```C
+//----- (00490060) --------------------------------------------------------
+// a1 = 12 component matrix
+void __cdecl sub_490060(const void *a1) {
+  sub_4925D0(dword_DF7F2C + 8, (int)a1);
+  qmemcpy(&unk_ECC440, a1, 0x30u);
+  sub_492960((int)&unk_ECC440, COERCE_FLOAT(&unk_DF7F20));
+}
+```
+
+#### Helper 1
+
+```C
+//----- (004925D0) --------------------------------------------------------
+float *__cdecl sub_4925D0(int a1, int a2)
+{
+  float *result; // eax
+  double v3; // st7
+  double v4; // st6
+  double v5; // st5
+
+  result = (float *)a2;
+  *(_DWORD *)(a1 + 4) = *(_DWORD *)(a2 + 12);
+  *(_DWORD *)(a1 + 8) = *(_DWORD *)(a2 + 24);
+  *(_DWORD *)(a1 + 20) = *(_DWORD *)(a2 + 28);
+  *(_DWORD *)(a1 + 12) = *(_DWORD *)(a2 + 4);
+  *(_DWORD *)(a1 + 24) = *(_DWORD *)(a2 + 8);
+  *(_DWORD *)(a1 + 28) = *(_DWORD *)(a2 + 20);
+  *(_DWORD *)a1 = *(_DWORD *)a2;
+  *(_DWORD *)(a1 + 16) = *(_DWORD *)(a2 + 16);
+  *(_DWORD *)(a1 + 32) = *(_DWORD *)(a2 + 32);
+  v3 = *(float *)(a2 + 40);
+  v4 = *(float *)(a2 + 44);
+  v5 = *(float *)(a2 + 36);
+  *(float *)(a1 + 36) = -(result[1] * v3 + result[2] * v4 + result[9] * *result);
+  *(float *)(a1 + 40) = -(result[4] * v3 + result[3] * v5 + result[5] * v4);
+  *(float *)(a1 + 44) = -(*(float *)(a2 + 32) * v4 + *(float *)(a2 + 28) * v3 + *(float *)(a2 + 24) * v5);
+  return result;
+}
+```
+
+#### Helper 2
+
+```C
+//----- (00492960) --------------------------------------------------------
+void __cdecl sub_492960(int a1, float a2)
+{
+  double v2; // st7
+  float v3; // ST00_4
+  double v4; // st7
+  float v5; // esi
+  float v6; // ST00_4
+  double v7; // st7
+  double v8; // st7
+  double v9; // st7
+  float v10; // [esp+8h] [ebp-30h]
+  float v11; // [esp+14h] [ebp-24h]
+  float v12; // [esp+18h] [ebp-20h]
+  float v13; // [esp+1Ch] [ebp-1Ch]
+  float v14; // [esp+20h] [ebp-18h]
+  float v15; // [esp+24h] [ebp-14h]
+  float v16; // [esp+28h] [ebp-10h]
+  float v17; // [esp+2Ch] [ebp-Ch]
+  float v18; // [esp+30h] [ebp-8h]
+  float v19; // [esp+30h] [ebp-8h]
+  float v20; // [esp+34h] [ebp-4h]
+  float v21; // [esp+40h] [ebp+8h]
+  float v22; // [esp+44h] [ebp+Ch]
+  float v23; // [esp+44h] [ebp+Ch]
+  float v24; // [esp+44h] [ebp+Ch]
+
+  v11 = -*(float *)a1;
+  v12 = -*(float *)(a1 + 4);
+  v13 = -*(float *)(a1 + 8);
+  v14 = *(float *)(a1 + 12);
+  v15 = *(float *)(a1 + 16);
+  v16 = *(float *)(a1 + 20);
+  v18 = v14 * v14;
+  v2 = v15 * v15 + v18;
+  v17 = v2;
+  v21 = v2;
+  v20 = sqrt(v21);
+  if ( v20 >= 0.001 )
+  {
+    v6 = v15 / v20;
+    v7 = 90.0 - sub_48D010(v6);
+    if ( v14 > 0.0 )
+      v7 = -v7;
+    v5 = a2;
+    *(float *)(LODWORD(a2) + 4) = v7;
+  }
+  else
+  {
+    v3 = -v11;
+    v4 = 90.0 - sub_48D010(v3);
+    if ( v12 > 0.0 && v16 > 0.0 || v12 < 0.0 && v16 < 0.0 )
+      v4 = -v4;
+    v5 = a2;
+    *(float *)(LODWORD(a2) + 8) = v4;
+    *(_DWORD *)(LODWORD(a2) + 4) = 0;
+  }
+  if ( v20 >= 0.001 )
+  {
+    v8 = v17 / v20;
+    if ( v8 < 1.0 )
+    {
+      v22 = v8;
+      *(float *)LODWORD(v5) = 90.0 - sub_48D010(v22);
+    }
+    else
+    {
+      *(_DWORD *)LODWORD(v5) = 0;
+    }
+  }
+  else
+  {
+    *(_DWORD *)LODWORD(v5) = 1119092736;
+  }
+  if ( v16 < 0.0 )
+    *(float *)LODWORD(v5) = -*(float *)LODWORD(v5);
+  v9 = -v15;
+  v10 = v9;
+  v23 = v9 * v10 + v18;
+  v19 = sqrt(v23);
+  if ( v20 >= 0.001 )
+  {
+    v24 = (v12 * v14 + v10 * v11) / v19;
+    if ( v24 < 1.0 )
+    {
+      if ( v24 > -1.0 )
+        *(float *)(LODWORD(v5) + 8) = 90.0 - sub_48D010(v24);
+      else
+        *(_DWORD *)(LODWORD(v5) + 8) = 1127481344;
+    }
+    else
+    {
+      *(_DWORD *)(LODWORD(v5) + 8) = 0;
+    }
+    if ( v13 < 0.0 )
+      *(float *)(LODWORD(v5) + 8) = -*(float *)(LODWORD(v5) + 8);
+  }
+}
+```
