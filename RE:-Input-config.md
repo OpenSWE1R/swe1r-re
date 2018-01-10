@@ -246,12 +246,38 @@ signed int __cdecl sub_406470(int a1, const char *a2, int a3) {
   v5 = (signed int)v17;
   v6 = v17;
 
+
+
+
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+
+#error RE ERROR
+
+// sub_487AE0 MUST BE CALLED BEFORE strcmp!
+
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+//FIXME FIXME FIXME FIXME
+
   while ( strcmp(dword_EC8E84, aEnd) ) {
 
     // Tokenize next row?
     if ( !sub_487AE0() ) {
       break;
     }
+
+
+
    
     // Pointer to tokens
     typedef struct {
