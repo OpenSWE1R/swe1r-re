@@ -113,8 +113,8 @@ double __cdecl sub_480650(float a1, float a2) {
 
 ```C
 //----- (00480670) --------------------------------------------------------
-double __cdecl sub_480670(float a1) {
-  return (float)sqrt(a1);
+float __cdecl sub_480670(float a1) {
+  return sqrt(a1);
 }
 ```
 
@@ -298,41 +298,36 @@ void __cdecl sub_493270(const float *a1, const float *a2, float *a3, int a4) {
 ```C
 //----- (00490060) --------------------------------------------------------
 // a1 = 12 component matrix
-void __cdecl sub_490060(const void *a1) {
-  sub_4925D0(dword_DF7F2C + 8, (int)a1);
+void __cdecl sub_490060(const float* a1) {
+  sub_4925D0(dword_DF7F2C + 8, a1);
   qmemcpy(&unk_ECC440, a1, 0x30u);
   sub_492960((int)&unk_ECC440, COERCE_FLOAT(&unk_DF7F20));
 }
 ```
 
-#### Helper 1
+#### Helper 1 (Something to do with translation and transposing?)
 
 ```C
 //----- (004925D0) --------------------------------------------------------
-float *__cdecl sub_4925D0(int a1, int a2)
-{
-  float *result; // eax
-  double v3; // st7
-  double v4; // st6
-  double v5; // st5
+const float* __cdecl sub_4925D0(float* a1, const float* a2) {
 
-  result = (float *)a2;
-  *(_DWORD *)(a1 + 4) = *(_DWORD *)(a2 + 12);
-  *(_DWORD *)(a1 + 8) = *(_DWORD *)(a2 + 24);
-  *(_DWORD *)(a1 + 20) = *(_DWORD *)(a2 + 28);
-  *(_DWORD *)(a1 + 12) = *(_DWORD *)(a2 + 4);
-  *(_DWORD *)(a1 + 24) = *(_DWORD *)(a2 + 8);
-  *(_DWORD *)(a1 + 28) = *(_DWORD *)(a2 + 20);
-  *(_DWORD *)a1 = *(_DWORD *)a2;
-  *(_DWORD *)(a1 + 16) = *(_DWORD *)(a2 + 16);
-  *(_DWORD *)(a1 + 32) = *(_DWORD *)(a2 + 32);
-  v3 = *(float *)(a2 + 40);
-  v4 = *(float *)(a2 + 44);
-  v5 = *(float *)(a2 + 36);
-  *(float *)(a1 + 36) = -(result[1] * v3 + result[2] * v4 + result[9] * *result);
-  *(float *)(a1 + 40) = -(result[4] * v3 + result[3] * v5 + result[5] * v4);
-  *(float *)(a1 + 44) = -(*(float *)(a2 + 32) * v4 + *(float *)(a2 + 28) * v3 + *(float *)(a2 + 24) * v5);
-  return result;
+  a1[0] = a2[0];
+  a1[1] = a2[3];
+  a1[2] = a2[6]
+
+  a1[3] = a2[1];
+  a1[4] = a2[4];
+  a1[5] = a2[7]
+
+  a1[6] = a2[2];
+  a1[7] = a2[5];
+  a1[8] = a2[8];
+
+  a1[ 9] = -(a2[0] * a2[9] + a2[1] * a2[10] + a2[2] * a2[11]);
+  a1[10] = -(a2[3] * a2[9] + a2[4] * a2[10] + a2[5] * a2[11]);
+  a1[11] = -(a2[6] * a2[9] + a2[7] * a2[10] + a2[8] * a2[11]);
+
+  return a2;
 }
 ```
 
@@ -439,7 +434,7 @@ void __cdecl sub_492960(int a1, float a2)
 }
 ```
 
-##### Helper helper
+##### Helper helper (Probably `asinf()`)
 
 ```C
 //----- (0048D010) --------------------------------------------------------
@@ -491,6 +486,6 @@ float __cdecl sub_48D010(float a1) {
 ```C
 //----- (0048CFF0) --------------------------------------------------------
 float __cdecl sub_48CFF0(float a1) {
-  return (float)sqrt(a1);
+  return sqrt(a1);
 }
 ```
