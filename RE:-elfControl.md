@@ -72,17 +72,20 @@ signed int sub_404B10() {
   sub_409D70(0);
   sub_409EE0(0x11u, -1, -1, -1);
 
+  // Read force feedback config
   if ( sub_40AE40((int)aCurrent) < 0 ) {
     sub_40AB60();
     sub_40AB80((int)aCurrent);
   }
 
+  // Read input config (for mouse, keyboard and joystick?)
   if ( sub_406470(-1, &Class, 1) < 0 ) {
     sub_405EA0(0);
     sub_405EA0(1);
     sub_405EA0(2);
   }
 
+  // Read steering wheel input config (?)
   if ( dword_4D55D4 ) {
     sub_406470(0, aWheel, 1);
     dword_4B297C = 0;
@@ -98,6 +101,80 @@ signed int sub_404B10() {
   return 0;
 }
 ```
+
+## Some helper
+
+```C
+//----- (00405EA0) --------------------------------------------------------
+// a1 = probably device type
+int __cdecl sub_405EA0(signed int a1) {
+  signed int v1; // ebp
+  _BYTE *v2; // edx
+  _BYTE *v3; // ecx
+  int v5; // ecx
+  BOOL v6; // ecx
+  char *v7; // ecx
+  int result; // eax
+  char *v10; // [esp+10h] [ebp-Ch]
+  int v11; // [esp+14h] [ebp-8h]
+  int v12; // [esp+18h] [ebp-4h]
+
+  v1 = a1;
+  if ( a1 == 0) {
+    a1 = dword_EC879C;
+    v12 = dword_EC887C;
+    v10 = byte_4D5FC0;
+    memset(byte_4D5FC0, 0, 0x30Cu);
+    v2 = &unk_4B2F80;
+    v11 = dword_EC8824;
+    LODWORD(dword_EC876C) = dword_4B297C;
+    qmemcpy(dword_EC8880, &unk_4B2958, 0x18u);
+    if ( dword_EC8824 && dword_EC879C > 4 ) {
+      a1 = 4;
+    }
+  } else if ( a1 == 1 )
+    v11 = 0;
+    a1 = dword_EC8770;
+    v12 = dword_EC8808;
+    v10 = byte_4D6518;
+    v2 = &unk_4B3290;
+    memset(byte_4D6518, 0, 0x30Cu);
+    dword_EC8790[0] = dword_4B2970;
+    dword_EC8794 = dword_4B2974;
+    dword_EC8798 = dword_4B2978;
+  } else if ( a1 == 2 ) {
+    v11 = 0;
+    v12 = 0;
+    v10 = byte_4D6828;
+    v2 = &unk_4B35A0;
+    a1 = 256;
+    memset(byte_4D6828, 0, 0x30Cu);
+  } else {
+    v2 = (_BYTE *)a1;
+  }
+
+  dword_4D5E20[v1] = 0;
+  dword_EC8780[v1] = 1.0f;
+
+  while ( v2[0] != -1 ) {
+    if ( *v2 & 8 && *((_DWORD *)v2 + 1) < a1
+      || *v2 & 8 && ((v5 = *((_DWORD *)v2 + 1), v5 < 16) ? (v6 = 0) : (v6 = v5 <= 4 * v11 + 15), v6)
+      || *v2 & 4 && (1 << *((_DWORD *)v2 + 1)) & v12 ) {
+      v7 = &v10[12 * dword_4D5E20[v1]];
+      *((_DWORD *)v7 + 0) = *((_DWORD *)v2 + 0);
+      *((_DWORD *)v7 + 1) = *((_DWORD *)v2 + 1);
+      *((_DWORD *)v7 + 2) = *((_DWORD *)v2 + 2);
+      ++dword_4D5E20[v1];
+    }
+    v2 += 12;
+  } 
+
+  result = 3 * dword_4D5E20[v1];
+  v10[12 * dword_4D5E20[v1]] = -1;
+  return result;
+}
+```
+
 
 # elfControl_ReplaceMapping
 
