@@ -436,6 +436,19 @@ void __cdecl sub_492960(int a1, float a2)
 
 ##### Helper helper (Probably `asinf()`)
 
+Here's some math I used to understand why the 3rd factor is not 5/112:
+
+```
+Until sqrt(1/2):
+  ((sqrt(1/2))+((sqrt(1/2))^3)/6+3*((sqrt(1/2))^5)/40+5*((sqrt(1/2))^7)/112) - asin(sqrt(1/2)) = -0.00216165658762 < maclaurin
+  ((sqrt(1/2))+((sqrt(1/2))^3)/6+3*((sqrt(1/2))^5)/40+((sqrt(1/2))^7)*0.066797) - asin(sqrt(1/2)) = -0.000203488506909 < weird formula
+From sqrt(1/2):
+  (pi/2-((sqrt(1-1/2))+((sqrt(1-1/2))^3)/6+3*((sqrt(1-1/2))^5)/40+5*((sqrt(1-1/2))^7)/112)) - asin(sqrt(1/2)) = 0.00216165658772 < maclaurin
+  (pi/2-((sqrt(1-1/2))+((sqrt(1-1/2))^3)/6+3*((sqrt(1-1/2))^5)/40+((sqrt(1-1/2))^7)*0.066797)) - asin(sqrt(1/2)) = 0.000203488507013 < weird formula
+```
+
+So this seems to be done to get the 2 curves closer together to minimize the error. However, the actual fraction or method they used to find this constant still has to be found.
+
 ```C
 //----- (0048D010) --------------------------------------------------------
 float __cdecl sub_48D010(float a1) {
