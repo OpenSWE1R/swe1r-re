@@ -62,10 +62,18 @@ void __cdecl sub_4841E0(uint32_t* a1) {
 }
 ```
 
+# Start or continue filesearch
+
 ```
+typdef struct {
+  char path[256]; // unusure
+  uint32_t unk;
+  uint32_t is_subdirectory; // +260 Value 0x10 if this is a subdirectory, otherwise 0
+  uint32_t time_write; // + 264 Time of the last write to file. This time is stored in UTC format.
+} A2;
+
 //----- (00484220) --------------------------------------------------------
-BOOL __cdecl sub_484220(const char *a1, int a2)
-{
+BOOL __cdecl sub_484220(const char *a1, int a2) {
   BOOL result; // eax
   int v3; // eax
   int v4; // eax
@@ -74,21 +82,24 @@ BOOL __cdecl sub_484220(const char *a1, int a2)
   time_t v7; // ecx
   struct _finddata_t v8; // [esp+Ch] [ebp-118h]
 
-  if ( !a1 )
+  if (a1 == 0) {
     return 0;
+  }
+
   v3 = *((_DWORD *)a1 + 1);
   *((_DWORD *)a1 + 1) = v3 + 1;
-  if ( v3 )
-  {
+
+  if ( v3 ) {
     v4 = _findnext(*((_DWORD *)a1 + 34), &v8);
-  }
-  else
-  {
+  } else {
     v4 = _findfirst(a1 + 8, &v8);
     *((_DWORD *)a1 + 34) = v4;
   }
-  if ( v4 == -1 )
+
+  if ( v4 == -1 ) {
     return 0;
+  }
+
   v5 = *(_DWORD *)a1;
   v6 = v8.attrib;
   result = !*(_DWORD *)a1 || v5 == 3 || v5 == 1 && !(v8.attrib & 0x10) || v5 == 2 && v8.attrib & 0x10;
@@ -96,12 +107,13 @@ BOOL __cdecl sub_484220(const char *a1, int a2)
   {
     strcpy((char *)a2, v8.name);
     v7 = v8.time_write;
-    *(_DWORD *)(a2 + 260) = v6 & 0x10;
+    *(_DWORD *)(a2 + 260) = v6 & _A_SUBDIR;
     *(_DWORD *)(a2 + 264) = v7;
     result = 1;
   }
   return result;
 }
+```
 
 # Create directory
 
