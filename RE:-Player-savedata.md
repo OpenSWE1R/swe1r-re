@@ -10,7 +10,7 @@ Also since this keeps track of the freeplay stuff, that can also desync with the
 // They come from 0xE364A0 in memory
 typedef struct {
   uint8_t race_unlocked[4]; // 0xC 1 bit per course starting at LSb: unlocks race for freeplay
-  uint32_t podracer_unlocked; // 0x10 1 bit per podracer ??? for freeplay
+  uint8_t podracer_unlocked[4]; // 0x10 1 bit per podracer ??? for freeplay
   Savedata profiles[4]; // 0x14 4 profiles, but the first profile seems to be the one used for most things
 
   // This keeps track of the best times.
@@ -55,7 +55,7 @@ typedef struct {
   uint8_t race_unlocked[5]; // 0x25 1 bit per course starting at LSb: unlocks race
   uint16_t race_status[5]; // 0x2A 2 bit per course starting at LSb: 0=4th (or not finished), 1=3rd, 2=2nd, 3=1st.
 
-  uint32_t podracers_unlocked; // 0x34 1 bit per podracer ???
+  uint8_t podracers_unlocked[4]; // 0x34 1 bit per podracer ???
 
   uint32_t truguts; // 0x38
 
