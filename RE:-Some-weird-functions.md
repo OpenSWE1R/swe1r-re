@@ -2,39 +2,36 @@
 
 ```C
 //----- (00484140) --------------------------------------------------------
-char *__cdecl sub_484140(char *a1, int a2, int a3)
-{
+char *__cdecl sub_484140(char *a1, int a2, int a3) {
+  typdef struct {
+    uint32_t unk; // + 0
+    uint32_t unk; // + 4
+    char name[128];
+    uint32_t unk; // + 136
+    // 140 bytes
+  } Unk;
   char *result; // eax
-  char *v4; // esi
-  int v5; // eax
-
   result = dword_ECC420->unk8(140);
   if (result == 0) {
-    return result;
+    return 0;
   }
 
-  v4 = result;
-  memset(result, 0x00, 0x8Cu);
-  v5 = a3;
-  if ( a2 < 0 ) {
-    goto LABEL_9;
+  memset(result, 0x00, 140);
+
+  if ( a2 >= 0 ) {
+    if ( a2 <= 2 ) {
+      sub_4846E0(result + 8, 128, a1, asc_4C7D54);
+    } else if ( a2 == 3 ) {
+      if (*(_BYTE *)a3 == '.') {
+        a3++;
+      }
+      sprintf(OutputString, aS, a3);
+      sub_4846E0(result + 8, 128, a1, OutputString);
+    }
   }
-  if ( a2 <= 2 ) {
-    sub_4846E0(v4 + 8, 128, a1, asc_4C7D54);
-    goto LABEL_9;
-  }
-  if ( a2 != 3 ) {
-LABEL_9:
-    *(_DWORD *)v4 = a2;
-    return v4;
-  }
-  if ( *(_BYTE *)a3 == 46 ) {
-    v5 = a3 + 1;
-  }
-  sprintf(OutputString, aS, v5);
-  sub_4846E0(v4 + 8, 128, a1, OutputString);
-  *(_DWORD *)v4 = 3;
-  return v4;
+
+  *(_DWORD *)result = a2;
+  return result;
 }
 ```
 
@@ -53,7 +50,8 @@ void __cdecl sub_4841E0(uint32_t* a1) {
     findclose(a1[34]); // +136
   }
 
-  //FIXME: This check feels redundant?
+  // Free memory
+  //FIXME: This check feels redundant? Probably part of some SAFE_FREE macro.
   if ( a1 ) {
     dword_ECC420->unk9(a1);
   }
@@ -66,6 +64,15 @@ void __cdecl sub_4841E0(uint32_t* a1) {
 
 ```
 typdef struct {
+  uint32_t unk0; // +0 = search mode (0 = ?, 1 = only files, 2 = only directories, 3 = ?)
+  uint32_t unk1; // +4 = index of file in directory?
+  char path[128] // +8 = path
+  ...
+  intptr_t handle; // +136 = filesearch handle
+
+} FileSearch;
+
+typdef struct {
   char path[256]; // unusure
   uint32_t unk;
   uint32_t is_subdirectory; // +260 Value 0x10 if this is a subdirectory, otherwise 0
@@ -73,7 +80,9 @@ typdef struct {
 } A2;
 
 //----- (00484220) --------------------------------------------------------
-BOOL __cdecl sub_484220(const char *a1, int a2) {
+// a1 = file search object
+// a2 = current file being returned
+BOOL __cdecl sub_484220(FileSearch *a1, int a2) {
   BOOL result; // eax
   int v3; // eax
   int v4; // eax
@@ -86,32 +95,34 @@ BOOL __cdecl sub_484220(const char *a1, int a2) {
     return 0;
   }
 
-  v3 = *((_DWORD *)a1 + 1);
-  *((_DWORD *)a1 + 1) = v3 + 1;
-
-  if ( v3 ) {
-    v4 = _findnext(*((_DWORD *)a1 + 34), &v8);
+  if (a1->unk1 == 0) {
+    v4 = _findfirst(a1->path, &v8);
+    a1->handle = v4;
   } else {
-    v4 = _findfirst(a1 + 8, &v8);
-    *((_DWORD *)a1 + 34) = v4;
+    v4 = _findnext(a1->handle, &v8);
   }
+  a1->unk1 = a1->unk1 + 1;
 
+  // Check for errors
   if ( v4 == -1 ) {
     return 0;
   }
 
-  v5 = *(_DWORD *)a1;
-  v6 = v8.attrib;
-  result = !*(_DWORD *)a1 || v5 == 3 || v5 == 1 && !(v8.attrib & 0x10) || v5 == 2 && v8.attrib & 0x10;
-  if ( result )
-  {
-    strcpy((char *)a2, v8.name);
-    v7 = v8.time_write;
-    *(_DWORD *)(a2 + 260) = v6 & _A_SUBDIR;
-    *(_DWORD *)(a2 + 264) = v7;
-    result = 1;
+  uint32_t is_subdirectory = v8.attrib & _A_SUBDIR;
+
+  result = 0;
+  result = result || (a1->unk0 == 0); // Unspecified search mode?
+  result = result || (a1->unk0 == 1 && !is_subdirectory) // File search and this is not a directory
+  result = result || (a1->unk0 == 2 && is_subdirectory)); // Directory search and this is a directory
+  result = result || (a1->unk0 == 3); // Unspecified search mode?
+  if (!result) {
+    return 0;
   }
-  return result;
+   
+  strcpy(a2->name, v8.name);
+  a2->is_subdirectory = is_subdirectory;
+  a2->time_write =  v8.time_write;
+  return 1;
 }
 ```
 
@@ -137,43 +148,56 @@ BOOL __cdecl sub_484320(LPCSTR lpFileName) {
 
 ```C
 //----- (00484330) --------------------------------------------------------
+// Returns 1 on success, something else otherwise
 BOOL __cdecl sub_484330(LPCSTR lpPathName) {
-  signed int v1; // ebp
-  int v2; // eax
   HANDLE hFindFile; // [esp+10h] [ebp-248h]
-  CHAR FileName; // [esp+14h] [ebp-244h]
+
+  CHAR FileName[260]; // [esp+14h] [ebp-244h] //FIXME: Probably just 256 bytes?!
+
   struct _WIN32_FIND_DATAA FindFileData; // [esp+118h] [ebp-140h]
 
+  // Construct the pathname
   strcpy(&FileName, lpPathName);
-  v1 = 1;
   strcat(&FileName, asc_4C7D60);
+
   hFindFile = FindFirstFileA(&FileName, &FindFileData);
-  if ( hFindFile == (HANDLE)-1 )
+  if ( hFindFile == (HANDLE)-1 ) {
     return 0;
-  do
-  {
-    if ( FindFileData.dwFileAttributes != 16 )
-    {
+  }
+
+  // Loop until our success-flag is cleared
+  // This is a bug in the game. Should be `!= 0` as Microsoft only defines a value for failure.
+  int32_t v1 = 1;
+  while(v1 == 1) {
+    if ( FindFileData.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY) {
+      // This is a directory, make sure this is not "." or "..", and delete it recursively
+      if (!(!strcmp(FindFileData.cFileName, ".") || !strcmp(FindFileData.cFileName, ".."))) {
+        strcpy(&FileName, lpPathName);
+        strcat(&FileName, (const char *)&unk_4B3B48);
+        strcat(&FileName, FindFileData.cFileName);
+        v1 = sub_484330(&FileName);
+      }
+    } else {
+      // Delete this file
       strcpy(&FileName, lpPathName);
       strcat(&FileName, (const char *)&unk_4B3B48);
       strcat(&FileName, FindFileData.cFileName);
-      v2 = DeleteFileA(&FileName);
-      goto LABEL_7;
+      v1 = DeleteFileA(&FileName);
     }
-    if ( strcmp(FindFileData.cFileName, (const char *)&word_4B3B2C) && strcmp(FindFileData.cFileName, asc_4B4F44) )
-    {
-      strcpy(&FileName, lpPathName);
-      strcat(&FileName, (const char *)&unk_4B3B48);
-      strcat(&FileName, FindFileData.cFileName);
-      v2 = sub_484330(&FileName);
-LABEL_7:
-      v1 = v2;
+
+    // Get the next file
+    if(!FindNextFileA(hFindFile, &FindFileData)) {
+      break;
     }
   }
-  while ( FindNextFileA(hFindFile, &FindFileData) && v1 == 1 );
+
+  // Close the filesearch
   FindClose(hFindFile);
-  if ( v1 )
+
+  // Now that the directory is empty, delete it
+  if (v1) {
     return RemoveDirectoryA(lpPathName);
+  }
   return v1;
 }
 ```
