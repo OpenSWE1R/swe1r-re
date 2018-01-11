@@ -62,7 +62,7 @@ void __cdecl sub_4841E0(uint32_t* a1) {
 
 # Start or continue filesearch
 
-```
+```C
 typdef struct {
   uint32_t unk0; // +0 = search mode (0 = ?, 1 = only files, 2 = only directories, 3 = ?)
   uint32_t unk1; // +4 = index of file in directory?
