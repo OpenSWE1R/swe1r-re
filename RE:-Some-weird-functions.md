@@ -1,16 +1,81 @@
-# Unknown
+# Construct path
+
+```C
+//----- (004846E0) --------------------------------------------------------
+// a1 = output string
+// a2 = output buffer length
+// a3 = path name
+// a4 = filename
+char* __cdecl sub_4846E0(char* a1, int a2, char *a3, char *a4) {
+  // Copy the path and ensure that the buffer is zero terminated
+  strncpy(a1, a3, a2 - 1);
+  a1[a2 - 1] = 0;
+
+  // Append the filename to the path
+  return sub_484690(a1, a4, a2);
+}
+```
+
+## Helper
+
+```C
+//----- (00484690) --------------------------------------------------------
+// a1 = output buffer which holds path
+// a2 = filename to concatenate
+// a3 = output buffer length
+char* __cdecl sub_484690(char *a1, char *a2, int a3) {
+  // Check if the last symbol is already a path seperator
+  uint32_t v4 = strlen(a1);
+  if (a1[v4 - 1] != '\\') {
+    // Now check if there is at least one byte space in the buffer left.
+    //FIXME: the check for *a1 is a bit late, isn't it?! we are already out of bounds if a1 is ""
+    int32_t v3 = v4;
+    if ((v3 < (a3 - 1)) && (*a1 != '\0')) {
+      // Append a path seperator
+      a1[v3] = '\\';
+      v3++;
+      a1[v3] = '\0';
+    }
+  }
+
+  // Now append the filename and return the constructed path
+  strncat(a1, a2, a3 - v3 - 1);
+  return a1;
+}
+```
+
+# Filesearch
+
+This file search seems to be kind of stupid because it can find directories, but at the same time, it doesn't seem to allow filenames without a "." in them?
+
+```C
+typdef struct {
+  uint32_t unk0; // +0 = search mode (0 = ?, 1 = only files, 2 = only directories, 3 = ?)
+  uint32_t unk1; // +4 = index of file in directory?
+  char path[128] // +8 = path
+  intptr_t handle; // +136 = filesearch handle
+  // 140 byte total
+} FileSearch;
+```
+
+```C
+typdef struct {
+  char path[256]; // unusure
+  uint32_t unk;
+  uint32_t is_subdirectory; // +260 Value 0x10 if this is a subdirectory, otherwise 0
+  uint32_t time_write; // + 264 Time of the last write to file. This time is stored in UTC format.
+} FileSearchResult;
+```
+
+## Initialize ?
 
 ```C
 //----- (00484140) --------------------------------------------------------
-char *__cdecl sub_484140(char *a1, int a2, int a3) {
-  typdef struct {
-    uint32_t unk; // + 0
-    uint32_t unk; // + 4
-    char name[128];
-    uint32_t unk; // + 136
-    // 140 bytes
-  } Unk;
-  char *result; // eax
+// a1 = Path
+// a2 = search mode
+// a3 = extension to search for in mode 3 (Examples: ".bmp" or "bmp", the dot is added implicitly)
+char *__cdecl sub_484140(char *a1, int a2, char* a3) {
+  char *result; // eax // FIXME: A FileSearch
   result = dword_ECC420->unk8(140);
   if (result == 0) {
     return 0;
@@ -20,26 +85,28 @@ char *__cdecl sub_484140(char *a1, int a2, int a3) {
 
   if ( a2 >= 0 ) {
     if ( a2 <= 2 ) {
-      sub_4846E0(result + 8, 128, a1, asc_4C7D54);
+      // Mode 0, 1, 2: Search for "<path>\\*.*" or just "*.*"
+      sub_4846E0(result->path, 128, a1, "*.*");
     } else if ( a2 == 3 ) {
+      // Mode 3: Search for a specific extension using "<path>\\*.<extension>"
       if (*(_BYTE *)a3 == '.') {
         a3++;
       }
-      sprintf(OutputString, aS, a3);
-      sub_4846E0(result + 8, 128, a1, OutputString);
+      sprintf(OutputString, "*.%s", a3);
+      sub_4846E0(result->path, 128, a1, OutputString);
     }
   }
 
-  *(_DWORD *)result = a2;
+  result->unk0 = a2;
   return result;
 }
 ```
 
-# Close filesearch ?
+## Close
 
 ```C
 //----- (004841E0) --------------------------------------------------------
-// a1 = some file search handle?
+// a1 = some file search handle? FIXME: FileSearch
 // Probably returns nothing
 void __cdecl sub_4841E0(uint32_t* a1) {
   if (a1 == 0) {
@@ -60,28 +127,12 @@ void __cdecl sub_4841E0(uint32_t* a1) {
 }
 ```
 
-# Start or continue filesearch
+## Step filesearch
 
 ```C
-typdef struct {
-  uint32_t unk0; // +0 = search mode (0 = ?, 1 = only files, 2 = only directories, 3 = ?)
-  uint32_t unk1; // +4 = index of file in directory?
-  char path[128] // +8 = path
-  ...
-  intptr_t handle; // +136 = filesearch handle
-
-} FileSearch;
-
-typdef struct {
-  char path[256]; // unusure
-  uint32_t unk;
-  uint32_t is_subdirectory; // +260 Value 0x10 if this is a subdirectory, otherwise 0
-  uint32_t time_write; // + 264 Time of the last write to file. This time is stored in UTC format.
-} A2;
-
 //----- (00484220) --------------------------------------------------------
 // a1 = file search object
-// a2 = current file being returned
+// a2 = current file being returned (FileSearchResult) FIXME
 BOOL __cdecl sub_484220(FileSearch *a1, int a2) {
   BOOL result; // eax
   int v3; // eax
