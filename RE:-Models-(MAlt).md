@@ -135,24 +135,26 @@ void __cdecl sub_4476B0(signed int *a1) {
   bool v136; // zf
   bool v137; // sf
 
-  if ( a1 == 0) {
+  uintptr_t a1b = a1;
+
+  if ( a1b == 0) {
     return;
   }
 
   //FIXME: Did I invert this poorly?
   //FIXME: WTF?! a1[0] is not swapped here yet?!
-  v2 = a1[0];
+  v2 = *(uint32_t*)(a1b + 0);
   if ((v2 == 20581) || (v2 == 20582) || (v2 == 53348) || (v2 == 53349) || (v2 == 20580) || (v2 == 12388) || (v2 == 53350)) {
     return;
   }
 
-  a1[0] = swap32(a1[0]);
-  v3 = a1[0];
-  a1[1] = swap32(a1[1]);
-  a1[2] = swap32(a1[2]);
+  *(uint32_t*)(a1b + 0) = swap32(*(uint32_t*)(a1b + 0));
+  v3 = *(uint32_t*)(a1b + 0);
+  *(uint32_t*)(a1b + 4) = swap32(*(uint32_t*)(a1b + 4));
+  *(uint32_t*)(a1b + 8) = swap32(*(uint32_t*)(a1b + 8));
 
-  *((_WORD *)a1 + 6) = swap16(*((_WORD *)a1 + 6));
-  *((_WORD *)a1 + 7) = swap16(*((_WORD *)a1 + 7));
+  *((_WORD *)(a1b + 12)) = swap16(*((_WORD *)(a1b + 12)));
+  *((_WORD *)(a1b + 14)) = swap16(*((_WORD *)(a1b + 14)));
 
   a1[4] = swap32(a1[4]);
 
