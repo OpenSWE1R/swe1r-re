@@ -19,7 +19,6 @@ void __cdecl sub_4476B0(signed int *a1) {
   unsigned int v14; // eax
   int v16; // ebp
   int v17; // edi
-  int v18; // eax
   int v19; // esi
   __int16 v20; // dx
   __int16 v21; // cx
@@ -178,27 +177,53 @@ void __cdecl sub_4476B0(signed int *a1) {
 
     for(int32_t v15 = 0; v15 < a1[5]; v15++) {
 
+      typedef struct {
+        uint32_t unk0; // A pointer of some sorts
+        uint32_t unk4; // A pointer of some sorts
+        uint32_t unk8[6]; // 8
+        uint16_t unk32; // Count for unk36
+        uint16_t unk34; // Some mode, {3,4,5} are typical values
+        uint32_t unk36; // Pointer to uint32_t[]
+        uint32_t unk40;
+        uint32_t unk44; // Pointer to uint16_t[]
+        uint8_t unk48[8];
+        uint16_t unk56; // Count for unk44
+        uint16_t unk58;
+        uint16_t unk60;
+        uint16_t unk62;
+      } V16;
       v16 = *(_DWORD *)(a1[6] + 4 * v15);
       if ( !v16 ) {
         continue;
       }
 
-      v17 = *(_DWORD *)v16;
+      
+      // Get item pointer and check if it's in the list already
+      typedef struct {
+        uint32_t unk0;
+        uint16_t unk4;
+        uint16_t unk6;
+        uint32_t unk8; // A pointer of some sorts
+        uint32_t unk12; // A pointer of some sorts
+      } V17;
+      v17 = *(_DWORD *)(v16 + 0);
       if ( v17 && !sub_4475F0(v17) ) {
-        v18 = dword_50C628;
+
+        // Add this pointer to the array
         dword_E95300[dword_50C628] = v17;
-        dword_50C628 = v18 + 1;
+        dword_50C628 = dword_50C628 + 1;
 
         *(_DWORD *)(v17 + 0) = swap32(*(_DWORD *)(v17 + 0));
         *(_WORD *)(v17 + 4) = swap16(*(_WORD *)(v17 + 4));
         *(_WORD *)(v17 + 6) = swap16(*(_WORD *)(v17 + 6));
 
+        // Get pointer and check if it's already in list
         v19 = *(_DWORD *)(v17 + 8);
-
         if ( v19 && !sub_447630(v19) ) {
-          v22 = dword_50C62C;
+
+          // Add pointer to list
           dword_E90980[dword_50C62C] = v19;
-          dword_50C62C = v22 + 1;
+          dword_50C62C = dword_50C62C + 1;
 
           *(_DWORD *)(v19 + 0) = swap32(*(_DWORD *)(v19 + 0));
           *(_WORD *)(v19 + 4) = swap16(*(_WORD *)(v19 + 4));
@@ -213,11 +238,13 @@ void __cdecl sub_4476B0(signed int *a1) {
 
         }
 
+        // Get pointer and check if it's already in list
         v36 = *(_DWORD *)(v17 + 12);
         if ( v36 && !sub_447670(*(_DWORD *)(v17 + 12)) ) {
-          v37 = dword_50C630;
+
+          // Add pointer to list
           dword_E68280[dword_50C630] = v36;
-          dword_50C630 = v37 + 1;
+          dword_50C630 = dword_50C630 + 1;
 
           *(_DWORD *)(v36 + 0) = swap32(*(_DWORD *)(v36 + 0));
           *(_WORD *)(v36 + 4) = swap16(*(_WORD *)(v36 + 4));
@@ -231,8 +258,6 @@ void __cdecl sub_4476B0(signed int *a1) {
 
       v46 = *(_DWORD *)(v16 + 4);
       if ( v46 ) {
-        v47 = *(_DWORD *)(v46 + 60);
-
         *(_WORD *)(v46 + 0) = swap16(*(_WORD *)(v46 + 0));
         //FIXME: Nothing here?
         *(_WORD *)(v46 + 6) = swap16(*(_WORD *)(v46 + 6));
@@ -251,6 +276,18 @@ void __cdecl sub_4476B0(signed int *a1) {
         *(_DWORD *)(v46 + 52) = swap32(*(_DWORD *)(v46 + 52));
         *(_DWORD *)(v46 + 56) = swap32(*(_DWORD *)(v46 + 56));
 
+        // Walk through some list
+        typedef struct {
+          uint32_t v74[3]; // 0
+          uint32_t v77[3]; // 12
+          uint32_t unk24; // 24
+          uint32_t unk28; // 28
+          uint32_t unk32; // 32 not touched?
+          uint16_t unk36; // 36
+          uint16_t unk38; // 38
+          struct _V47* next; // 40
+        } V47;
+        v47 = *(_DWORD *)(v46 + 60);
         if ( v47 ) {
           do {
 
@@ -258,6 +295,7 @@ void __cdecl sub_4476B0(signed int *a1) {
             v77 = swap32((v47 + 12), 3);
             *(_DWORD *)(v47 + 24) = swap32(*(_DWORD *)(v47 + 24));
             *(_DWORD *)(v47 + 28) = swap32(*(_DWORD *)(v47 + 28));
+            //FIXME: Nothing?
             *(_WORD *)(v47 + 36) = swap16(*(_WORD *)(v47 + 36))
             *(_WORD *)(v47 + 38) = swap16(*(_WORD *)(v47 + 38));
 
