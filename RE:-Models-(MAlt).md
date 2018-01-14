@@ -14,11 +14,9 @@ void __cdecl sub_4476B0(signed int *a1) {
   unsigned int v8; // ecx
   int v9; // edx
   unsigned int v10; // esi
-  unsigned int v11; // ecx
   signed int v12; // edx
   unsigned int *v13; // ecx
   unsigned int v14; // eax
-  int v15; // eax
   int v16; // ebp
   int v17; // edi
   int v18; // eax
@@ -149,61 +147,36 @@ void __cdecl sub_4476B0(signed int *a1) {
     return;
   }
 
-  v4 = (a1[1] << 16) | a1[1] & 0xFF00;
-  v5 = (unsigned int)a1[1] >> 16;
-  v6 = a1[1] & 0xFF0000;
-  v7 = v6 | v5;
-  a1[1] = (v7 >> 8) | (v4 << 8);
-
   a1[0] = swap32(a1[0]);
   v3 = a1[0];
+  a1[1] = swap32(a1[1]);
+  a1[2] = swap32(a1[2]);
 
-  v8 = a1[2];
-  v9 = (v8 << 16) | (unsigned __int16)(v8 & 0xFF00);
-  v10 = v8 & 0xFF0000 | (v8 >> 16);
-  a1[2] = (v10 >> 8) | (v9 << 8);
-
-  LOWORD(v8) = *((_WORD *)a1 + 6);
-  LOBYTE(v9) = BYTE1(v8);
-  BYTE1(v9) = v8;
-  *((_WORD *)a1 + 6) = v9;
-
-  LOWORD(v8) = *((_WORD *)a1 + 7);
-  LOBYTE(v9) = BYTE1(v8);
-  BYTE1(v9) = v8;
-  *((_WORD *)a1 + 7) = v9;
+  *((_WORD *)a1 + 6) = swap16(*((_WORD *)a1 + 6));
+  *((_WORD *)a1 + 7) = swap16(*((_WORD *)a1 + 7));
 
   a1[4] = swap32(a1[4]);
-  v11 = a1[4];
 
   if ( v3 == 53349) {
-    v127 = (unsigned int *)(a1 + 7);
-    v127 = swap32(v127, 12);
-    v130 = (unsigned int *)(a1 + 19);
-    v130 = swap32(v130, 3);
+    swap32((unsigned int *)(a1 + 7), 12);
+    swap32((unsigned int *)(a1 + 19), 3);
   } else if ( v3 == 53350 ) {
     *((_WORD *)a1 + 14) = swap16(*((_WORD *)a1 + 14));
     *((_WORD *)a1 + 15) = swap16(*((_WORD *)a1 + 15));
-
-    v124 = (unsigned int *)(a1 + 8);
-    v124 = swap32(v124, 3);
+    swap32((unsigned int *)(a1 + 8), 3);
   } else if ( v3 == 53348 ) {
-    v117 = (unsigned int *)(a1 + 7);
-    v117 = swap32(v117, 12);
+    swap32((unsigned int *)(a1 + 7), 12);
   } else if ( v3 == 20582 ) {
-    v111 = (unsigned int *)(a1 + 7);
-    v111 = swap32(v111, 8);
-    v114 = (unsigned int *)(a1 + 15);
-    v114 = swap32(v114, 3);
+    swap32((unsigned int *)(a1 + 7), 8);
+    swap32((unsigned int *)(a1 + 15), 3);
   } else if ( v3 == 20581 ) {
     a1[7] = swap32(a1[7]);
   } else if ( v3 == 12388 ) {
     a1[5] = swap32(a1[5]);
-    v13 = (unsigned int *)(a1 + 7);
-    v13 = swap32(v13, 6);
+    swap32((unsigned int *)(a1 + 7), 6);
 
 
-    for(v15 = 0; v15 < a1[5]; v15++) {
+    for(int32_t v15 = 0; v15 < a1[5]; v15++) {
 
       v16 = *(_DWORD *)(a1[6] + 4 * v15);
       if ( v16 ) {
