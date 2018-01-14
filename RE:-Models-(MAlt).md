@@ -95,7 +95,6 @@ void __cdecl sub_4476B0(signed int *a1) {
   int v90; // ecx
   signed int v91; // ecx
   unsigned int *v92; // edx
-  int v93; // esi
   __int16 v94; // cx
   int v95; // eax
   int v96; // edx
@@ -138,7 +137,6 @@ void __cdecl sub_4476B0(signed int *a1) {
   unsigned int v135; // edx
   bool v136; // zf
   bool v137; // sf
-  int v138; // [esp+10h] [ebp-4h]
 
   if ( a1 == 0) {
     return;
@@ -204,160 +202,145 @@ void __cdecl sub_4476B0(signed int *a1) {
     v13 = (unsigned int *)(a1 + 7);
     v13 = swap32(v13, 6);
 
-    v15 = 0;
-    v138 = 0;
-    if ( a1[5] > 0 ) {
-      do {
 
-        v16 = *(_DWORD *)(a1[6] + 4 * v15);
-        if ( v16 ) {
-          v17 = *(_DWORD *)v16;
-          if ( *(_DWORD *)v16 && !sub_4475F0(*(_DWORD *)v16) ) {
-            v18 = dword_50C628;
-            dword_E95300[dword_50C628] = v17;
-            dword_50C628 = v18 + 1;
+    for(v15 = 0; v15 < a1[5]; v15++) {
 
-            *(_DWORD *)(v17 + 0) = swap32(*(_DWORD *)(v17 + 0));
-            *(_WORD *)(v17 + 4) = swap16(*(_WORD *)(v17 + 4));
-            *(_WORD *)(v17 + 6) = swap16(*(_WORD *)(v17 + 6));
+      v16 = *(_DWORD *)(a1[6] + 4 * v15);
+      if ( v16 ) {
+        v17 = *(_DWORD *)v16;
+        if ( *(_DWORD *)v16 && !sub_4475F0(*(_DWORD *)v16) ) {
+          v18 = dword_50C628;
+          dword_E95300[dword_50C628] = v17;
+          dword_50C628 = v18 + 1;
 
-            v19 = *(_DWORD *)(v17 + 8);
+          *(_DWORD *)(v17 + 0) = swap32(*(_DWORD *)(v17 + 0));
+          *(_WORD *)(v17 + 4) = swap16(*(_WORD *)(v17 + 4));
+          *(_WORD *)(v17 + 6) = swap16(*(_WORD *)(v17 + 6));
 
-            if ( v19 && !sub_447630(v19) ) {
-              v22 = dword_50C62C;
-              dword_E90980[dword_50C62C] = v19;
-              dword_50C62C = v22 + 1;
+          v19 = *(_DWORD *)(v17 + 8);
 
-              *(_DWORD *)(v19 + 0) = swap32(*(_DWORD *)(v19 + 0));
-              *(_WORD *)(v19 + 4) = swap16(*(_WORD *)(v19 + 4));
-              *(_WORD *)(v19 + 6) = swap16(*(_WORD *)(v19 + 6));
+          if ( v19 && !sub_447630(v19) ) {
+            v22 = dword_50C62C;
+            dword_E90980[dword_50C62C] = v19;
+            dword_50C62C = v22 + 1;
 
-              v25 = (__int16 *)(v19 + 8);
-              v25 = swap16(v25, 2);
-
-              *(_WORD *)(v19 + 16) = swap16(*(_WORD *)(v19 + 16));
-              *(_WORD *)(v19 + 18) = swap16(*(_WORD *)(v19 + 18));
-              *(_WORD *)(v19 + 20) = swap16(*(_WORD *)(v19 + 20));
-              *(_WORD *)(v19 + 22) = swap16(*(_WORD *)(v19 + 22));
-              *(_WORD *)(v19 + 24) = swap16(*(_WORD *)(v19 + 24));
-              *(_WORD *)(v19 + 26) = swap16(*(_WORD *)(v19 + 26));
-
-            }
-
-            v36 = *(_DWORD *)(v17 + 12);
-            if ( v36 && !sub_447670(*(_DWORD *)(v17 + 12)) ) {
-              v37 = dword_50C630;
-              dword_E68280[dword_50C630] = v36;
-              dword_50C630 = v37 + 1;
-
-              *(_DWORD *)(v36 + 0) = swap32(*(_DWORD *)(v36 + 0));
-              *(_WORD *)(v36 + 4) = swap16(*(_WORD *)(v36 + 4));
-
-              v38 = (unsigned int *)(v36 + 6);
-              v38 = swap32(v38, 2);
-
-              v42 = (unsigned int *)(v36 + 14);
-              v42 = swap32(v42, 2);
-
-              *(_DWORD *)(v36 + 24) = swap32(*(_DWORD *)(v36 + 24);
-              *(_DWORD *)(v36 + 28) = swap32(*(_DWORD *)(v36 + 28));
-
-            }
-          }
-
-          v46 = *(_DWORD *)(v16 + 4);
-          if ( v46 ) {
-            v47 = *(_DWORD *)(v46 + 60);
-
-            *(_WORD *)(v46 + 0) = swap16(*(_WORD *)(v46 + 0));
-
-            *(_WORD *)(v46 + 6) = swap16(*(_WORD *)(v46 + 6));
-            *(_WORD *)(v46 + 8) = swap16(*(_WORD *)(v46 + 8));
-            *(_WORD *)(v46 + 10) = swap16( *(_WORD *)(v46 + 10));
-            *(_DWORD *)(v46 + 20) = swap32(*(_DWORD *)(v46 + 20));
-            *(_DWORD *)(v46 + 24) = swap32(*(_DWORD *)(v46 + 24));
-            *(_DWORD *)(v46 + 28) = swap32(*(_DWORD *)(v46 + 28));
-            *(_DWORD *)(v46 + 32) = swap32(*(_DWORD *)(v46 + 32));
-            *(_DWORD *)(v46 + 36) = swap32(*(_DWORD *)(v46 + 36));
-            *(_DWORD *)(v46 + 40) = swap32(*(_DWORD *)(v46 + 40));
-            *(_DWORD *)(v46 + 44) = swap32(*(_DWORD *)(v46 + 44));
-            *(_WORD *)(v46 + 48) = swap16(*(_WORD *)(v46 + 48));
-            *(_WORD *)(v46 + 50) = swap16(*(_WORD *)(v46 + 50));
-            *(_DWORD *)(v46 + 52) = swap32(*(_DWORD *)(v46 + 52));
-            *(_DWORD *)(v46 + 56) = swap32(*(_DWORD *)(v46 + 56));
-
-            if ( v47 ) {
-              do {
-
-                v74 = swap32((v47 + 0), 3);
-                v77 = swap32((v47 + 12), 3);
-                *(_DWORD *)(v47 + 24) = swap32(*(_DWORD *)(v47 + 24));
-                *(_DWORD *)(v47 + 28) = swap32(*(_DWORD *)(v47 + 28));
-                *(_WORD *)(v47 + 36) = swap16(*(_WORD *)(v47 + 36))
-                *(_WORD *)(v47 + 38) = swap16(*(_WORD *)(v47 + 38));
-
-                v47 = *(_DWORD *)(v47 + 40);
-              } while ( v47 );
-            }
-          }
-
-          v82 = (unsigned int *)(v16 + 8);
-          v82 = swap32(v82, 6);
-
-          *(_WORD *)(v16 + 32) = swap16(*(_WORD *)(v16 + 32);
-          *(_WORD *)(v16 + 34) = swap16(*(_WORD *)(v16 + 34));
-
-          v90 = *(_DWORD *)(v16 + 36);
-          if ( v90 ) {
-            swap32(v90, *(_WORD *)(v16 + 32));
-          }
-
-          v93 = 0;
-          if ( *(_DWORD *)(v16 + 44) && *(_DWORD *)(v16 + 40) ) {
-            v94 = *(_WORD *)(v16 + 34);
-            v95 = 0;
-            switch ( v94 ) {
-              case 3:
-                v95 = 3 * *(signed __int16 *)(v16 + 32);
-                break;
-              case 4:
-                v95 = 4 * *(signed __int16 *)(v16 + 32);
-                break;
-              case 5:
-                v97 = *(int **)(v16 + 36);
-                for(v96 = 0; v96 < *(signed __int16 *)(v16 + 32); v96++) {
-                  v95 += v97[v96] + 2;
-                }
-                break;
-              default:
-                // Another noble error handler!
-                while (1);
-            }
-
-            v99 = (_WORD *)(*(_DWORD *)(v16 + 40));
-            swap16(v99, v95);
+            *(_DWORD *)(v19 + 0) = swap32(*(_DWORD *)(v19 + 0));
+            *(_WORD *)(v19 + 4) = swap16(*(_WORD *)(v19 + 4));
+            *(_WORD *)(v19 + 6) = swap16(*(_WORD *)(v19 + 6));
+            swap16((__int16 *)(v19 + 8), 2);
+            *(_WORD *)(v19 + 16) = swap16(*(_WORD *)(v19 + 16));
+            *(_WORD *)(v19 + 18) = swap16(*(_WORD *)(v19 + 18));
+            *(_WORD *)(v19 + 20) = swap16(*(_WORD *)(v19 + 20));
+            *(_WORD *)(v19 + 22) = swap16(*(_WORD *)(v19 + 22));
+            *(_WORD *)(v19 + 24) = swap16(*(_WORD *)(v19 + 24));
+            *(_WORD *)(v19 + 26) = swap16(*(_WORD *)(v19 + 26));
 
           }
 
-          *(_WORD *)(v16 + 56) = swap16(*(_WORD *)(v16 + 56));
+          v36 = *(_DWORD *)(v17 + 12);
+          if ( v36 && !sub_447670(*(_DWORD *)(v17 + 12)) ) {
+            v37 = dword_50C630;
+            dword_E68280[dword_50C630] = v36;
+            dword_50C630 = v37 + 1;
 
-          if ( !dword_E6B168 ) {
-            v104 = *(_DWORD *)(v16 + 44);
-            if (v104) {
-              swap16((_WORD *)v104, *(_WORD *)(v16 + 56));
-            }
+            *(_DWORD *)(v36 + 0) = swap32(*(_DWORD *)(v36 + 0));
+            *(_WORD *)(v36 + 4) = swap16(*(_WORD *)(v36 + 4));
+            swap32((unsigned int *)(v36 + 6), 2);
+            swap32((unsigned int *)(v36 + 14), 2);
+            *(_DWORD *)(v36 + 24) = swap32(*(_DWORD *)(v36 + 24);
+            *(_DWORD *)(v36 + 28) = swap32(*(_DWORD *)(v36 + 28));
+
           }
-
-          *(_WORD *)(v16 + 58) = swap16(*(_WORD *)(v16 + 58));
-          *(_WORD *)(v16 + 60) = swap16(*(_WORD *)(v16 + 60));
-          *(_WORD *)(v16 + 62) = swap16(*(_WORD *)(v16 + 62));
-
-          v15 = v138;
         }
 
-        v138 = ++v15;
+        v46 = *(_DWORD *)(v16 + 4);
+        if ( v46 ) {
+          v47 = *(_DWORD *)(v46 + 60);
+
+          *(_WORD *)(v46 + 0) = swap16(*(_WORD *)(v46 + 0));
+          //FIXME: Nothing here?
+          *(_WORD *)(v46 + 6) = swap16(*(_WORD *)(v46 + 6));
+          *(_WORD *)(v46 + 8) = swap16(*(_WORD *)(v46 + 8));
+          *(_WORD *)(v46 + 10) = swap16( *(_WORD *)(v46 + 10));
+          //FIXME: Nothing here?
+          *(_DWORD *)(v46 + 20) = swap32(*(_DWORD *)(v46 + 20));
+          *(_DWORD *)(v46 + 24) = swap32(*(_DWORD *)(v46 + 24));
+          *(_DWORD *)(v46 + 28) = swap32(*(_DWORD *)(v46 + 28));
+          *(_DWORD *)(v46 + 32) = swap32(*(_DWORD *)(v46 + 32));
+          *(_DWORD *)(v46 + 36) = swap32(*(_DWORD *)(v46 + 36));
+          *(_DWORD *)(v46 + 40) = swap32(*(_DWORD *)(v46 + 40));
+          *(_DWORD *)(v46 + 44) = swap32(*(_DWORD *)(v46 + 44));
+          *(_WORD *)(v46 + 48) = swap16(*(_WORD *)(v46 + 48));
+          *(_WORD *)(v46 + 50) = swap16(*(_WORD *)(v46 + 50));
+          *(_DWORD *)(v46 + 52) = swap32(*(_DWORD *)(v46 + 52));
+          *(_DWORD *)(v46 + 56) = swap32(*(_DWORD *)(v46 + 56));
+
+          if ( v47 ) {
+            do {
+
+              v74 = swap32((v47 + 0), 3);
+              v77 = swap32((v47 + 12), 3);
+              *(_DWORD *)(v47 + 24) = swap32(*(_DWORD *)(v47 + 24));
+              *(_DWORD *)(v47 + 28) = swap32(*(_DWORD *)(v47 + 28));
+              *(_WORD *)(v47 + 36) = swap16(*(_WORD *)(v47 + 36))
+              *(_WORD *)(v47 + 38) = swap16(*(_WORD *)(v47 + 38));
+
+              v47 = *(_DWORD *)(v47 + 40);
+            } while ( v47 );
+          }
+        }
+
+        swap32((unsigned int *)(v16 + 8), 6);
+        *(_WORD *)(v16 + 32) = swap16(*(_WORD *)(v16 + 32);
+        *(_WORD *)(v16 + 34) = swap16(*(_WORD *)(v16 + 34));
+
+        v90 = *(_DWORD *)(v16 + 36);
+        if ( v90 ) {
+          swap32(v90, *(_WORD *)(v16 + 32));
+        }
+
+        // Accumulate something?
+        if ( *(_DWORD *)(v16 + 44) && *(_DWORD *)(v16 + 40) ) {
+          v94 = *(_WORD *)(v16 + 34);
+          v95 = 0;
+          switch ( v94 ) {
+            case 3:
+              v95 = 3 * *(signed __int16 *)(v16 + 32);
+              break;
+            case 4:
+              v95 = 4 * *(signed __int16 *)(v16 + 32);
+              break;
+            case 5:
+              v97 = *(int **)(v16 + 36);
+              for(v96 = 0; v96 < *(signed __int16 *)(v16 + 32); v96++) {
+                v95 += v97[v96] + 2;
+              }
+              break;
+            default:
+              // Another noble error handler!
+              while (1);
+          }
+
+          v99 = (_WORD *)(*(_DWORD *)(v16 + 40));
+          swap16(v99, v95);
+
+        }
+
+        *(_WORD *)(v16 + 56) = swap16(*(_WORD *)(v16 + 56));
+
+        if ( !dword_E6B168 ) {
+          v104 = *(_DWORD *)(v16 + 44);
+          if (v104) {
+            swap16((_WORD *)v104, *(_WORD *)(v16 + 56));
+          }
+        }
+
+        *(_WORD *)(v16 + 58) = swap16(*(_WORD *)(v16 + 58));
+        *(_WORD *)(v16 + 60) = swap16(*(_WORD *)(v16 + 60));
+        *(_WORD *)(v16 + 62) = swap16(*(_WORD *)(v16 + 62));
+
       }
-      while ( v15 < a1[5] );
+
     }
   }
 
