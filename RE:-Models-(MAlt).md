@@ -181,10 +181,10 @@ void __cdecl sub_4476B0(signed int *a1) {
         uint32_t unk0; // A pointer of some sorts
         uint32_t unk4; // A pointer of some sorts
         uint32_t unk8[6]; // 8
-        uint16_t unk32; // Count for unk36
+        uint16_t unk32; // mode 3 = 3*unk32; mode 4 = 4*unk32; mode 5 = Count for unk36
         uint16_t unk34; // Some mode, {3,4,5} are typical values
-        uint32_t unk36; // Pointer to uint32_t[]
-        uint32_t unk40;
+        uint32_t unk36; // Pointer to uint32_t[], for mode 5, summed up is the count of unk40 (stripsize?)
+        uint32_t unk40; // Pointer to uint16_t[] (indices?)
         uint32_t unk44; // Pointer to uint16_t[]
         uint8_t unk48[8];
         uint16_t unk56; // Count for unk44
