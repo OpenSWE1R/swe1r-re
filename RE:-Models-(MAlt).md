@@ -5,136 +5,6 @@ Short little function... NOT!
 ```C
 //----- (004476B0) --------------------------------------------------------
 void __cdecl sub_4476B0(signed int *a1) {
-  int v2; // ecx
-  signed int v3; // eax
-  int v4; // edx
-  unsigned int v5; // esi
-  int v6; // ecx
-  unsigned int v7; // esi
-  unsigned int v8; // ecx
-  int v9; // edx
-  unsigned int v10; // esi
-  signed int v12; // edx
-  unsigned int *v13; // ecx
-  unsigned int v14; // eax
-  int v16; // ebp
-  int v17; // edi
-  int v19; // esi
-  __int16 v20; // dx
-  __int16 v21; // cx
-  int v22; // eax
-  __int16 v23; // dx
-  __int16 v24; // cx
-  __int16 *v25; // eax
-  signed int v26; // edx
-  __int16 v27; // cx
-  __int16 v28; // bx
-  __int16 v29; // dx
-  __int16 v30; // ax
-  __int16 v31; // cx
-  __int16 v32; // ax
-  __int16 v33; // ax
-  __int16 v34; // ax
-  __int16 v35; // ax
-  int v36; // esi
-  int v37; // eax
-  unsigned int *v38; // ecx
-  __int16 v39; // dx
-  signed int v40; // edx
-  unsigned int v41; // eax
-  unsigned int *v42; // ecx
-  signed int v43; // edx
-  unsigned int v44; // eax
-  int v46; // eax
-  int v47; // esi
-  __int16 v48; // dx
-  unsigned int v49; // ecx
-  int v50; // edx
-  unsigned int v51; // edi
-  unsigned int v52; // ecx
-  int v53; // edx
-  unsigned int v54; // edi
-  unsigned int v55; // ecx
-  int v56; // edx
-  unsigned int v57; // edi
-  unsigned int v58; // ecx
-  int v59; // edx
-  unsigned int v60; // edi
-  unsigned int v61; // ecx
-  int v62; // edx
-  unsigned int v63; // edi
-  unsigned int v64; // ecx
-  int v65; // edx
-  unsigned int v66; // edi
-  unsigned int v67; // ecx
-  int v68; // edx
-  unsigned int v69; // edi
-  unsigned int v70; // ecx
-  int v71; // edx
-  unsigned int v72; // edi
-  unsigned int v73; // ecx
-  unsigned int *v74; // ecx
-  signed int v75; // edx
-  unsigned int v76; // eax
-  unsigned int *v77; // ecx
-  signed int v78; // edx
-  unsigned int v79; // eax
-  __int16 v80; // cx
-  __int16 v81; // dx
-  unsigned int *v82; // ecx
-  signed int v83; // edx
-  unsigned int v84; // eax
-  __int16 v85; // cx
-  __int16 v86; // ax
-  __int16 v87; // cx
-  __int16 v88; // ax
-  __int16 v89; // dx
-  int v90; // ecx
-  signed int v91; // ecx
-  unsigned int *v92; // edx
-  __int16 v94; // cx
-  int v95; // eax
-  int v96; // edx
-  int *v97; // ecx
-  int v98; // edi
-  _WORD *v99; // edi
-  __int16 v100; // dx
-  __int16 v101; // cx
-  __int16 v102; // cx
-  int v103; // eax
-  int v104; // edx
-  __int16 v105; // cx
-  _WORD *v106; // esi
-  __int16 v107; // dx
-  __int16 v108; // ax
-  __int16 v109; // cx
-  __int16 v110; // ax
-  unsigned int *v111; // ecx
-  signed int v112; // edx
-  unsigned int v113; // eax
-  unsigned int *v114; // ecx
-  signed int v115; // edx
-  unsigned int v116; // eax
-  unsigned int *v117; // ecx
-  signed int v118; // edx
-  unsigned int v119; // eax
-  __int16 v121; // cx
-  __int16 v122; // ax
-  __int16 v123; // dx
-  unsigned int *v124; // ecx
-  signed int v125; // edx
-  unsigned int v126; // eax
-  unsigned int *v127; // ecx
-  signed int v128; // edx
-  unsigned int v129; // eax
-  unsigned int *v130; // ecx
-  signed int v131; // edx
-  unsigned int v132; // eax
-  int v133; // eax
-  unsigned int v135; // edx
-  bool v136; // zf
-  bool v137; // sf
-
   uintptr_t a1b = a1;
 
   if ( a1b == 0) {
@@ -149,15 +19,13 @@ void __cdecl sub_4476B0(signed int *a1) {
   }
 
   *(uint32_t*)(a1b + 0) = swap32(*(uint32_t*)(a1b + 0));
-  v3 = *(uint32_t*)(a1b + 0);
   *(uint32_t*)(a1b + 4) = swap32(*(uint32_t*)(a1b + 4));
   *(uint32_t*)(a1b + 8) = swap32(*(uint32_t*)(a1b + 8));
-
   *((_WORD *)(a1b + 12)) = swap16(*((_WORD *)(a1b + 12)));
   *((_WORD *)(a1b + 14)) = swap16(*((_WORD *)(a1b + 14)));
-
   *(uint32_t*)(a1b + 16) = swap32(*(uint32_t*)(a1b + 16));
 
+  uint32_t v3 = *(uint32_t*)(a1b + 0);
   if ( v3 == 53349) {
     swap32((uint32_t*)(a1b + 28), 12);
     swap32((uint32_t*)(a1b + 76), 3);
@@ -194,11 +62,12 @@ void __cdecl sub_4476B0(signed int *a1) {
         uint16_t unk60;
         uint16_t unk62;
       } V16;
-      v16 = *(_DWORD *)(*(uint32_t*)(a1b + 24) + 4 * v15);
+
+      uint32_t* base = *(uint32_t**)(a1b + 24);
+      uintptr_t v16 = base[v15];
       if ( !v16 ) {
         continue;
       }
-
       
       // Get item pointer and check if it's in the list already
       typedef struct {
@@ -208,7 +77,7 @@ void __cdecl sub_4476B0(signed int *a1) {
         uint32_t unk8; // A pointer of some sorts
         uint32_t unk12; // A pointer of some sorts
       } V17;
-      v17 = *(_DWORD *)(v16 + 0);
+      uintptr_t v17 = *(_DWORD *)(v16 + 0);
       if ( v17 && !sub_4475F0(v17) ) {
 
         // Add this pointer to the array
@@ -220,7 +89,20 @@ void __cdecl sub_4476B0(signed int *a1) {
         *(_WORD *)(v17 + 6) = swap16(*(_WORD *)(v17 + 6));
 
         // Get pointer and check if it's already in list
-        v19 = *(_DWORD *)(v17 + 8);
+        typedef struct {
+          uint32_t unk0;
+          uint16_t unk4;
+          uint16_t unk6;
+          uint16_t unk8[2]; // 8 and 10
+          uint8_t unk12[4]; // 12
+          uint16_t unk16;
+          uint16_t unk18;
+          uint16_t unk20;
+          uint16_t unk22;
+          uint16_t unk24;
+          uint16_t unk26;
+        } V19;
+        uintptr_t v19 = *(_DWORD *)(v17 + 8);
         if ( v19 && !sub_447630(v19) ) {
 
           // Add pointer to list
@@ -241,7 +123,7 @@ void __cdecl sub_4476B0(signed int *a1) {
         }
 
         // Get pointer and check if it's already in list
-        v36 = *(_DWORD *)(v17 + 12);
+        uintptr_t v36 = *(_DWORD *)(v17 + 12);
         if ( v36 && !sub_447670(*(_DWORD *)(v17 + 12)) ) {
 
           // Add pointer to list
@@ -258,7 +140,7 @@ void __cdecl sub_4476B0(signed int *a1) {
         }
       }
 
-      v46 = *(_DWORD *)(v16 + 4);
+      uintptr_t v46 = *(_DWORD *)(v16 + 4);
       if ( v46 ) {
         *(_WORD *)(v46 + 0) = swap16(*(_WORD *)(v46 + 0));
         //FIXME: Nothing here?
@@ -289,20 +171,18 @@ void __cdecl sub_4476B0(signed int *a1) {
           uint16_t unk38; // 38
           struct _V47* next; // 40
         } V47;
-        v47 = *(_DWORD *)(v46 + 60);
-        if ( v47 ) {
-          do {
+        uintptr_t v47 = *(_DWORD *)(v46 + 60);
+        while ( v47 ) {
 
-            v74 = swap32((v47 + 0), 3);
-            v77 = swap32((v47 + 12), 3);
-            *(_DWORD *)(v47 + 24) = swap32(*(_DWORD *)(v47 + 24));
-            *(_DWORD *)(v47 + 28) = swap32(*(_DWORD *)(v47 + 28));
-            //FIXME: Nothing?
-            *(_WORD *)(v47 + 36) = swap16(*(_WORD *)(v47 + 36))
-            *(_WORD *)(v47 + 38) = swap16(*(_WORD *)(v47 + 38));
+          swap32((v47 + 0), 3);
+          swap32((v47 + 12), 3);
+          *(_DWORD *)(v47 + 24) = swap32(*(_DWORD *)(v47 + 24));
+          *(_DWORD *)(v47 + 28) = swap32(*(_DWORD *)(v47 + 28));
+          //FIXME: Nothing?
+          *(_WORD *)(v47 + 36) = swap16(*(_WORD *)(v47 + 36))
+          *(_WORD *)(v47 + 38) = swap16(*(_WORD *)(v47 + 38));
 
-            v47 = *(_DWORD *)(v47 + 40);
-          } while ( v47 );
+          v47 = *(_DWORD *)(v47 + 40);
         }
       }
 
@@ -310,15 +190,15 @@ void __cdecl sub_4476B0(signed int *a1) {
       *(_WORD *)(v16 + 32) = swap16(*(_WORD *)(v16 + 32);
       *(_WORD *)(v16 + 34) = swap16(*(_WORD *)(v16 + 34));
 
-      v90 = *(_DWORD *)(v16 + 36);
+      uintptr_t v90 = *(_DWORD *)(v16 + 36);
       if ( v90 ) {
         swap32(v90, *(_WORD *)(v16 + 32));
       }
 
       // Accumulate something?
       if ( *(_DWORD *)(v16 + 44) && *(_DWORD *)(v16 + 40) ) {
-        v94 = *(_WORD *)(v16 + 34);
-        v95 = 0;
+        uint16_t v94 = *(_WORD *)(v16 + 34);
+        int32_t v95 = 0;
         switch ( v94 ) {
           case 3:
             v95 = 3 * *(signed __int16 *)(v16 + 32);
@@ -327,8 +207,8 @@ void __cdecl sub_4476B0(signed int *a1) {
             v95 = 4 * *(signed __int16 *)(v16 + 32);
             break;
           case 5:
-            v97 = *(int **)(v16 + 36);
-            for(v96 = 0; v96 < *(signed __int16 *)(v16 + 32); v96++) {
+            int32_t* v97 = *(int32_t**)(v16 + 36);
+            for(int32_t v96 = 0; v96 < *(signed __int16 *)(v16 + 32); v96++) {
               v95 += v97[v96] + 2;
             }
             break;
@@ -337,17 +217,16 @@ void __cdecl sub_4476B0(signed int *a1) {
             while (1);
         }
 
-        v99 = (_WORD *)(*(_DWORD *)(v16 + 40));
-        swap16(v99, v95);
+        swap16((_WORD *)(*(_DWORD *)(v16 + 40), v95);
 
       }
 
       *(_WORD *)(v16 + 56) = swap16(*(_WORD *)(v16 + 56));
 
       if ( !dword_E6B168 ) {
-        v104 = *(_DWORD *)(v16 + 44);
+        uintptr_t v104 = *(_DWORD *)(v16 + 44);
         if (v104) {
-          swap16((_WORD *)v104, *(_WORD *)(v16 + 56));
+          swap16(v104, *(_WORD *)(v16 + 56));
         }
       }
 
