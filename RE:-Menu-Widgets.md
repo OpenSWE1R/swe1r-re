@@ -1,4 +1,4 @@
-# Draw checkbox
+# Draw checkbox or option box
 
 Used for graphic options for example
 
@@ -136,5 +136,18 @@ int *__cdecl sub_413C50(int a1, int a2, int a3, char *a4, int a5, int a6, int a7
     result = v14;
   }
   return result;
+}
+```
+
+# Set font color
+
+```C
+//----- (00414BE0) --------------------------------------------------------
+uint8_t*__cdecl sub_414BE0(uint8_t* a1, uint8_t a2, uint8_t a3, uint8_t a4, uint8_t a5) {
+  a1[1216] = a2;
+  a1[1217] = a3;
+  a1[1218] = a4;
+  a1[1219] = a5;
+  return a1;
 }
 ```
