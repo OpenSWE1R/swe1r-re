@@ -142,7 +142,7 @@ void __cdecl sub_4476B0(signed int *a1) {
   }
 
   //FIXME: Did I invert this poorly?
-  //FIXME: WTF?! a1[0] is not swapped here yet?!
+  //FIXME: WTF?! *(uint32_t*)(a1b + 0) is not swapped here yet?!
   v2 = *(uint32_t*)(a1b + 0);
   if ((v2 == 20581) || (v2 == 20582) || (v2 == 53348) || (v2 == 53349) || (v2 == 20580) || (v2 == 12388) || (v2 == 53350)) {
     return;
@@ -156,28 +156,28 @@ void __cdecl sub_4476B0(signed int *a1) {
   *((_WORD *)(a1b + 12)) = swap16(*((_WORD *)(a1b + 12)));
   *((_WORD *)(a1b + 14)) = swap16(*((_WORD *)(a1b + 14)));
 
-  a1[4] = swap32(a1[4]);
+  *(uint32_t*)(a1b + 16) = swap32(*(uint32_t*)(a1b + 16));
 
   if ( v3 == 53349) {
-    swap32((unsigned int *)(a1 + 7), 12);
-    swap32((unsigned int *)(a1 + 19), 3);
+    swap32((uint32_t*)(a1b + 28), 12);
+    swap32((uint32_t*)(a1b + 76), 3);
   } else if ( v3 == 53350 ) {
-    *((_WORD *)a1 + 14) = swap16(*((_WORD *)a1 + 14));
-    *((_WORD *)a1 + 15) = swap16(*((_WORD *)a1 + 15));
-    swap32((unsigned int *)(a1 + 8), 3);
+    *((_WORD *)(a1b + 28)) = swap16(*((_WORD *)(a1b + 28)));
+    *((_WORD *)(a1b + 30)) = swap16(*((_WORD *)(a1b + 30)));
+    swap32((uint32_t*)(a1b + 32), 3);
   } else if ( v3 == 53348 ) {
-    swap32((unsigned int *)(a1 + 7), 12);
+    swap32((uint32_t*)(a1b + 28), 12);
   } else if ( v3 == 20582 ) {
-    swap32((unsigned int *)(a1 + 7), 8);
-    swap32((unsigned int *)(a1 + 15), 3);
+    swap32((uint32_t*)(a1b + 28), 8);
+    swap32((uint32_t*)(a1b + 60), 3);
   } else if ( v3 == 20581 ) {
-    a1[7] = swap32(a1[7]);
+    *(uint32_t*)(a1b + 28) = swap32(*(uint32_t*)(a1b + 28));
   } else if ( v3 == 12388 ) {
-    a1[5] = swap32(a1[5]);
-    swap32((unsigned int *)(a1 + 7), 6);
+    *(uint32_t*)(a1b + 20) = swap32(*(uint32_t*)(a1b + 20));
+    swap32((uint32_t*)(a1b + 28), 6);
 
 
-    for(int32_t v15 = 0; v15 < a1[5]; v15++) {
+    for(int32_t v15 = 0; v15 < *(uint32_t*)(a1b + 20); v15++) {
 
       typedef struct {
         uint32_t unk0; // A pointer of some sorts
@@ -194,7 +194,7 @@ void __cdecl sub_4476B0(signed int *a1) {
         uint16_t unk60;
         uint16_t unk62;
       } V16;
-      v16 = *(_DWORD *)(a1[6] + 4 * v15);
+      v16 = *(_DWORD *)(*(uint32_t*)(a1b + 24) + 4 * v15);
       if ( !v16 ) {
         continue;
       }
@@ -360,10 +360,10 @@ void __cdecl sub_4476B0(signed int *a1) {
   }
 
   // Recursively parse children if this has any ???
-  if ( a1[0] & 0x4000 ) {
-    a1[5] = swap32(a1[5]);
-    for(int32_t v134 = 0; v134 < a1[5]; v134++) {
-      sub_4476B0(*(_DWORD *)(a1[6] + 4 * v134));
+  if (*(uint32_t*)(a1b + 0) & 0x4000 ) {
+    *(uint32_t*)(a1b + 20) = swap32(*(uint32_t*)(a1b + 20));
+    for(int32_t v134 = 0; v134 < *(uint32_t*)(a1b + 20); v134++) {
+      sub_4476B0(*(uint32_t*)(*(uint32_t*)(a1b + 24) + 4 * v134));
     }
   }
 
