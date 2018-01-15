@@ -123,6 +123,15 @@ void __cdecl sub_4476B0(signed int *a1) {
         }
 
         // Get pointer and check if it's already in list
+        typedef struct {
+          uint32_t unk0;
+          uint16_t unk4;
+          uint32_t unk6[2]; // 6 and 10
+          uint32_t unk14[2]; // 14 and 18
+          uint8_t unk22[2];
+          uint32_t unk24; // 24
+          uint32_t unk28; // 28
+        } V36;
         uintptr_t v36 = *(_DWORD *)(v17 + 12);
         if ( v36 && !sub_447670(*(_DWORD *)(v17 + 12)) ) {
 
@@ -140,6 +149,26 @@ void __cdecl sub_4476B0(signed int *a1) {
         }
       }
 
+      typedef struct {
+        uint16_t unk0;
+        uint8_t unk2[4];
+        uint16_t unk6;
+        uint16_t unk8;
+        uint16_t unk10;
+        uint8_t unk12[8];
+        uint32_t unk20;
+        uint32_t unk24;
+        uint32_t unk28;
+        uint32_t unk32;
+        uint32_t unk36;
+        uint32_t unk40;
+        uint32_t unk44;
+        uint16_t unk48;
+        uint16_t unk50;
+        uint32_t unk52;
+        uint32_t unk56;
+        uint32_t list_head; // 60 pointer to a list head, see v47
+      } V46;
       uintptr_t v46 = *(_DWORD *)(v16 + 4);
       if ( v46 ) {
         *(_WORD *)(v46 + 0) = swap16(*(_WORD *)(v46 + 0));
@@ -190,6 +219,9 @@ void __cdecl sub_4476B0(signed int *a1) {
       *(_WORD *)(v16 + 32) = swap16(*(_WORD *)(v16 + 32);
       *(_WORD *)(v16 + 34) = swap16(*(_WORD *)(v16 + 34));
 
+      typedef struct {
+        uint32_t unk0[];
+      } V90;
       uintptr_t v90 = *(_DWORD *)(v16 + 36);
       if ( v90 ) {
         swap32(v90, *(_WORD *)(v16 + 32));
@@ -240,9 +272,11 @@ void __cdecl sub_4476B0(signed int *a1) {
 
   // Recursively parse children if this has any ???
   if (*(uint32_t*)(a1b + 0) & 0x4000 ) {
+    // FIXME: This has been swapped before?! bug in RE?!
     *(uint32_t*)(a1b + 20) = swap32(*(uint32_t*)(a1b + 20));
+    uint32_t* base24 = *(uint32_t**)(a1b + 24);
     for(int32_t v134 = 0; v134 < *(uint32_t*)(a1b + 20); v134++) {
-      sub_4476B0(*(uint32_t*)(*(uint32_t*)(a1b + 24) + 4 * v134));
+      sub_4476B0(base24[v134]);
     }
   }
 
