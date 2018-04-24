@@ -50,7 +50,7 @@
 # Pod list / Characters
 
 | [Name Character](https://www.giantbomb.com/star-wars-episode-i-racer/3030-13526/characters/) | ModelPod  | ModelPod_Lod | ModelCharacter |
-|----------------------------------------------------------------------------------------------|-----------|----------------|
+|----------------------------------------------------------------------------------------------|-----------|--------------|----------------|
 | [Aldar Beedo](https://www.giantbomb.com/aldar-beedo/3005-5168/)                              | Model_010 | Model_009               |
 | Anakin Skywalker                                                                             | Model_000 | Model_002               |
 | [Ark "Bumpy" Roose](https://www.giantbomb.com/ark-bumpy-roose/3005-5194/)                    | Model_013 | Model_014               |
