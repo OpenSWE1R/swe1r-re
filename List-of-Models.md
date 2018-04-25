@@ -5,77 +5,77 @@
 
 | Name Stage                | planet    |  Champion                     | ModelStage | ModelPresMap |
 |---------------------------|-----------|-------------------------------|------------|--------------|
-| 0-Boonta Training Course  | Tatooine   | Sebulba                      | Model_115  |              |
-| 1-Mon Gazza Speedway       | Mon Gazza  |  Teemto Pagalies            |            |              |
-| 2-Beedo's Wild Ride       | Ando Prime| Aldar Beedo                   |            |              |
-| 3-Aquilaris Classic       | Aquilaris | Clegg Holdfast                |            |              |
+| 0-Boonta Training Course  | Tatooine  | Sebulba                       | Model_115  |              |
+| 1-Mon Gazza Speedway      | Mon Gazza |  Teemto Pagalies              | Model_142  |              |
+| 2-Beedo's Wild Ride       | Ando Prime| Aldar Beedo                   | Model_130  |              |
+| 3-Aquilaris Classic       | Aquilaris | Clegg Holdfast                | Model_133  |              |
 | 4-Malastare 100           | Malastare | Dud Bolt                      |            |              |
-| 5-Vengeance               | Oovo IV   | Fud Sang                      |            |              |
-| 6-Spice Mine Run           | Mon Gazza | Mars Guo/Jinn Reeso          |            |              |
+| 5-Vengeance               | Oovo IV   | Fud Sang                      | Model_145  |              |
+| 6-Spice Mine Run          | Mon Gazza | Mars Guo/Jinn Reeso           | Model_143  |              |
 
 ## Series "Semi-Pro" (S2)
 
 | Name Stage                | planet    |  Champion                     | ModelStage | ModelPresMap |
 |---------------------------|-----------|-------------------------------|------------|--------------|
-| 0-Sunken City             | Aquilaris | "Bullseye" Navior / Cy Yunga  |            |              |
-| 1-Howler Gorge             | Ando Prime| Ratts Tyerell                |            |              |
+| 0-Sunken City             | Aquilaris | "Bullseye" Navior / Cy Yunga  | Model_134  |              |
+| 1-Howler Gorge            | Ando Prime| Ratts Tyerell                 | Model_131  |              |
 | 2-Dug Derby               | Malastare | Elan Mak                      |            |              |
-| 3-Scrapper's Run           | Ord Ibanna| Wan Sandage                  |            |              |
-| 4-Zugga Challenge         | Mon Gazza | Boles Roor                    |            |              |
-| 5-Baroo Coast              | Baroonda   | Neva Kee                    |            |              |
-| 6-Bumpy's Breakers         | Aquilaris | Ark "Bumpy" Roose            |            |              |
+| 3-Scrapper's Run          | Ord Ibanna| Wan Sandage                   | Model_136  |              |
+| 4-Zugga Challenge         | Mon Gazza | Boles Roor                    | Model_144  |              |
+| 5-Baroo Coast             | Baroonda  | Neva Kee                      | Model_139  |              |
+| 6-Bumpy's Breakers        | Aquilaris | Ark "Bumpy" Roose             | Model_135  |              |
 
 ## Series "Galactic" (S3)
 
 | Name Stage                | planet    |  Champion                     | ModelStage | ModelPresMap |
 |---------------------------|-----------|-------------------------------|------------|--------------|
-| 0-Executioner             | Oovo IV   | Toy Dampner                   |            |              |
-| 1-Sebulba's Legacy         | Malastare | Sebulba                      |            |              |
-| 2-Grabvine Gateway         | Baroonda   | Anakin Skywalker            |            |              |
-| 3-Andobi Mountain Run     | Ando Prime|  Mawhonic                     |            |              |
-| 4-Dethro's Revenge         | Ord Ibanna| Ody Mandrell                 |            |              |
-| 5-Fire Mountain Rally     | Baroonda   | Ebe Endocott                 |            |              |
-| 6-Boonta Classic           | Tatooine   | Sebulba                     | Model_001  |              |
+| 0-Executioner             | Oovo IV   | Toy Dampner                   | Model_148  |              |
+| 1-Sebulba's Legacy        | Malastare | Sebulba                       |            |              |
+| 2-Grabvine Gateway        | Baroonda  | Anakin Skywalker              | Model_140  |              |
+| 3-Andobi Mountain Run     | Ando Prime|  Mawhonic                     | Model_132  |              |
+| 4-Dethro's Revenge        | Ord Ibanna| Ody Mandrell                  | Model_137  |              |
+| 5-Fire Mountain Rally     | Baroonda  | Ebe Endocott                  | Model_141  |              |
+| 6-Boonta Classic          | Tatooine  | Sebulba                       | Model_001  |              |
 
 ## Series "Invitational" (S4)
 
 | Name Stage                | planet    |  Champion                     | ModelStage | ModelPresMap |
 |---------------------------|-----------|-------------------------------|------------|--------------|
-| 0-Ando Prime Centrum       | Ando Prime| Slide Paramita               |            | Model_122    |
-| 1-Abyss                   | Ord Ibanna| Bozzie Baranta                |            |              |
-| 2-The Gauntlet             | Oovo IV   | Gasgano                      |            |              |
-| 3-Inferno                 | Baroonda   | Ben Quadinaros               |            |              |
+| 0-Ando Prime Centrum      | Ando Prime| Slide Paramita                |            | Model_122    |
+| 1-Abyss                   | Ord Ibanna| Bozzie Baranta                | Model_138  |              |
+| 2-The Gauntlet            | Oovo IV   | Gasgano                       |            |              |
+| 3-Inferno                 | Baroonda  | Ben Quadinaros                |            |              |
 
 
 # Pod list / Characters
 
-| [Name Character](https://www.giantbomb.com/star-wars-episode-i-racer/3030-13526/characters/) | ModelPod  | ModelPod_Lod | ModelCharacter |
-|----------------------------------------------------------------------------------------------|-----------|--------------|----------------|
-| [Aldar Beedo](https://www.giantbomb.com/aldar-beedo/3005-5168/)                              | Model_010 | Model_009               |
-| Anakin Skywalker                                                                             | Model_000 | Model_002               |
-| [Ark "Bumpy" Roose](https://www.giantbomb.com/ark-bumpy-roose/3005-5194/)                    | Model_013 | Model_014               |
-| [Ben Quadinaros](https://www.giantbomb.com/ben-quadinaros/3005-5165/)                        | Model_039 | Model_040               |
-| [Boles Roor](https://www.giantbomb.com/boles-roor/3005-5178/)                                | Model_033 | Model_034               |
-| [Bozzie Baranta](https://www.giantbomb.com/bozzie-baranta/3005-5199/)                        | Model_031 | Model_032               |
-| ["Bullseye" Navior](https://www.giantbomb.com/bullseye-navior/3005-5111/)                    | Model_045 | Model_046               |
-| [Clegg Holdfast](https://www.giantbomb.com/clegg-holdfast/3005-5128/)                        | Model_025 | Model_026               |
-| [Cy Yunga](https://www.giantbomb.com/cy-yunga/3005-5115/) CheatCode  ->  "Bullseye" Navior   |           |                |
-| [Dud Bolt](https://www.giantbomb.com/dud-bolt/3005-5169/)                                    | Model_021 | Model_022                              |
-| [Ebe Endocott](https://www.giantbomb.com/ebe-endocott/3005-5121/)                            | Model_019 | Model_020               |
-| [Elan Mak](https://www.giantbomb.com/elan-mak/3005-5170/)                                    | Model_027 | Model_028               |
-| [Fud Sang](https://www.giantbomb.com/fud-sang/3005-5114/)                                    | Model_037 | Model_038               |
-| [Gasgano](https://www.giantbomb.com/gasgano/3005-5162/)                                      | Model_023 | Model_024              |
-| [Jinn Reeso](https://www.giantbomb.com/jinn-reeso/3005-5113/) CheatCode (->Mars Guo)         |           |                |
-| [Mars Guo](https://www.giantbomb.com/mars-guo/3005-5125/)                                    | Model_016 | Model_018               |
-| [Mawhonic](https://www.giantbomb.com/mawhonic/3005-5164/)                                    | Model_011 | Model_012               |
-| [Neva Kee](https://www.giantbomb.com/neva-kee/3005-5132/)                                    | Model_029 | Model_030               |
-| [Ody Mandrell](https://www.giantbomb.com/ody-mandrell/3005-5173/)                            | Model_035 | Model_036               |
-| [Ratts Tyerell](https://www.giantbomb.com/ratts-tyerell/3005-5197/)                          | Model_007 | Model_008               |
-| [Sebulba](https://www.giantbomb.com/sebulba/3005-5161/)                                      | Model_005 | Model_006               |
-| [Slide Paramita](https://www.giantbomb.com/slide-paramita/3005-5112/)                        | Model_041 | Model_042               |
-| [Teemto Pagalies](https://www.giantbomb.com/teemto-pagalies/3005-5176/)                      | Model_003 | Model_004               |
-| [Toy Dampner](https://www.giantbomb.com/toy-dampner/3005-5200/)                              | Model_043 | Model_044               |
-| [Wan Sandage](https://www.giantbomb.com/wan-sandage/3005-5181/)                              | Model_015 | Model_017               |
+| [Name Character](https://www.giantbomb.com/star-wars-episode-i-racer/3030-13526/characters/) | ModelPod  | ModelPod_Lod | ModelCharacter | ModelWin  |
+|----------------------------------------------------------------------------------------------|-----------|--------------|----------------|-----------|
+| [Aldar Beedo](https://www.giantbomb.com/aldar-beedo/3005-5168/)                              | Model_010 | Model_009               |                |           |
+| Anakin Skywalker                                                                             | Model_000 | Model_002               |                | Model_153 |
+| [Ark "Bumpy" Roose](https://www.giantbomb.com/ark-bumpy-roose/3005-5194/)                    | Model_013 | Model_014               |                |           |
+| [Ben Quadinaros](https://www.giantbomb.com/ben-quadinaros/3005-5165/)                        | Model_039 | Model_040               |                |           |
+| [Boles Roor](https://www.giantbomb.com/boles-roor/3005-5178/)                                | Model_033 | Model_034               |                |           |
+| [Bozzie Baranta](https://www.giantbomb.com/bozzie-baranta/3005-5199/)                        | Model_031 | Model_032               |                |           |
+| ["Bullseye" Navior](https://www.giantbomb.com/bullseye-navior/3005-5111/)                    | Model_045 | Model_046               |                |           |
+| [Clegg Holdfast](https://www.giantbomb.com/clegg-holdfast/3005-5128/)                        | Model_025 | Model_026               |                |           |
+| [Cy Yunga](https://www.giantbomb.com/cy-yunga/3005-5115/) CheatCode  ->  "Bullseye" Navior   |           |                |                |           |
+| [Dud Bolt](https://www.giantbomb.com/dud-bolt/3005-5169/)                                    | Model_021 | Model_022                              |                |           |
+| [Ebe Endocott](https://www.giantbomb.com/ebe-endocott/3005-5121/)                            | Model_019 | Model_020               |                |           |
+| [Elan Mak](https://www.giantbomb.com/elan-mak/3005-5170/)                                    | Model_027 | Model_028               |                |           |
+| [Fud Sang](https://www.giantbomb.com/fud-sang/3005-5114/)                                    | Model_037 | Model_038               |                |           |
+| [Gasgano](https://www.giantbomb.com/gasgano/3005-5162/)                                      | Model_023 | Model_024              |                |           |
+| [Jinn Reeso](https://www.giantbomb.com/jinn-reeso/3005-5113/) CheatCode (->Mars Guo)         |           |                |                |           |
+| [Mars Guo](https://www.giantbomb.com/mars-guo/3005-5125/)                                    | Model_016 | Model_018               |                |           |
+| [Mawhonic](https://www.giantbomb.com/mawhonic/3005-5164/)                                    | Model_011 | Model_012               |                |           |
+| [Neva Kee](https://www.giantbomb.com/neva-kee/3005-5132/)                                    | Model_029 | Model_030               |                |           |
+| [Ody Mandrell](https://www.giantbomb.com/ody-mandrell/3005-5173/)                            | Model_035 | Model_036               |                |           |
+| [Ratts Tyerell](https://www.giantbomb.com/ratts-tyerell/3005-5197/)                          | Model_007 | Model_008               |                |           |
+| [Sebulba](https://www.giantbomb.com/sebulba/3005-5161/)                                      | Model_005 | Model_006               |                |           |
+| [Slide Paramita](https://www.giantbomb.com/slide-paramita/3005-5112/)                        | Model_041 | Model_042               |                |           |
+| [Teemto Pagalies](https://www.giantbomb.com/teemto-pagalies/3005-5176/)                      | Model_003 | Model_004               |                |           |
+| [Toy Dampner](https://www.giantbomb.com/toy-dampner/3005-5200/)                              | Model_043 | Model_044               |                |           |
+| [Wan Sandage](https://www.giantbomb.com/wan-sandage/3005-5181/)                              | Model_015 | Model_017               |                |           |
 
 
 # List Upgrade
@@ -162,6 +162,7 @@
 ### Cantina's Objects
 | Name                   | Model     |
 |------------------------|-----------|
+|-Room                   | Model_154 |
 |-CantinaHoloPlaneteA    | Model_076 |
 |-CantinaHoloPlaneteB    | Model_077 |
 |-CantinaHoloPlaneteC    | Model_078 |
