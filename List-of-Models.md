@@ -41,10 +41,10 @@
 
 | Name Stage                | planet    |  Champion                     | ModelStage | ModelPresMap |
 |---------------------------|-----------|-------------------------------|------------|--------------|
-| 0-Ando Prime Centrum      | Ando Prime| Slide Paramita                |            | Model_122    |
+| 0-Ando Prime Centrum      | Ando Prime| Slide Paramita                | Model_128  | Model_122    |
 | 1-Abyss                   | Ord Ibanna| Bozzie Baranta                | Model_138  |              |
 | 2-The Gauntlet            | Oovo IV   | Gasgano                       |            |              |
-| 3-Inferno                 | Baroonda  | Ben Quadinaros                |            |              |
+| 3-Inferno                 | Baroonda  | Ben Quadinaros                | Model_129  |              |
 
 
 # Pod list / Characters
