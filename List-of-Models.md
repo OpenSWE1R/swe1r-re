@@ -59,13 +59,13 @@
 | [Bozzie Baranta](https://www.giantbomb.com/bozzie-baranta/3005-5199/)                        | Model_031 | Model_032               |                |           |
 | ["Bullseye" Navior](https://www.giantbomb.com/bullseye-navior/3005-5111/)                    | Model_045 | Model_046               |                |           |
 | [Clegg Holdfast](https://www.giantbomb.com/clegg-holdfast/3005-5128/)                        | Model_025 | Model_026               |                |           |
-| [Cy Yunga](https://www.giantbomb.com/cy-yunga/3005-5115/)  ("Bullseye" Navior reskin)        |           |                |                |           |
+| [Cy Yunga](https://www.giantbomb.com/cy-yunga/3005-5115/)  ("Bullseye" Navior alternative)   |           |                |                |           |
 | [Dud Bolt](https://www.giantbomb.com/dud-bolt/3005-5169/)                                    | Model_021 | Model_022                              |                |           |
 | [Ebe Endocott](https://www.giantbomb.com/ebe-endocott/3005-5121/)                            | Model_019 | Model_020               |                |           |
 | [Elan Mak](https://www.giantbomb.com/elan-mak/3005-5170/)                                    | Model_027 | Model_028               |                |           |
 | [Fud Sang](https://www.giantbomb.com/fud-sang/3005-5114/)                                    | Model_037 | Model_038               |                |           |
 | [Gasgano](https://www.giantbomb.com/gasgano/3005-5162/)                                      | Model_023 | Model_024              |                |           |
-| [Jinn Reeso](https://www.giantbomb.com/jinn-reeso/3005-5113/) (Mars Guo reskin)              |           |                |                |           |
+| [Jinn Reeso](https://www.giantbomb.com/jinn-reeso/3005-5113/) (Mars Guo alternative)         |           |                |                |           |
 | [Mars Guo](https://www.giantbomb.com/mars-guo/3005-5125/)                                    | Model_016 | Model_018               |                |           |
 | [Mawhonic](https://www.giantbomb.com/mawhonic/3005-5164/)                                    | Model_011 | Model_012               |                |           |
 | [Neva Kee](https://www.giantbomb.com/neva-kee/3005-5132/)                                    | Model_029 | Model_030               |                |           |
