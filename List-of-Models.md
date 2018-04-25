@@ -164,6 +164,10 @@
 | Name                   | Model     |
 |------------------------|-----------|
 | RaceDirectionArrow     | Model_071 |
+| ballonInSky            | Model_308 |
+| Flag                   | Model_048 |
+| littleFlag             | Model_196 |
+| littleFlag2            | Model_197 |
 
 ### Cantina's Objects
 | Name                   | Model     |
@@ -189,3 +193,11 @@
 | Jawas                  | Model_247 |
 | R2D2                   | Model_248 |
 | Qui_Gon_Jinn           | Model_319 |
+
+### Buildings For Video
+| Name                   | Model     |
+|------------------------|-----------|
+| StartOfTatooine        | Model_127 |
+| commentator_s_lodge    | Model_278 |
+| AquilarisStadium       | Model_281 |
+
