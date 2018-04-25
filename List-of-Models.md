@@ -81,67 +81,75 @@
 # List Upgrade
 
 ## Repair Rate
-
-- [Single Power Cell](http://starwars.wikia.com/wiki/Single_Power_Cell)
-- [Dual Power Cell](http://starwars.wikia.com/wiki/Dual_Power_Cell)
-- [Quad Power Cell](http://starwars.wikia.com/wiki/Quad_Power_Cell)
-- [Cluster Power Plug](http://starwars.wikia.com/wiki/Cluster_Power_Plug)
-- [Rotary Power Plug](http://starwars.wikia.com/wiki/Rotary_Power_Plug)
-- [Cluster 2 Power Plug](http://starwars.wikia.com/wiki/Cluster2_Power_Plug)
+| Name                                                                       | Model     |
+|----------------------------------------------------------------------------|-----------|
+|- [Single Power Cell](http://starwars.wikia.com/wiki/Single_Power_Cell)     |           |
+|- [Dual Power Cell](http://starwars.wikia.com/wiki/Dual_Power_Cell)         |           |
+|- [Quad Power Cell](http://starwars.wikia.com/wiki/Quad_Power_Cell)         |           |
+|- [Cluster Power Plug](http://starwars.wikia.com/wiki/Cluster_Power_Plug)   |           |
+|- [Rotary Power Plug](http://starwars.wikia.com/wiki/Rotary_Power_Plug)     |           |
+|- [Cluster 2 Power Plug](http://starwars.wikia.com/wiki/Cluster2_Power_Plug)|           |
 
 ## Cool Rate
-
-- [Coolant Radiator](http://starwars.wikia.com/wiki/Coolant_Radiator)
-- [Stack-3 Radiator](http://starwars.wikia.com/wiki/Stack-3_Radiator)
-- [Stack-6 Radiator](http://starwars.wikia.com/wiki/Stack-6_Radiator)
-- [Rod Coolant Pump](http://starwars.wikia.com/wiki/Rod_Coolant_Pump)
--  [Dual Coolant Pump](http://starwars.wikia.com/wiki/Dual_Coolant_Pump)
-- [Turbo Coolant Pump](http://starwars.wikia.com/wiki/Turbo_Coolant_Pump)
+| Name                                                                       | Model     |
+|----------------------------------------------------------------------------|-----------|
+|- [Coolant Radiator](http://starwars.wikia.com/wiki/Coolant_Radiator)       |           |
+|- [Stack-3 Radiator](http://starwars.wikia.com/wiki/Stack-3_Radiator)       |           |
+|- [Stack-6 Radiator](http://starwars.wikia.com/wiki/Stack-6_Radiator)       |           |
+|- [Rod Coolant Pump](http://starwars.wikia.com/wiki/Rod_Coolant_Pump)       |           |
+|-  [Dual Coolant Pump](http://starwars.wikia.com/wiki/Dual_Coolant_Pump)    |           |
+|- [Turbo Coolant Pump](http://starwars.wikia.com/wiki/Turbo_Coolant_Pump)   |           |
 
 ## Airbrake Inverse
-
-- [Mark II Air Brake](http://starwars.wikia.com/wiki/Mark_II_Air_Brake)
-- [Mark III Air Brake](http://starwars.wikia.com/wiki/Mark_III_Air_Brake)
-- [Mark IV Air Brake](http://starwars.wikia.com/wiki/Mark_IV_Air_Brake)
-- [Mark V Air Brake](http://starwars.wikia.com/wiki/Mark_V_Air_Brake)
-- [Tri-Jet Air Brake](http://starwars.wikia.com/wiki/Tri-Jet_Air_Brake)
-- [Quadrijet Air Brake](http://starwars.wikia.com/wiki/Quadrijet_Air_Brake)
+| Name                                                                       | Model     |
+|----------------------------------------------------------------------------|-----------|
+|- [Mark II Air Brake](http://starwars.wikia.com/wiki/Mark_II_Air_Brake)     |           |
+|- [Mark III Air Brake](http://starwars.wikia.com/wiki/Mark_III_Air_Brake)   |           |
+|- [Mark IV Air Brake](http://starwars.wikia.com/wiki/Mark_IV_Air_Brake)     |           |
+|- [Mark V Air Brake](http://starwars.wikia.com/wiki/Mark_V_Air_Brake)       |           |
+|- [Tri-Jet Air Brake](http://starwars.wikia.com/wiki/Tri-Jet_Air_Brake)     |           |
+|- [Quadrijet Air Brake](http://starwars.wikia.com/wiki/Quadrijet_Air_Brake) |           |
 
 ## Maximum Speed
-
-- [Plug2 Thrust Coil](http://starwars.wikia.com/wiki/Plug2_Thrust_Coil)
-- [Plug3 Thrust Coil](http://starwars.wikia.com/wiki/Plug3_Thrust_Coil)
-- [Plug5 Thrust Coil](http://starwars.wikia.com/wiki/Plug5_Thrust_Coil)
-- [Plug8 Thrust Coil](http://starwars.wikia.com/wiki/Plug8_Thrust_Coil)
-- [Block5 Thrust Coil](http://starwars.wikia.com/wiki/Block5_Thrust_Coil)
-- [Block 6 Thrust Coil](http://starwars.wikia.com/wiki/Block6_thrust_coil)
+| Name                                                                       | Model     |
+|----------------------------------------------------------------------------|-----------|
+|- [Plug2 Thrust Coil](http://starwars.wikia.com/wiki/Plug2_Thrust_Coil)     |           |
+|- [Plug3 Thrust Coil](http://starwars.wikia.com/wiki/Plug3_Thrust_Coil)     |           |
+|- [Plug5 Thrust Coil](http://starwars.wikia.com/wiki/Plug5_Thrust_Coil)     |           |
+|- [Plug8 Thrust Coil](http://starwars.wikia.com/wiki/Plug8_Thrust_Coil)     |           |
+|- [Block5 Thrust Coil](http://starwars.wikia.com/wiki/Block5_Thrust_Coil)   |           |
+|- [Block 6 Thrust Coil](http://starwars.wikia.com/wiki/Block6_thrust_coil)  |           |
 
 ## Acceleration
-
-- [Dual 20 PCX Injector](http://starwars.wikia.com/wiki/Dual_20_PCX_Injector)
-- [44 PCX Injector](http://starwars.wikia.com/wiki/44_PCX_Injector)
-- [Dual 32 PCX Injector](http://starwars.wikia.com/wiki/Dual_32_PCX_Injector)
-- [Quad 32 PCX Injector](http://starwars.wikia.com/wiki/Quad_32_PCX_Injector)
-- [Quad 44 Injector](http://starwars.wikia.com/wiki/Quad_44_Injector)
-- [Mag 6 Injector](http://starwars.wikia.com/wiki/Mag-6_Injector)
+| Name                                                                        | Model     |
+|-----------------------------------------------------------------------------|-----------|
+|- [Dual 20 PCX Injector](http://starwars.wikia.com/wiki/Dual_20_PCX_Injector)|           |
+|- [44 PCX Injector](http://starwars.wikia.com/wiki/44_PCX_Injector)          |           |
+|- [Dual 32 PCX Injector](http://starwars.wikia.com/wiki/Dual_32_PCX_Injector)|           |
+|- [Quad 32 PCX Injector](http://starwars.wikia.com/wiki/Quad_32_PCX_Injector)|           |
+|- [Quad 44 Injector](http://starwars.wikia.com/wiki/Quad_44_Injector)        |           |
+|- [Mag 6 Injector](http://starwars.wikia.com/wiki/Mag-6_Injector)            |           |
 
 ## Turn Response
 
-- [Control Linkage](http://starwars.wikia.com/wiki/Control_Linkage)         | Model_050
-- [Control Shift Plate](http://starwars.wikia.com/wiki/Control_Shift_Plate) | Model_051
-- [Control Vectro-Jet](http://starwars.wikia.com/wiki/Control_Vectro-Jet)   | Model_052
-- [Control Coupling](http://starwars.wikia.com/wiki/Control_Coupling)       | Model_053
-- [Control Nozzle  ](http://starwars.wikia.com/wiki/Control_Nozzle)         |
-- [Control Stabilizer](http://starwars.wikia.com/wiki/Control_Stabilizer)   | Model_064
+| Name                                                                       | Model     |
+|----------------------------------------------------------------------------|-----------|
+|- [Control Linkage](http://starwars.wikia.com/wiki/Control_Linkage)         | Model_050 |
+|- [Control Shift Plate](http://starwars.wikia.com/wiki/Control_Shift_Plate) | Model_051 |
+|- [Control Vectro-Jet](http://starwars.wikia.com/wiki/Control_Vectro-Jet)   | Model_052 |
+|- [Control Coupling](http://starwars.wikia.com/wiki/Control_Coupling)       | Model_053 |
+|- [Control Nozzle  ](http://starwars.wikia.com/wiki/Control_Nozzle)         |           |
+|- [Control Stabilizer](http://starwars.wikia.com/wiki/Control_Stabilizer)   | Model_064 |
 
 ## Anti-Skid
-
-- [R-20 Repulsorgirp](http://starwars.wikia.com/wiki/R-20_Repulsorgrip)
-- [R-60 Repulsorgirp](http://starwars.wikia.com/wiki/R-60_Repulsorgrip)
-- [R-80 Repulsorgirp](http://starwars.wikia.com/wiki/R-80_Repulsorgrip)
-- [R-100 Repulsorgirp](http://starwars.wikia.com/wiki/R-100_Repulsorgrip)
-- [R-300 Repulsorgirp](http://starwars.wikia.com/wiki/R-300_Repulsorgrip)
-- [R-600 Repulsorgirp](http://starwars.wikia.com/wiki/R-600_Repulsorgrip)
+| Name                                                                       | Model     |
+|----------------------------------------------------------------------------|-----------|
+|- [R-20 Repulsorgirp](http://starwars.wikia.com/wiki/R-20_Repulsorgrip)     |           |
+|- [R-60 Repulsorgirp](http://starwars.wikia.com/wiki/R-60_Repulsorgrip)     |           |
+|- [R-80 Repulsorgirp](http://starwars.wikia.com/wiki/R-80_Repulsorgrip)     |           |
+|- [R-100 Repulsorgirp](http://starwars.wikia.com/wiki/R-100_Repulsorgrip)   |           |
+|- [R-300 Repulsorgirp](http://starwars.wikia.com/wiki/R-300_Repulsorgrip)   |           |
+|- [R-600 Repulsorgirp](http://starwars.wikia.com/wiki/R-600_Repulsorgrip)   |           |
 
 
 ## Miscellaneous
