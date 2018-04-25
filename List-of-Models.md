@@ -3,48 +3,48 @@
 
 ## Series "Amateur" (S1)
 
-| Name Stage                | planet    |  Champion                     | ModelStage |
-|---------------------------|-----------|-------------------------------|------------|
-| 0-Boonta Training Course  | Tatooine   | Sebulba                      |            |
-| 1-Mon Gazza Speedway       | Mon Gazza  |  Teemto Pagalies            |            |
-| 2-Beedo's Wild Ride       | Ando Prime| Aldar Beedo                   |            |
-| 3-Aquilaris Classic       | Aquilaris | Clegg Holdfast                |            |
-| 4-Malastare 100           | Malastare | Dud Bolt                      |            |
-| 5-Vengeance               | Oovo IV   | Fud Sang                      |            |
-| 6-Spice Mine Run           | Mon Gazza | Mars Guo/Jinn Reeso          |            |
+| Name Stage                | planet    |  Champion                     | ModelStage | ModelPresMap |
+|---------------------------|-----------|-------------------------------|------------|--------------|
+| 0-Boonta Training Course  | Tatooine   | Sebulba                      | Model_115  |              |
+| 1-Mon Gazza Speedway       | Mon Gazza  |  Teemto Pagalies            |            |              |
+| 2-Beedo's Wild Ride       | Ando Prime| Aldar Beedo                   |            |              |
+| 3-Aquilaris Classic       | Aquilaris | Clegg Holdfast                |            |              |
+| 4-Malastare 100           | Malastare | Dud Bolt                      |            |              |
+| 5-Vengeance               | Oovo IV   | Fud Sang                      |            |              |
+| 6-Spice Mine Run           | Mon Gazza | Mars Guo/Jinn Reeso          |            |              |
 
 ## Series "Semi-Pro" (S2)
 
-| Name Stage                | planet    |  Champion                     | ModelStage |
-|---------------------------|-----------|-------------------------------|------------|
-| 0-Sunken City             | Aquilaris | "Bullseye" Navior / Cy Yunga  |            |
-| 1-Howler Gorge             | Ando Prime| Ratts Tyerell                |            |
-| 2-Dug Derby               | Malastare | Elan Mak                      |            |
-| 3-Scrapper's Run           | Ord Ibanna| Wan Sandage                  |            |
-| 4-Zugga Challenge         | Mon Gazza | Boles Roor                    |            |
-| 5-Baroo Coast              | Baroonda   | Neva Kee                    |            |
-| 6-Bumpy's Breakers         | Aquilaris | Ark "Bumpy" Roose            |            |
+| Name Stage                | planet    |  Champion                     | ModelStage | ModelPresMap |
+|---------------------------|-----------|-------------------------------|------------|--------------|
+| 0-Sunken City             | Aquilaris | "Bullseye" Navior / Cy Yunga  |            |              |
+| 1-Howler Gorge             | Ando Prime| Ratts Tyerell                |            |              |
+| 2-Dug Derby               | Malastare | Elan Mak                      |            |              |
+| 3-Scrapper's Run           | Ord Ibanna| Wan Sandage                  |            |              |
+| 4-Zugga Challenge         | Mon Gazza | Boles Roor                    |            |              |
+| 5-Baroo Coast              | Baroonda   | Neva Kee                    |            |              |
+| 6-Bumpy's Breakers         | Aquilaris | Ark "Bumpy" Roose            |            |              |
 
 ## Series "Galactic" (S3)
 
-| Name Stage                | planet    |  Champion                     | ModelStage |
-|---------------------------|-----------|-------------------------------|------------|
-| 0-Executioner             | Oovo IV   | Toy Dampner                   |            |
-| 1-Sebulba's Legacy         | Malastare | Sebulba                      |            |
-| 2-Grabvine Gateway         | Baroonda   | Anakin Skywalker            |            |
-| 3-Andobi Mountain Run     | Ando Prime|  Mawhonic                     |            |
-| 4-Dethro's Revenge         | Ord Ibanna| Ody Mandrell                 |            |
-| 5-Fire Mountain Rally     | Baroonda   | Ebe Endocott                 |            |
-| 6-Boonta Classic           | Tatooine   | Sebulba                     | Model_001  |
+| Name Stage                | planet    |  Champion                     | ModelStage | ModelPresMap |
+|---------------------------|-----------|-------------------------------|------------|--------------|
+| 0-Executioner             | Oovo IV   | Toy Dampner                   |            |              |
+| 1-Sebulba's Legacy         | Malastare | Sebulba                      |            |              |
+| 2-Grabvine Gateway         | Baroonda   | Anakin Skywalker            |            |              |
+| 3-Andobi Mountain Run     | Ando Prime|  Mawhonic                     |            |              |
+| 4-Dethro's Revenge         | Ord Ibanna| Ody Mandrell                 |            |              |
+| 5-Fire Mountain Rally     | Baroonda   | Ebe Endocott                 |            |              |
+| 6-Boonta Classic           | Tatooine   | Sebulba                     | Model_001  |              |
 
 ## Series "Invitational" (S4)
 
-| Name Stage                | planet    |  Champion                     | ModelStage |
-|---------------------------|-----------|-------------------------------|------------|
-| 0-Ando Prime Centrum       | Ando Prime| Slide Paramita               |            |
-| 1-Abyss                   | Ord Ibanna| Bozzie Baranta                |            |
-| 2-The Gauntlet             | Oovo IV   | Gasgano                      |            |
-| 3-Inferno                 | Baroonda   | Ben Quadinaros               |            |
+| Name Stage                | planet    |  Champion                     | ModelStage | ModelPresMap |
+|---------------------------|-----------|-------------------------------|------------|--------------|
+| 0-Ando Prime Centrum       | Ando Prime| Slide Paramita               |            | Model_122    |
+| 1-Abyss                   | Ord Ibanna| Bozzie Baranta                |            |              |
+| 2-The Gauntlet             | Oovo IV   | Gasgano                      |            |              |
+| 3-Inferno                 | Baroonda   | Ben Quadinaros               |            |              |
 
 
 # Pod list / Characters
@@ -127,12 +127,12 @@
 
 ## Turn Response
 
-- [Control Linkage](http://starwars.wikia.com/wiki/Control_Linkage)
-- [Control Shift Plate](http://starwars.wikia.com/wiki/Control_Shift_Plate)
-- [Control Vectro-Jet](http://starwars.wikia.com/wiki/Control_Vectro-Jet)
-- [Control Coupling](http://starwars.wikia.com/wiki/Control_Coupling)
-- [Control Nozzle  ](http://starwars.wikia.com/wiki/Control_Nozzle)
-- [Control Stabilizer](http://starwars.wikia.com/wiki/Control_Stabilizer)
+- [Control Linkage](http://starwars.wikia.com/wiki/Control_Linkage)         | Model_050
+- [Control Shift Plate](http://starwars.wikia.com/wiki/Control_Shift_Plate) | Model_051
+- [Control Vectro-Jet](http://starwars.wikia.com/wiki/Control_Vectro-Jet)   | Model_052
+- [Control Coupling](http://starwars.wikia.com/wiki/Control_Coupling)       | Model_053
+- [Control Nozzle  ](http://starwars.wikia.com/wiki/Control_Nozzle)         |
+- [Control Stabilizer](http://starwars.wikia.com/wiki/Control_Stabilizer)   | Model_064
 
 ## Anti-Skid
 
@@ -144,8 +144,18 @@
 - [R-600 Repulsorgirp](http://starwars.wikia.com/wiki/R-600_Repulsorgrip)
 
 
+## Miscellaneous
 
+# Race's Objects
+-RaceDirectionArrow      | Model_071
 
+# Cantina's Objects
+-CantinaHoloPlaneteA     | Model_076
+-CantinaHoloPlaneteB     | Model_077
+-CantinaHoloPlaneteC     | Model_078
+-CantinaHoloPlaneteD     | Model_079
+-CantinaHoloPlaneteE     | Model_080
+-CantinaHoloPlaneteF     | Model_081
 
-
-
+# Breaker's yard
+-Room                    | Model_085
