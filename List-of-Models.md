@@ -146,16 +146,24 @@
 
 ## Miscellaneous
 
-# Race's Objects
--RaceDirectionArrow      | Model_071
+### Race's Objects
+| Name                   | Model     |
+|------------------------|-----------|
+|-RaceDirectionArrow     | Model_071 |
 
-# Cantina's Objects
--CantinaHoloPlaneteA     | Model_076
--CantinaHoloPlaneteB     | Model_077
--CantinaHoloPlaneteC     | Model_078
--CantinaHoloPlaneteD     | Model_079
--CantinaHoloPlaneteE     | Model_080
--CantinaHoloPlaneteF     | Model_081
+### Cantina's Objects
+| Name                   | Model     |
+|------------------------|-----------|
+|-CantinaHoloPlaneteA    | Model_076 |
+|-CantinaHoloPlaneteB    | Model_077 |
+|-CantinaHoloPlaneteC    | Model_078 |
+|-CantinaHoloPlaneteD    | Model_079 |
+|-CantinaHoloPlaneteE    | Model_080 |
+|-CantinaHoloPlaneteF    | Model_081 |
 
-# Breaker's yard
--Room                    | Model_085
+### Breaker's yard
+| Name                   | Model     |
+|------------------------|-----------|
+|-Room                   | Model_085 |
+
+
