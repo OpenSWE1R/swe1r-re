@@ -1,3 +1,10 @@
+## Warning
+
+This information is outdated and incomplete. [Please use issue 61 instead](https://github.com/OpenSWE1R/openswe1r/issues/61)
+This article will have to be restructured in the future.
+
+---
+
 There are different versions of this game.
 
 | MD5 of binary / executable         | Platform  | Region         | Notes                                    |
