@@ -1,8 +1,13 @@
+/*
+
 This appears to be the longest function (space wise) in the game. No idea what it does.
 It seems to be full of unrolled loops though.
 
-```C
-typdef struct {
+*/
+
+// Research based on patched US version
+
+typedef struct {
   uint8_t unk[16];
   uint32_t unk16; // +16 some flags register?
 } A1unkA;
@@ -25,9 +30,7 @@ typedef struct {
   ...
   uint32_t unk296; // +296
 } A1;
-```
 
-```C
 //----- (004337E0) --------------------------------------------------------
 // a1 = an object of some sorts
 // a2 = unk, only passed to sub_44BB10
@@ -569,4 +572,3 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
     }
   }
 }
-```
