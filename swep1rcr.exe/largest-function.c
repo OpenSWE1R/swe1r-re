@@ -177,7 +177,7 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
     } else {
 
       // This is an unrolled loop over 2 elements
-      {
+      for(int i = 0; i < 2; i++) {
 
         _DWORD *v20; // edi
         float v21; // ST18_4
@@ -187,96 +187,53 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
         float v25; // ST0C_4
         _DWORD *v26; // edi
 
-        v20 = *(_DWORD **)(a1 + 4);
+        v20 = *(_DWORD **)(a1 + (4 + i * 4));
         if ( v20 )
         {
           sub_44BB10(&v83, (int)&v105);
           sub_42F7D0(&v88, (_DWORD *)(108 * v67 + 5009556));
 
-          sub_430980(&v72, &v88, (float *)&v83);
-          sub_42F830((float *)&v86, (float *)&v86, &v72);
-          if ( a8 )
-          {
-            v21 = v95[3] * 0.2;
-            sub_42FA80((int)&v86, (int)&v86, v21, (int)&v85);
-            sub_42F7D0(&v72, &v84);
-            sub_42F9B0(&v72);
-            v22 = v95[1] * 5.0;
-            sub_431390((int)&v83, v22, v72, v73, v74, (int)&v83);
-          }
-          sub_431640(v20, &v83);
-          sub_431A50((int)v20, 2, 3, 16, 2);
-          v23 = *(_DWORD **)(a1 + 12);
-          if ( v23 )
-          {
-            sub_42F7D0(&v88, &dword_4C7A40);
-
-            sub_430980(&v72, &v88, (float *)&v105);
-            sub_42F830((float *)&v86, (float *)&v86, &v72);
-            if ( a8 )
-            {
-              v24 = v95[3] * 0.2;
-              sub_42FA80((int)&v86, (int)&v86, v24, (int)&v85);
-              sub_42F7D0(&v72, &v84);
-              sub_42F9B0(&v72);
-              v25 = v95[1] * 5.0;
-              sub_431390((int)&v83, v25, v72, v73, v74, (int)&v83);
-            }
-            sub_431640(v23, &v83);
-            sub_431A50((int)v23, 2, 3, 16, 2);
-          }
-          v26 = *(_DWORD **)(a1 + 248);
-          if ( v26 )
-          {
-            sub_42F7D0(&v72, &v86);
-            sub_4310B0((int)&v83, a4, SLODWORD(a5), SLODWORD(a6));
-            sub_42F7D0(&v86, &v72);
-            v87 = a7;
-            sub_431450((int)&v83, 0.0040000002, 0.0040000002, 0.0040000002, (int)&v83);
-            sub_431640(v26, &v83);
-            sub_431A50((int)v26, 2, 3, 16, 2);
-          }
-        }
-        
-        v20 = *(_DWORD **)(a1 + 8);
-        if ( v20 )
-        {
-          sub_44BB10(&v83, (int)&v105);
-          sub_42F7D0(&v88, (_DWORD *)(108 * v67 + 5009556));
-          v88 = -v88;
-          sub_430980(&v72, &v88, (float *)&v83);
-          sub_42F830((float *)&v86, (float *)&v86, &v72);
-          if ( a8 )
-          {
-            v21 = v95[4] * 0.2;
-            sub_42FA80((int)&v86, (int)&v86, v21, (int)&v85);
-            sub_42F7D0(&v72, &v84);
-            sub_42F9B0(&v72);
-            v22 = v95[2] * 5.0;
-            sub_431390((int)&v83, v22, v72, v73, v74, (int)&v83);
-          }
-          sub_431640(v20, &v83);
-          sub_431A50((int)v20, 2, 3, 16, 2);
-          v23 = *(_DWORD **)(a1 + 16);
-          if ( v23 )
-          {
-            sub_42F7D0(&v88, &dword_4C7A40);
+          if (i % 2 != 0) {
             v88 = -v88;
+          }
+
+          sub_430980(&v72, &v88, (float *)&v83);
+          sub_42F830((float *)&v86, (float *)&v86, &v72);
+          if ( a8 )
+          {
+            v21 = v95[3 + i] * 0.2;
+            sub_42FA80((int)&v86, (int)&v86, v21, (int)&v85);
+            sub_42F7D0(&v72, &v84);
+            sub_42F9B0(&v72);
+            v22 = v95[1 + i] * 5.0;
+            sub_431390((int)&v83, v22, v72, v73, v74, (int)&v83);
+          }
+          sub_431640(v20, &v83);
+          sub_431A50((int)v20, 2, 3, 16, 2);
+          v23 = *(_DWORD **)(a1 + (12 + i * 4));
+          if ( v23 )
+          {
+            sub_42F7D0(&v88, &dword_4C7A40);
+
+            if (i % 2 != 0) {
+              v88 = -v88;
+            }
+
             sub_430980(&v72, &v88, (float *)&v105);
             sub_42F830((float *)&v86, (float *)&v86, &v72);
             if ( a8 )
             {
-              v24 = v95[2] * 0.2;
+              v24 = v95[3 + i] * 0.2;
               sub_42FA80((int)&v86, (int)&v86, v24, (int)&v85);
               sub_42F7D0(&v72, &v84);
               sub_42F9B0(&v72);
-              v25 = v95[0] * 5.0;
+              v25 = v95[1 + i] * 5.0;
               sub_431390((int)&v83, v25, v72, v73, v74, (int)&v83);
             }
             sub_431640(v23, &v83);
             sub_431A50((int)v23, 2, 3, 16, 2);
           }
-          v26 = *(_DWORD **)(a1 + 252);
+          v26 = *(_DWORD **)(a1 + (248 + i * 4));
           if ( v26 )
           {
             sub_42F7D0(&v72, &v86);
@@ -290,6 +247,7 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
         }
 
       }
+
       v34 = *(_DWORD **)(a1 + 20);
       if ( v34 )
       {
