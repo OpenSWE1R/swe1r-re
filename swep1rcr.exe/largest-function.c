@@ -72,15 +72,6 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
   _DWORD *v37; // eax
   _DWORD *v38; // eax
   _DWORD *v39; // edi
-  int v40; // eax
-  int v41; // eax
-  int v42; // eax
-  int v43; // eax
-  int v44; // eax
-  int v45; // eax
-  int v46; // eax
-  int v47; // eax
-  int v48; // ebx
   float v49; // ST18_4
   float v50; // ST14_4
   float v51; // ST10_4
@@ -360,31 +351,13 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
       }
       sub_46F2C0(0, a1, a9, a10);
 
-      //FIXME: Most likely a loop over 8 elements
-      v40 = *(_DWORD *)(a1 + 24);
-      if ( v40 )
-        sub_431A50(v40, 2, -4, 16, 3);
-      v41 = *(_DWORD *)(a1 + 28);
-      if ( v41 )
-        sub_431A50(v41, 2, -4, 16, 3);
-      v42 = *(_DWORD *)(a1 + 32);
-      if ( v42 )
-        sub_431A50(v42, 2, -4, 16, 3);
-      v43 = *(_DWORD *)(a1 + 36);
-      if ( v43 )
-        sub_431A50(v43, 2, -4, 16, 3);
-      v44 = *(_DWORD *)(a1 + 40);
-      if ( v44 )
-        sub_431A50(v44, 2, -4, 16, 3);
-      v45 = *(_DWORD *)(a1 + 44);
-      if ( v45 )
-        sub_431A50(v45, 2, -4, 16, 3);
-      v46 = *(_DWORD *)(a1 + 48);
-      if ( v46 )
-        sub_431A50(v46, 2, -4, 16, 3);
-      v47 = *(_DWORD *)(a1 + 52);
-      if ( v47 )
-        sub_431A50(v47, 2, -4, 16, 3);
+      // This loop is unrolled in the games code
+      for(int i = 0; i < 8; i++) {
+        _DWORD v40 = *(_DWORD *)(a1 + (24 + i * 4));
+        if (v40) {
+          sub_431A50(v40, 2, -4, 16, 3);
+        }
+      }
 
       if ( dword_50C478 > 0 )
         --dword_50C478;
