@@ -75,7 +75,6 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
   float v49; // ST18_4
   float v50; // ST14_4
   float v51; // ST10_4
-  int v52; // ebp
   int v53; // eax
   float v54; // ST18_4
   float v55; // ST14_4
@@ -359,15 +358,18 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
         }
       }
 
-      if ( dword_50C478 > 0 )
+      if ( dword_50C478 > 0 ) {
         --dword_50C478;
+      }
+
+      v48 = v67;
+
       if ( *(_DWORD *)(a1 + 40) )
       {
         sub_4316A0(*(_DWORD **)(a1 + 20), v101);
         sub_42F7D0(&v76, &v102);
         sub_4316A0(*(_DWORD **)(a1 + 4), v103);
         sub_42F7D0(v81, &v104);
-        v48 = v67;
         sub_42F7D0(&v79, (_DWORD *)&unk_4C70AC + 27 * v67);
         sub_430980(&v79, &v79, v101);
         sub_42F830((float *)&v76, &v79, (float *)&v76);
@@ -387,15 +389,9 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
         v51 = a4 * 0.0040000002;
         sub_431450((int)&v90, v51, v50, v49, (int)&v90);
         sub_431640(*(_DWORD **)(a1 + 40), &v90);
-        if ( dword_50C478 <= 0 )
-        {
-          v52 = a8;
-        }
-        else
-        {
+        if ( dword_50C478 > 0 ) {
           sub_42F7B0((int)&v94, 0.0, 0, 0);
           sub_42F7B0((int)&v93, 0.0, 0, 0);
-          v52 = a8;
           v68 = 1067869798;
           if ( !a8 )
             v68 = 1056964608;
@@ -405,11 +401,7 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
         if ( v53 )
           sub_431A50(v53, 2, 3, 16, 2);
       }
-      else
-      {
-        v52 = a8;
-        v48 = v67;
-      }
+
       if ( *(_DWORD *)(a1 + 44) )
       {
         sub_4316A0(*(_DWORD **)(a1 + 20), v101);
@@ -442,7 +434,7 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
           sub_42F7B0((int)&v94, 0.0, 0, 0);
           sub_42F7B0((int)&v93, 0.0, 0, 0);
           v69 = 1067869798;
-          if ( !v52 )
+          if ( !a8 )
             v69 = 1056964608;
           sub_481C30(*(_DWORD *)(a1 + 44), (int)&v94, (int)&v93, *(float *)&v69, 1065353216, 0.0, 50.0, 0);
         }
@@ -480,7 +472,7 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
           sub_42F7B0((int)&v94, 0.0, 0, 0);
           sub_42F7B0((int)&v93, 0.0, 0, 0);
           v70 = 1067869798;
-          if ( !v52 )
+          if ( !a8 )
             v70 = 1056964608;
           sub_481C30(*(_DWORD *)(a1 + 48), (int)&v94, (int)&v93, *(float *)&v70, 1065353216, 0.0, 50.0, 0);
         }
@@ -518,7 +510,7 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
         if ( dword_50C478 > 0 ) {
           sub_42F7B0((int)&v94, 0.0, 0, 0);
           sub_42F7B0((int)&v93, 0.0, 0, 0);
-          v71 = v52 ? 1.3f : 0.5f;
+          v71 = a8 ? 1.3f : 0.5f;
           sub_481C30(*(_DWORD *)(a1 + 52), (int)&v94, (int)&v93, *(float *)&v71, 1.0f, 0.0f, 50.0f, 0);
         }
 
