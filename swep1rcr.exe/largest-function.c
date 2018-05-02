@@ -240,7 +240,7 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
             sub_4310B0((int)&v83, a4, SLODWORD(a5), SLODWORD(a6));
             sub_42F7D0(&v86, &v72);
             v87 = a7;
-            sub_431450((int)&v83, 0.0040000002, 0.0040000002, 0.0040000002, (int)&v83);
+            sub_431450((int)&v83, 0.004f, 0.004f, 0.004f, (int)&v83);
             sub_431640(v26, &v83);
             sub_431A50((int)v26, 2, 3, 16, 2);
           }
@@ -248,6 +248,8 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
 
       }
 
+      //FIXME: This could actually be the same couple of inline function as
+      //       the previous one, just with different parameters.
       v34 = *(_DWORD **)(a1 + 20);
       if ( v34 )
       {
@@ -284,7 +286,7 @@ void __cdecl sub_4337E0(int a1, int a2, int a3, float a4, float a5, float a6, in
           sub_4310B0((int)&v83, a4, SLODWORD(a5), SLODWORD(a6));
           sub_42F7D0(&v86, &v72);
           v87 = a7;
-          sub_431450((int)&v83, 0.0040000002, 0.0040000002, 0.0040000002, (int)&v83);
+          sub_431450((int)&v83, 0.004f, 0.004f, 0.004f, (int)&v83);
           sub_431640(v39, &v83);
           sub_431A50((int)v39, 2, 3, 16, 2);
         }
