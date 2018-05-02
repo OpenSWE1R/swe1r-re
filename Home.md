@@ -1,1 +1,0 @@
-Welcome to the OpenSWE1R wiki!
