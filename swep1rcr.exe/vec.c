@@ -221,224 +221,124 @@ float* __cdecl sub_431BF0(float* a1, const float* a2) {
 }
 
 //----- (00431C20) --------------------------------------------------------
-float *__cdecl sub_431C20(float *a1, float *a2, float *a3)
-{
-  float v3; // ST48_4
-  float v4; // ST4C_4
-  double v5; // st6
-  float v6; // ST50_4
-  float v7; // ST54_4
-  double v8; // st3
-  float v9; // ST58_4
-  float v10; // ST5C_4
-  float v11; // ST44_4
-  float v12; // ST60_4
-  float v13; // ST00_4
-  float v14; // ST64_4
-  float v15; // ST68_4
-  float v16; // ST6C_4
-  float v17; // ST70_4
-  float v18; // ST04_4
-  float v19; // ST74_4
-  float v20; // ST10_4
-  float v21; // ST78_4
-  float v22; // ST14_4
-  float v23; // ST08_4
-  float v24; // ST20_4
-  float v25; // ST18_4
-  float v26; // ST7C_4
-  float v27; // ST24_4
-  float v28; // ST28_4
-  float v29; // ST0C_4
-  double v30; // rt2
-  double v31; // st4
-  float v32; // ST1C_4
-  float v33; // ST38_4
-  float v34; // ST2C_4
-  float v35; // ST34_4
-  float v36; // ST3C_4
-  float *result; // eax
-  double v38; // st7
+// Multiply Mat4
+float* __cdecl sub_431C20(float *a1, const float *a2, const float *a3) {
 
-  v3 = a2[2];
-  v4 = a2[3];
-  v5 = a3[1];
-  v6 = a2[4];
-  v7 = a2[5];
-  v8 = *a2;
-  v9 = a2[6];
-  v10 = a2[7];
-  v11 = a2[1];
-  v12 = a2[8];
-  v13 = *a3;
-  v14 = a2[9];
-  v15 = a2[10];
-  v16 = a2[11];
-  v17 = a2[12];
-  v18 = a3[1];
-  v19 = a2[13];
-  v20 = a3[4];
-  v21 = a2[14];
-  v22 = a3[5];
-  v23 = a3[2];
-  v24 = a3[8];
-  v25 = a3[6];
-  v26 = a2[15];
-  v27 = a3[9];
-  v28 = a3[10];
-  v29 = a3[3];
-  v30 = v27;
-  v31 = a3[12];
-  v32 = a3[7];
-  v33 = a3[14];
-  v34 = a3[11];
-  v35 = a3[13];
-  v36 = a3[15];
-  result = a1;
-  v38 = v22 * v11;
-  *a1 = v13 * v8 + v20 * v11 + v24 * v3 + v31 * v4;
-  a1[1] = v5 * v8 + v38 + v30 * v3 + v35 * v4;
-  a1[2] = v23 * v8 + v25 * v11 + v28 * v3 + v33 * v4;
-  a1[3] = v29 * v8 + v32 * v11 + v34 * v3 + v36 * v4;
-  a1[4] = v13 * v6 + v20 * v7 + v24 * v9 + v31 * v10;
-  a1[5] = v18 * v6 + v22 * v7 + v27 * v9 + v35 * v10;
-  a1[6] = v23 * v6 + v25 * v7 + v28 * v9 + v33 * v10;
-  a1[7] = v29 * v6 + v32 * v7 + v34 * v9 + v36 * v10;
-  a1[8] = v13 * v12 + v20 * v14 + v24 * v15 + v31 * v16;
-  a1[9] = v18 * v12 + v22 * v14 + v27 * v15 + v35 * v16;
-  a1[10] = v23 * v12 + v25 * v14 + v28 * v15 + v33 * v16;
-  a1[11] = v29 * v12 + v32 * v14 + v34 * v15 + v36 * v16;
-  a1[12] = v13 * v17 + v20 * v19 + v24 * v21 + v31 * v26;
-  a1[13] = v18 * v17 + v22 * v19 + v27 * v21 + v35 * v26;
-  a1[14] = v23 * v17 + v25 * v19 + v28 * v21 + v33 * v26;
-  a1[15] = v29 * v17 + v32 * v19 + v34 * v21 + v36 * v26;
-  return result;
+  // Make a copy of a2
+  Mat4 a;
+  for(unsigned int i = 0; i < 4 * 4; i++) {
+     a.f[i] = a2[i];
+  }
+
+  // Make a copy of a3
+  Mat4 b;
+  for(unsigned int i = 0; i < 4 * 4; i++) {
+     b.f[i] = a3[i];
+  }
+
+  // Multiply matrices
+  for(int i = 0; i < 4; i++) {
+    for(int j = 0; j < 4; j++) {
+      a1[i * 4 + j] = b.f[0 * 4 + j] * a.f[i * 4 + 0] +
+                      b.f[1 * 4 + j] * a.f[i * 4 + 1] + 
+                      b.f[2 * 4 + j] * a.f[i * 4 + 2] + 
+                      b.f[3 * 4 + j] * a.f[i * 4 + 3];
+    }
+  }
+
+  return a1;
 }
 
 //----- (00432030) --------------------------------------------------------
-float *__cdecl sub_432030(float *a1, float *a2)
-{
-  float *result; // eax
-  double v3; // st7
-  double v4; // st6
-  float v5; // ST30_4
-  float v6; // ST00_4
-  double v7; // st5
-  float v8; // ST14_4
-  float v9; // ST24_4
-  float v10; // edx
-  float v11; // ST18_4
-  float v12; // ST34_4
-  float v13; // ST04_4
-  double v14; // st4
-  float v15; // ST28_4
-  float v16; // edx
-  float v17; // ST0C_4
-  float v18; // ST38_4
-  float v19; // ST08_4
-  float v20; // ST1C_4
-  float v21; // ST2C_4
-  float v22; // edx
+// Multiply Mat4 inplace
+float *__cdecl sub_432030(float *a1, const float *a2) {
 
-  result = a2;
-  v3 = a1[4];
-  v4 = a1[8];
-  v5 = a1[12];
-  v6 = *a1;
-  v7 = a1[13];
-  v8 = a1[5];
-  v9 = a1[9];
-  v10 = a1[6];
-  *a1 = v3 * a2[1] + v4 * a2[2] + v5 * a2[3] + *a2 * v6;
-  v11 = v10;
-  v12 = v7;
-  v13 = a1[1];
-  v14 = a1[14];
-  v15 = a1[10];
-  v16 = a1[3];
-  a1[1] = v8 * a2[1] + v9 * a2[2] + v7 * a2[3] + *a2 * v13;
-  v17 = v16;
-  v18 = v14;
-  v19 = a1[2];
-  v20 = a1[7];
-  v21 = a1[11];
-  v22 = a1[15];
-  a1[2] = v11 * a2[1] + v15 * a2[2] + v14 * a2[3] + *a2 * v19;
-  a1[3] = v20 * a2[1] + v21 * result[2] + v22 * result[3] + *result * v17;
-  a1[4] = v3 * result[5] + v5 * result[7] + v6 * result[4] + v4 * result[6];
-  a1[5] = v8 * result[5] + v12 * result[7] + v13 * result[4] + v9 * a2[6];
-  a1[6] = v11 * result[5] + v18 * result[7] + v19 * result[4] + v15 * result[6];
-  a1[7] = v20 * result[5] + v22 * result[7] + v17 * result[4] + v21 * result[6];
-  a1[8] = v4 * result[10] + v3 * result[9] + v5 * result[11] + v6 * a2[8];
-  a1[9] = v9 * result[10] + v8 * result[9] + v12 * result[11] + v13 * result[8];
-  a1[10] = v15 * result[10] + v11 * result[9] + v18 * result[11] + v19 * result[8];
-  a1[11] = v21 * result[10] + v20 * result[9] + v22 * a2[11] + v17 * a2[8];
-  a1[12] = v3 * result[13] + v5 * result[15] + v6 * a2[12] + v4 * a2[14];
-  a1[13] = v8 * result[13] + v12 * result[15] + v13 * result[12] + v9 * result[14];
-  a1[14] = v11 * result[13] + v18 * result[15] + v19 * result[12] + v15 * a2[14];
-  a1[15] = v20 * a2[13] + v22 * a2[15] + v17 * a2[12] + v21 * a2[14];
-  return result;
+  // Make a copy of a1
+  Mat4 a;
+  for(unsigned int i = 0; i < 4 * 4; i++) {
+     a.f[i] = a1[i];
+  }
+
+  // Multiply matrices
+  for(int i = 0; i < 4; i++) {
+    for(int j = 0; j < 4; j++) {
+      a1[i * 4 + j] = a.f[0 * 4 + j] * a2[i * 4 + 0] +
+                      a.f[1 * 4 + j] * a2[i * 4 + 1] + 
+                      a.f[2 * 4 + j] * a2[i * 4 + 2] + 
+                      a.f[3 * 4 + j] * a2[i * 4 + 3];
+    }
+  }
+
+  return a2;
 }
 
 //----- (004323C0) --------------------------------------------------------
-int __cdecl sub_4323C0(int a1, float *a2)
-{
-  float *v2; // ecx
-  double v3; // st7
-  int result; // eax
+float* __cdecl sub_4323C0(float* a1, const float *a2) {
   float v5; // edx
   double v6; // st4
   double v7; // rt2
   double v8; // st5
-  float v9; // ST00_4
-  double v10; // st6
   double v11; // st7
   double v12; // st7
   double v13; // st2
   double v14; // st7
   float v15; // [esp+8h] [ebp+4h]
-  float v16; // [esp+8h] [ebp+4h]
   float v17; // [esp+8h] [ebp+4h]
   float v18; // [esp+Ch] [ebp+8h]
-  float v19; // [esp+Ch] [ebp+8h]
   float v20; // [esp+Ch] [ebp+8h]
 
-  v2 = a2;
-  v3 = a2[4] * a2[4] + a2[5] * a2[5] + a2[6] * a2[6];
-  result = a1;
-  v5 = a2[1];
-  v6 = a2[4] / v3;
-  v15 = a2[9];
-  v7 = v15;
-  v8 = a2[8] * a2[8];
-  v18 = a2[10];
-  v9 = *v2;
-  v10 = v2[2] * v2[2];
-  *(float *)(result + 4) = v6;
-  v16 = v8 + v7 * v15 + v18 * v18;
-  *(float *)(result + 8) = v2[8] / v16;
-  *(float *)(result + 24) = v2[9] / v16;
-  v19 = v5 * v5 + v10 + v9 * v9;
-  *(float *)(result + 16) = v2[1] / v19;
-  *(float *)(result + 32) = v2[2] / v19;
-  *(float *)(result + 36) = v2[6] / v3;
-  *(float *)result = *v2 / v19;
-  *(float *)(result + 20) = v2[5] / v3;
-  v11 = v2[10] / v16;
-  *(_DWORD *)(result + 12) = 0;
-  *(_DWORD *)(result + 28) = 0;
-  *(_DWORD *)(result + 44) = 0;
-  *(_DWORD *)(result + 60) = 1065353216;
-  *(float *)(result + 40) = v11;
-  v12 = v2[14];
-  v20 = v2[12];
-  v17 = v2[13];
-  v13 = v12 * *(float *)(result + 36);
-  *(float *)(result + 48) = -(v17 * *(float *)(result + 16) + v12 * *(float *)(result + 32) + *(float *)result * v20);
-  v14 = -(v17 * *(float *)(result + 24) + v20 * *(float *)(result + 8) + v12 * *(float *)(result + 40));
-  *(float *)(result + 52) = -(v13 + v20 * *(float *)(result + 4) + v17 * *(float *)(result + 20));
-  *(float *)(result + 56) = v14;
-  return result;
+  //FIXME: This is a bit more complicated because a2 is still being read while a1 has been written.
+  //       This means the order of operation suddenly becomes critical if regions in a1 and a2 overlap.
+
+  // Get squared length
+  float v19 = a2[0 * 4 + 0] * a2[0 * 4 + 0] +
+              a2[0 * 4 + 1] * a2[0 * 4 + 1] +
+              a2[0 * 4 + 2] * a2[0 * 4 + 2];
+  double v3 = a2[1 * 4 + 0] * a2[1 * 4 + 0] +
+              a2[1 * 4 + 1] * a2[1 * 4 + 1] +
+              a2[1 * 4 + 2] * a2[1 * 4 + 2];
+  float v16 = a2[2 * 4 + 0] * a2[2 * 4 + 0] +
+              a2[2 * 4 + 1] * a2[2 * 4 + 1] +
+              a2[2 * 4 + 2] * a2[2 * 4 + 2];
+
+  // Can't trust a2 after this (might have been written):
+
+  a1[0 * 4 + 1] = a2[1 * 4 + 0] / v3;
+  a1[0 * 4 + 2] = a2[2 * 4 + 0] / v16;
+
+  a1[1 * 4 + 2] = a2[2 * 4 + 1] / v16;
+
+
+  a1[1 * 4 + 0] = a2[0 * 4 + 1] / v19;
+  a1[2 * 4 + 0] = a2[0 * 4 + 2] / v19;
+
+  a1[2 * 4 + 1] = a2[1 * 4 + 2] / v3;
+
+  a1[0 * 4 + 0] = a2[0 * 4 + 0] / v19;
+
+  a1[1 * 4 + 1] = a2[1 * 4 + 1] / v3;
+
+  v11 = a2[2 * 4 + 2] / v16;
+
+  a1[0 * 4 + 3] = 0.0f;
+  a1[1 * 4 + 3] = 0.0f;
+  a1[2 * 4 + 3] = 0.0f;
+  a1[3 * 4 + 3] = 1.0f;
+
+  a1[2 * 4 + 2] = v11;
+
+  v20 = a2[3 * 4 + 0];
+  v17 = a2[3 * 4 + 1];
+  v12 = a2[3 * 4 + 2];
+
+  v13 = v12 * a1[2 * 4 + 1];
+
+  a1[3 * 4 + 0] = -(v17 * a1[1 * 4 + 0] + v12 * a1[2 * 4 + 0] + a1[0 * 4 + 0] * v20);
+  v14 = -(v17 * a1[1 * 4 + 2] + v20 * a1[0 * 4 + 2] + v12 * a1[2 * 4 + 2]);
+
+  a1[3 * 4 + 1] = -(v13 + v20 * a1[0 * 4 + 1] + v17 * a1[1 * 4 + 1];
+  a1[3 * 4 + 2] = v14;
+  return a1;
 }
 
 // [More matrix functions follow]
