@@ -330,46 +330,55 @@ int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3) {
 
 
 
-
 //----- (00447370) --------------------------------------------------------
-int __cdecl sub_447370(int *a1, _DWORD *a2, _DWORD *a3) {
-  int v3; // esi
-  size_t v4; // edi
-  int result; // eax
-  int v6; // eax
-  char *v7; // esi
-  int v8; // eax
-  int v9; // esi
+// Loads texture from textureblock
+// a1 = 3 Pointers into offset table (a, b, c)
+// a2 = receives data read from a
+// a3 = receives data read from b (optional, might be garbage!)
+int __cdecl sub_447370(const uint32_t* a1, uint32_t* a2, uint32_t* a3) {
+  uint8_t* v7; // esi
 
-  v3 = *a1;
-  v4 = a1[2] - *a1;
-  if ( (signed int)(v4 + 128) <= sub_445BF0() )
-  {
-    v6 = a1[1];
-    if ( v6 )
-      v4 = v6 - v3;
-    v7 = (char *)((sub_445B40() + 63) & 0xFFFFFFC0);
-    sub_42D640(3, *a1, v7, v4);
-    *a2 = v7;
-    v8 = a1[1];
-    if ( v8 )
-    {
-      v9 = (int)&v7[v4 + 63];
-      v4 = a1[2] - v8;
-      v7 = (char *)(v9 & 0xFFFFFFC0);
-      sub_42D640(3, v8, v7, v4);
-      *a3 = v7;
-    }
-    result = sub_445B20((int)&v7[v4]);
-  }
-  else
-  {
-    result = (int)a2;
+  // Get length of texture data, assuming a1[1] is 0
+  int32_t v4 = a1[2] - a1[0];
+
+  // Validate length of chunk, possibly error out
+  if ((v4 + 128) > sub_445BF0()) {
     *a3 = 0;
     *a2 = 0;
     dword_50C610 = 1;
+    return a2;
   }
-  return result;
+
+  // If a1[1] is not 0, then we need to fixup the texture size
+  if ( a1[1] ) {
+    v4 = a1[1] - a1[0];
+  }
+
+  // Get the current buffer offset and align it to the next 64 byte boundary
+  v7 = align_up(sub_445B40(), 64);
+
+  // Read texturedata from modelblock at a1[0] to v7
+  sub_42D640(3, a1[0], v7, v4);
+  *a2 = v7;
+
+  // Load the optional texture chunk
+  if (a1[1]) {
+
+    // Calculate length of optional texture chunk
+    v4 = a1[2] - a1[1];
+
+    // Allocate space in the buffer for the optional chunk
+    v7 = align_up(v7 + v4, 64);
+
+  // Read optional texturedata from modelblock at a1[1] to v7
+    sub_42D640(3, a1[1], v7, v4);
+    *a3 = v7;
+  }
+  //FIXME: Shouldn't there be an `else` case which sets `*a3 = 0` ?!
+  //       Bug in original game code?
+
+  // Set buffer offset
+  return sub_445B20(v7 + v4);
 }
 
 
@@ -392,9 +401,9 @@ int __cdecl sub_447370(int *a1, _DWORD *a2, _DWORD *a3) {
 // Called from the model loader to (presumably) load a texture
 // a1 = ???
 // a2 = texture index
-// a3 = pointer to `struct {void* Texture, void* something};` (?) which receives output
-// a4 = also an output, no idea, receives the equivalent of a3[1]?
-void __usercall sub_447490(int a1@<ebp>, int a2, char **a3, int *a4) {
+// a3 = Output: Pointer to mandatory texture data
+// a4 = Output: Pointer to optional texture data
+void __usercall sub_447490(int a1@<ebp>, int a2, uint32_t* a3, uint32_t* a4) {
   uint32_t v8[3]; // [esp+Ch] [ebp-Ch]
 
   // Check texture index boundaries
@@ -407,8 +416,8 @@ void __usercall sub_447490(int a1@<ebp>, int a2, char **a3, int *a4) {
   // Load texture from cache
   uint32_t* v4 = dword_E93860[a2];
   if (v4) {
-    *a3 = v4[0];
-    *a4 = v4[1];
+    *a3 = v4[0]; // Pointer to mandatory data
+    *a4 = v4[1]; // Pointer to optional data
     return;
   }
 
@@ -418,7 +427,8 @@ void __usercall sub_447490(int a1@<ebp>, int a2, char **a3, int *a4) {
     v8[v6] = swap32(v8[v6]);
   }
 
-  //FIXME: ???
+  // Read texture data from file offsets
+  // This sets a3 and a4
   sub_447370(v8, a3, a4);
 
   //FIXME: ???
