@@ -341,7 +341,7 @@ int __cdecl sub_447370(const uint32_t* a1, uint32_t* a2, uint32_t* a3) {
   // Get length of texture data, assuming a1[1] is 0
   int32_t v4 = a1[2] - a1[0];
 
-  // Validate length of chunk, possibly error out
+  // Check if there is enough room left in the buffer
   if ((v4 + 128) > sub_445BF0()) {
     *a3 = 0;
     *a2 = 0;

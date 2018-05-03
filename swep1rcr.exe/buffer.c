@@ -30,3 +30,9 @@ int sub_445B40() {
 BOOL __cdecl sub_445B50(unsigned int a1) {
   return a1 < sub_445B40();
 }
+
+//----- (00445BF0) --------------------------------------------------------
+// Get remaining number of bytes in buffer
+int sub_445BF0() {
+  return dword_E981E4 - sub_445B40();
+}
