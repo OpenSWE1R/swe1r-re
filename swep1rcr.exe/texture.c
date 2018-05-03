@@ -1,11 +1,14 @@
-# Getting texture dimensions
+/* Functions to work with textures */
 
-```C
+// Research based on patched US version
+
+//----- (0048A9E0) --------------------------------------------------------
+// Getting texture dimensions for texture-upload.
+// The size is restricted by the GPU capabilities.
 // a1 = in_width
 // a2 = in_height
 // a3 = &out_width
 // a4 = &out_height
-//----- (0048A9E0) --------------------------------------------------------
 void sub_48A9E0(unsigned int a1, unsigned int a2, unsigned int *a3, unsigned int *a4) {
   unsigned int min_width = *(_DWORD *)(dword_52E618 + 32);
   unsigned int max_width = *(_DWORD *)(dword_52E618 + 40);
@@ -45,12 +48,10 @@ void sub_48A9E0(unsigned int a1, unsigned int a2, unsigned int *a3, unsigned int
     *a4 = height;
   }
 }
-```
 
-# Loading texture
 
-```C
 //----- (0048A5E0) --------------------------------------------------------
+// Loading texture / Create DirectDraw surfaces and fill with data
 // a1 = ?
 // a2 = texture object
 // a3 = number of mipmaps
@@ -256,13 +257,10 @@ LABEL_43:
     result = v15->Release();
   return result;
 }
-```
 
-# Color inversion?
-
-```C
 //----- (00431DF0) --------------------------------------------------------
-// (not actually a function)
+// Color inversion?
+// (not actually a function?)
 // a3 = must be anything but "invcol"
 // Probably returns void
 int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3) {
@@ -320,4 +318,3 @@ int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3) {
   }
   return result;
 }
-```
