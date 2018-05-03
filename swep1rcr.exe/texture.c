@@ -385,7 +385,43 @@ int __cdecl sub_447370(const uint32_t* a1, uint32_t* a2, uint32_t* a3) {
 
 
 
+//----- (00446C20) --------------------------------------------------------
+char *__cdecl sub_446C20(char **a1, int *a2)
+{
+  int v2; // esi
+  __int16 v3; // bx
+  __int16 v4; // dx
+  int v5; // edi
+  int v6; // ebp
+  int v7; // eax
+  char *result; // eax
 
+  v2 = (int)(a1 - 14);
+  LOBYTE(v4) = *((_WORD *)a1 - 20) >> 8;
+  HIBYTE(v4) = *((_WORD *)a1 - 20);
+  if ( *(a1 - 7) )
+  {
+    v5 = v4;
+    LOBYTE(v3) = *((_WORD *)a1 - 19) >> 8;
+    HIBYTE(v3) = *((_WORD *)a1 - 19);
+    v6 = sub_445C90(v4);
+    v7 = sub_445C90(v3);
+    sub_445EE0(
+      *(unsigned __int8 *)(v2 + 12),
+      *(unsigned __int8 *)(v2 + 13),
+      v5,
+      v3,
+      v6,
+      v7,
+      a1,
+      a2,
+      1,
+      *(_BYTE *)(*(_DWORD *)(v2 + 28) + 3));
+  }
+  result = *a1;
+  *(_DWORD *)(*a1 + 10) = v2;
+  return result;
+}
 
 
 
