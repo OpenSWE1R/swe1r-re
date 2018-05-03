@@ -326,6 +326,68 @@ int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3) {
 
 
 
+
+
+
+
+
+//----- (00447370) --------------------------------------------------------
+int __cdecl sub_447370(int *a1, _DWORD *a2, _DWORD *a3) {
+  int v3; // esi
+  size_t v4; // edi
+  int result; // eax
+  int v6; // eax
+  char *v7; // esi
+  int v8; // eax
+  int v9; // esi
+
+  v3 = *a1;
+  v4 = a1[2] - *a1;
+  if ( (signed int)(v4 + 128) <= sub_445BF0() )
+  {
+    v6 = a1[1];
+    if ( v6 )
+      v4 = v6 - v3;
+    v7 = (char *)((sub_445B40() + 63) & 0xFFFFFFC0);
+    sub_42D640(3, *a1, v7, v4);
+    *a2 = v7;
+    v8 = a1[1];
+    if ( v8 )
+    {
+      v9 = (int)&v7[v4 + 63];
+      v4 = a1[2] - v8;
+      v7 = (char *)(v9 & 0xFFFFFFC0);
+      sub_42D640(3, v8, v7, v4);
+      *a3 = v7;
+    }
+    result = sub_445B20((int)&v7[v4]);
+  }
+  else
+  {
+    result = (int)a2;
+    *a3 = 0;
+    *a2 = 0;
+    dword_50C610 = 1;
+  }
+  return result;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //----- (00447490) --------------------------------------------------------
 // Called from the model loader to (presumably) load a texture
 // a1 = ???
