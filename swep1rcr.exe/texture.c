@@ -387,25 +387,20 @@ int __cdecl sub_447370(const uint32_t* a1, uint32_t* a2, uint32_t* a3) {
 //----- (00445C90) --------------------------------------------------------
 int __cdecl sub_445C90(int32_t a1) {
   int v3; // ecx
-  int result; // eax
 
-  int32_t v1 = 0x40000000;
-  int32_t v2 = 31;
-  while (v2) {
-
+  uint32_t v1 = 0x40000000;
+  for(int32_t v2 = 0; v2 < 31; v2++) {
     v3 = a1 & v1;
     v1 >>= 1;
 
     if ( v3 ) {
       break;
     }
-
-    --v2;
   }
 
-  result = 2 * v1;
+  int result = v1 << 1;
   if ( result < a1 ) {
-    result *= 2;
+    result <<= 1;
   }
 
   // Result is at least 16
