@@ -386,40 +386,57 @@ int __cdecl sub_447370(const uint32_t* a1, uint32_t* a2, uint32_t* a3) {
 
 
 //----- (00446C20) --------------------------------------------------------
-char *__cdecl sub_446C20(char **a1, int *a2)
-{
-  int v2; // esi
-  __int16 v3; // bx
-  __int16 v4; // dx
-  int v5; // edi
-  int v6; // ebp
-  int v7; // eax
-  char *result; // eax
+// a1 = Pointer to pointer to mandatory texture data [part of some model structure?]
+// a2 = Pointer to pointer to optional texture data [part of some model structure?]
+typedef struct {
+  uint8_t unk0[3]; // +0
+  uint8_t unk3; // +3
+} A1Unk;
+typedef struct {
+  uint8_t unk_neg56[12]; // -56 (-14*4)
+  uint8_t unk_neg44; // -44 (-14*4 + 12)
+  uint8_t unk_neg43; // -43 (-14*4 + 13)
+  uint8_t unk_neg42[2]; // -42
+  uint16_t unk_neg40; // -40
+  uint16_t unk_neg38; // -38
+  uint8_t unk_neg36[8]; // -36
+  A1Unk* unk_neg28; // -28 (-14*4 + 28)
+  void* texture_data; // 0 [a1 points here]
+  void* optional_texture_data; // 4 [a2 should point here]
+} A1; // Probably part of the model structure
+char *__cdecl sub_446C20(uint32_t* _a1, uint32_t* _a2) {
 
-  v2 = (int)(a1 - 14);
-  LOBYTE(v4) = *((_WORD *)a1 - 20) >> 8;
-  HIBYTE(v4) = *((_WORD *)a1 - 20);
-  if ( *(a1 - 7) )
-  {
-    v5 = v4;
-    LOBYTE(v3) = *((_WORD *)a1 - 19) >> 8;
-    HIBYTE(v3) = *((_WORD *)a1 - 19);
-    v6 = sub_445C90(v4);
-    v7 = sub_445C90(v3);
+  //FIXME: Do some upcast of the a1 and a2 arguments here
+  A1* a1 = UPCAST(_a1, A1,texture_data);
+
+  uint16_t v4 = swap16(a1->unk_neg40);
+
+  if (a1->unk_neg28) {
+    uint16_t v3 = swap16(a1->unk_neg38);
+
+    // Get width and height?
+    int v6 = sub_445C90(v4);
+    int v7 = sub_445C90(v3);
+
+    // Process texture data
     sub_445EE0(
-      *(unsigned __int8 *)(v2 + 12),
-      *(unsigned __int8 *)(v2 + 13),
-      v5,
-      v3,
-      v6,
-      v7,
-      a1,
-      a2,
-      1,
-      *(_BYTE *)(*(_DWORD *)(v2 + 28) + 3));
+      a1->unk_neg44, // ?
+      a1->unk_neg43, // ?
+      v4, // Width shift factor?
+      v3, // Height shift factor?
+      v6, // Width
+      v7, // Height
+      _a1, // Texture data
+      _a2, // Optional texture data
+      1, // ?
+      a1->unk_neg28->unk3); // ?
   }
-  result = *a1;
-  *(_DWORD *)(*a1 + 10) = v2;
+
+  //FIXME: Broken RE? I doubt they just write a random pixel in the texture data..
+  //FIXME: Actually.. I think a1->texture_data might point to something else when returning from sub_445EE0
+  uint32_t* result = a1->texture_data;
+  *(uint32_t *)((uintptr_t)a1->texture_data + 10) = &a1->unk_neg56[0];
+
   return result;
 }
 
