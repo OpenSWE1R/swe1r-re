@@ -384,6 +384,35 @@ int __cdecl sub_447370(const uint32_t* a1, uint32_t* a2, uint32_t* a3) {
 
 
 
+//----- (00445C90) --------------------------------------------------------
+int __cdecl sub_445C90(int a1)
+{
+  signed int v1; // eax
+  signed int v2; // edx
+  int v3; // ecx
+  int result; // eax
+
+  v1 = 0x40000000;
+  v2 = 31;
+  do
+  {
+    if ( !v2 )
+      break;
+    v3 = a1 & v1;
+    v1 >>= 1;
+    --v2;
+  }
+  while ( !v3 );
+  result = 2 * v1;
+  if ( result < a1 )
+    result *= 2;
+  if ( result < 16 )
+    result = 16;
+  return result;
+}
+
+
+
 
 //----- (00446C20) --------------------------------------------------------
 // a1 = Pointer to pointer to mandatory texture data [part of some model structure?]
