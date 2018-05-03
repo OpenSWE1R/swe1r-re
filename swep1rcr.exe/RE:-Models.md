@@ -199,33 +199,6 @@ int *__cdecl sub_448780(int32_t a1) {
 }
 ```
 
-### Buffer helpers
-
-```C
-//----- (00445B20) --------------------------------------------------------
-// Sets a buffer / file pointer?
-int __cdecl sub_445B20(int a1) {
-  dword_E98200[dword_50C614] = a1;
-  return nullsub_3();
-}
-```
-
-```
-//----- (00445B40) --------------------------------------------------------
-// Used like malloc, but seems to tell the current file / buffer offset?
-int sub_445B40() {
-  return dword_E98200[dword_50C614];
-}
-```
-
-```C
-//----- (00445B50) --------------------------------------------------------
-// Something like EOF?
-BOOL __cdecl sub_445B50(unsigned int a1) {
-  return a1 < sub_445B40();
-}
-```
-
 # Parse model?!
 
 ```C
