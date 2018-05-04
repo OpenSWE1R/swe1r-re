@@ -425,7 +425,6 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
   int v25; // ebx
   unsigned int v26; // ecx
   _WORD *v27; // edi
-  int v28; // ecx
   int v29; // ebx
   int v30; // ecx
   _WORD *v31; // ebp
@@ -655,16 +654,19 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
   v19 = v12;
   v18 = v129;
 
-  if ( a1 == 4 && !a2 )
-  {
+  if ( a1 == 4 && a2 == 0 ) {
     v20 = a4;
     v21 = 0;
-    if ( a4 <= 0 )
+
+    // Check height
+    if ( a4 <= 0 ) {
       goto LABEL_31;
+    }
+
     v22 = a4;
     v124 = a4;
-    do
-    {
+    do {
+      //FIXME: Undo this for-loop
       for ( i = 0; i < a3; *(v18 - 1) = v24 | 16 * (v24 | 16 * (v24 | 16 * (v24 & 0xF))) )
       {
         i += 2;
@@ -673,23 +675,26 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
                                                                 * (((unsigned int)(unsigned __int8)*v19 >> 4) | 16 * (((unsigned int)(unsigned __int8)*v19 >> 4) | 16 * (((unsigned __int8)*v19 >> 4) & 0xF)));
         v24 = *v19++ & 0xF;
       }
+
+
       v16 = a5;
-      if ( i < a5 )
-      {
+
+      if ( i < a5 ) {
         v25 = a5 - i;
         v26 = (unsigned int)(a5 - i) >> 1;
         memset(v18, 0, 4 * v26);
         v27 = &v18[2 * v26];
-        v28 = v25 & 1;
         v18 += v25;
-        while ( v28 )
-        {
+
+        int v28 = v25 & 1;
+        while ( v28 ) {
           *v27 = 0;
           ++v27;
           --v28;
         }
-        v16 = a5;
+
       }
+
       --v22;
     }
     while ( v22 );
@@ -1227,33 +1232,32 @@ LABEL_30:
       goto LABEL_31;
     }
   }
+
 LABEL_31:
-  if ( v21 >= a6 )
-  {
-    v29 = a3;
-  }
-  else
-  {
-    v29 = a3;
+  v29 = a3;
+
+  //FIXME: for-loop from 0 to `a6 - v21` ?
+  if ( v21 < a6 ) {
     v115 = a6 - v21;
-    do
-    {
-      if ( v16 > 0 )
-      {
+    do {
+
+      // FIXME: for-loop from 0 to `v16` ?
+      if ( v16 > 0 ) {
         v30 = v16;
-        do
-        {
-          v31 = v18;
+        do {
+          *v18 = v18[-a3];
           ++v18;
+
           --v30;
-          *(v18 - 1) = v31[-a3];
         }
         while ( v30 );
       }
+
       --v115;
     }
     while ( v115 );
   }
+
   if ( v127 )
   {
     v32 = v129;
