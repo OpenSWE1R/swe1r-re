@@ -398,16 +398,23 @@ int __cdecl sub_447370(const uint32_t* a1, uint32_t* a2, uint32_t* a3) {
 
 
 //----- (00445EE0) --------------------------------------------------------
-int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7, int *a8, char a9, char a10)
-{
-  int result; // eax
+// Process textue data
+// Typically called like `sub_445EE0(3, 0, 64, 128, 64, 128, v1, &v11, 1, 0);`
+// a1 = Unknown, maybe textureblock index?
+// a2 = Unknown, often zero?
+// a3 = NPOT width
+// a4 = NPOT height
+// a5 = POT width
+// a6 = POT Height
+// a7 = Pointer to texture data, also used as output: Receives pointer to material?
+// a8 = Pointer to optional texture data
+// a9 = Unknown, always 0 or 1
+// a10 = Unknown, flags? only bit 0x10 and 0x01 are used
+int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7, int *a8, char a9, char a10) {
   int v11; // ebx
   char *v12; // ebp
   char *v13; // edi
-  int v14; // edx
-  int *v15; // ecx
   int v16; // eax
-  const void *v17; // esi
   _WORD *v18; // edx
   char *v19; // esi
   int v20; // edi
@@ -524,44 +531,70 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
   int *v131; // [esp+28h] [ebp-E4h]
   char v132; // [esp+2Ch] [ebp-E0h]
 
-  result = (int)a8;
-  v11 = *a8;
-  v127 = 0;
-  v126 = 0;
+  // Read the 2 texture pointers
   v12 = *a7;
+  v11 = *a8;
+
+  // Clear the 2 texture pointers
+  // They will be reused as outputs
   *a7 = 0;
   *a8 = 0;
-  if ( !v12 )
-    return result;
+
+  if ( !v12 ) {
+    return a8;
+  }
+
+  //FIXME: Unknown
+  v127 = 0;
+  v126 = 0;
+
+  // Load default material?
   v13 = sub_48E680(aDataDefaultMat);
+
+  // Unknown
   v131 = (int *)v13;
   sub_408FB0((unsigned int)v12, (int)v13);
   *a7 = v13;
   v125 = &v132;
+
+
+  // If a10 bit 0x10 is set, double the width
   v128 = a3;
-  v130 = a4;
-  if ( a10 & 0x10 )
-  {
+  if ( a10 & 0x10 ) {
     v127 = 1;
     v128 = 2 * a3;
     if ( 2 * a3 > a5 )
       a5 = sub_445C90(2 * a3);
   }
-  if ( a10 & 1 )
-  {
+
+  // If a10 bit 0x01 is set, double the height
+  v130 = a4;
+  if ( a10 & 1 ) {
     v126 = 1;
     v130 = 2 * a4;
     if ( 2 * a4 > a6 )
       a6 = sub_445C90(2 * a4);
   }
+
+  //FIXME: Unknown, but probably allocates space for texture data?
   v129 = (_WORD *)sub_408E60((unsigned int)v12, 2 * a5 * a6);
+
+  // Unknown, something to do with material
   sprintf(v13, aRovermatic);
+
+  // Unknown, something to do with material
   *(float *)(v13 + 10) = (double)v128 / (double)a5;
   *(float *)(v13 + 14) = (double)v130 / (double)a6;
+
+  // Unknown
   *((_DWORD *)v13 + 16) = 0;
-  if ( (a1 || a2 != 3) && (a1 != 5 || a2 != 1 && a2 != 3) && a1 != 4 && (a1 != 3 || a2) )
-  {
-    v14 = (int)(v13 + 68);
+
+  // Set up material information?
+  //FIXME: What is this condition?
+  if ( (a1 != 0 || a2 != 3) &&
+       (a1 != 5 || a2 != 1 && a2 != 3) &&
+       (a1 != 4) &&
+       (a1 != 3 || a2 != 0) ) {
     *((_DWORD *)v13 + 19) = 5;
     *((_DWORD *)v13 + 20) = 5;
     *((_DWORD *)v13 + 21) = 5;
@@ -577,10 +610,7 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
     *((_DWORD *)v13 + 27) = 3;
     *((_DWORD *)v13 + 30) = 7;
     *((_DWORD *)v13 + 31) = 1;
-  }
-  else
-  {
-    v14 = (int)(v13 + 68);
+  } else {
     *((_DWORD *)v13 + 18) = 16;
     *((_DWORD *)v13 + 19) = 4;
     *((_DWORD *)v13 + 20) = 4;
@@ -597,27 +627,34 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
     *((_DWORD *)v13 + 30) = 4;
     *((_DWORD *)v13 + 31) = 2;
   }
-  v15 = v131;
+
   v16 = a5;
   v114 = v12;
+
+  // Move texture dimensions to material?
   v131[32] = a5;
-  v15[33] = a6;
-  v15[34] = 1;
-  v15[35] = 0;
-  *(_DWORD *)v125 = 0;
+  v131[33] = a6;
+
+  //FIXME: Unknown
+  v131[34] = 1;
+  v131[35] = 0;
+
+  //FIXME: Fill some data block
+  *((_DWORD *)v125 + 0) = 0;
   *((_DWORD *)v125 + 1) = 0;
   *((_DWORD *)v125 + 2) = 0;
   *((_DWORD *)v125 + 3) = a5;
   *((_DWORD *)v125 + 4) = a6;
   *((_DWORD *)v125 + 5) = 2 * a5 * a6;
   *((_DWORD *)v125 + 6) = 2 * a5;
-  v17 = (const void *)v14;
-  v18 = v129;
   *((_DWORD *)v125 + 7) = a5;
-  qmemcpy(v125 + 32, v17, 0x38u);
-  v19 = v12;
-  *((_DWORD *)v125 + 22) = v18;
+  qmemcpy(v125 + 32, (int)(v13 + 68), 0x38u);
+  *((_DWORD *)v125 + 22) = v129;
   *((_DWORD *)v125 + 23) = 0;
+
+  v19 = v12;
+  v18 = v129;
+
   if ( a1 == 4 && !a2 )
   {
     v20 = a4;
