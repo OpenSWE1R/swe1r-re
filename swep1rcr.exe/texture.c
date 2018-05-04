@@ -663,19 +663,22 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
       goto LABEL_31;
     }
 
+    //FIXME: v24 should be set to zero here, because the last value in ecx
+    //       was v21, which has been set to 0.
+
     v22 = a4;
     v124 = a4;
     do {
-      //FIXME: Undo this for-loop
-      for ( i = 0; i < a3; *(v18 - 1) = v24 | 16 * (v24 | 16 * (v24 | 16 * (v24 & 0xF))) )
-      {
-        i += 2;
-        v18 += 2;
-        *(v18 - 2) = ((unsigned int)(unsigned __int8)*v19 >> 4) | 16
-                                                                * (((unsigned int)(unsigned __int8)*v19 >> 4) | 16 * (((unsigned int)(unsigned __int8)*v19 >> 4) | 16 * (((unsigned __int8)*v19 >> 4) & 0xF)));
-        v24 = *v19++ & 0xF;
-      }
 
+      i = 0;
+      while(i < a3) {
+        v18[0] = ((unsigned int)(unsigned __int8)*v19 >> 4) | 16 * (((unsigned int)(unsigned __int8)*v19 >> 4) | 16 * (((unsigned int)(unsigned __int8)*v19 >> 4) | 16 * (((unsigned __int8)*v19 >> 4) & 0xF)));
+        v24 = *v19++ & 0xF;
+        v18[1] = v24 | 16 * (v24 | 16 * (v24 | 16 * (v24 & 0xF)));
+        v18 += 2;
+
+        i += 2;
+      }
 
       v16 = a5;
 
@@ -686,11 +689,9 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
         v27 = &v18[2 * v26];
         v18 += v25;
 
-        int v28 = v25 & 1;
-        while ( v28 ) {
+        if ( v25 & 1 ) {
           *v27 = 0;
           ++v27;
-          --v28;
         }
 
       }
@@ -698,17 +699,19 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
       --v22;
     }
     while ( v22 );
+
     goto LABEL_30;
   }
+
+
   v21 = a1;
-  if ( a1 != 3 || a2 )
-  {
-    if ( a1 != 4 || a2 != 1 )
-    {
-      if ( a1 == 2 )
-      {
-        if ( !a2 )
-        {
+  if ( a1 != 3 || a2 != 0) {
+    if ( a1 != 4 || a2 != 1 ) {
+      
+
+      if ( a1 == 2 ) {
+
+        if ( a2 == 0 ) {
           v20 = a4;
           v21 = 0;
           if ( a4 > 0 )
@@ -752,6 +755,7 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
           }
           goto LABEL_31;
         }
+
         if ( a2 == 1 )
         {
           v20 = a4;
@@ -803,6 +807,7 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
           goto LABEL_31;
         }
       }
+
       if ( a1 == 5 )
       {
         if ( a2 == 1 )
@@ -848,6 +853,7 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
           }
           goto LABEL_31;
         }
+
         if ( a2 == 2 )
         {
           v20 = a4;
@@ -892,12 +898,11 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
           goto LABEL_31;
         }
       }
-      if ( a1 || a2 != 2 )
-      {
-        if ( a1 == 5 )
-        {
-          if ( a2 == 3 )
-          {
+
+      if ( a1 != 0 || a2 != 2 ) {
+
+        if ( a1 == 5 ) {
+          if ( a2 == 3 ) {
             v20 = a4;
             v21 = 0;
             if ( a4 > 0 )
@@ -942,8 +947,8 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
             }
             goto LABEL_31;
           }
-          if ( a2 == 7 )
-          {
+
+          if ( a2 == 7 ) {
             v20 = a4;
             v21 = 0;
             if ( a4 > 0 )
@@ -989,13 +994,11 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
             goto LABEL_31;
           }
         }
-        if ( a1 || a2 != 3 )
-        {
+
+        if ( a1 != 0 || a2 != 3 ) {
           v21 = v123;
           v20 = a4;
-        }
-        else
-        {
+        } else {
           v20 = a4;
           if ( a4 > 0 )
           {
@@ -1044,8 +1047,11 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
             goto LABEL_30;
           }
         }
+
+
         goto LABEL_31;
       }
+
       v20 = a4;
       if ( a4 > 0 )
       {
