@@ -430,24 +430,26 @@ int __cdecl sub_445C90(int32_t a1) {
 
 
 //----- (00446C20) --------------------------------------------------------
+// Loads the pixel data for a texture chunk for a model
 // a1 = Pointer to pointer to mandatory texture data [part of some model structure?]
 // a2 = Pointer to pointer to optional texture data [part of some model structure?]
 typedef struct {
-  uint8_t unk0[3]; // +0
+  uint8_t unk_pad0[3]; // +0
   uint8_t unk3; // +3
-} A1Unk;
+} A1Unk; // SWR_MODEL_Section5_b
 typedef struct {
-  uint8_t unk_neg56[12]; // -56 (-14*4)
-  uint8_t unk_neg44; // -44 (-14*4 + 12)
-  uint8_t unk_neg43; // -43 (-14*4 + 13)
-  uint8_t unk_neg42[2]; // -42
-  uint16_t unk_neg40; // -40
-  uint16_t unk_neg38; // -38
-  uint8_t unk_neg36[8]; // -36
-  A1Unk* unk_neg28; // -28 (-14*4 + 28)
-  void* texture_data; // 0 [a1 points here]
-  void* optional_texture_data; // 4 [a2 should point here]
-} A1; // Probably part of the model structure
+  uint8_t unk_pad_neg56[12]; // -56 (-14*4) // 0x0
+  uint8_t unk_neg44; // -44 (-14*4 + 12) // 0xC
+  uint8_t unk_neg43; // -43 (-14*4 + 13) // 0xD
+  uint8_t unk_pad_neg42[2]; // -42 // 0xE
+  uint16_t unk_neg40; // -40 // 0x10
+  uint16_t unk_neg38; // -38 // 0x12
+  uint8_t unk_pad_neg36[8]; // -36 // 0x14
+  A1Unk* unk_neg28; // -28 (-14*4 + 28) //  0x1C
+  uint8_t unk_pad_neg24[24]; // -24 // 0x20
+  void* texture_data; // 0 [a1 points here] // 0x38
+  void* optional_texture_data; // 4 [a2 should point here] // 0x3C
+} A1; // Model structure, SWR_MODEL_Section5 
 char *__cdecl sub_446C20(uint32_t* _a1, uint32_t* _a2) {
 
   //FIXME: Do some upcast of the a1 and a2 arguments here
@@ -528,7 +530,7 @@ void __usercall sub_447490(int a1@<ebp>, int a2, uint32_t* a3, uint32_t* a4) {
   // This sets a3 and a4
   sub_447370(v8, a3, a4);
 
-  //FIXME: ???
+  // Load texture pixel data for this texture chunk
   sub_446C20(a3, a4);
 
   // Add texture to cache
