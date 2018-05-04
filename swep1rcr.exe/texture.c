@@ -705,7 +705,50 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
 
 
   v21 = a1;
-  if ( a1 != 3 || a2 != 0) {
+  if ( a1 == 3 && a2 == 0) {
+    v20 = a4;
+    v21 = 0;
+    if ( a4 > 0 )
+    {
+      v40 = a4;
+      v124 = a4;
+      do
+      {
+        for ( k = 0; k < a3; k += 2 )
+        {
+          v18 += 2;
+          *(v18 - 2) = ((unsigned __int8)(*v19 & 0xF0) << 8) | 0xFFF;
+          v42 = ((*v19++ & 0xF) << 12) | 0xFFF;
+          *(v18 - 1) = v42;
+        }
+        v16 = a5;
+        if ( k < a5 )
+        {
+          v43 = a5 - k;
+          v44 = (unsigned int)(a5 - k) >> 1;
+          memset(v18, 0, 4 * v44);
+          v45 = &v18[2 * v44];
+          v46 = v43 & 1;
+          v18 += v43;
+          while ( v46 )
+          {
+            *v45 = 0;
+            ++v45;
+            --v46;
+          }
+          v16 = a5;
+        }
+        --v40;
+      }
+      while ( v40 );
+
+LABEL_30:
+      v20 = a4;
+      v21 = v124;
+      goto LABEL_31;
+    }
+  } else {
+
     if ( a1 != 4 || a2 != 1 ) {
       
 
@@ -808,10 +851,8 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
         }
       }
 
-      if ( a1 == 5 )
-      {
-        if ( a2 == 1 )
-        {
+      if ( a1 == 5 ) {
+        if ( a2 == 1 ) {
           v20 = a4;
           v21 = 0;
           if ( a4 > 0 )
@@ -854,8 +895,7 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
           goto LABEL_31;
         }
 
-        if ( a2 == 2 )
-        {
+        if ( a2 == 2 ) {
           v20 = a4;
           v21 = 0;
           if ( a4 > 0 )
@@ -1053,8 +1093,7 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
       }
 
       v20 = a4;
-      if ( a4 > 0 )
-      {
+      if ( a4 > 0 ) {
         v87 = a4;
         v124 = a4;
         do
@@ -1098,9 +1137,7 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
         while ( v87 );
         goto LABEL_30;
       }
-    }
-    else if ( a9 == 1 )
-    {
+    } else if ( a9 == 1 ) {
       v20 = a4;
       v21 = 0;
       if ( a4 > 0 )
@@ -1145,9 +1182,7 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
         while ( v117 );
         goto LABEL_30;
       }
-    }
-    else
-    {
+    } else {
       v20 = a4;
       v21 = 0;
       if ( a4 > 0 )
@@ -1193,49 +1228,6 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
         while ( v54 );
         goto LABEL_30;
       }
-    }
-  }
-  else
-  {
-    v20 = a4;
-    v21 = 0;
-    if ( a4 > 0 )
-    {
-      v40 = a4;
-      v124 = a4;
-      do
-      {
-        for ( k = 0; k < a3; k += 2 )
-        {
-          v18 += 2;
-          *(v18 - 2) = ((unsigned __int8)(*v19 & 0xF0) << 8) | 0xFFF;
-          v42 = ((*v19++ & 0xF) << 12) | 0xFFF;
-          *(v18 - 1) = v42;
-        }
-        v16 = a5;
-        if ( k < a5 )
-        {
-          v43 = a5 - k;
-          v44 = (unsigned int)(a5 - k) >> 1;
-          memset(v18, 0, 4 * v44);
-          v45 = &v18[2 * v44];
-          v46 = v43 & 1;
-          v18 += v43;
-          while ( v46 )
-          {
-            *v45 = 0;
-            ++v45;
-            --v46;
-          }
-          v16 = a5;
-        }
-        --v40;
-      }
-      while ( v40 );
-LABEL_30:
-      v20 = a4;
-      v21 = v124;
-      goto LABEL_31;
     }
   }
 
