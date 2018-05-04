@@ -385,26 +385,42 @@ int __cdecl sub_447370(const uint32_t* a1, uint32_t* a2, uint32_t* a3) {
 
 
 //----- (00445C90) --------------------------------------------------------
+// Calculate texture POT width or height from non-POT size
+// Results smaller than 16 will be raised to 16
 int __cdecl sub_445C90(int32_t a1) {
-  int v3; // ecx
 
-  uint32_t v1 = 0x40000000;
-  for(int32_t v2 = 0; v2 < 31; v2++) {
-    v3 = a1 & v1;
-    v1 >>= 1;
-
-    if ( v3 ) {
+  // Find leading 1 bit
+  int32_t bit = 0x40000000;
+  for(int32_t i = 0; i < 31; i++) {
+    int32_t hit = a1 & bit;
+    bit >>= 1;
+    if (hit) {
       break;
     }
   }
 
-  int result = v1 << 1;
+  // Get bit which has hit
+  // In case none (`input = 0`) or the the last bit hit (`input = 1`) we will
+  // get 0 here
+  int32_t result = bit << 1;
+
+  // If we are lower than the input, we take the next higher POT
+  // For example: input = 0, bit = 0, result = 0 => ok: 0
+  //              input = 1, bit = 0, result = 0 => too small, after shift: 0
+  //              input = 2, bit = 1, result = 2 => ok: 2
+  //              input = 3, bit = 1, result = 2 => too small; after shift: 4
+  //              input = 4, bit = 2, result = 4 => too small; after shift: 8
+  //              input = 5, bit = 2, result = 4 => too small; after shift: 8
+  //              input = 6, bit = 2, result = 4 => too small; after shift: 8
+  //              input = 7, bit = 2, result = 4 => too small; after shift: 8
+  //              input = 8, bit = 4, result = 8 => ok: 8
+  //              ...
   if ( result < a1 ) {
     result <<= 1;
   }
 
-  // Result is at least 16
-  if ( result < 16 ) {
+  // Result must be at least 16
+  if (result < 16) {
     result = 16;
   }
   return result;
