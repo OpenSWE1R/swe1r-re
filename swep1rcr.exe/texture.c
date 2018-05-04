@@ -590,31 +590,10 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
 
   // Set up material information?
   //FIXME: What is this condition?
-  if ( (a1 != 0 || a2 != 3) &&
-       (a1 != 5 || a2 != 1 && a2 != 3) &&
-       (a1 != 4) &&
-       (a1 != 3 || a2 != 0) ) {
-    *((_DWORD *)v13 + 17) = 2; // Bytes per pixel?
-    *((_DWORD *)v13 + 18) = 16; // Bits per pixel?
-
-    *((_DWORD *)v13 + 19) = 5; // R pixel bits?
-    *((_DWORD *)v13 + 20) = 5; // G pixel bits?
-    *((_DWORD *)v13 + 21) = 5; // B pixel bits?
-
-    *((_DWORD *)v13 + 22) = 11; // R pixel offset?
-    *((_DWORD *)v13 + 23) = 6; // G pixel offset?
-    *((_DWORD *)v13 + 24) = 1; // B pixel offset?
-
-    *((_DWORD *)v13 + 25) = 3;
-    *((_DWORD *)v13 + 26) = 3;
-    *((_DWORD *)v13 + 27) = 3;
-
-    *((_DWORD *)v13 + 28) = 1; // A pixel bits?
-    *((_DWORD *)v13 + 29) = 0; // A pixel offset?
-
-    *((_DWORD *)v13 + 30) = 7;
-    *((_DWORD *)v13 + 31) = 1;
-  } else {
+  if ((a1 == 0 && a2 == 3) ||
+      (a1 == 5 && (a2 == 1 || a2 == 3)) ||
+      (a1 == 4) ||
+      (a1 == 3 && a2 == 0)) {
     *((_DWORD *)v13 + 17) = 2; // Bytes per pixel?
     *((_DWORD *)v13 + 18) = 16; // Bits per pixel
 
@@ -635,6 +614,27 @@ int __cdecl sub_445EE0(int a1, int a2, int a3, int a4, int a5, int a6, char **a7
 
     *((_DWORD *)v13 + 30) = 4;
     *((_DWORD *)v13 + 31) = 2;
+  } else {
+    *((_DWORD *)v13 + 17) = 2; // Bytes per pixel?
+    *((_DWORD *)v13 + 18) = 16; // Bits per pixel?
+
+    *((_DWORD *)v13 + 19) = 5; // R pixel bits?
+    *((_DWORD *)v13 + 20) = 5; // G pixel bits?
+    *((_DWORD *)v13 + 21) = 5; // B pixel bits?
+
+    *((_DWORD *)v13 + 22) = 11; // R pixel offset?
+    *((_DWORD *)v13 + 23) = 6; // G pixel offset?
+    *((_DWORD *)v13 + 24) = 1; // B pixel offset?
+
+    *((_DWORD *)v13 + 25) = 3;
+    *((_DWORD *)v13 + 26) = 3;
+    *((_DWORD *)v13 + 27) = 3;
+
+    *((_DWORD *)v13 + 28) = 1; // A pixel bits?
+    *((_DWORD *)v13 + 29) = 0; // A pixel offset?
+
+    *((_DWORD *)v13 + 30) = 7;
+    *((_DWORD *)v13 + 31) = 1;
   }
 
   v16 = a5;
