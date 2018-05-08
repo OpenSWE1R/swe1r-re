@@ -1,38 +1,4 @@
-# Lookup text entry
 
-```C
-//----- (00421360) --------------------------------------------------------
-const char *__cdecl sub_421360(const char *a1)
-{
-  const char *result; // eax
-  char *v2; // edi
-  char *v3; // eax
-  const char **v4; // eax
-  CHAR *v5; // [esp+Ch] [ebp-104h]
-  CHAR SrcStr; // [esp+10h] [ebp-100h]
-
-  v5 = &SrcStr;
-  if ( !a1 )
-    return 0;
-  if ( !*a1 || *a1 != 47 || strlen(a1) == 1 )
-    return a1;
-  v2 = strchr(a1 + 1, 47) + 1;
-  if ( !lpSrcStr )
-    return v2;
-  strncpy(&SrcStr, a1 + 1, 0xFEu);
-  v3 = strchr(&SrcStr, 47);
-  if ( v3 )
-    *v3 = 0;
-  sub_4AB5D0(&SrcStr);
-  v4 = (const char **)bsearch(&v5, dword_4EB3C4, dword_4EB3CC, 4u, sub_4212F0);
-  if ( !v4 )
-    return v2;
-  result = &(*v4)[strlen(*v4) + 1];
-  if ( !*result )
-    return a1;
-  return result;
-}
-```
 
 ```C
 //----- (00421470) --------------------------------------------------------
@@ -52,7 +18,7 @@ const char *__cdecl sub_421470(const char *a1) {
 
 There are more functions nearby which look like text related too
 
-```
+```C
 //----- (00450530) --------------------------------------------------------
 int __cdecl sub_450530(__int16 a1, __int16 a2, char a3, char a4, char a5, char a6, int a7)
 {
