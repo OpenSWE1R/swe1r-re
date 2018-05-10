@@ -25,57 +25,73 @@ void sub_4104F0()
   if ( dword_4B5C40 )
     dword_4B5C40 = 0;
   v12 = dword_E35A98[0];
-  if ( sub_485880(88, 0) )
+
+  // F12
+  //FIXME: I believe this was screenshot?
+  if ( sub_485880(DIK_F12, 0) )
     sub_410430();
-  if ( !sub_485880(29, 0) || !sub_485880(46, 0) || !sub_485880(21, 0) || *(_DWORD *)(dword_50C454 + 8) != 9 )
+
+  // NOT [ Ctrl (Left) + C + Y ]
+  if ( !sub_485880(DIK_LCONTROL, 0) || !sub_485880(DIK_C, 0) || !sub_485880(DIK_Y, 0) || *(_DWORD *)(dword_50C454 + 8) != 9 )
   {
-    if ( sub_485880(157, 0) && sub_485880(49, 0) && sub_485880(37, 0) && *(_DWORD *)(dword_50C454 + 8) == 9 )
+    // Ctrl (Right) + N + K
+    if ( sub_485880(DIK_RCONTROL, 0) && sub_485880(DIK_N, 0) && sub_485880(DIK_K, 0) && *(_DWORD *)(dword_50C454 + 8) == 9 )
     {
       if ( dword_4D79EC )
         goto LABEL_146;
       dword_4D79EC = 1;
-      _cfltcvt_init_5();
+
+      // Enable Jinn Reeso
+      sub_44B530();
+
       sub_440550(45);
 LABEL_145:
       if ( !dword_4D79EC )
         return;
       goto LABEL_146;
     }
-    if ( sub_485880(59, 0) )
+
+    if ( sub_485880(DIK_F1, 0) )
     {
       if ( dword_4D79EC )
         goto LABEL_146;
       dword_4D79EC = 1;
-      dword_EC83D0 = 1667458609;
+      dword_EC83D0 = 1667458609; // 'ccf1'
       goto LABEL_145;
     }
-    if ( sub_485880(60, 0) )
+
+    if ( sub_485880(DIK_F2, 0) )
     {
       if ( dword_4D79EC )
         goto LABEL_146;
       dword_4D79EC = 1;
-      dword_EC83D0 = 1667458610;
+      dword_EC83D0 = 1667458610; // 'ccf2'
       goto LABEL_145;
     }
-    if ( sub_485880(61, 0) )
+
+    if ( sub_485880(DIK_F3, 0) )
     {
       if ( dword_4D79EC )
         goto LABEL_146;
       dword_4D79EC = 1;
-      dword_EC83D0 = 1667458611;
+      dword_EC83D0 = 1667458611; // 'ccf3'
       goto LABEL_145;
     }
-    if ( sub_485880(62, 0) )
+
+    // Reward 1000 Truguts if F4 + Shift (left or right) + 4 are pressed
+    if ( sub_485880(DIK_F4, 0) )
     {
       if ( dword_4D79EC )
         goto LABEL_146;
       dword_4D79EC = 1;
-      dword_EC83D0 = 1667458612;
-      if ( *(_DWORD *)(dword_50C454 + 8) == 7 && (sub_485880(42, 0) || sub_485880(54, 0)) && sub_485880(5, 0) )
+      dword_EC83D0 = 1667458612; // 'ccf4'
+      if ( *(_DWORD *)(dword_50C454 + 8) == 7 && (sub_485880(DIK_LSHIFT, 0) || sub_485880(DIK_RSHIFT, 0)) && sub_485880(DIK_4, 0) )
         dword_E35A98[0] += 1000;
       goto LABEL_145;
     }
-    if ( sub_485880(58, 0) )
+
+    // Check for capslock
+    if ( sub_485880(DIK_CAPITAL, 0) )
     {
       if ( dword_4D79EC )
         goto LABEL_146;
@@ -100,7 +116,10 @@ LABEL_145:
       }
       goto LABEL_145;
     }
-    if ( (sub_485880(184, 0) || sub_485880(56, 0)) && sub_485880(35, 0) )
+
+    // Alt (Right or Left) + H
+    //FIXME: What does this do?!
+    if ( (sub_485880(DIK_RMENU, 0) || sub_485880(DIK_LMENU, 0)) && sub_485880(DIK_H, 0) )
     {
       if ( dword_4D79EC )
         goto LABEL_146;
@@ -108,11 +127,15 @@ LABEL_145:
       dword_EC83C8 = 1;
       goto LABEL_145;
     }
+
     if ( dword_50C07C != 2 )
       goto LABEL_66;
-    if ( sub_485880(29, 0) || sub_485880(157, 0) )
+
+    // Control (Left or Right)
+    if ( sub_485880(DIK_LCONTROL, 0) || sub_485880(DIK_RCONTROL, 0) )
     {
-      if ( sub_485880(68, 0) )
+      // F10
+      if ( sub_485880(DIK_F10, 0) )
       {
         if ( dword_4D79EC )
           goto LABEL_146;
@@ -127,7 +150,10 @@ LABEL_65:
     }
     else
     {
-      if ( sub_485880(55, 0) && sub_485880(20, 0) )
+
+      // Multiply (Numpad) + T
+      //FIXME What is this?
+      if ( sub_485880(DIK_MULTIPLY, 0) && sub_485880(DIK_T, 0) )
       {
         if ( !dword_4D5E00 )
         {
@@ -140,7 +166,10 @@ LABEL_65:
         }
         goto LABEL_66;
       }
-      if ( sub_485880(23, 0) && sub_485880(33, 0) && sub_485880(38, 0) && sub_485880(21, 0) && !dword_4D5E00 )
+
+      // I + F + L + Y
+      //FIXME: What does this do?
+      if ( sub_485880(DIK_I, 0) && sub_485880(DIK_F, 0) && sub_485880(DIK_L, 0) && sub_485880(DIK_Y, 0) && !dword_4D5E00 )
       {
         if ( dword_4D79EC )
           goto LABEL_146;
@@ -148,11 +177,16 @@ LABEL_65:
         sub_440550(43);
         goto LABEL_65;
       }
+
     }
 LABEL_66:
-    if ( sub_485880(29, 0) || sub_485880(157, 0) )
+
+    // Control (Left or Right)
+    if ( sub_485880(DIK_LCONTROL, 0) || sub_485880(DIK_RCONTROL, 0) )
     {
-      if ( sub_485880(36, 0) )
+
+      // J
+      if ( sub_485880(DIK_J, 0) )
       {
         if ( dword_4D79EC )
           goto LABEL_146;
@@ -190,9 +224,13 @@ LABEL_66:
         }
         goto LABEL_105;
       }
-      if ( sub_485880(56, 0) && *(_DWORD *)(dword_50C454 + 8) == 13 )
+
+      // Alt (Left)
+      if ( sub_485880(DIK_LMENU, 0) && *(_DWORD *)(dword_50C454 + 8) == 13 )
       {
-        if ( sub_485880(184, 0) )
+
+        // Alt (Right)
+        if ( sub_485880(DIK_RMENU, 0) )
         {
           if ( dword_4D79EC )
             goto LABEL_146;
@@ -207,7 +245,9 @@ LABEL_66:
           }
           goto LABEL_145;
         }
-        if ( sub_485880(157, 0) )
+
+        // Control (Right)
+        if ( sub_485880(DIK_RCONTROL, 0) )
         {
           if ( dword_4D79EC )
             goto LABEL_146;
@@ -221,7 +261,9 @@ LABEL_66:
           goto LABEL_145;
         }
       }
-      if ( sub_485880(50, 0) )
+
+      // M
+      if ( sub_485880(DIK_M, 0) )
       {
         if ( dword_4D79EC )
           goto LABEL_146;
@@ -255,7 +297,9 @@ LABEL_105:
         sub_406080((int)aCurrent);
         goto LABEL_145;
       }
-      if ( sub_485880(33, 0) )
+
+      // F
+      if ( sub_485880(DIK_F, 0) )
       {
         if ( dword_4D79EC )
           goto LABEL_146;
@@ -293,7 +337,9 @@ LABEL_112:
         strcat(&byte_4D78D0, v2);
         goto LABEL_145;
       }
-      if ( sub_485880(16, 0) && dword_4D5E00 )
+
+      // Q
+      if ( sub_485880(DIK_Q, 0) && dword_4D5E00 )
       {
         if ( dword_4D79EC )
           goto LABEL_146;
@@ -304,7 +350,9 @@ LABEL_112:
         sub_450C50(1097624609, (int)&v13);
         goto LABEL_145;
       }
-      if ( sub_485880(87, 0) )
+
+      // F11
+      if ( sub_485880(DIK_F11, 0) )
       {
         if ( dword_4D79EC )
           goto LABEL_146;
@@ -313,16 +361,22 @@ LABEL_112:
         goto LABEL_145;
       }
     }
-    if ( !sub_485880(65, 0) )
+
+    // F7
+    if ( !sub_485880(DIK_F7, 0) )
     {
-      if ( sub_485880(63, 0) || sub_485880(64, 0) )
+
+      // F5 or F6
+      if ( sub_485880(DIK_F5, 0) || sub_485880(DIK_F6, 0) )
       {
         if ( dword_4D79EC )
           goto LABEL_146;
         dword_4D79E0 = 1;
         dword_4D79EC = 1;
       }
-      else if ( sub_485880(70, 0) && sub_485880(199, 0) )
+      // Scroll lock + Home
+      //FIXME: What does this do?!
+      else if ( sub_485880(DIK_SCROLL, 0) && sub_485880(DIK_HOME, 0) )
       {
         if ( dword_4D79EC )
           goto LABEL_146;
@@ -347,13 +401,18 @@ LABEL_134:
     dword_4D79EC = 1;
     goto LABEL_145;
   }
+
   if ( !dword_4D79EC )
   {
     dword_4D79EC = 1;
-    _cfltcvt_init_6();
+
+    // Enable Cy Junga
+    sub_44B5E0();
+
     sub_440550(-1);
     goto LABEL_145;
   }
+
 LABEL_146:
   if ( byte_4D78D0 )
   {
