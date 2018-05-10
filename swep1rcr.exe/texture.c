@@ -1,11 +1,14 @@
-# Getting texture dimensions
+/* Functions to work with textures */
 
-```C
+// Research based on patched US version
+
+//----- (0048A9E0) --------------------------------------------------------
+// Getting texture dimensions for texture-upload.
+// The size is restricted by the GPU capabilities.
 // a1 = in_width
 // a2 = in_height
 // a3 = &out_width
 // a4 = &out_height
-//----- (0048A9E0) --------------------------------------------------------
 void sub_48A9E0(unsigned int a1, unsigned int a2, unsigned int *a3, unsigned int *a4) {
   unsigned int min_width = *(_DWORD *)(dword_52E618 + 32);
   unsigned int max_width = *(_DWORD *)(dword_52E618 + 40);
@@ -45,12 +48,10 @@ void sub_48A9E0(unsigned int a1, unsigned int a2, unsigned int *a3, unsigned int
     *a4 = height;
   }
 }
-```
 
-# Loading texture
 
-```C
 //----- (0048A5E0) --------------------------------------------------------
+// Loading texture / Create DirectDraw surfaces and fill with data
 // a1 = ?
 // a2 = texture object
 // a3 = number of mipmaps
@@ -256,13 +257,10 @@ LABEL_43:
     result = v15->Release();
   return result;
 }
-```
 
-# Color inversion?
-
-```C
 //----- (00431DF0) --------------------------------------------------------
-// (not actually a function)
+// Color inversion?
+// (not actually a function?)
 // a3 = must be anything but "invcol"
 // Probably returns void
 int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3) {
@@ -320,4 +318,236 @@ int __usercall sub_431DF0@<eax>(int a1@<ebx>, int a2@<ebp>, char *a3) {
   }
   return result;
 }
-```
+
+
+
+
+
+
+
+
+
+
+
+
+//----- (00447370) --------------------------------------------------------
+// Loads texture from textureblock
+// a1 = 3 Pointers into offset table (a, b, c)
+// a2 = receives data read from a
+// a3 = receives data read from b (optional, might be garbage!)
+int __cdecl sub_447370(const uint32_t* a1, uint32_t* a2, uint32_t* a3) {
+  uint8_t* v7; // esi
+
+  // Get length of texture data, assuming a1[1] is 0
+  int32_t v4 = a1[2] - a1[0];
+
+  // Check if there is enough room left in the buffer
+  if ((v4 + 128) > sub_445BF0()) {
+    *a3 = 0;
+    *a2 = 0;
+    dword_50C610 = 1;
+    return a2;
+  }
+
+  // If a1[1] is not 0, then we need to fixup the texture size
+  if ( a1[1] ) {
+    v4 = a1[1] - a1[0];
+  }
+
+  // Get the current buffer offset and align it to the next 64 byte boundary
+  v7 = align_up(sub_445B40(), 64);
+
+  // Read texturedata from modelblock at a1[0] to v7
+  sub_42D640(3, a1[0], v7, v4);
+  *a2 = v7;
+
+  // Load the optional texture chunk
+  if (a1[1]) {
+
+    // Calculate length of optional texture chunk
+    v4 = a1[2] - a1[1];
+
+    // Allocate space in the buffer for the optional chunk
+    v7 = align_up(v7 + v4, 64);
+
+  // Read optional texturedata from modelblock at a1[1] to v7
+    sub_42D640(3, a1[1], v7, v4);
+    *a3 = v7;
+  }
+  //FIXME: Shouldn't there be an `else` case which sets `*a3 = 0` ?!
+  //       Bug in original game code?
+
+  // Set buffer offset
+  return sub_445B20(v7 + v4);
+}
+
+
+
+
+//----- (00445C90) --------------------------------------------------------
+// Calculate texture POT width or height from non-POT size
+// Results smaller than 16 will be raised to 16
+int __cdecl sub_445C90(int32_t a1) {
+
+  // Find leading 1 bit
+  int32_t bit = 0x40000000;
+  for(int32_t i = 0; i < 31; i++) {
+    int32_t hit = a1 & bit;
+    bit >>= 1;
+    if (hit) {
+      break;
+    }
+  }
+
+  // Get bit which has hit
+  // In case none (`input = 0`) or the the last bit hit (`input = 1`) we will
+  // get 0 here
+  int32_t result = bit << 1;
+
+  // If we are lower than the input, we take the next higher POT
+  // For example: input = 0, bit = 0, result = 0 => ok: 0
+  //              input = 1, bit = 0, result = 0 => too small, after shift: 0
+  //              input = 2, bit = 1, result = 2 => ok: 2
+  //              input = 3, bit = 1, result = 2 => too small; after shift: 4
+  //              input = 4, bit = 2, result = 4 => too small; after shift: 8
+  //              input = 5, bit = 2, result = 4 => too small; after shift: 8
+  //              input = 6, bit = 2, result = 4 => too small; after shift: 8
+  //              input = 7, bit = 2, result = 4 => too small; after shift: 8
+  //              input = 8, bit = 4, result = 8 => ok: 8
+  //              ...
+  if ( result < a1 ) {
+    result <<= 1;
+  }
+
+  // Result must be at least 16
+  if (result < 16) {
+    result = 16;
+  }
+  return result;
+}
+
+
+
+
+//----- (00446C20) --------------------------------------------------------
+// Loads the pixel data for a texture chunk for a model
+// a1 = Pointer to pointer to mandatory texture data [part of some model structure?]
+// a2 = Pointer to pointer to optional texture data [part of some model structure?]
+typedef struct {
+  uint8_t unk_pad0[3]; // +0
+  uint8_t unk3; // +3
+} A1Unk; // SWR_MODEL_Section5_b
+typedef struct {
+  uint8_t unk_pad_neg56[12]; // -56 (-14*4) // 0x0
+  uint8_t unk_neg44; // -44 (-14*4 + 12) // 0xC
+  uint8_t unk_neg43; // -43 (-14*4 + 13) // 0xD
+  uint8_t unk_pad_neg42[2]; // -42 // 0xE
+  uint16_t unk_neg40; // -40 // 0x10
+  uint16_t unk_neg38; // -38 // 0x12
+  uint8_t unk_pad_neg36[8]; // -36 // 0x14
+  A1Unk* unk_neg28; // -28 (-14*4 + 28) //  0x1C
+  uint8_t unk_pad_neg24[24]; // -24 // 0x20
+  void* texture_data; // 0 [a1 points here] // 0x38
+  void* optional_texture_data; // 4 [a2 should point here] // 0x3C
+} A1; // Model structure, SWR_MODEL_Section5 
+char *__cdecl sub_446C20(uint32_t* _a1, uint32_t* _a2) {
+
+  //FIXME: Do some upcast of the a1 and a2 arguments here
+  A1* a1 = UPCAST(_a1, A1,texture_data);
+
+  uint16_t v4 = swap16(a1->unk_neg40);
+
+  if (a1->unk_neg28) {
+    uint16_t v3 = swap16(a1->unk_neg38);
+
+    // Get width and height?
+    int v6 = sub_445C90(v4);
+    int v7 = sub_445C90(v3);
+
+    // Process texture data
+    sub_445EE0(
+      a1->unk_neg44, // ?
+      a1->unk_neg43, // ?
+      v4, // Width shift factor?
+      v3, // Height shift factor?
+      v6, // Width
+      v7, // Height
+      _a1, // Texture data
+      _a2, // Optional texture data
+      1, // ?
+      a1->unk_neg28->unk3); // ?
+  }
+
+  //FIXME: Broken RE? I doubt they just write a random pixel in the texture data..
+  //FIXME: Actually.. I think a1->texture_data might point to something else when returning from sub_445EE0
+  uint32_t* result = a1->texture_data;
+  *(uint32_t *)((uintptr_t)a1->texture_data + 10) = &a1->unk_neg56[0];
+
+  return result;
+}
+
+
+
+
+
+
+
+
+
+
+
+//----- (00447490) --------------------------------------------------------
+// Called from the model loader to (presumably) load a texture
+// a1 = ???
+// a2 = texture index
+// a3 = Output: Pointer to mandatory texture data
+// a4 = Output: Pointer to optional texture data
+void __usercall sub_447490(int a1@<ebp>, int a2, uint32_t* a3, uint32_t* a4) {
+  uint32_t v8[3]; // [esp+Ch] [ebp-Ch]
+
+  // Check texture index boundaries
+  if ( a2 < 0 || a2 >= dword_E9823C ) {
+    *a3 = 0;
+    *a4 = 0;
+    return;
+  }
+
+  // Load texture from cache
+  uint32_t* v4 = dword_E93860[a2];
+  if (v4) {
+    *a3 = v4[0]; // Pointer to mandatory data
+    *a4 = v4[1]; // Pointer to optional data
+    return;
+  }
+
+  // Read texture offset table
+  sub_42D640(3, 8 * a2 + 4, v8, 3 * 4);
+  for(int32_t v6 = 0; v6 < 3; v6++) {
+    v8[v6] = swap32(v8[v6]);
+  }
+
+  // Read texture data from file offsets
+  // This sets a3 and a4
+  sub_447370(v8, a3, a4);
+
+  // Load texture pixel data for this texture chunk
+  sub_446C20(a3, a4);
+
+  // Add texture to cache
+  dword_E93860[a2] = a3;
+
+  // Keep track of some special textures?
+  if ( a2 == 1257 ) {
+    dword_50C620 = a3[0];
+  } else if ( a2 == 1258 ) {
+    dword_50C624 = a3[0];
+  } else if ( a2 == 936 ) {
+    dword_50C618 = a3[0];
+  } else if ( a2 == 352 ) {
+    dword_50C61C = a3[0];
+  } else if ( a2 == 118 ) {
+    sub_431DF0(a4, a1, a3[0]);
+  }
+
+  return;
+}
