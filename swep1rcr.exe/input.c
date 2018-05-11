@@ -4,25 +4,34 @@
 
 
 //----- (00485880) --------------------------------------------------------
-int __cdecl sub_485880(int a1, _DWORD *a2)
-{
-  int result; // eax
+// Check the keyboard state for a specific key
+// a1 = DirectInput DIK_* (keycode)
+// a2 = Optional pointer to output value to which the state will be added
+int __cdecl sub_485880(int32_t a1, uint32_t *a2) {
 
-  if ( a1 < 0 )
+  // Don't allow a negative key index to be queried
+  if ( a1 < 0 ) {
     return 0;
-  if ( dword_50FEB4 )
-  {
-    if ( a2 )
-      *a2 += dword_50F668[a1];
-    if ( dword_50FEB0 && dword_50E868[a1] )
-      dword_50FEB0 = 0;
-    result = dword_50E868[a1];
   }
-  else
-  {
-    if ( a2 )
+
+  // Early out if the keyboard is disabled?
+  if ( !dword_50FEB4 ) {
+    if ( a2 != NULL ) {
       *a2 = 0;
-    result = 0;
+    }
+    return 0;
   }
-  return result;
+
+  // Add the state to the optional output value
+  if ( a2 != NULL ) {
+    *a2 += dword_50F668[a1];
+  }
+
+  //FIXME: Unknown
+  if ( dword_50FEB0 && dword_50E868[a1] ) {
+    dword_50FEB0 = 0;
+  }
+
+  // Return the current state
+  return dword_50E868[a1];
 }
