@@ -2,6 +2,25 @@
 
 // Research based on patched US version
 
+//----- (00410430) --------------------------------------------------------
+int sub_410430()
+{
+  int result; // eax
+
+  result = sub_485880(88, 0);
+  if ( !result || (result = dword_4D79E8) != 0 )
+  {
+    dword_4D79E8 = 0;
+  }
+  else
+  {
+    sub_440550(70);
+    result = sub_410480((int)aSnap);
+    dword_4D79E8 = 1;
+  }
+  return result;
+}
+
 //----- (004104F0) --------------------------------------------------------
 void sub_4104F0()
 {
