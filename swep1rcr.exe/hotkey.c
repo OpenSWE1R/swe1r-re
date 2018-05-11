@@ -3,27 +3,33 @@
 // Research based on patched US version
 
 //----- (00410430) --------------------------------------------------------
-int sub_410430()
-{
-  int result; // eax
+// Check if a screenshot should be taken, then take it
+void sub_410430() {
 
-  result = sub_485880(88, 0);
-  if ( !result || (result = dword_4D79E8) != 0 )
-  {
-    dword_4D79E8 = 0;
-  }
-  else
-  {
+  // Check if we hold F12 and it was released at least once,
+  // after the last screenshot was taken
+  if ( sub_485880(DIK_F12, 0) && (dword_4D79E8 != 0)) {
+
+    // Play a sound to confirm taking the screenshot
     sub_440550(70);
-    result = sub_410480((int)aSnap);
+
+    // Take screenshot
+    sub_410480((int)aSnap);
+
+    // Mark F12 as held / pressed
     dword_4D79E8 = 1;
+
+  } else {
+
+    // Mark F12 as released
+    dword_4D79E8 = 0;
+
   }
-  return result;
+  return;
 }
 
 //----- (004104F0) --------------------------------------------------------
-void sub_4104F0()
-{
+void sub_4104F0() {
   char *v0; // esi
   int v1; // ecx
   const char *v2; // eax
@@ -41,14 +47,20 @@ void sub_4104F0()
   int v14; // [esp+18h] [ebp-1Ch]
   int v15; // [esp+1Ch] [ebp-18h]
 
-  if ( dword_4B5C40 )
+  //FIXME: What is this?
+  if ( dword_4B5C40 ) {
     dword_4B5C40 = 0;
+  }
+
+  // Get the number of truguts
   v12 = dword_E35A98[0];
 
-  // F12
-  //FIXME: I believe this was screenshot?
-  if ( sub_485880(DIK_F12, 0) )
+  // F12: Take a screenshot
+  //FIXME: Bug in game: F12 is checked in the called function anyway,
+  //                    no need to check it here
+  if ( sub_485880(DIK_F12, 0) ) {
     sub_410430();
+  }
 
   // NOT [ Ctrl (Left) + C + Y ]
   if ( !sub_485880(DIK_LCONTROL, 0) || !sub_485880(DIK_C, 0) || !sub_485880(DIK_Y, 0) || *(_DWORD *)(dword_50C454 + 8) != 9 )
