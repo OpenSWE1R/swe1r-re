@@ -273,22 +273,7 @@ float *__cdecl sub_432030(float *a1, const float *a2) {
 }
 
 //----- (004323C0) --------------------------------------------------------
-float* __cdecl sub_4323C0(float* a1, const float *a2) {
-  float v5; // edx
-  double v6; // st4
-  double v7; // rt2
-  double v8; // st5
-  double v11; // st7
-  double v12; // st7
-  double v13; // st2
-  double v14; // st7
-  float v15; // [esp+8h] [ebp+4h]
-  float v17; // [esp+8h] [ebp+4h]
-  float v18; // [esp+Ch] [ebp+8h]
-  float v20; // [esp+Ch] [ebp+8h]
-
-  //FIXME: This is a bit more complicated because a2 is still being read while a1 has been written.
-  //       This means the order of operation suddenly becomes critical if regions in a1 and a2 overlap.
+float* __cdecl sub_4323C0(float* restrict a1, const float* restrict a2) {
 
   // Get squared length
   float v19 = a2[0 * 4 + 0] * a2[0 * 4 + 0] +
@@ -301,43 +286,35 @@ float* __cdecl sub_4323C0(float* a1, const float *a2) {
               a2[2 * 4 + 1] * a2[2 * 4 + 1] +
               a2[2 * 4 + 2] * a2[2 * 4 + 2];
 
-  // Can't trust a2 after this (might have been written):
-
-  a1[0 * 4 + 1] = a2[1 * 4 + 0] / v3;
-  a1[0 * 4 + 2] = a2[2 * 4 + 0] / v16;
-
-  a1[1 * 4 + 2] = a2[2 * 4 + 1] / v16;
-
-
-  a1[1 * 4 + 0] = a2[0 * 4 + 1] / v19;
-  a1[2 * 4 + 0] = a2[0 * 4 + 2] / v19;
-
-  a1[2 * 4 + 1] = a2[1 * 4 + 2] / v3;
+  //FIXME: This is a bit more complicated because a2 is still being read after a1 has been written.
+  //       This means the order of operation suddenly becomes critical if regions in a1 and a2 overlap.
+  //       During this analysis I did break this order! So if the game depends on proper behaviour, it will break!
+  //       Hence, the pointers have been marked as restricted.
 
   a1[0 * 4 + 0] = a2[0 * 4 + 0] / v19;
-
-  a1[1 * 4 + 1] = a2[1 * 4 + 1] / v3;
-
-  v11 = a2[2 * 4 + 2] / v16;
-
+  a1[0 * 4 + 1] = a2[1 * 4 + 0] / v3;
+  a1[0 * 4 + 2] = a2[2 * 4 + 0] / v16;
   a1[0 * 4 + 3] = 0.0f;
+
+  a1[1 * 4 + 0] = a2[0 * 4 + 1] / v19;
+  a1[1 * 4 + 1] = a2[1 * 4 + 1] / v3;
+  a1[1 * 4 + 2] = a2[2 * 4 + 1] / v16;
   a1[1 * 4 + 3] = 0.0f;
+
+  a1[2 * 4 + 0] = a2[0 * 4 + 2] / v19;
+  a1[2 * 4 + 1] = a2[1 * 4 + 2] / v3;
+  a1[2 * 4 + 2] = a2[2 * 4 + 2] / v16;
   a1[2 * 4 + 3] = 0.0f;
+
+  float v20 = a2[3 * 4 + 0];
+  float v17 = a2[3 * 4 + 1];
+  double v12 = a2[3 * 4 + 2];
+
+  a1[3 * 4 + 0] = -(v20 * a1[0 * 4 + 0] + v17 * a1[1 * 4 + 0] + v12 * a1[2 * 4 + 0]);
+  a1[3 * 4 + 1] = -(v20 * a1[0 * 4 + 1] + v17 * a1[1 * 4 + 1] + v12 * a1[2 * 4 + 1]);
+  a1[3 * 4 + 2] = -(v20 * a1[0 * 4 + 2] + v17 * a1[1 * 4 + 2] + v12 * a1[2 * 4 + 2]);
   a1[3 * 4 + 3] = 1.0f;
 
-  a1[2 * 4 + 2] = v11;
-
-  v20 = a2[3 * 4 + 0];
-  v17 = a2[3 * 4 + 1];
-  v12 = a2[3 * 4 + 2];
-
-  v13 = v12 * a1[2 * 4 + 1];
-
-  a1[3 * 4 + 0] = -(v17 * a1[1 * 4 + 0] + v12 * a1[2 * 4 + 0] + a1[0 * 4 + 0] * v20);
-  v14 = -(v17 * a1[1 * 4 + 2] + v20 * a1[0 * 4 + 2] + v12 * a1[2 * 4 + 2]);
-
-  a1[3 * 4 + 1] = -(v13 + v20 * a1[0 * 4 + 1] + v17 * a1[1 * 4 + 1];
-  a1[3 * 4 + 2] = v14;
   return a1;
 }
 
